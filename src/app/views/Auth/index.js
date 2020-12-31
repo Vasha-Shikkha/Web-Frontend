@@ -142,6 +142,10 @@ const SignIn = (props) => {
 							),
 						}}
 					/>
+
+					<div className={classes.lnk} onClick={() => toggleAuth()}>
+						{showSignUp ? "Already have an account?" : "Create new account"}
+					</div>
 				</div>
 			</div>
 			<div className={`${classes.lower} ${classes.centered}`}>

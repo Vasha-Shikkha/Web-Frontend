@@ -17,7 +17,7 @@ const styles = makeStyles((theme) => ({
 		},
 
 		[theme.breakpoints.up("sm")]: {
-			height: "65vh",
+			height: "75vh",
 			background: theme.palette.colors.background,
 		},
 	},
@@ -31,7 +31,7 @@ const styles = makeStyles((theme) => ({
 		},
 
 		[theme.breakpoints.up("sm")]: {
-			height: "35vh",
+			height: "25vh",
 		},
 	},
 
@@ -52,13 +52,13 @@ const styles = makeStyles((theme) => ({
 
 		display: "flex",
 		flexDirection: "column",
-		justifyContent: "center",
+		justifyContent: "flex-end",
 		alignContent: "center",
 		alignItems: "center",
 	},
 
 	txtField: {
-		marginBottom: 20,
+		marginBottom: 15,
 
 		[theme.breakpoints.down(350)]: {
 			width: "100%",
@@ -112,6 +112,22 @@ const styles = makeStyles((theme) => ({
 
 		borderRadius: 30,
 		cursor: "pointer",
+	},
+
+	lnk: {
+		color: theme.palette.colors.primary,
+		fontSize: 16,
+		cursor: "pointer",
+
+		[theme.breakpoints.down("xs")]: {
+			marginBottom: 80,
+			marginTop: 130,
+		},
+
+		[theme.breakpoints.up("sm")]: {
+			marginBottom: 0,
+			marginTop: 80,
+		},
 	},
 }));
 
