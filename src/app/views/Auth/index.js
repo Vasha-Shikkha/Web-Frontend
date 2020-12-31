@@ -1,23 +1,24 @@
-import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
+import React, {useState} from "react";
+import {Redirect} from "react-router-dom";
 
-import { TextField, IconButton, InputAdornment } from "@material-ui/core";
-import { Visibility, VisibilityOff } from "@material-ui/icons";
+import {TextField, IconButton, InputAdornment} from "@material-ui/core";
+import {Visibility, VisibilityOff} from "@material-ui/icons";
 
-import { AuthConsumer } from "../../stateHandlers/authContext";
+import {AuthConsumer} from "../../stateHandlers/authContext";
 
-import { login } from "../../axios/services/auth";
+import {login} from "../../axios/services/auth";
 import authValidator from "../../validators/auth";
 import styles from "./styles";
 
 const SignIn = (props) => {
 	const classes = styles();
-	const [field, setField] = useState({ phone: "", password: "", showPassword: "" });
+	const [showSignUp, setShowSignUp] = useState(false);
+	const [field, setField] = useState({phone: "", password: "", showPassword: ""});
 	const [authenticated, setAuthenticated] = useState(false);
 	const [errors, setErrors] = useState({});
 
 	const handleChange = (name) => (event) => {
-		setField({ ...field, [name]: event.target.value });
+		setField({...field, [name]: event.target.value});
 	};
 
 	const handleLogin = () => {
@@ -26,7 +27,7 @@ const SignIn = (props) => {
 			password: field.password,
 		};
 
-		const { errors, isValid } = authValidator.login(data);
+		const {errors, isValid} = authValidator.login(data);
 		if (!isValid) {
 			setErrors(errors);
 			return;
@@ -44,8 +45,31 @@ const SignIn = (props) => {
 	if (authenticated) return <Redirect to={"/home"} />;
 
 	return (
-		<div className={`${classes.root} ${classes.centered}`}>
-			<div className={`${classes.content} ${classes.centered}`}>
+		<div className={classes.root}>
+			<div className={classes.upper}>
+				<div className={classes.nav}>
+					<div className={classes.logo}>
+						Vasha<span className={classes.logoBold}>Shikkha</span>
+					</div>
+					<div className={classes.authBtnContainer}>
+						<div
+							className={showSignUp ? classes.activeAuth : classes.inactiveAuth}
+							onClick={() => setShowSignUp(true)}>
+							Sign Up
+						</div>
+
+						<div
+							style={{marginLeft: 25}}
+							className={!showSignUp ? classes.activeAuth : classes.inactiveAuth}
+							onClick={() => setShowSignUp(false)}>
+							Sign In
+						</div>
+					</div>
+				</div>
+				<div className={classes.fieldContainer}></div>
+			</div>
+			<div className={classes.lower}></div>
+			{/* <div className={`${classes.content} ${classes.centered}`}>
 				<TextField
 					required
 					onChange={handleChange("phone")}
@@ -74,7 +98,7 @@ const SignIn = (props) => {
 								<IconButton
 									edge="end"
 									aria-label="Toggle password visibility"
-									onClick={() => setField({ ...field, showPassword: !field.showPassword })}
+									onClick={() => setField({...field, showPassword: !field.showPassword})}
 								>
 									{field.showPassword ? <VisibilityOff /> : <Visibility />}
 								</IconButton>
@@ -86,13 +110,13 @@ const SignIn = (props) => {
 				<div className={`${classes.btn} ${classes.centered}`} onClick={() => handleLogin()}>
 					Sign In
 				</div>
-			</div>
+			</div> */}
 		</div>
 	);
 };
 
 const ConsumerComponent = (props) => (
-	<AuthConsumer>{({ login }) => <SignIn {...props} login={login} />}</AuthConsumer>
+	<AuthConsumer>{({login}) => <SignIn {...props} login={login} />}</AuthConsumer>
 );
 
 export default ConsumerComponent;

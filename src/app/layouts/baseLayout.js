@@ -1,21 +1,25 @@
-import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import React, {lazy, Suspense} from "react";
+import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import {MuiThemeProvider, createMuiTheme} from "@material-ui/core/styles";
 
-import { AuthProvider } from "../stateHandlers/authContext";
+import {AuthProvider} from "../stateHandlers/authContext";
 // import PrivateWrapper from "./privateWrapper";
 
-import SignIn from "../views/SignIn";
-import Landing from "../views/Landing";
+import Loading from "../components/Loading";
+
+// use code splitting for better ux
+const Landing = lazy(() => import("../views/Landing"));
+const Auth = lazy(() => import("../views/Auth"));
 
 const theme = createMuiTheme({
 	palette: {
 		colors: {
 			primary: "grey",
 			secondary: "",
+			background: "#F2F2F2",
+			textLight: "#2E303E",
 			dark: "",
 			textDark: "",
-			textLight: "#9e9e9e",
 		},
 	},
 
@@ -28,21 +32,23 @@ const theme = createMuiTheme({
 
 const BaseLayout = () => (
 	<Router>
-		<AuthProvider>
-			<MuiThemeProvider theme={theme}>
-				<div>
-					<Switch>
-						{/* <Route
+		<Suspense fallback={<Loading />}>
+			<AuthProvider>
+				<MuiThemeProvider theme={theme}>
+					<div>
+						<Switch>
+							{/* <Route
 							exact
 							path="/home"
 							render={(props) => <PrivateWrapper component={<Home {...props} />} />}
 						/> */}
-						<Route exact path="/" component={Landing} />
-						<Route exact path="/signin" component={SignIn} />
-					</Switch>
-				</div>
-			</MuiThemeProvider>
-		</AuthProvider>
+							<Route exact path="/" component={Landing} />
+							<Route exact path="/auth" component={Auth} />
+						</Switch>
+					</div>
+				</MuiThemeProvider>
+			</AuthProvider>
+		</Suspense>
 	</Router>
 );
 
