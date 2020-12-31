@@ -6,14 +6,14 @@ import {Visibility, VisibilityOff} from "@material-ui/icons";
 
 import {AuthConsumer} from "../../stateHandlers/authContext";
 
-import {login} from "../../axios/services/auth";
+import {login, signup} from "../../axios/services/auth";
 import authValidator from "../../validators/auth";
 import styles from "./styles";
 
 const SignIn = (props) => {
 	const classes = styles();
 	const [showSignUp, setShowSignUp] = useState(false);
-	const [field, setField] = useState({phone: "", password: "", showPassword: ""});
+	const [field, setField] = useState({name: "", phone: "", password: "", showPassword: false});
 	const [authenticated, setAuthenticated] = useState(false);
 	const [errors, setErrors] = useState({});
 
@@ -21,7 +21,12 @@ const SignIn = (props) => {
 		setField({...field, [name]: event.target.value});
 	};
 
-	const handleLogin = () => {
+	const toggleAuth = () => {
+		setShowSignUp(!showSignUp);
+		setField({name: "", phone: "", password: "", showPassword: false});
+	};
+
+	const handleSignin = () => {
 		let data = {
 			phone: field.phone,
 			password: field.password,
@@ -42,6 +47,28 @@ const SignIn = (props) => {
 		});
 	};
 
+	const handleSignUp = () => {
+		let data = {
+			name: field.name,
+			phone: field.phone,
+			password: field.password,
+		};
+
+		const {errors, isValid} = authValidator.signup(data);
+		if (!isValid) {
+			setErrors(errors);
+			return;
+		}
+
+		signup(data, (err, axios_data) => {
+			if (err) console.error("error in signup", err);
+			else {
+				props.login(axios_data.user);
+				setAuthenticated(true);
+			}
+		});
+	};
+
 	if (authenticated) return <Redirect to={"/home"} />;
 
 	return (
@@ -54,63 +81,78 @@ const SignIn = (props) => {
 					<div className={classes.authBtnContainer}>
 						<div
 							className={showSignUp ? classes.activeAuth : classes.inactiveAuth}
-							onClick={() => setShowSignUp(true)}>
+							onClick={() => toggleAuth()}>
 							Sign Up
 						</div>
 
 						<div
 							style={{marginLeft: 25}}
 							className={!showSignUp ? classes.activeAuth : classes.inactiveAuth}
-							onClick={() => setShowSignUp(false)}>
+							onClick={() => toggleAuth()}>
 							Sign In
 						</div>
 					</div>
 				</div>
-				<div className={classes.fieldContainer}></div>
-			</div>
-			<div className={classes.lower}></div>
-			{/* <div className={`${classes.content} ${classes.centered}`}>
-				<TextField
-					required
-					onChange={handleChange("phone")}
-					value={field.phone}
-					name="phone"
-					label="phone"
-					className={classes.txtField}
-					error={errors.phone ? true : false}
-					helperText={errors.phone ? errors.phone : ""}
-					type="text"
-				/>
+				<div className={classes.fieldContainer}>
+					{showSignUp && (
+						<TextField
+							required
+							onChange={handleChange("name")}
+							value={field.name}
+							name="name"
+							label="name"
+							className={classes.txtField}
+							error={errors.name ? true : false}
+							helperText={errors.name ? errors.name : ""}
+							type="text"
+						/>
+					)}
+					<TextField
+						required
+						onChange={handleChange("phone")}
+						value={field.phone}
+						name="phone"
+						label="phone"
+						className={classes.txtField}
+						error={errors.phone ? true : false}
+						helperText={errors.phone ? errors.phone : ""}
+						type="text"
+					/>
 
-				<TextField
-					required
-					className={classes.txtField}
-					value={field.password}
-					type={field.showPassword ? "text" : "password"}
-					label="password"
-					name="password"
-					error={errors.password ? true : false}
-					helperText={errors.password ? errors.password : ""}
-					onChange={handleChange("password")}
-					InputProps={{
-						endAdornment: (
-							<InputAdornment position="end">
-								<IconButton
-									edge="end"
-									aria-label="Toggle password visibility"
-									onClick={() => setField({...field, showPassword: !field.showPassword})}
-								>
-									{field.showPassword ? <VisibilityOff /> : <Visibility />}
-								</IconButton>
-							</InputAdornment>
-						),
-					}}
-				/>
-
-				<div className={`${classes.btn} ${classes.centered}`} onClick={() => handleLogin()}>
-					Sign In
+					<TextField
+						required
+						className={classes.txtField}
+						value={field.password}
+						type={field.showPassword ? "text" : "password"}
+						label="password"
+						name="password"
+						error={errors.password ? true : false}
+						helperText={errors.password ? errors.password : ""}
+						onChange={handleChange("password")}
+						InputProps={{
+							endAdornment: (
+								<InputAdornment position="end">
+									<IconButton
+										edge="end"
+										aria-label="Toggle password visibility"
+										onClick={() => setField({...field, showPassword: !field.showPassword})}>
+										{field.showPassword ? <VisibilityOff /> : <Visibility />}
+									</IconButton>
+								</InputAdornment>
+							),
+						}}
+					/>
 				</div>
-			</div> */}
+			</div>
+			<div className={`${classes.lower} ${classes.centered}`}>
+				<div
+					className={`${classes.btn} ${classes.centered}`}
+					onClick={() => {
+						showSignUp ? handleSignUp() : handleSignin();
+					}}>
+					{showSignUp ? "Sign Up" : "Sign In"}
+				</div>
+			</div>
 		</div>
 	);
 };

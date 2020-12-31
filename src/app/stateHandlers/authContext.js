@@ -8,8 +8,8 @@ export const AuthProvider = (props) => {
 	const [user, setUser] = useState({});
 
 	const checkAuth = () => {
-		let user = localStorage.getItem("user");
-		let jwtToken = localStorage.getItem("jwtToken");
+		let user = localStorage.getItem("vasha_shikkha_user");
+		let jwtToken = localStorage.getItem("vasha_shikkha_jwtToken");
 		console.log(user, jwtToken);
 
 		if (jwtToken) {
@@ -26,8 +26,8 @@ export const AuthProvider = (props) => {
 	};
 
 	const logout = () => {
-		localStorage.removeItem("user");
-		localStorage.removeItem("jwtToken");
+		localStorage.removeItem("vasha_shikkha_user");
+		localStorage.removeItem("vasha_shikkha_jwtToken");
 
 		setUser({});
 		setIsAuthenticated(false);

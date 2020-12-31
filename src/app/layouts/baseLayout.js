@@ -14,7 +14,7 @@ const Auth = lazy(() => import("../views/Auth"));
 const theme = createMuiTheme({
 	palette: {
 		colors: {
-			primary: "grey",
+			primary: "#8577E2",
 			secondary: "",
 			background: "#F2F2F2",
 			textLight: "#2E303E",

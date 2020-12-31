@@ -17,7 +17,7 @@ const styles = makeStyles((theme) => ({
 		},
 
 		[theme.breakpoints.up("sm")]: {
-			height: "70vh",
+			height: "65vh",
 			background: theme.palette.colors.background,
 		},
 	},
@@ -31,7 +31,7 @@ const styles = makeStyles((theme) => ({
 		},
 
 		[theme.breakpoints.up("sm")]: {
-			height: "30vh",
+			height: "35vh",
 		},
 	},
 
@@ -58,7 +58,15 @@ const styles = makeStyles((theme) => ({
 	},
 
 	txtField: {
-		marginBottom: "15px",
+		marginBottom: 20,
+
+		[theme.breakpoints.down(350)]: {
+			width: "100%",
+		},
+
+		[theme.breakpoints.up(350)]: {
+			width: 300,
+		},
 	},
 
 	logo: {
@@ -102,8 +110,7 @@ const styles = makeStyles((theme) => ({
 		width: "150px",
 		height: "50px",
 
-		marginTop: "30px",
-		borderRadius: "5px",
+		borderRadius: 30,
 		cursor: "pointer",
 	},
 }));
