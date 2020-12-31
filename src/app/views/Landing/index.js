@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 
 import LandingImg from "../../assets/landing_img.svg";
 import styles from "./styles";

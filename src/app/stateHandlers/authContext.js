@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import PropTypes from "prop-types";
 
 export const AuthContext = React.createContext();
@@ -41,8 +41,7 @@ export const AuthProvider = (props) => {
 				checkAuth: checkAuth,
 				logout: logout,
 				login: login,
-			}}
-		>
+			}}>
 			{props.children}
 		</AuthContext.Provider>
 	);
