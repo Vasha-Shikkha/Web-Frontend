@@ -3,6 +3,8 @@ import {Redirect} from "react-router-dom";
 
 import {TextField, IconButton, InputAdornment} from "@material-ui/core";
 import {Visibility, VisibilityOff} from "@material-ui/icons";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
 
 import {AuthConsumer} from "../../stateHandlers/authContext";
 
@@ -10,12 +12,19 @@ import {login, signup} from "../../axios/services/auth";
 import authValidator from "../../validators/auth";
 import styles from "./styles";
 
+function Alert(props) {
+	return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
 const SignIn = (props) => {
 	const classes = styles();
 	const [showSignUp, setShowSignUp] = useState(false);
 	const [field, setField] = useState({name: "", phone: "", password: "", showPassword: false});
-	const [authenticated, setAuthenticated] = useState(false);
+	const [authenticated, setAuthenticated] = useState(props.isAuthenticated);
 	const [errors, setErrors] = useState({});
+	const [open, setOpen] = useState(false);
+	const [msg, setMsg] = useState("");
+	const [snackType, setSnackType] = useState(1);
 
 	const handleChange = (name) => (event) => {
 		setField({...field, [name]: event.target.value});
@@ -39,11 +48,16 @@ const SignIn = (props) => {
 		}
 
 		login(data, (err, axios_data) => {
-			if (err) console.error("error in login", err);
-			else {
+			if (err) {
+				console.error("error in login", err);
+				setSnackType(0);
+				setMsg(err.msg);
+			} else {
 				props.login(axios_data.user);
 				setAuthenticated(true);
 			}
+
+			setOpen(true);
 		});
 	};
 
@@ -61,18 +75,39 @@ const SignIn = (props) => {
 		}
 
 		signup(data, (err, axios_data) => {
-			if (err) console.error("error in signup", err);
-			else {
-				props.login(axios_data.user);
-				setAuthenticated(true);
+			if (err) {
+				console.error("error in signup", err);
+				setMsg(err.msg);
+				setSnackType(0);
+			} else {
+				setMsg("Registered Successfully!!!");
+				setSnackType(1);
+				setShowSignUp(false);
+				setField({name: "", phone: "", password: "", showPassword: false});
 			}
+
+			setOpen(true);
 		});
+	};
+
+	const handleClose = (event, reason) => {
+		if (reason === "clickaway") {
+			return;
+		}
+
+		setOpen(false);
 	};
 
 	if (authenticated) return <Redirect to={"/home"} />;
 
 	return (
 		<div className={classes.root}>
+			<Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+				<Alert onClose={handleClose} severity={snackType ? "success" : "error"}>
+					{msg}
+				</Alert>
+			</Snackbar>
+
 			<div className={classes.upper}>
 				<div className={classes.nav}>
 					<div className={classes.logo}>
@@ -162,7 +197,11 @@ const SignIn = (props) => {
 };
 
 const ConsumerComponent = (props) => (
-	<AuthConsumer>{({login}) => <SignIn {...props} login={login} />}</AuthConsumer>
+	<AuthConsumer>
+		{({login, isAuthenticated}) => (
+			<SignIn {...props} login={login} isAuthenticated={isAuthenticated} />
+		)}
+	</AuthConsumer>
 );
 
 export default ConsumerComponent;

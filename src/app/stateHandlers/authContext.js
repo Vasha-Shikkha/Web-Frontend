@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import PropTypes from "prop-types";
 
 export const AuthContext = React.createContext();
@@ -6,6 +6,10 @@ export const AuthContext = React.createContext();
 export const AuthProvider = (props) => {
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
 	const [user, setUser] = useState({});
+
+	useEffect(() => {
+		checkAuth();
+	}, []);
 
 	const checkAuth = () => {
 		let user = localStorage.getItem("vasha_shikkha_user");

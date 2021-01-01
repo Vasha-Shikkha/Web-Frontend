@@ -3,13 +3,14 @@ import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import {MuiThemeProvider, createMuiTheme} from "@material-ui/core/styles";
 
 import {AuthProvider} from "../stateHandlers/authContext";
-// import PrivateWrapper from "./privateWrapper";
+import PrivateWrapper from "./privateWrapper";
 
 import Loading from "../components/Loading";
 
 // use code splitting for better ux
 const Landing = lazy(() => import("../views/Landing"));
 const Auth = lazy(() => import("../views/Auth"));
+const Home = lazy(() => import("../views/Home"));
 
 const theme = createMuiTheme({
 	palette: {
@@ -37,11 +38,11 @@ const BaseLayout = () => (
 				<MuiThemeProvider theme={theme}>
 					<div>
 						<Switch>
-							{/* <Route
-							exact
-							path="/home"
-							render={(props) => <PrivateWrapper component={<Home {...props} />} />}
-						/> */}
+							<Route
+								exact
+								path="/home"
+								render={(props) => <PrivateWrapper component={<Home {...props} />} />}
+							/>
 							<Route exact path="/" component={Landing} />
 							<Route exact path="/auth" component={Auth} />
 						</Switch>
