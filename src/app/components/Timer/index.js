@@ -21,7 +21,6 @@ const Timer = (props) => {
 	});
 
 	const timeFormat = () => {
-		// let timeRem = Math.floor((initial_time + props.duration * 1000 - Date.now()) / 1000);
 		let minutes = Math.floor(timeRemaining / 60);
 		let seconds = timeRemaining % 60;
 
@@ -36,7 +35,6 @@ const Timer = (props) => {
 		return ret;
 	};
 
-	console.log(timeRemaining);
 	return (
 		<div className={classes.root}>
 			<ArrowBackIosIcon className={classes.backBtn} onClick={() => props.backToHome()} />

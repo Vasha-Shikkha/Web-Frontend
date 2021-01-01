@@ -3,6 +3,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import Timer from "../components/Timer";
+import QuestionNumber from "../components/QuestionNumber";
 
 const styles = makeStyles((theme) => ({
 	root: {
@@ -33,7 +34,6 @@ const styles = makeStyles((theme) => ({
 	child: {
 		height: "75vh",
 		width: "100%",
-		background: "blue",
 	},
 }));
 
@@ -52,6 +52,7 @@ const ExerciseLayout = (props) => {
 		<div className={classes.root}>
 			<div className={classes.nav}>
 				<Timer duration={10} timeout={timeout} backToHome={backToHome} />
+				<QuestionNumber totalQuestions={3} currentQuestionNumber={1} />
 			</div>
 			<div className={classes.child}>{props.children}</div>
 			<div className={classes.btnContainer}></div>
