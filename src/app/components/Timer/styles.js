@@ -20,7 +20,7 @@ const styles = makeStyles((theme) => ({
 	},
 
 	rem: {
-		color: "grey",
+		color: theme.palette.colors.secondary,
 		marginLeft: 10,
 	},
 

@@ -91,7 +91,7 @@ const styles = makeStyles((theme) => ({
 	},
 
 	inactiveAuth: {
-		color: "grey",
+		color: theme.palette.colors.secondary,
 		cursor: "pointer",
 		fontWeight: 500,
 	},

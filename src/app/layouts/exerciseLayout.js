@@ -48,6 +48,14 @@ const ExerciseLayout = (props) => {
 		console.log("time to get back kid");
 	};
 
+	const skip = () => {
+		console.log("skipped");
+	};
+
+	const getNext = () => {
+		console.log("next");
+	};
+
 	return (
 		<div className={classes.root}>
 			<div className={classes.nav}>

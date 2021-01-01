@@ -19,7 +19,7 @@ const styles = makeStyles((theme) => ({
 	},
 
 	slash: {
-		color: "grey",
+		color: theme.palette.colors.secondary,
 		marginLeft: 3,
 		marginRight: 3,
 	},
