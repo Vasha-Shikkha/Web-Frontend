@@ -14,7 +14,6 @@ export const AuthProvider = (props) => {
 	const checkAuth = () => {
 		let user = localStorage.getItem("vasha_shikkha_user");
 		let jwtToken = localStorage.getItem("vasha_shikkha_jwtToken");
-		console.log(user, jwtToken);
 
 		if (jwtToken) {
 			setIsAuthenticated(true);

@@ -11,6 +11,7 @@ import Loading from "../components/Loading";
 const Landing = lazy(() => import("../views/Landing"));
 const Auth = lazy(() => import("../views/Auth"));
 const Home = lazy(() => import("../views/Home"));
+const MCQ = lazy(() => import("../views/MCQ"));
 
 const theme = createMuiTheme({
 	palette: {
@@ -43,6 +44,13 @@ const BaseLayout = () => (
 								path="/home"
 								render={(props) => <PrivateWrapper component={<Home {...props} />} />}
 							/>
+
+							<Route
+								exact
+								path="/mcq"
+								render={(props) => <PrivateWrapper component={<MCQ {...props} />} />}
+							/>
+
 							<Route exact path="/" component={Landing} />
 							<Route exact path="/auth" component={Auth} />
 						</Switch>
