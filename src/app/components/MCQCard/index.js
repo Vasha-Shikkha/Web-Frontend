@@ -7,10 +7,15 @@ const MCQCard = (props) => {
 	const classes = styles();
 	const [selected, setSelected] = useState(props.question.options.map(() => false));
 
-	const toggleSelected = (idx) => {
-		let arr = [...selected];
-		arr[idx] = !arr[idx];
-		setSelected(arr);
+	const selectOption = (idx) => {
+		// if not review then select
+		if (props.isReview === false && !props.isChecked) props.selectOption(idx);
+
+		if (!props.isChecked) {
+			let arr = [...selected];
+			arr[idx] = !arr[idx];
+			setSelected(arr);
+		}
 	};
 
 	return (
@@ -30,7 +35,8 @@ const MCQCard = (props) => {
 					{props.question.options.map((obj, idx) => (
 						<Grid item xs={6} sm={6} md={6} lg={6} xl={6} key={idx}>
 							<div
-								onClick={() => toggleSelected(idx)}
+								style={{background: props.colors[idx]}}
+								onClick={() => selectOption(idx)}
 								className={`${classes.opt} ${classes.centered} ${
 									selected[idx] ? classes.hi : classes.lo
 								}`}>
@@ -48,6 +54,10 @@ MCQCard.propTypes = {
 	question: PropTypes.object.isRequired,
 	moveAway: PropTypes.bool,
 	elevation: PropTypes.number,
+	selectOption: PropTypes.func,
+	isReview: PropTypes.bool.isRequired,
+	isChecked: PropTypes.bool.isRequired,
+	colors: PropTypes.array.isRequired,
 };
 
 export default MCQCard;

@@ -20,8 +20,8 @@ const theme = createMuiTheme({
 			secondary: "#e5e5e5",
 			background: "#F2F2F2",
 			textLight: "#2E303E",
-			correct: "#fccb7c",
-			incorrect: "#b6eb8a",
+			incorrect: "#fac1c1",
+			correct: "#b6eb8a",
 		},
 	},
 
