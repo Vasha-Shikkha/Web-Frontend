@@ -30,18 +30,36 @@ const styles = makeStyles((theme) => ({
 	},
 
 	btnContainer: {
-		height: "15vh",
+		height: "20vh",
+		flexWrap: "wrap",
 	},
 
 	child: {
-		height: "70vh",
+		minHeight: "65vh",
 		width: "100%",
 		overflowY: "auto",
 	},
 
 	btn: {
-		width: "45%",
-		height: "60%",
+		[theme.breakpoints.down("sm")]: {
+			width: "100%",
+			height: 40,
+		},
+
+		[theme.breakpoints.up("md")]: {
+			width: "45%",
+			height: "60%",
+		},
+	},
+
+	m10: {
+		[theme.breakpoints.down("sm")]: {
+			marginBottom: 10,
+		},
+
+		[theme.breakpoints.up("md")]: {
+			marginBottom: 0,
+		},
 	},
 
 	btn1: {
@@ -69,7 +87,7 @@ const ExerciseLayout = (props) => {
 			</div>
 			<div className={classes.child}>{props.children}</div>
 			<div className={`${classes.btnContainer} ${classes.container}`}>
-				<div className={classes.btn}>
+				<div className={`${classes.btn} ${classes.m10}`}>
 					<Button styles={classes.btn1} text="Skip" onClick={props.skip} />
 				</div>
 

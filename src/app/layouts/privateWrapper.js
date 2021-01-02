@@ -19,7 +19,7 @@ class PrivateComponent extends Component {
 
 		const {component} = this.props;
 		if (status === true) return component;
-		else if (status === false) return <Redirect to={"/signin"} />;
+		else if (status === false) return <Redirect to={"/auth"} />;
 		else return <Loading />;
 	}
 }

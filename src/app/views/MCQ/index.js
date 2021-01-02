@@ -49,7 +49,7 @@ const MCQ = (props) => {
 		console.log("skipped");
 	};
 
-	const getNext = () => {
+	const check = () => {
 		console.log("next");
 	};
 
@@ -65,8 +65,20 @@ const MCQ = (props) => {
 					timeout={timeout}
 					backToHome={backToHome}
 					skip={skip}
-					getNext={getNext}>
-					<div></div>
+					check={check}>
+					<div>
+						efficitur. Quisque in turpis sed quam elementum rutrum sed non erat. Nam vel blandit
+						massa. Nulla quis libero egestas, pretium nulla in, tincidunt urna. Maecenas sit amet
+						rutrum sapien, a ultrices metus. Pellentesque bibendum dictum scelerisque. Mauris
+						malesuada eros vel eleifend faucibus. Morbi pellentesque est in pharetra facilisis.
+						Nulla accumsan nisl sit amet justo facilisis, finibus facilisis lectus accumsan. Vivamus
+						in faucibus nisl. Maecenas sit amet mi nibh. Maecenas accumsan sapien odio, ac ultricies
+						purus eleifend id. Fusce commodo orci sapien, eget posuere magna faucibus et. Fusce ut
+						ipsum pharetra, maximus nunc non, commodo magna. Lorem ipsum dolor sit amet, consectetur
+						adipiscing elit. Praesent sodales lorem quis lacus sodales, a rhoncus massa dapibus. Sed
+						pharetra libero lorem, at placerat augue sollicitudin sed. Aenean sed libero justo.
+						Aenean nec dapibus risus
+					</div>
 				</ExerciseLayout>
 			)}
 		</>
