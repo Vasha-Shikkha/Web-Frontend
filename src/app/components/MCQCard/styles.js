@@ -20,14 +20,31 @@ const styles = makeStyles((theme) => ({
 		height: "30%",
 		width: "100%",
 		borderRadius: "30px 30px 0px 0px",
-		background: "green",
+
+		fontSize: 18,
 	},
 
 	optionContainer: {
 		height: "70%",
 		width: "100%",
+		padding: "5%",
 		borderRadius: "0px 0px 30px 30px",
-		background: "yellow",
+	},
+
+	opt: {
+		width: "100%",
+		height: "auto",
+		padding: 15,
+		borderRadius: 30,
+		cursor: "pointer",
+	},
+
+	hi: {
+		boxShadow: `10px 10px 15px ${theme.palette.colors.secondary}`,
+	},
+
+	lo: {
+		boxShadow: `2px 3px 4px ${theme.palette.colors.secondary}`,
 	},
 
 	centered: {

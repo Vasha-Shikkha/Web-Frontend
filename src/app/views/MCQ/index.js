@@ -85,7 +85,12 @@ const MCQ = () => {
 					check={check}>
 					<div className={`${classes.root} ${classes.centered}`}>
 						{question.map((obj, idx) => (
-							<MCQCard key={idx} questionNo={idx} question={obj} moveAway={moveAway[idx]} />
+							<MCQCard
+								key={idx}
+								elevation={question.length - idx + 1}
+								question={obj}
+								moveAway={moveAway[idx]}
+							/>
 						))}
 					</div>
 				</ExerciseLayout>
