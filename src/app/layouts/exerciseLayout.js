@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 
 import Timer from "../components/Timer";
 import QuestionNumber from "../components/QuestionNumber";
+import Button from "../components/Button";
 
 const styles = makeStyles((theme) => ({
 	root: {
@@ -13,6 +14,9 @@ const styles = makeStyles((theme) => ({
 
 	nav: {
 		height: "15vh",
+	},
+
+	container: {
 		width: "100%",
 		background: theme.palette.colors.background,
 
@@ -26,14 +30,27 @@ const styles = makeStyles((theme) => ({
 	},
 
 	btnContainer: {
-		height: "10vh",
-		width: "100%",
-		background: "red",
+		height: "15vh",
 	},
 
 	child: {
-		height: "75vh",
+		height: "70vh",
 		width: "100%",
+	},
+
+	btn: {
+		width: "45%",
+		height: "60%",
+	},
+
+	btn1: {
+		color: "grey",
+		background: theme.palette.colors.secondary,
+	},
+
+	btn2: {
+		color: "white",
+		background: theme.palette.colors.primary,
 	},
 }));
 
@@ -58,12 +75,20 @@ const ExerciseLayout = (props) => {
 
 	return (
 		<div className={classes.root}>
-			<div className={classes.nav}>
+			<div className={`${classes.nav} ${classes.container}`}>
 				<Timer duration={10} timeout={timeout} backToHome={backToHome} />
 				<QuestionNumber totalQuestions={3} currentQuestionNumber={1} />
 			</div>
 			<div className={classes.child}>{props.children}</div>
-			<div className={classes.btnContainer}></div>
+			<div className={`${classes.btnContainer} ${classes.container}`}>
+				<div className={classes.btn}>
+					<Button styles={classes.btn1} text="Skip" onClick={skip} />
+				</div>
+
+				<div className={classes.btn}>
+					<Button styles={classes.btn2} text="Get Next" onClick={getNext} />
+				</div>
+			</div>
 		</div>
 	);
 };
