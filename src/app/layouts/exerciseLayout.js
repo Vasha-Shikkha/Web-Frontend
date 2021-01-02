@@ -36,6 +36,7 @@ const styles = makeStyles((theme) => ({
 	child: {
 		height: "70vh",
 		width: "100%",
+		overflowY: "auto",
 	},
 
 	btn: {
@@ -57,36 +58,23 @@ const styles = makeStyles((theme) => ({
 const ExerciseLayout = (props) => {
 	const classes = styles();
 
-	const timeout = () => {
-		console.log("timeover kid!!");
-	};
-
-	const backToHome = () => {
-		console.log("time to get back kid");
-	};
-
-	const skip = () => {
-		console.log("skipped");
-	};
-
-	const getNext = () => {
-		console.log("next");
-	};
-
 	return (
 		<div className={classes.root}>
 			<div className={`${classes.nav} ${classes.container}`}>
-				<Timer duration={10} timeout={timeout} backToHome={backToHome} />
-				<QuestionNumber totalQuestions={3} currentQuestionNumber={1} />
+				<Timer duration={props.duration} timeout={props.timeout} backToHome={props.backToHome} />
+				<QuestionNumber
+					totalQuestions={props.totalQuestions}
+					currentQuestionNumber={props.currentQuestionNumber}
+				/>
 			</div>
 			<div className={classes.child}>{props.children}</div>
 			<div className={`${classes.btnContainer} ${classes.container}`}>
 				<div className={classes.btn}>
-					<Button styles={classes.btn1} text="Skip" onClick={skip} />
+					<Button styles={classes.btn1} text="Skip" onClick={props.skip} />
 				</div>
 
 				<div className={classes.btn}>
-					<Button styles={classes.btn2} text="Get Next" onClick={getNext} />
+					<Button styles={classes.btn2} text="Get Next" onClick={props.getNext} />
 				</div>
 			</div>
 		</div>
@@ -95,6 +83,13 @@ const ExerciseLayout = (props) => {
 
 ExerciseLayout.propTypes = {
 	children: PropTypes.object.isRequired,
+	timeout: PropTypes.func.isRequired,
+	skip: PropTypes.func.isRequired,
+	getNext: PropTypes.func.isRequired,
+	backToHome: PropTypes.func.isRequired,
+	duration: PropTypes.number.isRequired,
+	totalQuestions: PropTypes.number.isRequired,
+	currentQuestionNumber: PropTypes.number.isRequired,
 };
 
 export default ExerciseLayout;
