@@ -6,7 +6,7 @@ const styles = makeStyles((theme) => ({
 		width: "100%",
 
 		position: "fixed",
-		zIndex: 2,
+		zIndex: 100,
 		bottom: "-20vh",
 
 		display: "flex",
