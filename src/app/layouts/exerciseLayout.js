@@ -8,7 +8,6 @@ import Button from "../components/Button";
 
 const styles = makeStyles((theme) => ({
 	root: {
-		height: "100vh",
 		width: "100%",
 	},
 
@@ -37,7 +36,7 @@ const styles = makeStyles((theme) => ({
 	child: {
 		minHeight: "65vh",
 		width: "100%",
-		overflowY: "auto",
+		background: theme.palette.colors.background,
 	},
 
 	btn: {
@@ -92,7 +91,7 @@ const ExerciseLayout = (props) => {
 				</div>
 
 				<div className={classes.btn}>
-					<Button styles={classes.btn2} text="Get Next" onClick={props.getNext} />
+					<Button styles={classes.btn2} text="Check" onClick={props.check} />
 				</div>
 			</div>
 		</div>
@@ -103,7 +102,7 @@ ExerciseLayout.propTypes = {
 	children: PropTypes.object.isRequired,
 	timeout: PropTypes.func.isRequired,
 	skip: PropTypes.func.isRequired,
-	getNext: PropTypes.func.isRequired,
+	check: PropTypes.func.isRequired,
 	backToHome: PropTypes.func.isRequired,
 	duration: PropTypes.number.isRequired,
 	totalQuestions: PropTypes.number.isRequired,

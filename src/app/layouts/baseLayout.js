@@ -50,7 +50,7 @@ const BaseLayout = () => (
 								path="/mcq"
 								render={(props) => <PrivateWrapper component={<MCQ {...props} />} />}
 							/>
-							<Route exact path="/test" component={MCQ} />
+							{/* <Route exact path="/test" component={MCQ} /> */}
 							<Route exact path="/" component={Landing} />
 							<Route exact path="/auth" component={Auth} />
 						</Switch>
