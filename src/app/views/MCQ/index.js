@@ -3,6 +3,7 @@ import React, {useEffect, useState} from "react";
 import ExerciseLayout from "../../layouts/exerciseLayout";
 import Loading from "../../components/Loading";
 import MCQCard from "../../components/MCQCard";
+import VerdictBanner from "../../components/VerdictBanner";
 
 import styles from "./styles";
 
@@ -15,6 +16,8 @@ const MCQ = () => {
 	const [currentQuestion, setCurrentQuestion] = useState(0);
 	const [duration, setDuration] = useState(0);
 	const [loading, setLoading] = useState(true);
+	const [showVerdict, setShowVerdict] = useState(false);
+	const [correct, setCorrect] = useState(true);
 
 	useEffect(() => {
 		let data = [
@@ -79,8 +82,14 @@ const MCQ = () => {
 		for (let i = 0; i < question[currentQuestion].answer.length; i++) {
 			// if marked red, that means the user attempted it, so it is correct
 			// if it white then the user missed this option so make it incorrect
-			if (temp_colors[question[currentQuestion].answer[i]] === "white") temp_colors[i] = "#fac1c1";
+			if (temp_colors[question[currentQuestion].answer[i]] === "white")
+				temp_colors[question[currentQuestion].answer[i]] = "#fac1c1";
 			else temp_colors[question[currentQuestion].answer[i]] = "#b6eb8a";
+		}
+
+		let incorrect = false;
+		for (let i = 0; i < temp_colors.length; i++) {
+			if (temp_colors[i] === "#fac1c1") incorrect = true;
 		}
 
 		setColors(temp_colors);
@@ -89,6 +98,8 @@ const MCQ = () => {
 		let arr = [...checked];
 		arr[currentQuestion] = true;
 		setChecked(arr);
+		setShowVerdict(true);
+		setCorrect(!incorrect);
 	};
 
 	const getNext = () => {
@@ -131,6 +142,7 @@ const MCQ = () => {
 								colors={colors}
 							/>
 						))}
+						<VerdictBanner correct={correct} anime={showVerdict} />
 					</div>
 				</ExerciseLayout>
 			)}
