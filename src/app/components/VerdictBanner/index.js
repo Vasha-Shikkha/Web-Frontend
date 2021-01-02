@@ -19,21 +19,42 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styles from "./styles";
+
+import ErrorSound from "../../assets/sounds/error.mp3";
+import SuccessSound from "../../assets/sounds/success.mp3";
+import Button from "../Button";
 //import "../../styles/verdictBanner.css";
 
 const VerdictBanner = (props) => {
 	const classes = styles();
 	return (
-		<div
-			className={`${classes.root} ${props.correct ? classes.correct : classes.incorrect} ${
-				props.anime ? classes.anime : null
-			}`}></div>
+		<>
+			{props.anime && (
+				<audio controls={false} autoPlay>
+					<source src={props.correct ? SuccessSound : ErrorSound} type="audio/mpeg" />
+				</audio>
+			)}
+			<div
+				className={`${classes.root} ${props.correct ? classes.correct : classes.incorrect} ${
+					props.anime ? classes.anime : null
+				}`}>
+				<div className={classes.left}>{props.correct ? "Correct" : "Incorrect"}</div>
+				<div className={classes.right}>
+					<Button
+						text="Get Next"
+						onClick={props.getNext}
+						styles={props.correct ? classes.correct_btn : classes.incorrect_btn}
+					/>
+				</div>
+			</div>
+		</>
 	);
 };
 
 VerdictBanner.propTypes = {
 	correct: PropTypes.bool.isRequired,
 	anime: PropTypes.bool.isRequired,
+	getNext: PropTypes.func.isRequired,
 };
 
 export default VerdictBanner;

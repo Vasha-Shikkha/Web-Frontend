@@ -9,12 +9,18 @@ const styles = makeStyles((theme) => ({
 		zIndex: 2,
 		bottom: "-20vh",
 
-		//transformOrigin: "left",
+		display: "flex",
+		flexDirection: "row",
+		justifyContent: "space-between",
+		alignContent: "center",
+		alignItems: "center",
+
+		padding: "0% 5% 0% 5%",
 	},
 
 	anime: {
 		transform: "translateY(-20vh)",
-		transition: "all 1s cubic-bezier(0.645, 0.045, 0.355, 1) 0s",
+		transition: "all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1) 0s",
 	},
 
 	correct: {
@@ -25,6 +31,26 @@ const styles = makeStyles((theme) => ({
 	incorrect: {
 		background: theme.palette.colors.incorrect,
 		color: "#d06079",
+	},
+
+	left: {
+		fontSize: 20,
+		fontWeight: 600,
+	},
+
+	right: {
+		width: 150,
+		height: 50,
+	},
+
+	correct_btn: {
+		color: "white",
+		background: "#73af55",
+	},
+
+	incorrect_btn: {
+		color: theme.palette.colors.incorrect,
+		background: " #d06079",
 	},
 }));
 

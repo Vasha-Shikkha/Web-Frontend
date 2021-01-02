@@ -73,23 +73,22 @@ const MCQ = () => {
 	// change the colors of options
 	// show verdict - (correct or incorrect), get-next button will be on the verdict
 	const check = () => {
-		// mark those that the user selected red at first
-		let temp_colors = [...colors];
-		for (let item of question[currentQuestion].users_answer) {
-			temp_colors[item] = "#fac1c1";
-		}
-
-		for (let i = 0; i < question[currentQuestion].answer.length; i++) {
-			// if marked red, that means the user attempted it, so it is correct
-			// if it white then the user missed this option so make it incorrect
-			if (temp_colors[question[currentQuestion].answer[i]] === "white")
-				temp_colors[question[currentQuestion].answer[i]] = "#fac1c1";
-			else temp_colors[question[currentQuestion].answer[i]] = "#b6eb8a";
-		}
-
 		let incorrect = false;
-		for (let i = 0; i < temp_colors.length; i++) {
-			if (temp_colors[i] === "#fac1c1") incorrect = true;
+
+		if (question[currentQuestion].users_answer.size == 0) incorrect = true;
+
+		// mark the correct answers
+		let temp_colors = [...colors];
+		for (let i = 0; i < question[currentQuestion].answer.length; i++) {
+			temp_colors[question[currentQuestion].answer[i]] = "#b6eb8a";
+		}
+
+		// if white then the user choosed a wrong option
+		for (let item of question[currentQuestion].users_answer) {
+			if (temp_colors[item] === "white") {
+				temp_colors[item] = "#fac1c1";
+				incorrect = true;
+			}
 		}
 
 		setColors(temp_colors);
@@ -108,8 +107,11 @@ const MCQ = () => {
 		arr[currentQuestion] = true;
 		setMoveAway(arr);
 
+		// hide verdict
+		setShowVerdict(false);
+
 		// gameover
-		if (currentQuestion === question.length) {
+		if (currentQuestion + 1 === question.length) {
 		} else {
 			setColors(question[currentQuestion + 1].options.map(() => "white"));
 			setCurrentQuestion(currentQuestion + 1);
@@ -142,7 +144,7 @@ const MCQ = () => {
 								colors={colors}
 							/>
 						))}
-						<VerdictBanner correct={correct} anime={showVerdict} />
+						<VerdictBanner correct={correct} anime={showVerdict} getNext={getNext} />
 					</div>
 				</ExerciseLayout>
 			)}
