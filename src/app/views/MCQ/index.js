@@ -75,7 +75,7 @@ const MCQ = () => {
 	const check = () => {
 		let incorrect = false;
 
-		if (question[currentQuestion].users_answer.size == 0) incorrect = true;
+		if (question[currentQuestion].users_answer.size === 0) incorrect = true;
 
 		// mark the correct answers
 		let temp_colors = [...colors];
