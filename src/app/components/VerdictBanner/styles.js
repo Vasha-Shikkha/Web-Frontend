@@ -34,13 +34,16 @@ const styles = makeStyles((theme) => ({
 	},
 
 	left: {
-		fontSize: 20,
-		fontWeight: 600,
-
 		display: "flex",
 		flexDirection: "row",
 		alignContent: "center",
 		alignItems: "center",
+	},
+
+	left_text: {
+		fontSize: 20,
+		fontWeight: 600,
+		marginLeft: 10,
 	},
 
 	right: {

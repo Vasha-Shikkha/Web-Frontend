@@ -1,38 +1,23 @@
-svg {
-	width: 100px;
-	display: block;
-	margin: 40px auto 0;
-}
-
-.path {
+.path_verdict {
 	stroke-dasharray: 1000;
 	stroke-dashoffset: 0;
-	&.circle {
-		-webkit-animation: dash 0.9s ease-in-out;
-		animation: dash 0.9s ease-in-out;
-	}
-	&.line {
-		stroke-dashoffset: 1000;
-		-webkit-animation: dash 0.9s 0.35s ease-in-out forwards;
-		animation: dash 0.9s 0.35s ease-in-out forwards;
-	}
-	&.check {
-		stroke-dashoffset: -100;
-		-webkit-animation: dash-check 0.9s 0.35s ease-in-out forwards;
-		animation: dash-check 0.9s 0.35s ease-in-out forwards;
-	}
 }
 
-p {
-	text-align: center;
-	margin: 20px 0 60px;
-	font-size: 1.25em;
-	&.success {
-		color: #73af55;
-	}
-	&.error {
-		color: #d06079;
-	}
+.circle_verdict {
+	-webkit-animation: dash 1.4s ease-in-out;
+	animation: dash 1.4s ease-in-out;
+}
+
+.line_verdict {
+	stroke-dashoffset: 1000;
+	-webkit-animation: dash 0.5s 0.5s ease-in-out forwards;
+	animation: dash 0.5s 0.5s ease-in-out forwards;
+}
+
+.check_verdict {
+	stroke-dashoffset: -100;
+	-webkit-animation: dash-check 0.5s 0.5s ease-in-out forwards;
+	animation: dash-check 0.5s 0.5s ease-in-out forwards;
 }
 
 @-webkit-keyframes dash {
