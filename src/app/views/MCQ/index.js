@@ -51,6 +51,7 @@ const MCQ = () => {
 		setLoading(false);
 	}, []);
 
+	// select or deselects an option for the current question
 	const selectOption = (idx) => {
 		if (question[currentQuestion].users_answer.has(idx))
 			question[currentQuestion].users_answer.delete(idx);
