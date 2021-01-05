@@ -76,18 +76,20 @@ const MCQ = () => {
 	const check = () => {
 		let incorrect = false;
 
-		if (question[currentQuestion].users_answer.size === 0) incorrect = true;
-
-		// mark the correct answers
 		let temp_colors = [...colors];
+		let actual_answer = new Set();
 		for (let i = 0; i < question[currentQuestion].answer.length; i++) {
-			temp_colors[question[currentQuestion].answer[i]] = "#b6eb8a";
+			actual_answer.add(question[currentQuestion].answer[i]);
 		}
 
-		// if white then the user choosed a wrong option
-		for (let item of question[currentQuestion].users_answer) {
-			if (temp_colors[item] === "white") {
-				temp_colors[item] = "#fac1c1";
+		for (let i = 0; i < temp_colors.length; i++) {
+			if (question[currentQuestion].users_answer.has(i) && actual_answer.has(i))
+				temp_colors[i] = "#b6eb8a";
+			else if (question[currentQuestion].users_answer.has(i) && !actual_answer.has(i)) {
+				temp_colors[i] = "#fac1c1";
+				incorrect = true;
+			} else if (!question[currentQuestion].users_answer.has(i) && actual_answer.has(i)) {
+				temp_colors[i] = "#b6eb8a";
 				incorrect = true;
 			}
 		}
