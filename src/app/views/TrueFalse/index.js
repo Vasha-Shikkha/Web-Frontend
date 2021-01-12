@@ -1,4 +1,4 @@
-import React, {useEffect, useState, forwardRef, useRef, useImperativeHandle} from "react";
+import React, {useEffect, useState, useRef} from "react";
 
 import ExerciseLayout from "../../layouts/exerciseLayout";
 import Loading from "../../components/Loading";
@@ -17,6 +17,8 @@ const TrueFalse = () => {
 	const [loading, setLoading] = useState(true);
 	const [showVerdict, setShowVerdict] = useState(false);
 	const [correct, setCorrect] = useState(true);
+
+	const childRef = useRef();
 
 	useEffect(() => {
 		let data = [
@@ -43,6 +45,7 @@ const TrueFalse = () => {
 		setDuration(60 * data.length);
 		setQuestion(data);
 		setLoading(false);
+		setChecked(data.map(() => false));
 	}, []);
 
 	const timeout = () => {
@@ -58,12 +61,21 @@ const TrueFalse = () => {
 	};
 
 	const check = () => {
-		// mark the question as checked so that the user can't click on the options
+		let answer = childRef.current.check();
+
+		// save the answer
+		let tempQuestion = [...question];
+		tempQuestion[currentQuestion].users_answer = answer.users_answer;
+		setQuestion(tempQuestion);
+
+		// mark this question as marked
 		let arr = [...checked];
 		arr[currentQuestion] = true;
 		setChecked(arr);
+
+		// show verdict
 		setShowVerdict(true);
-		//setCorrect(!incorrect);
+		setCorrect(answer.isCorrect);
 	};
 
 	const getNext = () => {
@@ -77,6 +89,7 @@ const TrueFalse = () => {
 
 		// gameover
 		if (currentQuestion + 1 === question.length) {
+			console.lof(question);
 		} else setCurrentQuestion(currentQuestion + 1);
 	};
 
@@ -97,6 +110,7 @@ const TrueFalse = () => {
 						{question.map((obj, idx) => (
 							<TrueFalseCard
 								key={idx}
+								ref={childRef}
 								elevation={question.length - idx + 1}
 								question={obj}
 								moveAway={moveAway[idx]}

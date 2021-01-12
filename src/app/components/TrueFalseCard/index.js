@@ -1,16 +1,28 @@
-import React, {useState} from "react";
+import React, {useState, forwardRef, useImperativeHandle} from "react";
 import PropTypes from "prop-types";
 import {Grid} from "@material-ui/core";
 import colors from "../../styles/colors";
 import styles from "./styles";
 
-const TrueFalseCard = (props) => {
+const TrueFalseCard = forwardRef((props, ref) => {
+	useImperativeHandle(ref, () => ({
+		check() {
+			let answer = {users_answer: selected};
+			console.log("answer", selected, props.question.users_answer);
+			if (selected === props.question.users_answer) answer.isCorrect = true;
+			else answer.isCorrect = false;
+
+			return answer;
+		},
+	}));
+
 	const classes = styles();
 	const [selected, setSelected] = useState(props.question.users_answer);
 
 	const selectOption = (idx) => {
+		console.log("selecting", idx, props.isReview, props.isChecked);
 		// if not review then select
-		if (props.isReview === false && !props.isChecked) {
+		if (!props.isReview === false && !props.isChecked) {
 			setSelected(idx);
 		}
 	};
@@ -31,14 +43,6 @@ const TrueFalseCard = (props) => {
 			else if (val === selected && val !== props.question.asnwer) return colors.incorrect;
 			else return colors.white;
 		}
-	};
-
-	const check = () => {
-		let answer = {users_answer: selected};
-		if (selected === props.question.users_answer) answer.correct = true;
-		else answer.correct = false;
-
-		return answer;
 	};
 
 	return (
@@ -80,7 +84,7 @@ const TrueFalseCard = (props) => {
 			</div>
 		</div>
 	);
-};
+});
 
 TrueFalseCard.propTypes = {
 	question: PropTypes.object.isRequired,
