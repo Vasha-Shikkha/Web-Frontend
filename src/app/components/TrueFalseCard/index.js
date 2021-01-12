@@ -8,8 +8,8 @@ const TrueFalseCard = forwardRef((props, ref) => {
 	useImperativeHandle(ref, () => ({
 		check() {
 			let answer = {users_answer: selected};
-			console.log("answer", selected, props.question.users_answer);
-			if (selected === props.question.users_answer) answer.isCorrect = true;
+
+			if (selected === props.question.answer) answer.isCorrect = true;
 			else answer.isCorrect = false;
 
 			return answer;
@@ -19,28 +19,24 @@ const TrueFalseCard = forwardRef((props, ref) => {
 	const classes = styles();
 	const [selected, setSelected] = useState(props.question.users_answer);
 
+	// if not reviewing or done checking then let the user select an option
 	const selectOption = (idx) => {
-		console.log("selecting", idx, props.isReview, props.isChecked);
-		// if not review then select
-		if (!props.isReview === false && !props.isChecked) {
+		if (!props.isReview && !props.isChecked) {
 			setSelected(idx);
 		}
 	};
 
+	// determine the color of the option boxes
 	const determineOptionColor = (val) => {
 		if (!props.isChecked && !props.isReview) return colors.white;
-		else if (props.isReview) {
+		else {
+			// when checked, users_answer is updated so we use that data
 			if (props.question.users_answer === val && props.question.answer === val)
 				return colors.correct;
 			else if (props.question.users_answer === val && props.question.answer !== val)
 				return colors.incorrect;
 			else if (props.question.users_answer !== val && props.question.answer === val)
 				return colors.correct;
-			else return colors.white;
-		} else {
-			if (val === selected && val === props.question.answer) return colors.correct;
-			else if (val !== selected && val === props.question.answer) return colors.correct;
-			else if (val === selected && val !== props.question.asnwer) return colors.incorrect;
 			else return colors.white;
 		}
 	};

@@ -30,13 +30,13 @@ const TrueFalse = () => {
 
 			{
 				question: "'with' is a conjunction",
-				options: 0,
+				answer: 1,
 				users_answer: -1,
 			},
 
 			{
 				question: "'the' is not an article",
-				options: 0,
+				answer: 0,
 				users_answer: -1,
 			},
 		];
@@ -89,7 +89,6 @@ const TrueFalse = () => {
 
 		// gameover
 		if (currentQuestion + 1 === question.length) {
-			console.lof(question);
 		} else setCurrentQuestion(currentQuestion + 1);
 	};
 
