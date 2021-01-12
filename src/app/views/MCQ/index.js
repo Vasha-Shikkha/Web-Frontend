@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 
 import ExerciseLayout from "../../layouts/exerciseLayout";
 import Loading from "../../components/Loading";
-import MCQCard from "../../components/MCQCard";
+import MCQCard from "../../components/ExerciseCard/MCQCard";
 import VerdictBanner from "../../components/VerdictBanner";
 
 import styles from "./styles";

@@ -1,7 +1,7 @@
 import React, {useState, forwardRef, useImperativeHandle} from "react";
 import PropTypes from "prop-types";
 import {Grid} from "@material-ui/core";
-import colors from "../../styles/colors";
+import colors from "../../../styles/colors";
 import styles from "./styles";
 
 const TrueFalseCard = forwardRef((props, ref) => {

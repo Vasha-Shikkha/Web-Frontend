@@ -2,7 +2,7 @@ import React, {useEffect, useState, useRef} from "react";
 
 import ExerciseLayout from "../../layouts/exerciseLayout";
 import Loading from "../../components/Loading";
-import TrueFalseCard from "../../components/TrueFalseCard";
+import TrueFalseCard from "../../components/ExerciseCard/TrueFalseCard";
 import VerdictBanner from "../../components/VerdictBanner";
 
 import styles from "./styles";
