@@ -79,7 +79,7 @@ const VerdictBanner = (props) => {
 									y2="92.3"
 								/>
 								<line
-									class="path_verdict line_verdict"
+									className="path_verdict line_verdict"
 									fill="none"
 									stroke="#D06079"
 									strokeWidth="6"
