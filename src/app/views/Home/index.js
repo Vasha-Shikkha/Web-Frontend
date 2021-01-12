@@ -6,7 +6,8 @@ const Landing = () => {
 	const classes = styles();
 	return (
 		<div className={`${classes.root} ${classes.centered}`}>
-			<Link to="/mcq">solve mcq </Link>
+			<Link to="/mcq">solve mcq</Link>
+			<Link to="/true-false">solve true-false</Link>
 		</div>
 	);
 };
