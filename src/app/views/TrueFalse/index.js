@@ -2,7 +2,7 @@ import React, {useEffect, useState, useRef} from "react";
 
 import ExerciseLayout from "../../layouts/exerciseLayout";
 import Loading from "../../components/Loading";
-import TrueFalseCard from "../../components/TrueFalseCard";
+import TrueFalseCard from "../../components/ExerciseCard/TrueFalseCard";
 import VerdictBanner from "../../components/VerdictBanner";
 
 import styles from "./styles";
@@ -65,10 +65,10 @@ const TrueFalse = () => {
 
 		// save the answer
 		let tempQuestion = [...question];
-		tempQuestion[currentQuestion].users_answer = answer.users_answer;
+		tempQuestion[currentQuestion].users_answer = [...answer.users_answer];
 		setQuestion(tempQuestion);
 
-		// mark this question as marked
+		// mark this question as checked
 		let arr = [...checked];
 		arr[currentQuestion] = true;
 		setChecked(arr);
