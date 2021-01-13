@@ -1,7 +1,8 @@
 import React, {useState, forwardRef, useImperativeHandle} from "react";
 import PropTypes from "prop-types";
-import styles from "./styles";
 import {Grid} from "@material-ui/core";
+import colors from "../../../styles/colors";
+import styles from "./styles";
 
 const MCQCard = forwardRef((props, ref) => {
 	useImperativeHandle(ref, () => ({
@@ -46,6 +47,7 @@ const MCQCard = forwardRef((props, ref) => {
 	const determineOptionColor = (idx) => {
 		if (!props.isChecked && !props.isReview) return colors.white;
 		else {
+			return colors.incorrect;
 		}
 	};
 
@@ -66,10 +68,10 @@ const MCQCard = forwardRef((props, ref) => {
 					{props.question.options.map((obj, idx) => (
 						<Grid item xs={6} sm={6} md={6} lg={6} xl={6} key={idx}>
 							<div
-								style={{background: props.colors[idx]}}
+								style={{background: determineOptionColor(idx)}}
 								onClick={() => selectOption(idx)}
 								className={`${classes.opt} ${classes.centered} ${
-									selected[idx] ? classes.hi : classes.lo
+									selected[idx] && !props.isChecked && !props.isReview ? classes.hi : classes.lo
 								}`}>
 								{obj}
 							</div>
@@ -85,10 +87,8 @@ MCQCard.propTypes = {
 	question: PropTypes.object.isRequired,
 	moveAway: PropTypes.bool,
 	elevation: PropTypes.number,
-	//selectOption: PropTypes.func,
 	isReview: PropTypes.bool.isRequired,
 	isChecked: PropTypes.bool.isRequired,
-	//colors: PropTypes.array.isRequired,
 };
 
 export default MCQCard;

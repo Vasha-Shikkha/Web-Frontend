@@ -51,13 +51,6 @@ const MCQ = () => {
 		setLoading(false);
 	}, []);
 
-	// select or deselects an option for the current question
-	const selectOption = (idx) => {
-		if (question[currentQuestion].users_answer.has(idx))
-			question[currentQuestion].users_answer.delete(idx);
-		else question[currentQuestion].users_answer.add(idx);
-	};
-
 	const timeout = () => {
 		console.log("timeover kid!!");
 	};
@@ -70,38 +63,22 @@ const MCQ = () => {
 		check();
 	};
 
-	// check the current question
-	// change the colors of options
-	// show verdict - (correct or incorrect), get-next button will be on the verdict
 	const check = () => {
-		let incorrect = false;
+		let answer = childRef.current.check();
 
-		let temp_colors = [...colors];
-		let actual_answer = new Set();
-		for (let i = 0; i < question[currentQuestion].answer.length; i++) {
-			actual_answer.add(question[currentQuestion].answer[i]);
-		}
+		// save the answer
+		let tempQuestion = [...question];
+		tempQuestion[currentQuestion].users_answer = [...answer.users_answer];
+		setQuestion(tempQuestion);
 
-		for (let i = 0; i < temp_colors.length; i++) {
-			if (question[currentQuestion].users_answer.has(i) && actual_answer.has(i))
-				temp_colors[i] = "#b6eb8a";
-			else if (question[currentQuestion].users_answer.has(i) && !actual_answer.has(i)) {
-				temp_colors[i] = "#fac1c1";
-				incorrect = true;
-			} else if (!question[currentQuestion].users_answer.has(i) && actual_answer.has(i)) {
-				temp_colors[i] = "#b6eb8a";
-				incorrect = true;
-			}
-		}
-
-		setColors(temp_colors);
-
-		// mark the question as checked so that the user can't click on the options
+		// mark this question as checked
 		let arr = [...checked];
 		arr[currentQuestion] = true;
 		setChecked(arr);
+
+		// show verdict
 		setShowVerdict(true);
-		setCorrect(!incorrect);
+		setCorrect(answer.isCorrect);
 	};
 
 	const getNext = () => {
@@ -115,8 +92,8 @@ const MCQ = () => {
 
 		// gameover
 		if (currentQuestion + 1 === question.length) {
+			console.log(question);
 		} else {
-			setColors(question[currentQuestion + 1].options.map(() => "white"));
 			setCurrentQuestion(currentQuestion + 1);
 		}
 	};
