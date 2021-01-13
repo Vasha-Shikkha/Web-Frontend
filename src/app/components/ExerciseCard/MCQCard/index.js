@@ -47,7 +47,13 @@ const MCQCard = forwardRef((props, ref) => {
 	const determineOptionColor = (idx) => {
 		if (!props.isChecked && !props.isReview) return colors.white;
 		else {
-			return colors.incorrect;
+			let x = new Set(props.question.answer);
+			let y = new Set(props.question.users_answer);
+
+			if (x.has(idx) && y.has(idx)) return colors.correct;
+			else if (x.has(idx) && !y.has(idx)) return colors.correct;
+			else if (!x.has(idx) && y.has(idx)) return colors.incorrect;
+			else return colors.white;
 		}
 	};
 

@@ -92,7 +92,6 @@ const MCQ = () => {
 
 		// gameover
 		if (currentQuestion + 1 === question.length) {
-			console.log(question);
 		} else {
 			setCurrentQuestion(currentQuestion + 1);
 		}
