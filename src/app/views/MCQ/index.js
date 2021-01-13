@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useRef} from "react";
 
 import ExerciseLayout from "../../layouts/exerciseLayout";
 import Loading from "../../components/Loading";
@@ -12,12 +12,13 @@ const MCQ = () => {
 	const [question, setQuestion] = useState([]);
 	const [moveAway, setMoveAway] = useState([]);
 	const [checked, setChecked] = useState([]);
-	const [colors, setColors] = useState([]);
 	const [currentQuestion, setCurrentQuestion] = useState(0);
 	const [duration, setDuration] = useState(0);
 	const [loading, setLoading] = useState(true);
 	const [showVerdict, setShowVerdict] = useState(false);
 	const [correct, setCorrect] = useState(true);
+
+	const childRef = useRef();
 
 	useEffect(() => {
 		let data = [
@@ -25,27 +26,26 @@ const MCQ = () => {
 				question: "What is the meaning of door?",
 				options: ["জানালা", "দরজা", "বাড়ী", "উঠান"],
 				answer: [1],
-				users_answer: new Set(),
+				users_answer: [],
 			},
 
 			{
 				question: "Which are articles?",
 				options: ["a", "of", "an", "the"],
 				answer: [0, 2, 3],
-				users_answer: new Set(),
+				users_answer: [],
 			},
 
 			{
 				question: "A Tree - which is the correct translation?",
 				options: ["একটি গাছ", "একটি বিড়াল", "একটি লোক", "একটি মাছ"],
 				answer: [0],
-				users_answer: new Set(),
+				users_answer: [],
 			},
 		];
 
 		setMoveAway(data.map(() => false));
 		setChecked(data.map(() => false));
-		if (data.length) setColors(data[0].options.map(() => "white"));
 		setDuration(60 * data.length);
 		setQuestion(data);
 		setLoading(false);
@@ -138,13 +138,12 @@ const MCQ = () => {
 						{question.map((obj, idx) => (
 							<MCQCard
 								key={idx}
+								ref={childRef}
 								elevation={question.length - idx + 1}
 								question={obj}
 								moveAway={moveAway[idx]}
-								selectOption={selectOption}
 								isReview={false}
 								isChecked={checked[idx]}
-								colors={colors}
 							/>
 						))}
 						<VerdictBanner correct={correct} anime={showVerdict} getNext={getNext} />
