@@ -65,7 +65,7 @@ const TrueFalse = () => {
 
 		// save the answer
 		let tempQuestion = [...question];
-		tempQuestion[currentQuestion].users_answer = [...answer.users_answer];
+		tempQuestion[currentQuestion].users_answer = answer.users_answer;
 		setQuestion(tempQuestion);
 
 		// mark this question as checked
