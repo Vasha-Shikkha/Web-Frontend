@@ -55,27 +55,18 @@ const WordToPictureCard = forwardRef((props, ref) => {
 					justify="space-between"
 					alignContent="space-between"
 					alignItems="stretch">
-					<Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
-						<div
-							style={{background: determineOptionColor(1)}}
-							onClick={() => selectOption(1)}
-							className={`${classes.opt} ${classes.centered} ${
-								selected === 1 ? classes.hi : classes.lo
-							}`}>
-							True
-						</div>
-					</Grid>
-
-					<Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
-						<div
-							style={{background: determineOptionColor(0)}}
-							onClick={() => selectOption(0)}
-							className={`${classes.opt} ${classes.centered} ${
-								selected === 0 ? classes.hi : classes.lo
-							}`}>
-							False
-						</div>
-					</Grid>
+					{props.question.options.map((obj, idx) => (
+						<Grid item xs={6} sm={6} md={6} lg={6} xl={6} key={idx}>
+							<div
+								style={{background: determineOptionColor(idx)}}
+								onClick={() => selectOption(idx)}
+								className={`${classes.opt} ${classes.centered} ${
+									selected === idx ? classes.hi : classes.lo
+								}`}>
+								<img src={obj} alt="" className={classes.optImage} />
+							</div>
+						</Grid>
+					))}
 				</Grid>
 			</div>
 		</div>

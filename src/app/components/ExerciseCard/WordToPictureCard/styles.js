@@ -40,6 +40,11 @@ const styles = makeStyles((theme) => ({
 		cursor: "pointer",
 	},
 
+	optImage: {
+		width: "100%",
+		height: "auto",
+	},
+
 	hi: {
 		boxShadow: `10px 10px 15px ${theme.palette.colors.secondary}`,
 	},

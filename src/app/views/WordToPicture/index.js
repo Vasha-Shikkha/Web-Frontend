@@ -7,7 +7,7 @@ import VerdictBanner from "../../components/VerdictBanner";
 
 import styles from "../../styles/exerciseViewStyles";
 
-const MCQ = () => {
+const WordToPicture = () => {
 	const classes = styles();
 	const [question, setQuestion] = useState([]);
 	const [moveAway, setMoveAway] = useState([]);
@@ -145,4 +145,4 @@ const MCQ = () => {
 	);
 };
 
-export default MCQ;
+export default WordToPicture;
