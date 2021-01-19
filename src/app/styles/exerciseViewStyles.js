@@ -7,7 +7,8 @@ const styles = makeStyles((theme) => ({
 		background: theme.palette.colors.background,
 		background: "blue",
 
-		position: "relative",
+		//position: "relative",
+		overflowY: "auto",
 	},
 
 	centered: {

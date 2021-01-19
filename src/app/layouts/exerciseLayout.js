@@ -34,7 +34,7 @@ const styles = makeStyles((theme) => ({
 	},
 
 	child: {
-		minHeight: "65vh",
+		height: "65vh",
 		width: "100%",
 		background: theme.palette.colors.background,
 	},
