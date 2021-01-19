@@ -5,7 +5,7 @@ import Loading from "../../components/Loading";
 import TrueFalseCard from "../../components/ExerciseCard/TrueFalseCard";
 import VerdictBanner from "../../components/VerdictBanner";
 
-import styles from "./styles";
+import styles from "../../styles/exerciseViewStyles";
 
 const TrueFalse = () => {
 	const classes = styles();
