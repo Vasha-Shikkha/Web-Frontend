@@ -5,6 +5,7 @@ const styles = makeStyles((theme) => ({
 		width: "80%",
 		height: "90%",
 		background: "white",
+		background: "yellow",
 		borderRadius: 30,
 
 		position: "absolute",
@@ -30,14 +31,23 @@ const styles = makeStyles((theme) => ({
 		width: "100%",
 		padding: "5%",
 		borderRadius: "0px 0px 30px 30px",
+		background: "red",
 	},
 
 	opt: {
 		width: "100%",
-		height: "auto",
 		padding: 15,
 		borderRadius: 30,
 		cursor: "pointer",
+		border: "1px solid black",
+
+		[theme.breakpoints.down("sm")]: {
+			height: 100,
+		},
+
+		[theme.breakpoints.up("md")]: {
+			height: "100%",
+		},
 	},
 
 	optImage: {
@@ -46,11 +56,11 @@ const styles = makeStyles((theme) => ({
 	},
 
 	hi: {
-		boxShadow: `10px 10px 15px ${theme.palette.colors.secondary}`,
+		//boxShadow: `10px 10px 15px ${theme.palette.colors.secondary}`,
 	},
 
 	lo: {
-		boxShadow: `2px 3px 4px ${theme.palette.colors.secondary}`,
+		//boxShadow: `2px 3px 4px ${theme.palette.colors.secondary}`,
 	},
 
 	centered: {

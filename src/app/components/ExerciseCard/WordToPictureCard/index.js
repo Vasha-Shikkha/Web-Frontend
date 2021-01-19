@@ -53,10 +53,11 @@ const WordToPictureCard = forwardRef((props, ref) => {
 					direction="row"
 					wrap="wrap"
 					justify="space-between"
-					alignContent="space-between"
-					alignItems="stretch">
+					alignContent="center"
+					alignItems="center"
+					style={{height: "100%"}}>
 					{props.question.options.map((obj, idx) => (
-						<Grid item xs={6} sm={6} md={6} lg={6} xl={6} key={idx}>
+						<Grid item xs={6} sm={6} md={6} lg={3} xl={3} key={idx}>
 							<div
 								style={{background: determineOptionColor(idx)}}
 								onClick={() => selectOption(idx)}

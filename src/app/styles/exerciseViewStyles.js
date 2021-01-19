@@ -5,6 +5,7 @@ const styles = makeStyles((theme) => ({
 		width: "100%",
 		height: "65vh",
 		background: theme.palette.colors.background,
+		background: "blue",
 
 		position: "relative",
 	},
