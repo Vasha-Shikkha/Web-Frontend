@@ -2,7 +2,7 @@ import React, {useEffect, useState, useRef} from "react";
 
 import ExerciseLayout from "../../layouts/exerciseLayout";
 import Loading from "../../components/Loading";
-import MCQCard from "../../components/ExerciseCard/MCQCard";
+import WordToPictureCard from "../../components/ExerciseCard/WordToPictureCard";
 import VerdictBanner from "../../components/VerdictBanner";
 
 import styles from "../../styles/exerciseViewStyles";
@@ -23,24 +23,39 @@ const MCQ = () => {
 	useEffect(() => {
 		let data = [
 			{
-				question: "What is the meaning of door?",
-				options: ["জানালা", "দরজা", "বাড়ী", "উঠান"],
-				answer: [1],
-				users_answer: [],
+				question: "Which is a Tiger?",
+				options: [
+					"https://raw.githubusercontent.com/Waqar-107/temp/620ffac0e260b6e0e1f6f08d0a86a38ad93e0547/word2Pic/hen.svg",
+					"https://raw.githubusercontent.com/Waqar-107/temp/620ffac0e260b6e0e1f6f08d0a86a38ad93e0547/word2Pic/elephant.svg",
+					"https://raw.githubusercontent.com/Waqar-107/temp/620ffac0e260b6e0e1f6f08d0a86a38ad93e0547/word2Pic/tiger.svg",
+					"https://raw.githubusercontent.com/Waqar-107/temp/620ffac0e260b6e0e1f6f08d0a86a38ad93e0547/word2Pic/horse.svg",
+				],
+				answer: 2,
+				users_answer: -1,
 			},
 
 			{
-				question: "Which are articles?",
-				options: ["a", "of", "an", "the"],
-				answer: [0, 2, 3],
-				users_answer: [],
+				question: "Which is a fish?",
+				options: [
+					"https://raw.githubusercontent.com/Waqar-107/temp/620ffac0e260b6e0e1f6f08d0a86a38ad93e0547/word2Pic/fish.svg",
+					"https://raw.githubusercontent.com/Waqar-107/temp/620ffac0e260b6e0e1f6f08d0a86a38ad93e0547/word2Pic/hen.svg",
+					"https://raw.githubusercontent.com/Waqar-107/temp/620ffac0e260b6e0e1f6f08d0a86a38ad93e0547/word2Pic/tiger.svg",
+					"https://raw.githubusercontent.com/Waqar-107/temp/620ffac0e260b6e0e1f6f08d0a86a38ad93e0547/word2Pic/horse.svg",
+				],
+				answer: 0,
+				users_answer: -1,
 			},
 
 			{
-				question: "A Tree - which is the correct translation?",
-				options: ["একটি গাছ", "একটি বিড়াল", "একটি লোক", "একটি মাছ"],
-				answer: [0],
-				users_answer: [],
+				question: "Which is a tree?",
+				options: [
+					"https://raw.githubusercontent.com/Waqar-107/temp/620ffac0e260b6e0e1f6f08d0a86a38ad93e0547/word2Pic/fish.svg",
+					"https://raw.githubusercontent.com/Waqar-107/temp/620ffac0e260b6e0e1f6f08d0a86a38ad93e0547/word2Pic/apple.jpg",
+					"https://raw.githubusercontent.com/Waqar-107/temp/620ffac0e260b6e0e1f6f08d0a86a38ad93e0547/word2Pic/tiger.svg",
+					"https://raw.githubusercontent.com/Waqar-107/temp/620ffac0e260b6e0e1f6f08d0a86a38ad93e0547/word2Pic/tree.png",
+				],
+				answer: 3,
+				users_answer: -1,
 			},
 		];
 
@@ -68,7 +83,7 @@ const MCQ = () => {
 
 		// save the answer
 		let tempQuestion = [...question];
-		tempQuestion[currentQuestion].users_answer = [...answer.users_answer];
+		tempQuestion[currentQuestion].users_answer = answer.users_answer;
 		setQuestion(tempQuestion);
 
 		// mark this question as checked
@@ -112,7 +127,7 @@ const MCQ = () => {
 					check={check}>
 					<div className={`${classes.root} ${classes.centered}`}>
 						{question.map((obj, idx) => (
-							<MCQCard
+							<WordToPictureCard
 								key={idx}
 								ref={childRef}
 								elevation={question.length - idx + 1}
