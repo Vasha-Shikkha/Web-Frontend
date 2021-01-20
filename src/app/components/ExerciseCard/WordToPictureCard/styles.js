@@ -8,6 +8,7 @@ const styles = makeStyles((theme) => ({
 		borderRadius: 30,
 
 		position: "absolute",
+		background: "yellow",
 	},
 
 	transition: {
@@ -17,43 +18,53 @@ const styles = makeStyles((theme) => ({
 	},
 
 	question: {
-		height: "25%",
+		height: "30%",
 		width: "100%",
+
 		paddingLeft: "5%",
 		paddingRight: "5%",
 
 		borderRadius: "30px 30px 0px 0px",
 		fontSize: 18,
+		background: "blue",
 	},
 
 	optionContainer: {
-		height: "75%",
+		height: "70%",
 		width: "100%",
-		paddingLeft: "5%",
-		paddingRight: "5%",
+
+		// paddingLeft: "5%",
+		// paddingRight: "5%",
 
 		borderRadius: "0px 0px 30px 30px",
+		background: "red",
 	},
 
 	opt: {
-		width: "100%",
+		//width: "100%",
 		padding: 15,
 		borderRadius: 30,
 		cursor: "pointer",
-		border: "1px solid black",
 
-		[theme.breakpoints.down("sm")]: {
-			height: 100,
+		[theme.breakpoints.down("md")]: {
+			// height: "48%",
+			width: 120,
+			height: 120,
 		},
 
-		[theme.breakpoints.up("md")]: {
-			height: "100%",
+		[theme.breakpoints.up("lg")]: {
+			// height: "95%",
+			width: 200,
+			height: 200,
 		},
 	},
 
 	optImage: {
 		width: "100%",
-		height: "auto",
+		height: "100%",
+
+		objectFit: "cover",
+		objectPosition: "center",
 	},
 
 	hi: {

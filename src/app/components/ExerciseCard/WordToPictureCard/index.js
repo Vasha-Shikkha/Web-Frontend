@@ -46,30 +46,40 @@ const WordToPictureCard = forwardRef((props, ref) => {
 			style={{zIndex: props.elevation ? props.elevation : 0}}
 			className={props.moveAway === false ? classes.root : `${classes.root} ${classes.transition}`}>
 			<div className={`${classes.question} ${classes.centered}`}>{props.question.question}</div>
-			<div className={classes.optionContainer}>
-				{/* <Grid
-					container
-					spacing={3}
-					direction="row"
-					wrap="wrap"
-					justify="space-between"
-					alignContent="center"
-					alignItems="center"
-					style={{height: "100%"}}>
-					{props.question.options.map((obj, idx) => (
-						<Grid item xs={6} sm={6} md={6} lg={3} xl={3} key={idx}>
-							<div
-								style={{background: determineOptionColor(idx)}}
-								onClick={() => selectOption(idx)}
-								className={`${classes.opt} ${classes.centered} ${
-									selected === idx ? classes.hi : classes.lo
-								}`}>
-								<img src={obj} alt="" className={classes.optImage} />
-							</div>
-						</Grid>
-					))}
-				</Grid> */}
-			</div>
+			{/* <div className={classes.optionContainer}> */}
+			{/* {props.question.options.map((obj, idx) => (
+					<div
+						style={{background: determineOptionColor(idx)}}
+						onClick={() => selectOption(idx)}
+						className={`${classes.opt} ${classes.centered} ${
+							selected === idx ? classes.hi : classes.lo
+						}`}>
+						<img src={obj} alt="" className={classes.optImage} />
+					</div>
+				))} */}
+			<Grid
+				container
+				//spacing={3}
+				direction="row"
+				wrap="wrap"
+				justify="space-between"
+				alignContent="center"
+				alignItems="center"
+				className={classes.optionContainer}>
+				{props.question.options.map((obj, idx) => (
+					<Grid item xs={6} sm={6} md={6} lg={3} xl={3} key={idx}>
+						<div
+							style={{background: determineOptionColor(idx)}}
+							onClick={() => selectOption(idx)}
+							className={`${classes.opt} ${classes.centered} ${
+								selected === idx ? classes.hi : classes.lo
+							}`}>
+							<img src={obj} alt="" className={classes.optImage} />
+						</div>
+					</Grid>
+				))}
+			</Grid>
+			{/* </div> */}
 		</div>
 	);
 });
