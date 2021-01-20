@@ -5,7 +5,6 @@ const styles = makeStyles((theme) => ({
 		width: "80%",
 		height: "90%",
 		background: "white",
-		background: "yellow",
 		borderRadius: 30,
 
 		position: "absolute",
@@ -18,20 +17,22 @@ const styles = makeStyles((theme) => ({
 	},
 
 	question: {
-		height: "30%",
+		height: "25%",
 		width: "100%",
-		padding: "5%",
-		borderRadius: "30px 30px 0px 0px",
+		paddingLeft: "5%",
+		paddingRight: "5%",
 
+		borderRadius: "30px 30px 0px 0px",
 		fontSize: 18,
 	},
 
 	optionContainer: {
-		height: "70%",
+		height: "75%",
 		width: "100%",
-		padding: "5%",
+		paddingLeft: "5%",
+		paddingRight: "5%",
+
 		borderRadius: "0px 0px 30px 30px",
-		background: "red",
 	},
 
 	opt: {
@@ -65,7 +66,7 @@ const styles = makeStyles((theme) => ({
 
 	centered: {
 		display: "flex",
-		flexDirection: "column",
+		flexDirection: "row",
 		justifyContent: "center",
 		alignContent: "center",
 		alignItems: "center",

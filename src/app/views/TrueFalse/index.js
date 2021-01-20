@@ -29,7 +29,7 @@ const TrueFalse = () => {
 			},
 
 			{
-				question: "'with' is a conjunction",
+				question: "'with' is a preposition",
 				answer: 1,
 				users_answer: -1,
 			},

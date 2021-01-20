@@ -47,7 +47,7 @@ const WordToPictureCard = forwardRef((props, ref) => {
 			className={props.moveAway === false ? classes.root : `${classes.root} ${classes.transition}`}>
 			<div className={`${classes.question} ${classes.centered}`}>{props.question.question}</div>
 			<div className={classes.optionContainer}>
-				<Grid
+				{/* <Grid
 					container
 					spacing={3}
 					direction="row"
@@ -68,7 +68,7 @@ const WordToPictureCard = forwardRef((props, ref) => {
 							</div>
 						</Grid>
 					))}
-				</Grid>
+				</Grid> */}
 			</div>
 		</div>
 	);

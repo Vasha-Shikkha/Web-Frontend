@@ -55,7 +55,7 @@ const TrueFalseCard = forwardRef((props, ref) => {
 					justify="space-between"
 					alignContent="space-between"
 					alignItems="stretch">
-					<Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
+					<Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
 						<div
 							style={{background: determineOptionColor(1)}}
 							onClick={() => selectOption(1)}
@@ -66,7 +66,7 @@ const TrueFalseCard = forwardRef((props, ref) => {
 						</div>
 					</Grid>
 
-					<Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
+					<Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
 						<div
 							style={{background: determineOptionColor(0)}}
 							onClick={() => selectOption(0)}
