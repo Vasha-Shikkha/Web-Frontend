@@ -4,7 +4,7 @@ import {Grid} from "@material-ui/core";
 import colors from "../../../styles/colors";
 import styles from "./styles";
 
-const TrueFalseCard = forwardRef((props, ref) => {
+const WordToPictureCard = forwardRef((props, ref) => {
 	useImperativeHandle(ref, () => ({
 		check() {
 			let answer = {users_answer: selected};
@@ -46,43 +46,34 @@ const TrueFalseCard = forwardRef((props, ref) => {
 			style={{zIndex: props.elevation ? props.elevation : 0}}
 			className={props.moveAway === false ? classes.root : `${classes.root} ${classes.transition}`}>
 			<div className={`${classes.question} ${classes.centered}`}>{props.question.question}</div>
-			<div className={classes.optionContainer}>
-				<Grid
-					container
-					spacing={3}
-					direction="row"
-					wrap="wrap"
-					justify="space-between"
-					alignContent="space-between"
-					alignItems="stretch">
-					<Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
-						<div
-							style={{background: determineOptionColor(1)}}
-							onClick={() => selectOption(1)}
-							className={`${classes.opt} ${classes.centered} ${
-								selected === 1 ? classes.hi : classes.lo
-							}`}>
-							True
-						</div>
+			<Grid
+				container
+				direction="row"
+				wrap="wrap"
+				justify="space-between"
+				alignContent="center"
+				alignItems="center"
+				className={classes.optionContainer}>
+				{props.question.options.map((obj, idx) => (
+					<Grid item xs={6} sm={3} md={3} lg={3} xl={3} key={idx}>
+						<Grid container justify="center" alignContent="center" alignItems="center">
+							<div
+								style={{background: determineOptionColor(idx)}}
+								onClick={() => selectOption(idx)}
+								className={`${classes.opt} ${classes.centered} ${
+									selected === idx ? classes.hi : classes.lo
+								} ${idx <= 1 ? classes.optMarginBottom : null}`}>
+								<img src={obj} alt="" className={classes.optImage} />
+							</div>
+						</Grid>
 					</Grid>
-
-					<Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
-						<div
-							style={{background: determineOptionColor(0)}}
-							onClick={() => selectOption(0)}
-							className={`${classes.opt} ${classes.centered} ${
-								selected === 0 ? classes.hi : classes.lo
-							}`}>
-							False
-						</div>
-					</Grid>
-				</Grid>
-			</div>
+				))}
+			</Grid>
 		</div>
 	);
 });
 
-TrueFalseCard.propTypes = {
+WordToPictureCard.propTypes = {
 	question: PropTypes.object.isRequired,
 	moveAway: PropTypes.bool,
 	elevation: PropTypes.number,
@@ -90,4 +81,4 @@ TrueFalseCard.propTypes = {
 	isChecked: PropTypes.bool.isRequired,
 };
 
-export default TrueFalseCard;
+export default WordToPictureCard;

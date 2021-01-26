@@ -5,7 +5,7 @@ import Loading from "../../components/Loading";
 import MCQCard from "../../components/ExerciseCard/MCQCard";
 import VerdictBanner from "../../components/VerdictBanner";
 
-import styles from "./styles";
+import styles from "../../styles/exerciseViewStyles";
 
 const MCQ = () => {
 	const classes = styles();

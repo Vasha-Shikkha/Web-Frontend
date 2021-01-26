@@ -2,12 +2,12 @@ import React, {useEffect, useState, useRef} from "react";
 
 import ExerciseLayout from "../../layouts/exerciseLayout";
 import Loading from "../../components/Loading";
-import TrueFalseCard from "../../components/ExerciseCard/TrueFalseCard";
+import WordToPictureCard from "../../components/ExerciseCard/WordToPictureCard";
 import VerdictBanner from "../../components/VerdictBanner";
 
 import styles from "../../styles/exerciseViewStyles";
 
-const TrueFalse = () => {
+const WordToPicture = () => {
 	const classes = styles();
 	const [question, setQuestion] = useState([]);
 	const [moveAway, setMoveAway] = useState([]);
@@ -23,29 +23,47 @@ const TrueFalse = () => {
 	useEffect(() => {
 		let data = [
 			{
-				question: "'A' is an article",
-				answer: 1,
+				question: "Which is a Tiger?",
+				options: [
+					"https://raw.githubusercontent.com/Waqar-107/temp/620ffac0e260b6e0e1f6f08d0a86a38ad93e0547/word2Pic/hen.svg",
+					"https://raw.githubusercontent.com/Waqar-107/temp/620ffac0e260b6e0e1f6f08d0a86a38ad93e0547/word2Pic/elephant.svg",
+					"https://raw.githubusercontent.com/Waqar-107/temp/620ffac0e260b6e0e1f6f08d0a86a38ad93e0547/word2Pic/tiger.svg",
+					"https://raw.githubusercontent.com/Waqar-107/temp/620ffac0e260b6e0e1f6f08d0a86a38ad93e0547/word2Pic/horse.svg",
+				],
+				answer: 2,
 				users_answer: -1,
 			},
 
 			{
-				question: "'with' is a preposition",
-				answer: 1,
-				users_answer: -1,
-			},
-
-			{
-				question: "'the' is not an article",
+				question: "Which is a fish?",
+				options: [
+					"https://raw.githubusercontent.com/Waqar-107/temp/620ffac0e260b6e0e1f6f08d0a86a38ad93e0547/word2Pic/fish.svg",
+					"https://raw.githubusercontent.com/Waqar-107/temp/620ffac0e260b6e0e1f6f08d0a86a38ad93e0547/word2Pic/hen.svg",
+					"https://raw.githubusercontent.com/Waqar-107/temp/620ffac0e260b6e0e1f6f08d0a86a38ad93e0547/word2Pic/tiger.svg",
+					"https://raw.githubusercontent.com/Waqar-107/temp/620ffac0e260b6e0e1f6f08d0a86a38ad93e0547/word2Pic/horse.svg",
+				],
 				answer: 0,
+				users_answer: -1,
+			},
+
+			{
+				question: "Which is a tree?",
+				options: [
+					"https://raw.githubusercontent.com/Waqar-107/temp/620ffac0e260b6e0e1f6f08d0a86a38ad93e0547/word2Pic/fish.svg",
+					"https://raw.githubusercontent.com/Waqar-107/temp/master/word2Pic/apple.jpg",
+					"https://raw.githubusercontent.com/Waqar-107/temp/620ffac0e260b6e0e1f6f08d0a86a38ad93e0547/word2Pic/tiger.svg",
+					"https://raw.githubusercontent.com/Waqar-107/temp/master/word2Pic/tree.png",
+				],
+				answer: 3,
 				users_answer: -1,
 			},
 		];
 
 		setMoveAway(data.map(() => false));
+		setChecked(data.map(() => false));
 		setDuration(60 * data.length);
 		setQuestion(data);
 		setLoading(false);
-		setChecked(data.map(() => false));
 	}, []);
 
 	const timeout = () => {
@@ -89,7 +107,9 @@ const TrueFalse = () => {
 
 		// gameover
 		if (currentQuestion + 1 === question.length) {
-		} else setCurrentQuestion(currentQuestion + 1);
+		} else {
+			setCurrentQuestion(currentQuestion + 1);
+		}
 	};
 
 	return (
@@ -107,7 +127,7 @@ const TrueFalse = () => {
 					check={check}>
 					<div className={`${classes.root} ${classes.centered}`}>
 						{question.map((obj, idx) => (
-							<TrueFalseCard
+							<WordToPictureCard
 								key={idx}
 								ref={childRef}
 								elevation={question.length - idx + 1}
@@ -125,4 +145,4 @@ const TrueFalse = () => {
 	);
 };
 
-export default TrueFalse;
+export default WordToPicture;
