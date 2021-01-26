@@ -47,7 +47,7 @@ const BaseLayout = () => (
 								render={(props) => <PrivateWrapper component={<Home {...props} />} />}
 							/>
 
-							<Route
+							{/* <Route
 								exact
 								path="/mcq"
 								render={(props) => <PrivateWrapper component={<MCQ {...props} />} />}
@@ -63,9 +63,12 @@ const BaseLayout = () => (
 								exact
 								path="/word-to-picture"
 								render={(props) => <PrivateWrapper component={<WordToPicture {...props} />} />}
-							/>
+							/> */}
 
-							<Route exact path="/test" component={TrueFalse} />
+							<Route exact path="/word-to-picture" component={WordToPicture} />
+							<Route exact path="/mcq" component={MCQ} />
+							<Route exact path="/true-false" component={TrueFalse} />
+
 							<Route exact path="/" component={Landing} />
 							<Route exact path="/auth" component={Auth} />
 						</Switch>

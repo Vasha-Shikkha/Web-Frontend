@@ -8,7 +8,6 @@ const styles = makeStyles((theme) => ({
 		borderRadius: 30,
 
 		position: "absolute",
-		background: "yellow",
 	},
 
 	transition: {
@@ -26,7 +25,6 @@ const styles = makeStyles((theme) => ({
 
 		borderRadius: "30px 30px 0px 0px",
 		fontSize: 18,
-		background: "blue",
 	},
 
 	optionContainer: {
@@ -48,14 +46,24 @@ const styles = makeStyles((theme) => ({
 
 		[theme.breakpoints.down("md")]: {
 			// height: "48%",
-			width: 120,
-			height: 120,
+			width: 130,
+			height: 130,
 		},
 
 		[theme.breakpoints.up("lg")]: {
 			// height: "95%",
 			width: 200,
 			height: 200,
+		},
+	},
+
+	optMarginBottom: {
+		[theme.breakpoints.down("600")]: {
+			marginBottom: 10,
+		},
+
+		[theme.breakpoints.up("600")]: {
+			marginBottom: 0,
 		},
 	},
 
