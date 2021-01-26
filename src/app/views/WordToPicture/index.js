@@ -50,9 +50,9 @@ const WordToPicture = () => {
 				question: "Which is a tree?",
 				options: [
 					"https://raw.githubusercontent.com/Waqar-107/temp/620ffac0e260b6e0e1f6f08d0a86a38ad93e0547/word2Pic/fish.svg",
-					"https://raw.githubusercontent.com/Waqar-107/temp/620ffac0e260b6e0e1f6f08d0a86a38ad93e0547/word2Pic/apple.jpg",
+					"https://raw.githubusercontent.com/Waqar-107/temp/master/word2Pic/apple.jpg",
 					"https://raw.githubusercontent.com/Waqar-107/temp/620ffac0e260b6e0e1f6f08d0a86a38ad93e0547/word2Pic/tiger.svg",
-					"https://raw.githubusercontent.com/Waqar-107/temp/620ffac0e260b6e0e1f6f08d0a86a38ad93e0547/word2Pic/tree.png",
+					"https://raw.githubusercontent.com/Waqar-107/temp/master/word2Pic/tree.png",
 				],
 				answer: 3,
 				users_answer: -1,

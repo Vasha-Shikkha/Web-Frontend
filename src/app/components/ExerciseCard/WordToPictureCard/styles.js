@@ -30,28 +30,20 @@ const styles = makeStyles((theme) => ({
 	optionContainer: {
 		height: "70%",
 		width: "100%",
-
-		// paddingLeft: "5%",
-		// paddingRight: "5%",
-
 		borderRadius: "0px 0px 30px 30px",
-		background: "red",
 	},
 
 	opt: {
-		//width: "100%",
 		padding: 15,
 		borderRadius: 30,
 		cursor: "pointer",
 
 		[theme.breakpoints.down("md")]: {
-			// height: "48%",
 			width: 130,
 			height: 130,
 		},
 
 		[theme.breakpoints.up("lg")]: {
-			// height: "95%",
 			width: 200,
 			height: 200,
 		},
@@ -76,11 +68,11 @@ const styles = makeStyles((theme) => ({
 	},
 
 	hi: {
-		//boxShadow: `10px 10px 15px ${theme.palette.colors.secondary}`,
+		boxShadow: `10px 10px 15px ${theme.palette.colors.secondary}`,
 	},
 
 	lo: {
-		//boxShadow: `2px 3px 4px ${theme.palette.colors.secondary}`,
+		boxShadow: `2px 3px 4px ${theme.palette.colors.secondary}`,
 	},
 
 	centered: {
