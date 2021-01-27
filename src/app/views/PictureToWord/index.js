@@ -23,7 +23,7 @@ const PictureToWord = () => {
 	useEffect(() => {
 		let data = [
 			{
-				question: "Which is this?",
+				question: "What is this?",
 				questionImage:
 					"https://raw.githubusercontent.com/Waqar-107/temp/620ffac0e260b6e0e1f6f08d0a86a38ad93e0547/word2Pic/hen.svg",
 				options: ["hen", "fish", "tree", "horse"],
