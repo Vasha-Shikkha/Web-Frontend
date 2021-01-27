@@ -14,6 +14,7 @@ const Home = lazy(() => import("../views/Home"));
 const MCQ = lazy(() => import("../views/MCQ"));
 const TrueFalse = lazy(() => import("../views/TrueFalse"));
 const WordToPicture = lazy(() => import("../views/WordToPicture"));
+const PictureToWord = lazy(() => import("../views/PictureToWord"));
 
 const theme = createMuiTheme({
 	palette: {
@@ -65,6 +66,7 @@ const BaseLayout = () => (
 								render={(props) => <PrivateWrapper component={<WordToPicture {...props} />} />}
 							/> */}
 
+							<Route exact path="/picture-to-word" component={PictureToWord} />
 							<Route exact path="/word-to-picture" component={WordToPicture} />
 							<Route exact path="/mcq" component={MCQ} />
 							<Route exact path="/true-false" component={TrueFalse} />
