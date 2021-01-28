@@ -8,6 +8,8 @@ const styles = makeStyles((theme) => ({
 		borderRadius: 30,
 
 		position: "absolute",
+		overflowY: "auto",
+		overflowX: "hidden",
 	},
 
 	transition: {
@@ -16,12 +18,17 @@ const styles = makeStyles((theme) => ({
 		transitionDuration: "1.0s",
 	},
 
-	hi: {
-		boxShadow: `10px 10px 15px ${theme.palette.colors.secondary}`,
+	optionContainer: {
+		padding: "5%",
 	},
 
-	lo: {
+	options: {
+		padding: 10,
+		fontSize: 18,
+
+		borderRadius: 30,
 		boxShadow: `2px 3px 4px ${theme.palette.colors.secondary}`,
+		cursor: "pointer",
 	},
 
 	centered: {
