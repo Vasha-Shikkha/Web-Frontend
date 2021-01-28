@@ -69,9 +69,6 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 
 	//-------------------------------------------
 	const onDrag = (event, idx) => {
-		if (movable[idx]) {
-		}
-		console.log("dragging", idx);
 		event.preventDefault();
 		setDraggedIdx(idx);
 	};
@@ -85,7 +82,7 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 
 		let temp_sentences = [...currentSentences];
 		// even index means this is the first part of the sentence
-		if (draggedIdx % 2 == 0)
+		if (draggedIdx % 2 === 0)
 			temp_sentences[idx] = temp_sentences[draggedIdx] + " " + temp_sentences[idx];
 		else temp_sentences[idx] += " " + temp_sentences[draggedIdx];
 		temp_sentences[draggedIdx] = "";
@@ -105,7 +102,7 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 			// first part of the sentence are in the indexes, 0, 2, 4, ....
 			// second part of the sentence are in the indexes are on 1, 3, 5, ...
 			// we will not let the user drop first + first or second + second
-			if (idx % 2 != draggedIdx % 2) event.preventDefault();
+			if (idx % 2 !== draggedIdx % 2) event.preventDefault();
 		}
 	};
 	//-------------------------------------------
@@ -121,8 +118,8 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 				container
 				spacing={3}
 				wrap="wrap"
-				alignItems="stretch"
-				alignContent="stretch"
+				alignItems="center"
+				alignContent="center"
 				justify="space-between"
 				className={classes.optionContainer}>
 				{currentSentences.map((obj, idx) => (

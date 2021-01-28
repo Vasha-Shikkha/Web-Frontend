@@ -43,11 +43,11 @@ const BaseLayout = () => (
 				<MuiThemeProvider theme={theme}>
 					<div>
 						<Switch>
-							<Route
+							{/* <Route
 								exact
 								path="/home"
 								render={(props) => <PrivateWrapper component={<Home {...props} />} />}
-							/>
+							/> */}
 
 							{/* <Route
 								exact
@@ -75,6 +75,7 @@ const BaseLayout = () => (
 
 							<Route exact path="/" component={Landing} />
 							<Route exact path="/auth" component={Auth} />
+							<Route exact path="/home" component={Home} />
 						</Switch>
 					</div>
 				</MuiThemeProvider>
