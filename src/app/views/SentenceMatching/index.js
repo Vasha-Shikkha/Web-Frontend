@@ -38,21 +38,6 @@ const SentenceMatching = () => {
 						part_one: "She likes to",
 						part_two: "eat apple",
 					},
-
-					{
-						part_one: "The dog",
-						part_two: "is wagging its tail",
-					},
-
-					{
-						part_one: "It is raining",
-						part_two: "since morning",
-					},
-
-					{
-						part_one: "The bus has",
-						part_two: "manual gear",
-					},
 				],
 
 				user_answer: [],

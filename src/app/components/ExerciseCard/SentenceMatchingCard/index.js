@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import {Grid} from "@material-ui/core";
 import colors from "../../../styles/colors";
 import styles from "./styles";
+import "../../../styles/scrollbar.css";
 
 const SentenceMatchingCard = forwardRef((props, ref) => {
 	useImperativeHandle(ref, () => ({
@@ -17,16 +18,20 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 	const classes = styles();
 	const [currentSentences, setCurrentSentences] = useState([]);
 	const [sentenceMapping, setSentenceMapping] = useState([]);
-	const [color, setColor] = useState([]);
+	const [boxColors, setBoxColors] = useState([]);
+	const [draggedIdx, setDraggedIdx] = useState(-1);
+	const [movable, setMovable] = useState([]);
+	const [correct, setCorrect] = useState(0);
 
 	useEffect(() => {
+		let len = props.question.sentences.length * 2;
 		let temp = props.question.sentences.map((obj, idx) => idx);
 
 		// set initial color
-		setColor(props.question.sentences.map(() => colors.white));
+		setBoxColors(Array(len).fill(colors.white));
 
-		let temp_sentences = props.question.sentences.map(() => "");
-		let temp_mapping = props.question.sentences.map(() => -1);
+		let temp_sentences = Array(len).fill("");
+		let temp_mapping = Array(len).fill(-1);
 
 		// fill the first
 		temp = shuffle(temp);
@@ -44,6 +49,7 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 
 		setCurrentSentences(temp_sentences);
 		setSentenceMapping(temp_mapping);
+		setMovable(Array(len).fill(true));
 	}, []);
 
 	const shuffle = (array) => {
@@ -61,25 +67,56 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 		return array;
 	};
 
-	// determine the color of the option boxes
-	// const determineOptionColor = (val) => {
-	// 	if (!props.isChecked && !props.isReview) return colors.white;
-	// 	else {
-	// 		// when checked, users_answer is updated so we use that data
-	// 		if (props.question.users_answer === val && props.question.answer === val)
-	// 			return colors.correct;
-	// 		else if (props.question.users_answer === val && props.question.answer !== val)
-	// 			return colors.incorrect;
-	// 		else if (props.question.users_answer !== val && props.question.answer === val)
-	// 			return colors.correct;
-	// 		else return colors.white;
-	// 	}
-	// };
+	//-------------------------------------------
+	const onDrag = (event, idx) => {
+		if (movable[idx]) {
+		}
+		console.log("dragging", idx);
+		event.preventDefault();
+		setDraggedIdx(idx);
+	};
+
+	const onDrop = (idx) => {
+		// idx + draggedIdx or draggedIdx + idx
+		let temp_movable = [...movable];
+		temp_movable[idx] = false;
+		temp_movable[draggedIdx] = false;
+		setMovable(temp_movable);
+
+		let temp_sentences = [...currentSentences];
+		// even index means this is the first part of the sentence
+		if (draggedIdx % 2 == 0)
+			temp_sentences[idx] = temp_sentences[draggedIdx] + " " + temp_sentences[idx];
+		else temp_sentences[idx] += " " + temp_sentences[draggedIdx];
+		temp_sentences[draggedIdx] = "";
+
+		let temp_boxColors = [...boxColors];
+		if (sentenceMapping[idx] === sentenceMapping[draggedIdx]) {
+			temp_boxColors[idx] = colors.correct;
+			setCorrect(correct + 1);
+		} else temp_boxColors[idx] = colors.incorrect;
+
+		setBoxColors(temp_boxColors);
+		setCurrentSentences(temp_sentences);
+	};
+
+	const onDragOver = (event, idx) => {
+		if (movable[idx]) {
+			// first part of the sentence are in the indexes, 0, 2, 4, ....
+			// second part of the sentence are in the indexes are on 1, 3, 5, ...
+			// we will not let the user drop first + first or second + second
+			if (idx % 2 != draggedIdx % 2) event.preventDefault();
+		}
+	};
+	//-------------------------------------------
 
 	return (
 		<div
 			style={{zIndex: props.elevation ? props.elevation : 0}}
-			className={props.moveAway === false ? classes.root : `${classes.root} ${classes.transition}`}>
+			id="myScroll"
+			className={
+				props.moveAway === false ? `${classes.root}` : `${classes.root} ${classes.transition}`
+			}>
 			<Grid
 				container
 				spacing={3}
@@ -90,7 +127,15 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 				className={classes.optionContainer}>
 				{currentSentences.map((obj, idx) => (
 					<Grid item xs={12} sm={12} md={6} lg={6} xl={6} key={idx}>
-						<div className={`${classes.options} ${classes.centered}`}>{obj}</div>
+						<div
+							style={{background: boxColors[idx]}}
+							draggable={movable[idx]}
+							onDrag={(event) => onDrag(event, idx)}
+							onDrop={() => onDrop(idx)}
+							onDragOver={(event) => onDragOver(event, idx)}
+							className={`${classes.options} ${classes.centered}`}>
+							{obj}
+						</div>
 					</Grid>
 				))}
 			</Grid>

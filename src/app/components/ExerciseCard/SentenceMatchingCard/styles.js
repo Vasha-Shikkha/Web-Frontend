@@ -29,6 +29,7 @@ const styles = makeStyles((theme) => ({
 		borderRadius: 30,
 		boxShadow: `2px 3px 4px ${theme.palette.colors.secondary}`,
 		cursor: "pointer",
+		userSelect: "none",
 	},
 
 	centered: {
