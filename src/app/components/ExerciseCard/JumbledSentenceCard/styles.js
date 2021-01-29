@@ -16,41 +16,44 @@ const styles = makeStyles((theme) => ({
 		transitionDuration: "1.0s",
 	},
 
-	question: {
-		height: "30%",
+	instruction: {
+		height: "10%",
 		width: "100%",
-		padding: "5%",
 		borderRadius: "30px 30px 0px 0px",
 
 		fontSize: 18,
+		fontWeight: 500,
 	},
 
-	optionContainer: {
-		height: "70%",
+	wordContainer: {
+		height: "90%",
 		width: "100%",
 		padding: "5%",
 		borderRadius: "0px 0px 30px 30px",
+		overflow: "hidden",
+
+		display: "flex",
+		//flexWrap: "wrap",
+
+		flexDirection: "row",
+		justifyContent: "center",
+		alignContent: "center",
+		alignItems: "center",
 	},
 
-	opt: {
-		width: "100%",
-		height: "auto",
-		padding: 15,
+	box: {
+		padding: "15px 20px 15px 20px",
 		borderRadius: 30,
+		margin: 15,
+		userSelect: "none",
 		cursor: "pointer",
-	},
-
-	hi: {
-		boxShadow: `10px 10px 15px ${theme.palette.colors.secondary}`,
-	},
-
-	lo: {
 		boxShadow: `2px 3px 4px ${theme.palette.colors.secondary}`,
 	},
 
 	centered: {
 		display: "flex",
-		flexDirection: "column",
+		flexWrap: "wrap",
+		flexDirection: "row",
 		justifyContent: "center",
 		alignContent: "center",
 		alignItems: "center",
