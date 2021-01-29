@@ -17,7 +17,7 @@ const styles = makeStyles((theme) => ({
 	},
 
 	instruction: {
-		height: "10%",
+		height: "15%",
 		width: "100%",
 		borderRadius: "30px 30px 0px 0px",
 
@@ -26,14 +26,14 @@ const styles = makeStyles((theme) => ({
 	},
 
 	wordContainer: {
-		height: "90%",
+		height: "85%",
 		width: "100%",
 		padding: "5%",
 		borderRadius: "0px 0px 30px 30px",
 		overflow: "hidden",
 
 		display: "flex",
-		//flexWrap: "wrap",
+		flexWrap: "wrap",
 
 		flexDirection: "row",
 		justifyContent: "center",

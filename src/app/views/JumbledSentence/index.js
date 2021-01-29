@@ -23,6 +23,10 @@ const JumbledSentence = () => {
 	useEffect(() => {
 		let data = [
 			{
+				chunks: ["Ser Waymer Royce", "glanced", "at", "the", "sky", "with", "disinterest"],
+			},
+
+			{
 				chunks: ["the", "cow", "is having", "a nap"],
 			},
 
