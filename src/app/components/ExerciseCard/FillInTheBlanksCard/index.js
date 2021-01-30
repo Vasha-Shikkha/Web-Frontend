@@ -1,4 +1,4 @@
-import React, {useState, forwardRef, useImperativeHandle} from "react";
+import React, {useState, forwardRef, useImperativeHandle, useEffect} from "react";
 import PropTypes from "prop-types";
 import {Grid} from "@material-ui/core";
 import colors from "../../../styles/colors";
@@ -15,6 +15,36 @@ const FillInTheBlanksCard = forwardRef((props, ref) => {
 	}));
 
 	const classes = styles();
+	const [tokenizedQuestion, setTokenizedQuestion] = useState([]);
+	const [blankIndex, setBlankIndex] = useState([]);
+	const [optionMapping, setOptionMApping] = useState([]);
+
+	useEffect(() => {
+		parseData();
+
+		// this array will save ith option is in which blank
+		setOptionMApping(props.question.options.map(() => -1));
+	}, []);
+
+	const parseData = () => {
+		const splited_word = props.question.question.split(" ");
+		const final_words = [];
+		const blankIdx = [];
+
+		for (let i = 0; i < splited_word.length; i++) {
+			if (splited_word[i] === "_") {
+				blankIdx.push(i);
+				final_words.push("_______");
+			} else if (splited_word[i] !== "") final_words.push(splited_word[i]);
+
+			if (splited_word[i][splited_word[i].length - 1] === "\n") {
+				final_words.push("\n");
+			}
+		}
+
+		setTokenizedQuestion(final_words);
+		setBlankIndex(blankIdx);
+	};
 
 	// // determine the color of the option boxes
 	// const determineOptionColor = (val) => {
@@ -43,7 +73,18 @@ const FillInTheBlanksCard = forwardRef((props, ref) => {
 					</div>
 				))}
 			</div>
-			<div className={classes.questionContainer}></div>
+			<div className={classes.questionContainer}>
+				{tokenizedQuestion.map((obj, idx) =>
+					obj === "\n" ? (
+						<div key={idx} style={{flexBasis: "100%", marginBottom: 20}}></div>
+					) : (
+						// console.log("found a new line")
+						<div key={idx} className={classes.word}>
+							{obj}
+						</div>
+					)
+				)}
+			</div>
 		</div>
 	);
 });

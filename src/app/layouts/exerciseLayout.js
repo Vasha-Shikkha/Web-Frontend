@@ -79,7 +79,6 @@ const styles = makeStyles((theme) => ({
 
 const ExerciseLayout = (props) => {
 	const classes = styles();
-	console.log("scroll", props.scrollable);
 
 	return (
 		<div className={classes.root}>

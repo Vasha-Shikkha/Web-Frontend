@@ -13,7 +13,6 @@ const styles = makeStyles((theme) => ({
 	},
 
 	context: {
-		paddingBottom: "3%",
 		paddingTop: "5%",
 		fontSize: 18,
 		fontWeight: 600,
@@ -21,6 +20,8 @@ const styles = makeStyles((theme) => ({
 
 	optionContainer: {
 		width: "100%",
+		marginTop: 50,
+		marginBottom: 50,
 
 		display: "flex",
 		flexDirection: "row",
@@ -35,17 +36,21 @@ const styles = makeStyles((theme) => ({
 		margin: "0px 15px 15px 0px",
 	},
 
-	hi: {
-		boxShadow: `10px 10px 15px ${theme.palette.colors.secondary}`,
+	questionContainer: {
+		marginBottom: "5%",
+
+		display: "flex",
+		flexDirection: "row",
+		flexWrap: "wrap",
 	},
 
-	lo: {
-		boxShadow: `2px 3px 4px ${theme.palette.colors.secondary}`,
+	word: {
+		margin: "0px 5px 5px 0px",
 	},
 
 	centered: {
 		display: "flex",
-		flexDirection: "column",
+		flexDirection: "row",
 		justifyContent: "center",
 		alignContent: "center",
 		alignItems: "center",
