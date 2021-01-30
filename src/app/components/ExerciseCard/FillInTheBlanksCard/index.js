@@ -6,10 +6,21 @@ import styles from "./styles";
 const FillInTheBlanksCard = forwardRef((props, ref) => {
 	useImperativeHandle(ref, () => ({
 		check() {
-			// let answer = {users_answer: selected};
-			// if (selected === props.question.answer) answer.isCorrect = true;
-			// else answer.isCorrect = false;
-			// return answer;
+			let answer = {users_answer: [], isCorrect: true};
+
+			let jdx = 0;
+			for (let i = 0; i < tokenizedQuestion.length; i++) {
+				if (isBlank[i]) {
+					if (tokenizedQuestion[i] !== props.question.answer[jdx]) {
+						answer.isCorrect = false;
+					}
+
+					answer.users_answer.push(tokenizedQuestion[i] !== "_" ? tokenizedQuestion[i] : "");
+					jdx++;
+				}
+			}
+
+			return answer;
 		},
 	}));
 
@@ -30,9 +41,10 @@ const FillInTheBlanksCard = forwardRef((props, ref) => {
 		let final_words = [];
 		let blankIdx = [];
 
+		// ************* corner case left to handle: _(any punctuation mark, commonly [.,?!])
 		for (let i = 0; i < splited_word.length; i++) {
-			if (splited_word[i] === "_") {
-				final_words.push("_______");
+			if (splited_word[i] === "_" || splited_word[i] === "_.") {
+				final_words.push("_");
 				blankIdx.push(true);
 			} else if (splited_word[i] !== "") {
 				final_words.push(splited_word[i]);
@@ -55,14 +67,14 @@ const FillInTheBlanksCard = forwardRef((props, ref) => {
 
 		if (optionMapping[idx] === -1) {
 			for (let i = 0; i < isBlank.length; i++) {
-				if (isBlank[i] && tokenizedQuestion[i] === "_______") {
+				if (isBlank[i] && tokenizedQuestion[i] === "_") {
 					temp_tokenized_question[i] = props.question.options[idx];
 					arr[idx] = i;
 					break;
 				}
 			}
 		} else {
-			temp_tokenized_question[optionMapping[idx]] = "_______";
+			temp_tokenized_question[optionMapping[idx]] = "_";
 			arr[idx] = -1;
 		}
 
@@ -108,8 +120,8 @@ const FillInTheBlanksCard = forwardRef((props, ref) => {
 						<div
 							key={idx}
 							className={classes.word}
-							style={isBlank[idx] && obj !== "_______" ? {borderBottom: "1px solid black"} : null}>
-							{obj}
+							style={isBlank[idx] && obj !== "_" ? {borderBottom: "1px solid black"} : null}>
+							{obj === "_" ? "_______" : obj}
 						</div>
 					)
 				)}

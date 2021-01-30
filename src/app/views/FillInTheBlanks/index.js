@@ -51,6 +51,37 @@ const FillInTheBlanks = () => {
 				],
 				users_answer: [],
 			},
+
+			{
+				context: "Fill in the blanks with suitable word from the box:",
+				question:
+					"Bangladesh has an enriched culture of varieties of foods. Different types of _  add different _ to Bangladeshi cuisine. A person who does not eat fish and meat is called a _. But most of the Bangladeshis are _. In fact, it is said “fish and rice make one Bangali.” Usually most of the people here take three main _ a day- breakfast, lunch and dinner. They also like _ of vegetables with their meals. Moreover, they love taking snacks in between the main meals depending on their _. Bangladeshis also like _ foods as it makes the _ more appealing. Overall, they are very enthusiastic about trying out different foods and making _ in their cooking.",
+				options: [
+					"salads",
+					"fusion",
+					"flavours",
+					"appetite",
+					"non-vegetarians",
+					"meals",
+					"vegetarian",
+					"garnishing",
+					"cuisine",
+					"spices",
+				],
+				answer: [
+					"spices",
+					"flavours",
+					"vegetarian",
+					"non-vegetarians",
+					"meals",
+					"salads",
+					"appetite",
+					"garnishing",
+					"cuisine",
+					"fusion",
+				],
+				users_answer: [],
+			},
 		];
 
 		setMoveAway(data.map(() => false));
