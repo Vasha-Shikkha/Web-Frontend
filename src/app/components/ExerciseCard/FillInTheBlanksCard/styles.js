@@ -3,8 +3,7 @@ import {makeStyles} from "@material-ui/core";
 const styles = makeStyles((theme) => ({
 	root: {
 		width: "90%",
-		height: 1000,
-		background: "blue",
+		minHeight: "65vh",
 	},
 
 	transition: {
@@ -13,28 +12,27 @@ const styles = makeStyles((theme) => ({
 		transitionDuration: "1.0s",
 	},
 
-	question: {
-		height: "30%",
-		width: "100%",
-		padding: "5%",
-		borderRadius: "30px 30px 0px 0px",
-
+	context: {
+		paddingBottom: "3%",
+		paddingTop: "5%",
 		fontSize: 18,
+		fontWeight: 600,
 	},
 
 	optionContainer: {
-		height: "70%",
 		width: "100%",
-		padding: "5%",
-		borderRadius: "0px 0px 30px 30px",
+
+		display: "flex",
+		flexDirection: "row",
+		flexWrap: "wrap",
 	},
 
-	opt: {
-		width: "100%",
-		height: "auto",
+	box: {
 		padding: 15,
-		borderRadius: 30,
+		borderRadius: 15,
 		cursor: "pointer",
+		background: "white",
+		margin: "0px 15px 15px 0px",
 	},
 
 	hi: {
