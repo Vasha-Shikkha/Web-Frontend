@@ -34,6 +34,7 @@ const styles = makeStyles((theme) => ({
 		cursor: "pointer",
 		background: "white",
 		margin: "0px 15px 15px 0px",
+		userSelect: "none",
 	},
 
 	questionContainer: {
@@ -46,14 +47,15 @@ const styles = makeStyles((theme) => ({
 
 	word: {
 		margin: "0px 5px 5px 0px",
+		userSelect: "none",
 	},
 
-	centered: {
-		display: "flex",
-		flexDirection: "row",
-		justifyContent: "center",
-		alignContent: "center",
-		alignItems: "center",
+	hi: {
+		boxShadow: `10px 10px 15px ${theme.palette.colors.secondary}`,
+	},
+
+	lo: {
+		boxShadow: `2px 3px 4px ${theme.palette.colors.secondary}`,
 	},
 }));
 

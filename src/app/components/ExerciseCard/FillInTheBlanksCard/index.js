@@ -1,6 +1,5 @@
 import React, {useState, forwardRef, useImperativeHandle, useEffect} from "react";
 import PropTypes from "prop-types";
-import {Grid} from "@material-ui/core";
 import colors from "../../../styles/colors";
 import styles from "./styles";
 
@@ -16,8 +15,8 @@ const FillInTheBlanksCard = forwardRef((props, ref) => {
 
 	const classes = styles();
 	const [tokenizedQuestion, setTokenizedQuestion] = useState([]);
-	const [blankIndex, setBlankIndex] = useState([]);
 	const [optionMapping, setOptionMApping] = useState([]);
+	const [isBlank, setIsBlank] = useState([]);
 
 	useEffect(() => {
 		parseData();
@@ -27,23 +26,48 @@ const FillInTheBlanksCard = forwardRef((props, ref) => {
 	}, []);
 
 	const parseData = () => {
-		const splited_word = props.question.question.split(" ");
-		const final_words = [];
-		const blankIdx = [];
+		let splited_word = props.question.question.split(" ");
+		let final_words = [];
+		let blankIdx = [];
 
 		for (let i = 0; i < splited_word.length; i++) {
 			if (splited_word[i] === "_") {
-				blankIdx.push(i);
 				final_words.push("_______");
-			} else if (splited_word[i] !== "") final_words.push(splited_word[i]);
+				blankIdx.push(true);
+			} else if (splited_word[i] !== "") {
+				final_words.push(splited_word[i]);
+				blankIdx.push(false);
+			}
 
 			if (splited_word[i][splited_word[i].length - 1] === "\n") {
 				final_words.push("\n");
+				blankIdx.push(false);
 			}
 		}
 
 		setTokenizedQuestion(final_words);
-		setBlankIndex(blankIdx);
+		setIsBlank(blankIdx);
+	};
+
+	const selectOption = (idx) => {
+		let temp_tokenized_question = [...tokenizedQuestion];
+		let arr = [...optionMapping];
+
+		if (optionMapping[idx] === -1) {
+			for (let i = 0; i < isBlank.length; i++) {
+				if (isBlank[i] && tokenizedQuestion[i] === "_______") {
+					temp_tokenized_question[i] = props.question.options[idx];
+					arr[idx] = i;
+					break;
+				}
+			}
+		} else {
+			temp_tokenized_question[optionMapping[idx]] = "_______";
+			arr[idx] = -1;
+		}
+
+		setTokenizedQuestion(temp_tokenized_question);
+		setOptionMApping(arr);
 	};
 
 	// // determine the color of the option boxes
@@ -68,7 +92,10 @@ const FillInTheBlanksCard = forwardRef((props, ref) => {
 			<div className={classes.context}>{props.question.context}</div>
 			<div className={classes.optionContainer}>
 				{props.question.options.map((obj, idx) => (
-					<div className={classes.box} key={idx}>
+					<div
+						className={`${classes.box} ${optionMapping[idx] === -1 ? classes.lo : classes.hi}`}
+						key={idx}
+						onClick={() => selectOption(idx)}>
 						{obj}
 					</div>
 				))}
@@ -78,8 +105,10 @@ const FillInTheBlanksCard = forwardRef((props, ref) => {
 					obj === "\n" ? (
 						<div key={idx} style={{flexBasis: "100%", marginBottom: 20}}></div>
 					) : (
-						// console.log("found a new line")
-						<div key={idx} className={classes.word}>
+						<div
+							key={idx}
+							className={classes.word}
+							style={isBlank[idx] && obj !== "_______" ? {borderBottom: "1px solid black"} : null}>
 							{obj}
 						</div>
 					)
