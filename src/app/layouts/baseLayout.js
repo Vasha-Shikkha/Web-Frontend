@@ -15,6 +15,7 @@ const MCQ = lazy(() => import("../views/MCQ"));
 const TrueFalse = lazy(() => import("../views/TrueFalse"));
 const WordToPicture = lazy(() => import("../views/WordToPicture"));
 const PictureToWord = lazy(() => import("../views/PictureToWord"));
+const SentenceMatching = lazy(() => import("../views/SentenceMatching"));
 const JumbledSentence = lazy(() => import("../views/JumbledSentence"));
 
 const theme = createMuiTheme({
@@ -43,11 +44,11 @@ const BaseLayout = () => (
 				<MuiThemeProvider theme={theme}>
 					<div>
 						<Switch>
-							<Route
+							{/* <Route
 								exact
 								path="/home"
 								render={(props) => <PrivateWrapper component={<Home {...props} />} />}
-							/>
+							/> */}
 
 							{/* <Route
 								exact
@@ -67,6 +68,7 @@ const BaseLayout = () => (
 								render={(props) => <PrivateWrapper component={<WordToPicture {...props} />} />}
 							/> */}
 
+							<Route exact path="/sentence-matching" component={SentenceMatching} />
 							<Route exact path="/picture-to-word" component={PictureToWord} />
 							<Route exact path="/word-to-picture" component={WordToPicture} />
 							<Route exact path="/mcq" component={MCQ} />
@@ -75,6 +77,7 @@ const BaseLayout = () => (
 
 							<Route exact path="/" component={Landing} />
 							<Route exact path="/auth" component={Auth} />
+							<Route exact path="/home" component={Home} />
 						</Switch>
 					</div>
 				</MuiThemeProvider>
