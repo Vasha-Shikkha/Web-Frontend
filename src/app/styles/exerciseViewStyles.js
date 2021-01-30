@@ -9,6 +9,11 @@ const styles = makeStyles((theme) => ({
 		position: "relative",
 	},
 
+	scrollableRoot: {
+		width: "100%",
+		background: theme.palette.colors.background,
+	},
+
 	centered: {
 		display: "flex",
 		flexDirection: "column",

@@ -112,6 +112,7 @@ const FillInTheBlanks = () => {
 				<Loading />
 			) : (
 				<ExerciseLayout
+					scrollable={true}
 					duration={duration}
 					totalQuestions={question.length}
 					currentQuestionNumber={currentQuestion + 1}
@@ -119,7 +120,7 @@ const FillInTheBlanks = () => {
 					backToHome={backToHome}
 					skip={skip}
 					check={check}>
-					<div className={`${classes.root} ${classes.centered}`}>
+					<div className={`${classes.scrollableRoot} ${classes.centered}`}>
 						{question.map((obj, idx) => (
 							<FillInTheBlanksCard
 								key={idx}
