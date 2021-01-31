@@ -8,6 +8,7 @@ const colors = {
 	correct: "#b6eb8a",
 	violetLight: "#ECE0FF",
 	violetMedium: "#CEAFFF",
+	mediumPink: "#FFB8B8",
 };
 
 export default colors;
