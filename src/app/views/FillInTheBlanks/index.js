@@ -156,7 +156,8 @@ const FillInTheBlanks = () => {
 							<FillInTheBlanksCard
 								key={idx}
 								ref={childRef}
-								elevation={question.length - idx + 1}
+								thisQuestionNumber={idx}
+								currentQuestionNumber={currentQuestion}
 								question={obj}
 								moveAway={moveAway[idx]}
 								isReview={false}

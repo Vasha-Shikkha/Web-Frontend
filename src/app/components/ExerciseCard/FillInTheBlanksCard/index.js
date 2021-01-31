@@ -7,18 +7,22 @@ const FillInTheBlanksCard = forwardRef((props, ref) => {
 	useImperativeHandle(ref, () => ({
 		check() {
 			let answer = {users_answer: [], isCorrect: true};
+			let temp_color = [...wordColor];
 
 			let jdx = 0;
 			for (let i = 0; i < tokenizedQuestion.length; i++) {
 				if (isBlank[i]) {
 					if (tokenizedQuestion[i] !== props.question.answer[jdx]) {
 						answer.isCorrect = false;
-					}
+						temp_color[i] = colors.incorrect;
+					} else temp_color[i] = colors.correct;
 
 					answer.users_answer.push(tokenizedQuestion[i] !== "_" ? tokenizedQuestion[i] : "");
 					jdx++;
 				}
 			}
+
+			setWordColor(temp_color);
 
 			return answer;
 		},
@@ -28,6 +32,7 @@ const FillInTheBlanksCard = forwardRef((props, ref) => {
 	const [tokenizedQuestion, setTokenizedQuestion] = useState([]);
 	const [optionMapping, setOptionMApping] = useState([]);
 	const [isBlank, setIsBlank] = useState([]);
+	const [wordColor, setWordColor] = useState([]);
 
 	useEffect(() => {
 		parseData();
@@ -38,15 +43,14 @@ const FillInTheBlanksCard = forwardRef((props, ref) => {
 
 	const parseData = () => {
 		let splited_word = props.question.question.split(" ");
-		console.log(splited_word);
 		let final_words = [];
 		let blankIdx = [];
 
 		for (let i = 0; i < splited_word.length; i++) {
-			if (splited_word[i].match(/_[.,?!]/g)) {
+			if (splited_word[i].match(/_[.,?!]*/g)) {
 				final_words.push("_");
 				blankIdx.push(true);
-
+				console.log("inside");
 				if (splited_word[i].length > 1) {
 					final_words.push(splited_word[i][1]);
 					blankIdx.push(false);
@@ -64,6 +68,7 @@ const FillInTheBlanksCard = forwardRef((props, ref) => {
 
 		setTokenizedQuestion(final_words);
 		setIsBlank(blankIdx);
+		setWordColor(final_words.map(() => colors.background));
 	};
 
 	const selectOption = (idx) => {
@@ -87,24 +92,11 @@ const FillInTheBlanksCard = forwardRef((props, ref) => {
 		setOptionMApping(arr);
 	};
 
-	// // determine the color of the option boxes
-	// const determineOptionColor = (val) => {
-	// 	if (!props.isChecked && !props.isReview) return colors.white;
-	// 	else {
-	// 		// when checked, users_answer is updated so we use that data
-	// 		if (props.question.users_answer === val && props.question.answer === val)
-	// 			return colors.correct;
-	// 		else if (props.question.users_answer === val && props.question.answer !== val)
-	// 			return colors.incorrect;
-	// 		else if (props.question.users_answer !== val && props.question.answer === val)
-	// 			return colors.correct;
-	// 		else return colors.white;
-	// 	}
-	// };
-
 	return (
 		<div
-			style={{zIndex: props.elevation ? props.elevation : 0}}
+			style={{
+				display: props.thisQuestionNumber === props.currentQuestionNumber ? "initial" : "none",
+			}}
 			className={props.moveAway === false ? classes.root : `${classes.root} ${classes.transition}`}>
 			<div className={classes.context}>{props.question.context}</div>
 			<div className={classes.optionContainer}>
@@ -125,7 +117,10 @@ const FillInTheBlanksCard = forwardRef((props, ref) => {
 						<div
 							key={idx}
 							className={classes.word}
-							style={isBlank[idx] && obj !== "_" ? {borderBottom: "1px solid black"} : null}>
+							style={{
+								borderBottom: isBlank[idx] && obj !== "_" ? "2px solid black" : null,
+								background: wordColor[idx],
+							}}>
 							{obj === "_" ? "_______" : obj}
 						</div>
 					)
@@ -138,7 +133,8 @@ const FillInTheBlanksCard = forwardRef((props, ref) => {
 FillInTheBlanksCard.propTypes = {
 	question: PropTypes.object.isRequired,
 	moveAway: PropTypes.bool,
-	elevation: PropTypes.number,
+	thisQuestionNumber: PropTypes.number,
+	currentQuestionNumber: PropTypes.number,
 	isReview: PropTypes.bool.isRequired,
 	isChecked: PropTypes.bool.isRequired,
 };
