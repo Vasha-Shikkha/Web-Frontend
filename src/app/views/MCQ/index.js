@@ -103,10 +103,9 @@ const MCQ = () => {
 				<Loading />
 			) : (
 				<ExerciseLayout
-					duration={duration}
+					exerciseName="Multiple Choice Question"
 					totalQuestions={question.length}
 					currentQuestionNumber={currentQuestion + 1}
-					timeout={timeout}
 					backToHome={backToHome}
 					skip={skip}
 					check={check}>
