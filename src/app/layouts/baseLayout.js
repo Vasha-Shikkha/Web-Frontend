@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import {MuiThemeProvider, createMuiTheme} from "@material-ui/core/styles";
 
 import {AuthProvider} from "../stateHandlers/authContext";
-import PrivateWrapper from "./privateWrapper";
+// import PrivateWrapper from "./privateWrapper";
 
 import Loading from "../components/Loading";
 

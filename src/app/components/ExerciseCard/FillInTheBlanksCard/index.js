@@ -38,14 +38,19 @@ const FillInTheBlanksCard = forwardRef((props, ref) => {
 
 	const parseData = () => {
 		let splited_word = props.question.question.split(" ");
+		console.log(splited_word);
 		let final_words = [];
 		let blankIdx = [];
 
-		// ************* corner case left to handle: _(any punctuation mark, commonly [.,?!])
 		for (let i = 0; i < splited_word.length; i++) {
-			if (splited_word[i] === "_" || splited_word[i] === "_.") {
+			if (splited_word[i].match(/_[.,?!]/g)) {
 				final_words.push("_");
 				blankIdx.push(true);
+
+				if (splited_word[i].length > 1) {
+					final_words.push(splited_word[i][1]);
+					blankIdx.push(false);
+				}
 			} else if (splited_word[i] !== "") {
 				final_words.push(splited_word[i]);
 				blankIdx.push(false);
