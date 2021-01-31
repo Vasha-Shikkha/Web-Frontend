@@ -83,7 +83,7 @@ const ExerciseLayout = (props) => {
 	return (
 		<div className={classes.root}>
 			<div className={`${classes.nav} ${classes.container}`}>
-				<Timer duration={props.duration} timeout={props.timeout} backToHome={props.backToHome} />
+				{/* <Timer duration={props.duration} timeout={props.timeout} backToHome={props.backToHome} /> */}
 				<QuestionNumber
 					totalQuestions={props.totalQuestions}
 					currentQuestionNumber={props.currentQuestionNumber}
@@ -107,7 +107,7 @@ const ExerciseLayout = (props) => {
 
 ExerciseLayout.propTypes = {
 	children: PropTypes.object.isRequired,
-	timeout: PropTypes.func.isRequired,
+	timeout: PropTypes.func,
 	skip: PropTypes.func.isRequired,
 	check: PropTypes.func.isRequired,
 	backToHome: PropTypes.func.isRequired,
