@@ -39,6 +39,11 @@ const styles = makeStyles((theme) => ({
 		background: theme.palette.colors.background,
 	},
 
+	childScrollable: {
+		width: "100%",
+		background: theme.palette.colors.background,
+	},
+
 	btn: {
 		[theme.breakpoints.down("sm")]: {
 			width: "100%",
@@ -84,7 +89,9 @@ const ExerciseLayout = (props) => {
 					currentQuestionNumber={props.currentQuestionNumber}
 				/>
 			</div>
-			<div className={classes.child}>{props.children}</div>
+			<div className={props.scrollable ? classes.childScrollable : classes.child}>
+				{props.children}
+			</div>
 			<div className={`${classes.btnContainer} ${classes.container}`}>
 				<div className={`${classes.btn} ${classes.m10}`}>
 					<Button styles={classes.btn1} text="Skip" onClick={props.skip} />
@@ -107,6 +114,7 @@ ExerciseLayout.propTypes = {
 	duration: PropTypes.number.isRequired,
 	totalQuestions: PropTypes.number.isRequired,
 	currentQuestionNumber: PropTypes.number.isRequired,
+	scrollable: PropTypes.bool,
 };
 
 export default ExerciseLayout;
