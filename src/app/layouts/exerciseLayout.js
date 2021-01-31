@@ -125,6 +125,7 @@ const styles = makeStyles((theme) => ({
 	backBtn: {
 		color: theme.palette.colors.mediumPink,
 		fontSize: 30,
+		cursor: "pointer",
 	},
 }));
 
