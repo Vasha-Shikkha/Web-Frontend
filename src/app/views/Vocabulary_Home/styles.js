@@ -106,12 +106,13 @@ const styles = makeStyles((theme) => ({
 		height: 150,
 
 		marginBottom: 10,
+		cursor: "pointer",
 	},
 
 	taskBoxInner: {
 		width: 100,
 		height: 100,
-		borderRadius: 5,
+		borderRadius: 10,
 		padding: "5%",
 		background: theme.palette.colors.lightPink,
 	},
