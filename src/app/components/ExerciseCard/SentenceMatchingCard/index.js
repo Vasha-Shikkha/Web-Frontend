@@ -50,7 +50,7 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 		setCurrentSentences(temp_sentences);
 		setSentenceMapping(temp_mapping);
 		setMovable(Array(len).fill(true));
-	}, []);
+	}, [props.question.sentences]);
 
 	const shuffle = (array) => {
 		let currentIndex = array.length;

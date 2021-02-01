@@ -35,13 +35,6 @@ const FillInTheBlanksCard = forwardRef((props, ref) => {
 	const [wordColor, setWordColor] = useState([]);
 
 	useEffect(() => {
-		parseData();
-
-		// this array will save ith option is in which blank
-		setOptionMApping(props.question.options.map(() => -1));
-	}, []);
-
-	const parseData = () => {
 		let splited_word = props.question.question.split(" ");
 		let final_words = [];
 		let blankIdx = [];
@@ -69,7 +62,10 @@ const FillInTheBlanksCard = forwardRef((props, ref) => {
 		setTokenizedQuestion(final_words);
 		setIsBlank(blankIdx);
 		setWordColor(final_words.map(() => colors.background));
-	};
+
+		// this array will save ith option is in which blank
+		setOptionMApping(props.question.options.map(() => -1));
+	}, [props.question.question, props.question.options]);
 
 	const selectOption = (idx) => {
 		let temp_tokenized_question = [...tokenizedQuestion];

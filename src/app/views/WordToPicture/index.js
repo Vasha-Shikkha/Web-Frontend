@@ -13,7 +13,6 @@ const WordToPicture = () => {
 	const [moveAway, setMoveAway] = useState([]);
 	const [checked, setChecked] = useState([]);
 	const [currentQuestion, setCurrentQuestion] = useState(0);
-	const [duration, setDuration] = useState(0);
 	const [loading, setLoading] = useState(true);
 	const [showVerdict, setShowVerdict] = useState(false);
 	const [correct, setCorrect] = useState(true);
@@ -61,14 +60,9 @@ const WordToPicture = () => {
 
 		setMoveAway(data.map(() => false));
 		setChecked(data.map(() => false));
-		setDuration(60 * data.length);
 		setQuestion(data);
 		setLoading(false);
 	}, []);
-
-	const timeout = () => {
-		console.log("timeover kid!!");
-	};
 
 	const backToHome = () => {
 		console.log("time to get back kid");
@@ -118,10 +112,9 @@ const WordToPicture = () => {
 				<Loading />
 			) : (
 				<ExerciseLayout
-					duration={duration}
+					exerciseName="Word to Picture"
 					totalQuestions={question.length}
 					currentQuestionNumber={currentQuestion + 1}
-					timeout={timeout}
 					backToHome={backToHome}
 					skip={skip}
 					check={check}>

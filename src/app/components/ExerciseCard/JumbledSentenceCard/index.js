@@ -15,7 +15,7 @@ const JumbledSentenceCard = forwardRef((props, ref) => {
 	useEffect(() => {
 		let chunks = shuffle(props.question.chunks);
 		setChunks(chunks);
-	}, []);
+	}, [props.question.chunks]);
 
 	const handleOnDragEnd = (result) => {
 		if (!result.destination) return;
