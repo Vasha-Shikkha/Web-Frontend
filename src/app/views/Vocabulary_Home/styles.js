@@ -14,9 +14,15 @@ const styles = makeStyles((theme) => ({
 	},
 
 	imageContainer: {
-		height: "50vh",
 		width: "100%",
 		position: "relative",
+
+		[theme.breakpoints.down("md")]: {
+			height: "30vh",
+		},
+		[theme.breakpoints.up("md")]: {
+			height: "40vh",
+		},
 	},
 
 	imageUpper: {
@@ -40,6 +46,48 @@ const styles = makeStyles((theme) => ({
 
 	backBtn: {
 		color: "white",
+	},
+
+	taskContainer: {
+		padding: "5%",
+	},
+
+	heading: {
+		fontSize: 25,
+		fontWeight: 549,
+	},
+
+	levelContainer: {
+		height: 50,
+		width: "100%",
+
+		borderRadius: 10,
+		background: theme.palette.colors.lightPink,
+
+		display: "flex",
+		flexDirection: "row",
+		alignContent: "center",
+		alignItems: "center",
+		justifyContent: "space-around",
+
+		marginTop: 25,
+	},
+
+	levelBox: {
+		padding: 10,
+		borderRadius: 10,
+		width: "24%",
+		textAlign: "center",
+		cursor: "pointer",
+	},
+
+	levelBoxActive: {
+		color: "white",
+		background: theme.palette.colors.primary,
+	},
+
+	levelBoxInactive: {
+		color: theme.palette.colors.primary,
 	},
 }));
 

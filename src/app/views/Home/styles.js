@@ -34,9 +34,8 @@ const styles = makeStyles((theme) => ({
 	},
 
 	heading: {
-		fontFamily: "Montserrat",
 		fontSize: 25,
-		fontWeight: 600,
+		fontWeight: 549,
 
 		marginBottom: 10,
 		marginTop: 50,
