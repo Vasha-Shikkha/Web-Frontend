@@ -25,7 +25,7 @@ const FillInTheBlanks = () => {
 				context:
 					"Reza and Rony are classmates. They suddenly meet on the street and have a conversation about their interests in games. Can you help them complete their chat with the group of words from the box?",
 				question:
-					"Reza: Hi Rony! What’s in your hand? _  showing it to me?\nRony: Hey! Yes sure. This is a book on chess techniques.\nReza: Are you _ chess? I find it difficult to be honest.\nRony: I am crazy about chess. _ game?\nReza: Well, _ cricket to any other sports.\nRony: That’s great! Then we can _ when we’re free.\nReza: Sure, _ about it. Let’s meet some time soon.",
+					"Reza: Hi Rony! What’s in your hand? _  showing it to me?\n Rony: Hey! Yes sure. This is a book on chess techniques\n Reza: Are you _ chess? I find it difficult to be honest\n Rony: I am crazy about chess. _ game?\n Reza: Well, _ cricket to any other sports.\n Rony: That’s great! Then we can _ when we’re free.\n Reza: Sure, _ about it. Let’s meet some time soon.",
 				options: [
 					"What’s your favorite",
 					"I prefer",
