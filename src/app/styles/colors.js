@@ -8,6 +8,7 @@ const colors = {
 	correct: "#b6eb8a",
 	violetLight: "#ECE0FF",
 	violetMedium: "#CEAFFF",
+	violetDark: "#9E63FF",
 	mediumPink: "#FFB8B8",
 };
 

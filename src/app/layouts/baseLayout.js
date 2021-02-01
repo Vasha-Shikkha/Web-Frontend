@@ -22,7 +22,7 @@ const FillInTheBlanks = lazy(() => import("../views/FillInTheBlanks"));
 const theme = createMuiTheme({
 	palette: {
 		colors: {
-			primary: "#8577E2",
+			primary: "#9E63FF",
 			secondary: "#e5e5e5",
 			background: "#F2F2F2",
 			textLight: "#2E303E",
@@ -30,6 +30,7 @@ const theme = createMuiTheme({
 			correct: "#b6eb8a",
 			violetLight: "#ECE0FF",
 			violetMedium: "#CEAFFF",
+			violetDark: "#9E63FF",
 			mediumPink: "#FFB8B8",
 		},
 	},
