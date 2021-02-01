@@ -3,11 +3,47 @@ import {Link} from "react-router-dom";
 
 import Girl_Reading from "../../assets/girl_reading.svg";
 import ArrowBackOutlinedIcon from "@material-ui/icons/ArrowBackOutlined";
+
+import Places from "../../assets/topics/places.svg";
+import Birds from "../../assets/topics/birds.svg";
+import Food from "../../assets/topics/food.svg";
+
 import styles from "./styles";
 
 const Vocabulary = () => {
 	const classes = styles();
 	const [level, setLevel] = useState(1);
+	const [topics, setTopics] = useState([
+		{
+			name: "Places",
+			image: Places,
+		},
+
+		{
+			name: "Birds",
+			image: Birds,
+		},
+
+		{
+			name: "Food",
+			image: Food,
+		},
+
+		{
+			name: "Places",
+			image: Places,
+		},
+
+		{
+			name: "Birds",
+			image: Birds,
+		},
+
+		{
+			name: "Food",
+			image: Food,
+		},
+	]);
 
 	return (
 		<div className={classes.root}>
@@ -36,6 +72,17 @@ const Vocabulary = () => {
 								level === obj ? classes.levelBoxActive : classes.levelBoxInactive
 							}`}>
 							{`Level ${obj}`}
+						</div>
+					))}
+				</div>
+
+				<div className={classes.taskboxContainer}>
+					{topics.map((obj, idx) => (
+						<div className={classes.taskBoxOuter} key={idx}>
+							<div className={`${classes.taskBoxInner} ${classes.centered}`}>
+								<img src={obj.image} alt="" className={classes.topicImg} />
+							</div>
+							<div className={classes.title}>{obj.name}</div>
 						</div>
 					))}
 				</div>

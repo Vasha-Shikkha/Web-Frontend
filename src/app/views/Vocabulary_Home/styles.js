@@ -71,6 +71,7 @@ const styles = makeStyles((theme) => ({
 		justifyContent: "space-around",
 
 		marginTop: 25,
+		marginBottom: 25,
 	},
 
 	levelBox: {
@@ -88,6 +89,48 @@ const styles = makeStyles((theme) => ({
 
 	levelBoxInactive: {
 		color: theme.palette.colors.primary,
+	},
+
+	taskboxContainer: {
+		display: "flex",
+		flexDirection: "row",
+		flexWrap: "wrap",
+
+		justifyContent: "space-between",
+		alignContent: "stretch",
+		alignItems: "stretch",
+	},
+
+	taskBoxOuter: {
+		width: 100,
+		height: 150,
+
+		marginBottom: 10,
+	},
+
+	taskBoxInner: {
+		width: 100,
+		height: 100,
+		borderRadius: 5,
+		padding: "5%",
+		background: theme.palette.colors.lightPink,
+	},
+
+	topicImage: {
+		width: "100%",
+		height: "100%",
+
+		objectFit: "cover",
+		OObjectPosition: "center",
+	},
+
+	title: {
+		fontSize: 14,
+		fontStyle: "normal",
+		fontWeight: 600,
+		textAlign: "center",
+
+		marginTop: 15,
 	},
 }));
 
