@@ -20,18 +20,18 @@ const Landing = () => {
 					Keep practising your English by completing new lessons and revisiting your old lessons
 				</div>
 				<div className={classes.boxContainer}>
-					<div className={classes.box}>
+					<Link to="/vocabulary" className={classes.box}>
 						<div className={classes.thumbnail}>
 							<img className={classes.img} src={Vocabulary} alt="" />
 						</div>
 						<div className={classes.boxText}>VOCABULARY</div>
-					</div>
-					<div className={classes.box}>
+					</Link>
+					<Link to="" className={classes.box}>
 						<div className={classes.thumbnail}>
 							<img className={classes.img} src={Grammar} alt="" />
 						</div>
 						<div className={classes.boxText}>GRAMMAR</div>
-					</div>
+					</Link>
 				</div>
 			</div>
 		</div>

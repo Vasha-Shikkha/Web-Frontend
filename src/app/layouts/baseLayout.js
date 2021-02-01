@@ -11,6 +11,7 @@ import Loading from "../components/Loading";
 const Landing = lazy(() => import("../views/Landing"));
 const Auth = lazy(() => import("../views/Auth"));
 const Home = lazy(() => import("../views/Home"));
+const Vocabulary_Home = lazy(() => import("../views/Vocabulary_Home"));
 const MCQ = lazy(() => import("../views/MCQ"));
 const TrueFalse = lazy(() => import("../views/TrueFalse"));
 const WordToPicture = lazy(() => import("../views/WordToPicture"));
@@ -57,6 +58,12 @@ const BaseLayout = () => (
 
 							{/* <Route
 								exact
+								path="/vocabulary"
+								render={(props) => <PrivateWrapper component={<Vocabulary_Home {...props} />} />}
+							/> */}
+
+							{/* <Route
+								exact
 								path="/mcq"
 								render={(props) => <PrivateWrapper component={<MCQ {...props} />} />}
 							/>
@@ -84,6 +91,7 @@ const BaseLayout = () => (
 							<Route exact path="/" component={Landing} />
 							<Route exact path="/auth" component={Auth} />
 							<Route exact path="/home" component={Home} />
+							<Route exact path="/vocabulary" component={Vocabulary_Home} />
 						</Switch>
 					</div>
 				</MuiThemeProvider>

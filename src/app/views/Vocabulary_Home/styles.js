@@ -61,7 +61,6 @@ const styles = makeStyles((theme) => ({
 		width: "47%",
 		height: "auto",
 		cursor: "pointer",
-		textDecoration: "none",
 
 		padding: "5%",
 		background: theme.palette.colors.violetMedium,
@@ -103,6 +102,18 @@ const styles = makeStyles((theme) => ({
 		[theme.breakpoints.up("lg")]: {
 			fontSize: 25,
 		},
+	},
+
+	btn: {
+		background: theme.palette.colors.primary,
+		color: "white",
+		width: "150px",
+		height: "50px",
+
+		marginTop: "30px",
+		borderRadius: 30,
+		cursor: "pointer",
+		textDecoration: "none",
 	},
 }));
 
