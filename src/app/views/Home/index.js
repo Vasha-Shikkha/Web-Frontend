@@ -6,7 +6,7 @@ import Vocabulary from "../../assets/vocabulary.svg";
 import Grammar from "../../assets/grammar.svg";
 import styles from "./styles";
 
-const Landing = () => {
+const Home = () => {
 	const classes = styles();
 	return (
 		<div className={classes.root}>
@@ -38,4 +38,4 @@ const Landing = () => {
 	);
 };
 
-export default Landing;
+export default Home;
