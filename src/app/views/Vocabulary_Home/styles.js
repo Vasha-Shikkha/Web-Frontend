@@ -3,6 +3,7 @@ import {makeStyles} from "@material-ui/core";
 const styles = makeStyles((theme) => ({
 	root: {
 		width: "100%",
+		paddingBottom: 100,
 	},
 
 	centered: {
@@ -102,6 +103,8 @@ const styles = makeStyles((theme) => ({
 
 		marginBottom: 10,
 		cursor: "pointer",
+
+		background: "yellow",
 	},
 
 	taskBoxInner: {
@@ -131,15 +134,21 @@ const styles = makeStyles((theme) => ({
 
 	tooltip: {
 		position: "absolute",
+		marginBottom: 5,
 		zIndex: 2,
-		width: "90%",
-		height: 100,
+		width: 100,
+
+		display: "flex",
+		flexDirection: "column",
+		justifyContent: "center",
+		alignContent: "center",
+		alignItems: "center",
 	},
 
 	tooltipRectangle: {
 		background: theme.palette.colors.primary,
 		borderRadius: 10,
-		width: 120,
+		width: "100%",
 		height: 70,
 	},
 }));
