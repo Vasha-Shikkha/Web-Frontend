@@ -92,13 +92,8 @@ const styles = makeStyles((theme) => ({
 	},
 
 	taskboxContainer: {
-		display: "flex",
-		flexDirection: "row",
-		flexWrap: "wrap",
-
-		justifyContent: "space-between",
-		alignContent: "stretch",
-		alignItems: "stretch",
+		width: "100%",
+		margin: "auto",
 	},
 
 	taskBoxOuter: {
@@ -114,7 +109,7 @@ const styles = makeStyles((theme) => ({
 		height: 100,
 		borderRadius: 10,
 		padding: "5%",
-		background: theme.palette.colors.lightPink,
+		background: theme.palette.colors.background,
 	},
 
 	topicImage: {
@@ -132,6 +127,20 @@ const styles = makeStyles((theme) => ({
 		textAlign: "center",
 
 		marginTop: 15,
+	},
+
+	tooltip: {
+		position: "absolute",
+		zIndex: 2,
+		width: "90%",
+		height: 100,
+	},
+
+	tooltipRectangle: {
+		background: theme.palette.colors.primary,
+		borderRadius: 10,
+		width: 120,
+		height: 70,
 	},
 }));
 

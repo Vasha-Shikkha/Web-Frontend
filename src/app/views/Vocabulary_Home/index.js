@@ -1,6 +1,9 @@
 import React, {useState} from "react";
 import {Link} from "react-router-dom";
+import colors from "../../styles/colors";
 
+import Triangle from "../../components/Triangle";
+import {Grid} from "@material-ui/core";
 import Girl_Reading from "../../assets/girl_reading.svg";
 import ArrowBackOutlinedIcon from "@material-ui/icons/ArrowBackOutlined";
 
@@ -14,6 +17,36 @@ const Vocabulary = () => {
 	const classes = styles();
 	const [level, setLevel] = useState(1);
 	const [topics, setTopics] = useState([
+		{
+			name: "Places",
+			image: Places,
+		},
+
+		{
+			name: "Birds",
+			image: Birds,
+		},
+
+		{
+			name: "Food",
+			image: Food,
+		},
+		,
+		{
+			name: "Places",
+			image: Places,
+		},
+
+		{
+			name: "Birds",
+			image: Birds,
+		},
+
+		{
+			name: "Food",
+			image: Food,
+		},
+
 		{
 			name: "Places",
 			image: Places,
@@ -76,16 +109,43 @@ const Vocabulary = () => {
 					))}
 				</div>
 
-				<div className={classes.taskboxContainer}>
+				<Grid
+					container
+					spacing={3}
+					direction="row"
+					wrap="wrap"
+					justify="space-between"
+					alignContent="center"
+					alignItems="center"
+					className={classes.taskboxContainer}>
 					{topics.map((obj, idx) => (
 						<div className={classes.taskBoxOuter} key={idx}>
 							<div className={`${classes.taskBoxInner} ${classes.centered}`}>
 								<img src={obj.image} alt="" className={classes.topicImg} />
 							</div>
 							<div className={classes.title}>{obj.name}</div>
+							<div className={classes.tooltip}>
+								<Triangle color={colors.violetDark} size={10} direction="up" />
+								<div className={classes.tooltipRectangle}></div>
+							</div>
 						</div>
 					))}
-				</div>
+				</Grid>
+
+				{/* <div className={classes.taskboxContainer}>
+					{topics.map((obj, idx) => (
+						<div className={classes.taskBoxOuter} key={idx}>
+							<div className={`${classes.taskBoxInner} ${classes.centered}`}>
+								<img src={obj.image} alt="" className={classes.topicImg} />
+							</div>
+							<div className={classes.title}>{obj.name}</div>
+							<div className={classes.tooltip}>
+								<Triangle color={colors.violetDark} size={10} direction="up" />
+								<div className={classes.tooltipRectangle}></div>
+							</div>
+						</div>
+					))}
+				</div> */}
 			</div>
 		</div>
 	);
