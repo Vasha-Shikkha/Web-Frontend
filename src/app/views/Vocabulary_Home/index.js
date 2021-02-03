@@ -1,8 +1,9 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import colors from "../../styles/colors";
 
 import Triangle from "../../components/Triangle";
+import Button from "../../components/Button";
 import {Grid} from "@material-ui/core";
 import Girl_Reading from "../../assets/girl_reading.svg";
 import ArrowBackOutlinedIcon from "@material-ui/icons/ArrowBackOutlined";
@@ -16,6 +17,7 @@ import styles from "./styles";
 const Vocabulary = () => {
 	const classes = styles();
 	const [level, setLevel] = useState(1);
+	const [showTooltip, setShowTooltip] = useState([]);
 	const [topics, setTopics] = useState([
 		{
 			name: "Places",
@@ -78,6 +80,23 @@ const Vocabulary = () => {
 		},
 	]);
 
+	useEffect(() => {
+		setShowTooltip(topics.map(() => false));
+	}, []);
+
+	const tooltipToggler = (idx) => {
+		let arr = [...showTooltip];
+		arr[idx] = !arr[idx];
+		setShowTooltip(arr);
+	};
+
+	const tutorialBtnClick = (idx) => {
+		console.log("tut idx", idx);
+	};
+	const exerciseBtnClick = (idx) => {
+		console.log("ex idx", idx);
+	};
+
 	return (
 		<div className={classes.root}>
 			<div className={classes.imageContainer}>
@@ -119,33 +138,29 @@ const Vocabulary = () => {
 					alignItems="center"
 					className={classes.taskboxContainer}>
 					{topics.map((obj, idx) => (
-						<div className={classes.taskBoxOuter} key={idx}>
+						<div className={classes.taskBoxOuter} key={idx} onClick={() => tooltipToggler(idx)}>
 							<div className={`${classes.taskBoxInner} ${classes.centered}`}>
 								<img src={obj.image} alt="" className={classes.topicImg} />
 							</div>
 							<div className={classes.title}>{obj.name}</div>
-							<div className={classes.tooltip}>
+							<div className={classes.tooltip} style={{display: showTooltip[idx] ? "" : "none"}}>
 								<Triangle color={colors.violetDark} size={10} direction="up" />
-								<div className={classes.tooltipRectangle}></div>
+								<div className={classes.tooltipRectangle}>
+									<Button
+										text="Tutorial"
+										styles={`${classes.btn} ${classes.tutorialBtn}`}
+										onClick={() => tutorialBtnClick(idx)}
+									/>
+									<Button
+										text="Exercise"
+										styles={`${classes.btn} ${classes.exerciseBtn}`}
+										onClick={() => exerciseBtnClick(idx)}
+									/>
+								</div>
 							</div>
 						</div>
 					))}
 				</Grid>
-
-				{/* <div className={classes.taskboxContainer}>
-					{topics.map((obj, idx) => (
-						<div className={classes.taskBoxOuter} key={idx}>
-							<div className={`${classes.taskBoxInner} ${classes.centered}`}>
-								<img src={obj.image} alt="" className={classes.topicImg} />
-							</div>
-							<div className={classes.title}>{obj.name}</div>
-							<div className={classes.tooltip}>
-								<Triangle color={colors.violetDark} size={10} direction="up" />
-								<div className={classes.tooltipRectangle}></div>
-							</div>
-						</div>
-					))}
-				</div> */}
 			</div>
 		</div>
 	);

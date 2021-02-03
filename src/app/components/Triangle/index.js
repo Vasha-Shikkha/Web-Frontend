@@ -33,7 +33,6 @@ const Triangle = (props) => {
 			style.borderBottom = `${props.size}px solid transparent`;
 		}
 
-		console.log("style", style);
 		return style;
 	};
 
@@ -41,9 +40,9 @@ const Triangle = (props) => {
 };
 
 Triangle.propTypes = {
-	direction: PropTypes.number.isRequired,
+	direction: PropTypes.string.isRequired,
 	size: PropTypes.number.isRequired,
-	color: PropTypes.number.isRequired,
+	color: PropTypes.string.isRequired,
 };
 
 export default Triangle;

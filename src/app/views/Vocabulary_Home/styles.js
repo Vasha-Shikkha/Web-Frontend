@@ -103,8 +103,6 @@ const styles = makeStyles((theme) => ({
 
 		marginBottom: 10,
 		cursor: "pointer",
-
-		background: "yellow",
 	},
 
 	taskBoxInner: {
@@ -150,6 +148,29 @@ const styles = makeStyles((theme) => ({
 		borderRadius: 10,
 		width: "100%",
 		height: 70,
+
+		display: "flex",
+		flexDirection: "column",
+		justifyContent: "center",
+		alignContent: "center",
+		alignItems: "center",
+	},
+
+	btn: {
+		width: "80%",
+		padding: 3,
+
+		borderRadius: 5,
+	},
+
+	tutorialBtn: {
+		color: "white",
+		background: theme.palette.colors.violetMedium,
+		marginBottom: 5,
+	},
+	exerciseBtn: {
+		color: theme.palette.colors.primary,
+		background: "white",
 	},
 }));
 
