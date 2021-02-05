@@ -13,7 +13,6 @@ const FillInTheBlanks = () => {
 	const [moveAway, setMoveAway] = useState([]);
 	const [checked, setChecked] = useState([]);
 	const [currentQuestion, setCurrentQuestion] = useState(0);
-	const [duration, setDuration] = useState(0);
 	const [loading, setLoading] = useState(true);
 	const [showVerdict, setShowVerdict] = useState(false);
 	const [correct, setCorrect] = useState(true);
@@ -26,13 +25,7 @@ const FillInTheBlanks = () => {
 				context:
 					"Reza and Rony are classmates. They suddenly meet on the street and have a conversation about their interests in games. Can you help them complete their chat with the group of words from the box?",
 				question:
-					"Reza: Hi Rony! What’s in your hand? _  showing it to me?\n\
-        Rony: Hey! Yes sure. This is a book on chess techniques.\n\
-        Reza: Are you _ chess? I find it difficult to be honest.\n\
-        Rony: I am crazy about chess. _ game?\n\
-        Reza: Well, _ cricket to any other sports.\n\
-        Rony: That’s great! Then we can _ when we’re free.\n\
-        Reza: Sure, _ about it. Let’s meet some time soon.",
+					"Reza: Hi Rony! What’s in your hand? _  showing it to me?\n Rony: Hey! Yes sure. This is a book on chess techniques\n Reza: Are you _ chess? I find it difficult to be honest\n Rony: I am crazy about chess. _ game?\n Reza: Well, _ cricket to any other sports.\n Rony: That’s great! Then we can _ when we’re free.\n Reza: Sure, _ about it. Let’s meet some time soon.",
 				options: [
 					"What’s your favorite",
 					"I prefer",
@@ -86,14 +79,9 @@ const FillInTheBlanks = () => {
 
 		setMoveAway(data.map(() => false));
 		setChecked(data.map(() => false));
-		setDuration(60 * data.length);
 		setQuestion(data);
 		setLoading(false);
 	}, []);
-
-	const timeout = () => {
-		console.log("timeover kid!!");
-	};
 
 	const backToHome = () => {
 		console.log("time to get back kid");
@@ -143,11 +131,10 @@ const FillInTheBlanks = () => {
 				<Loading />
 			) : (
 				<ExerciseLayout
+					exerciseName="Fill in The Blanks"
 					scrollable={true}
-					duration={duration}
 					totalQuestions={question.length}
 					currentQuestionNumber={currentQuestion + 1}
-					timeout={timeout}
 					backToHome={backToHome}
 					skip={skip}
 					check={check}>

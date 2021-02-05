@@ -11,6 +11,7 @@ import Loading from "../components/Loading";
 const Landing = lazy(() => import("../views/Landing"));
 const Auth = lazy(() => import("../views/Auth"));
 const Home = lazy(() => import("../views/Home"));
+const Vocabulary_Home = lazy(() => import("../views/Vocabulary_Home"));
 const MCQ = lazy(() => import("../views/MCQ"));
 const TrueFalse = lazy(() => import("../views/TrueFalse"));
 const WordToPicture = lazy(() => import("../views/WordToPicture"));
@@ -22,12 +23,17 @@ const FillInTheBlanks = lazy(() => import("../views/FillInTheBlanks"));
 const theme = createMuiTheme({
 	palette: {
 		colors: {
-			primary: "#8577E2",
+			primary: "#9E63FF",
 			secondary: "#e5e5e5",
 			background: "#F2F2F2",
 			textLight: "#2E303E",
 			incorrect: "#fac1c1",
 			correct: "#b6eb8a",
+			violetLight: "#ECE0FF",
+			violetMedium: "#CEAFFF",
+			violetDark: "#9E63FF",
+			mediumPink: "#FFB8B8",
+			lightPink: "#fff0ff",
 		},
 	},
 
@@ -49,6 +55,12 @@ const BaseLayout = () => (
 								exact
 								path="/home"
 								render={(props) => <PrivateWrapper component={<Home {...props} />} />}
+							/> */}
+
+							{/* <Route
+								exact
+								path="/vocabulary"
+								render={(props) => <PrivateWrapper component={<Vocabulary_Home {...props} />} />}
 							/> */}
 
 							{/* <Route
@@ -77,9 +89,11 @@ const BaseLayout = () => (
 							<Route exact path="/jumbled-sentence" component={JumbledSentence} />
 							<Route exact path="/fill-in-the-blanks" component={FillInTheBlanks} />
 
-							<Route exact path="/" component={Landing} />
+							{/* <Route exact path="/" component={Landing} /> */}
 							<Route exact path="/auth" component={Auth} />
 							<Route exact path="/home" component={Home} />
+							<Route exact path="/" component={Home} />
+							<Route exact path="/vocabulary" component={Vocabulary_Home} />
 						</Switch>
 					</div>
 				</MuiThemeProvider>

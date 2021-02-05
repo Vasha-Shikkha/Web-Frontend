@@ -6,6 +6,10 @@ const colors = {
 	textLight: "#2E303E",
 	incorrect: "#fac1c1",
 	correct: "#b6eb8a",
+	violetLight: "#ECE0FF",
+	violetMedium: "#CEAFFF",
+	violetDark: "#9E63FF",
+	mediumPink: "#FFB8B8",
 };
 
 export default colors;

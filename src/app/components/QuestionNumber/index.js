@@ -7,9 +7,11 @@ const Timer = (props) => {
 
 	return (
 		<div className={classes.root}>
-			<div className={classes.num}>{props.currentQuestionNumber}</div>
-			<div className={classes.slash}>/</div>
-			<div className={classes.num}>{props.totalQuestions}</div>
+			<div className={classes.outer}>
+				<div
+					style={{width: `${((props.currentQuestionNumber - 1) * 100) / props.totalQuestions}%`}}
+					className={classes.inner}></div>
+			</div>
 		</div>
 	);
 };
