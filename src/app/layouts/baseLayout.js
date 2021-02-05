@@ -89,9 +89,10 @@ const BaseLayout = () => (
 							<Route exact path="/jumbled-sentence" component={JumbledSentence} />
 							<Route exact path="/fill-in-the-blanks" component={FillInTheBlanks} />
 
-							<Route exact path="/" component={Landing} />
+							{/* <Route exact path="/" component={Landing} /> */}
 							<Route exact path="/auth" component={Auth} />
 							<Route exact path="/home" component={Home} />
+							<Route exact path="/" component={Home} />
 							<Route exact path="/vocabulary" component={Vocabulary_Home} />
 						</Switch>
 					</div>
