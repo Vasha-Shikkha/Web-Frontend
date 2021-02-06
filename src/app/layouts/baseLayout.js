@@ -11,6 +11,7 @@ import Loading from "../components/Loading";
 // const Landing = lazy(() => import("../views/Landing"));
 const Auth = lazy(() => import("../views/Auth"));
 const Home = lazy(() => import("../views/Home"));
+const Tutorial = lazy(() => import("../views/Tutorial"));
 const Vocabulary_Home = lazy(() => import("../views/Vocabulary_Home"));
 const MCQ = lazy(() => import("../views/MCQ"));
 const TrueFalse = lazy(() => import("../views/TrueFalse"));
@@ -90,10 +91,11 @@ const BaseLayout = () => (
 							<Route exact path="/fill-in-the-blanks" component={FillInTheBlanks} />
 
 							{/* <Route exact path="/" component={Landing} /> */}
+							<Route exact path="/tutorial" component={Tutorial} />
 							<Route exact path="/auth" component={Auth} />
 							<Route exact path="/home" component={Home} />
 							<Route exact path="/" component={Home} />
-							<Route exact path="/vocabulary" component={Vocabulary_Home} />
+							<Route exact path="/communicative" component={Vocabulary_Home} />
 						</Switch>
 					</div>
 				</MuiThemeProvider>

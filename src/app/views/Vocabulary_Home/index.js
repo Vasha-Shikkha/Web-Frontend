@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import colors from "../../styles/colors";
 
 import Triangle from "../../components/Triangle";
 import Button from "../../components/Button";
-import {Grid, Paper} from "@material-ui/core";
+import {Grid} from "@material-ui/core";
 import Girl_Reading from "../../assets/girl_reading.svg";
 import ArrowBackOutlinedIcon from "@material-ui/icons/ArrowBackOutlined";
 
@@ -18,6 +18,8 @@ const Vocabulary = () => {
 	const classes = styles();
 	const [level, setLevel] = useState(1);
 	const [showTooltip, setShowTooltip] = useState([]);
+	const [redirect, setRedirect] = useState(false);
+	const [redirectLink, setRedirectLink] = useState("");
 	const [topics, setTopics] = useState([
 		{
 			name: "Places",
@@ -96,11 +98,22 @@ const Vocabulary = () => {
 	};
 
 	const tutorialBtnClick = (idx) => {
-		console.log("tut idx", idx);
+		setRedirect(true);
+		setRedirectLink("/tutorial");
 	};
 	const exerciseBtnClick = (idx) => {
 		console.log("ex idx", idx);
 	};
+
+	if (redirect)
+		return (
+			<Redirect
+				to={{
+					pathname: redirectLink,
+					state: {from: "/communicative"},
+				}}
+			/>
+		);
 
 	return (
 		<div className={classes.root}>
@@ -118,7 +131,7 @@ const Vocabulary = () => {
 			</div>
 
 			<div className={classes.taskContainer}>
-				<div className={classes.heading}>VOCABULARY</div>
+				<div className={classes.heading}>COMMUNICATIVE</div>
 
 				<div className={classes.levelContainer}>
 					{[1, 2, 3, 4].map((obj, idx) => (
