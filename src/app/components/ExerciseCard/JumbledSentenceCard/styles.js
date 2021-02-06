@@ -22,7 +22,7 @@ const styles = makeStyles((theme) => ({
 		marginBottom: 25,
 	},
 
-	shuffledWordContainer: {
+	wordContainer: {
 		marginBottom: 25,
 
 		display: "flex",
@@ -37,6 +37,7 @@ const styles = makeStyles((theme) => ({
 		padding: "15px 20px 15px 20px",
 		borderRadius: 10,
 		marginRight: 10,
+		marginBottom: 10,
 		userSelect: "none",
 		cursor: "pointer",
 		boxShadow: `0px 5px 10px ${theme.palette.colors.secondary}`,
@@ -48,8 +49,13 @@ const styles = makeStyles((theme) => ({
 		color: "#D0CDE1",
 		borderRadius: 10,
 		marginRight: 10,
+		marginBottom: 10,
 		userSelect: "none",
 		cursor: "pointer",
+	},
+
+	answerContainer: {
+		marginTop: 50,
 	},
 
 	centered: {
