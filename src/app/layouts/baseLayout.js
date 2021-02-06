@@ -8,7 +8,7 @@ import {AuthProvider} from "../stateHandlers/authContext";
 import Loading from "../components/Loading";
 
 // use code splitting for better ux
-const Landing = lazy(() => import("../views/Landing"));
+// const Landing = lazy(() => import("../views/Landing"));
 const Auth = lazy(() => import("../views/Auth"));
 const Home = lazy(() => import("../views/Home"));
 const Vocabulary_Home = lazy(() => import("../views/Vocabulary_Home"));

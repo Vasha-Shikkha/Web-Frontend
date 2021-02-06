@@ -4,7 +4,7 @@ import colors from "../../styles/colors";
 
 import Triangle from "../../components/Triangle";
 import Button from "../../components/Button";
-import {Grid} from "@material-ui/core";
+import {Grid, Paper} from "@material-ui/core";
 import Girl_Reading from "../../assets/girl_reading.svg";
 import ArrowBackOutlinedIcon from "@material-ui/icons/ArrowBackOutlined";
 
@@ -33,7 +33,7 @@ const Vocabulary = () => {
 			name: "Food",
 			image: Food,
 		},
-		,
+
 		{
 			name: "Places",
 			image: Places,
@@ -128,39 +128,39 @@ const Vocabulary = () => {
 					))}
 				</div>
 
-				<Grid
-					container
-					spacing={3}
-					direction="row"
-					wrap="wrap"
-					justify="space-between"
-					alignContent="center"
-					alignItems="center"
-					className={classes.taskboxContainer}>
-					{topics.map((obj, idx) => (
-						<div className={classes.taskBoxOuter} key={idx} onClick={() => tooltipToggler(idx)}>
-							<div className={`${classes.taskBoxInner} ${classes.centered}`}>
-								<img src={obj.image} alt="" className={classes.topicImg} />
-							</div>
-							<div className={classes.title}>{obj.name}</div>
-							<div className={classes.tooltip} style={{display: showTooltip[idx] ? "" : "none"}}>
-								<Triangle color={colors.violetDark} size={10} direction="up" />
-								<div className={classes.tooltipRectangle}>
-									<Button
-										text="Tutorial"
-										styles={`${classes.btn} ${classes.tutorialBtn}`}
-										onClick={() => tutorialBtnClick(idx)}
-									/>
-									<Button
-										text="Exercise"
-										styles={`${classes.btn} ${classes.exerciseBtn}`}
-										onClick={() => exerciseBtnClick(idx)}
-									/>
+				<div className={classes.gridroot}>
+					<Grid container spacing={3}>
+						{topics.map((obj, idx) => (
+							<Grid item key={idx} xs={4} sm={4} md={2} lg={2} xl={2}>
+								<div className={classes.taskBoxOuter} key={idx} onClick={() => tooltipToggler(idx)}>
+									<div className={`${classes.taskBoxInner} ${classes.centered}`}>
+										<div className={`${classes.taskImgContainer} ${classes.centered}`}>
+											<img src={obj.image} alt="" className={classes.topicImg} />
+										</div>
+									</div>
+									<div className={classes.title}>{obj.name}</div>
+									<div
+										className={classes.tooltip}
+										style={{display: showTooltip[idx] ? "" : "none"}}>
+										<Triangle color={colors.violetDark} size={10} direction="up" />
+										<div className={classes.tooltipRectangle}>
+											<Button
+												text="Tutorial"
+												styles={`${classes.btn} ${classes.tutorialBtn}`}
+												onClick={() => tutorialBtnClick(idx)}
+											/>
+											<Button
+												text="Exercise"
+												styles={`${classes.btn} ${classes.exerciseBtn}`}
+												onClick={() => exerciseBtnClick(idx)}
+											/>
+										</div>
+									</div>
 								</div>
-							</div>
-						</div>
-					))}
-				</Grid>
+							</Grid>
+						))}
+					</Grid>
+				</div>
 			</div>
 		</div>
 	);
