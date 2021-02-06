@@ -39,52 +39,95 @@ const styles = makeStyles((theme) => ({
 
 		marginBottom: 10,
 		marginTop: 50,
+
+		[theme.breakpoints.down("sm")]: {
+			textAlign: "left",
+		},
+
+		[theme.breakpoints.up("md")]: {
+			textAlign: "center",
+		},
 	},
 
 	description: {
 		fontFamily: "Montserrat",
 		fontSize: 18,
 		fontWeight: 400,
+
+		[theme.breakpoints.down("sm")]: {
+			textAlign: "left",
+		},
+
+		[theme.breakpoints.up("md")]: {
+			textAlign: "center",
+		},
 	},
 
 	boxContainer: {
 		display: "flex",
 		flexDirection: "row",
-		justifyContent: "space-between",
 		alignContent: "center",
 		alignItems: "center",
 		marginTop: 25,
+
+		[theme.breakpoints.down("sm")]: {
+			justifyContent: "space-between",
+		},
+
+		[theme.breakpoints.up("md")]: {
+			justifyContent: "center",
+		},
 	},
 
 	box: {
-		width: "47%",
 		height: "auto",
 		cursor: "pointer",
 		textDecoration: "none",
-
-		padding: "5%",
 		background: theme.palette.colors.violetMedium,
 
 		display: "flex",
-		flexDirection: "column",
-		justifyContent: "space-between",
 		alignContent: "center",
 		alignItems: "center",
 
 		marginBottom: 50,
-		[theme.breakpoints.down("md")]: {
-			borderRadius: 20,
+		borderRadius: 20,
+
+		[theme.breakpoints.down("sm")]: {
+			width: "47%",
+			flexDirection: "column",
+			justifyContent: "space-between",
+			padding: "5%",
 		},
-		[theme.breakpoints.up("lg")]: {
-			borderRadius: 40,
+
+		[theme.breakpoints.up("md")]: {
+			width: "30%",
+			flexDirection: "row",
+			justifyContent: "flex-start",
+			padding: "2%",
+		},
+	},
+
+	m20: {
+		[theme.breakpoints.down("sm")]: {
+			marginRight: 0,
+		},
+
+		[theme.breakpoints.up("md")]: {
+			marginRight: 25,
 		},
 	},
 
 	thumbnail: {
-		width: "100%",
-		height: "auto",
-
-		marginBottom: 10,
+		[theme.breakpoints.down("sm")]: {
+			width: "100%",
+			height: "auto",
+			marginBottom: 10,
+		},
+		[theme.breakpoints.up("md")]: {
+			width: "width",
+			height: 100,
+			marginRight: 25,
+		},
 	},
 
 	img: {
@@ -94,13 +137,13 @@ const styles = makeStyles((theme) => ({
 	boxText: {
 		fontFamily: "Montserrat",
 		fontWeight: 600,
-		color: theme.palette.colors.violetDark,
+		color: "white",
 
 		[theme.breakpoints.down("md")]: {
 			fontSize: 16,
 		},
 		[theme.breakpoints.up("lg")]: {
-			fontSize: 25,
+			fontSize: 20,
 		},
 	},
 }));

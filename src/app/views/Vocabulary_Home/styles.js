@@ -92,25 +92,33 @@ const styles = makeStyles((theme) => ({
 		color: theme.palette.colors.primary,
 	},
 
-	taskboxContainer: {
-		width: "100%",
-		margin: "auto",
-	},
-
 	taskBoxOuter: {
-		width: 100,
-		height: 150,
+		width: "100%",
+		height: "auto",
 
 		marginBottom: 10,
 		cursor: "pointer",
+		position: "relative",
 	},
 
 	taskBoxInner: {
-		width: 100,
-		height: 100,
+		width: "100%",
+		height: "auto",
+
 		borderRadius: 10,
 		padding: "5%",
 		background: theme.palette.colors.background,
+	},
+
+	taskImgContainer: {
+		[theme.breakpoints.down("300")]: {
+			width: 50,
+			height: 50,
+		},
+		[theme.breakpoints.up("300")]: {
+			width: 80,
+			height: 80,
+		},
 	},
 
 	topicImage: {
@@ -134,7 +142,7 @@ const styles = makeStyles((theme) => ({
 		position: "absolute",
 		marginBottom: 5,
 		zIndex: 2,
-		width: 100,
+		width: "100%",
 
 		display: "flex",
 		flexDirection: "column",
@@ -158,9 +166,10 @@ const styles = makeStyles((theme) => ({
 
 	btn: {
 		width: "80%",
-		padding: 3,
+		height: 25,
 
 		borderRadius: 5,
+		fontSize: 12,
 	},
 
 	tutorialBtn: {
@@ -168,9 +177,14 @@ const styles = makeStyles((theme) => ({
 		background: theme.palette.colors.violetMedium,
 		marginBottom: 5,
 	},
+
 	exerciseBtn: {
 		color: theme.palette.colors.primary,
 		background: "white",
+	},
+
+	gridroot: {
+		flexGrow: 1,
 	},
 }));
 

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import colors from "../../styles/colors";
 
 import Triangle from "../../components/Triangle";
@@ -18,6 +18,8 @@ const Vocabulary = () => {
 	const classes = styles();
 	const [level, setLevel] = useState(1);
 	const [showTooltip, setShowTooltip] = useState([]);
+	const [redirect, setRedirect] = useState(false);
+	const [redirectLink, setRedirectLink] = useState("");
 	const [topics, setTopics] = useState([
 		{
 			name: "Places",
@@ -33,7 +35,7 @@ const Vocabulary = () => {
 			name: "Food",
 			image: Food,
 		},
-		,
+
 		{
 			name: "Places",
 			image: Places,
@@ -86,16 +88,32 @@ const Vocabulary = () => {
 
 	const tooltipToggler = (idx) => {
 		let arr = [...showTooltip];
-		arr[idx] = !arr[idx];
+		if (arr[idx]) arr[idx] = false;
+		else {
+			arr = showTooltip.map(() => false);
+			arr[idx] = true;
+		}
+
 		setShowTooltip(arr);
 	};
 
 	const tutorialBtnClick = (idx) => {
-		console.log("tut idx", idx);
+		setRedirect(true);
+		setRedirectLink("/tutorial");
 	};
 	const exerciseBtnClick = (idx) => {
 		console.log("ex idx", idx);
 	};
+
+	if (redirect)
+		return (
+			<Redirect
+				to={{
+					pathname: redirectLink,
+					state: {from: "/communicative"},
+				}}
+			/>
+		);
 
 	return (
 		<div className={classes.root}>
@@ -113,7 +131,7 @@ const Vocabulary = () => {
 			</div>
 
 			<div className={classes.taskContainer}>
-				<div className={classes.heading}>VOCABULARY</div>
+				<div className={classes.heading}>COMMUNICATIVE</div>
 
 				<div className={classes.levelContainer}>
 					{[1, 2, 3, 4].map((obj, idx) => (
@@ -128,39 +146,39 @@ const Vocabulary = () => {
 					))}
 				</div>
 
-				<Grid
-					container
-					spacing={3}
-					direction="row"
-					wrap="wrap"
-					justify="space-between"
-					alignContent="center"
-					alignItems="center"
-					className={classes.taskboxContainer}>
-					{topics.map((obj, idx) => (
-						<div className={classes.taskBoxOuter} key={idx} onClick={() => tooltipToggler(idx)}>
-							<div className={`${classes.taskBoxInner} ${classes.centered}`}>
-								<img src={obj.image} alt="" className={classes.topicImg} />
-							</div>
-							<div className={classes.title}>{obj.name}</div>
-							<div className={classes.tooltip} style={{display: showTooltip[idx] ? "" : "none"}}>
-								<Triangle color={colors.violetDark} size={10} direction="up" />
-								<div className={classes.tooltipRectangle}>
-									<Button
-										text="Tutorial"
-										styles={`${classes.btn} ${classes.tutorialBtn}`}
-										onClick={() => tutorialBtnClick(idx)}
-									/>
-									<Button
-										text="Exercise"
-										styles={`${classes.btn} ${classes.exerciseBtn}`}
-										onClick={() => exerciseBtnClick(idx)}
-									/>
+				<div className={classes.gridroot}>
+					<Grid container spacing={3}>
+						{topics.map((obj, idx) => (
+							<Grid item key={idx} xs={4} sm={4} md={2} lg={2} xl={2}>
+								<div className={classes.taskBoxOuter} key={idx} onClick={() => tooltipToggler(idx)}>
+									<div className={`${classes.taskBoxInner} ${classes.centered}`}>
+										<div className={`${classes.taskImgContainer} ${classes.centered}`}>
+											<img src={obj.image} alt="" className={classes.topicImg} />
+										</div>
+									</div>
+									<div className={classes.title}>{obj.name}</div>
+									<div
+										className={classes.tooltip}
+										style={{display: showTooltip[idx] ? "" : "none"}}>
+										<Triangle color={colors.violetDark} size={10} direction="up" />
+										<div className={classes.tooltipRectangle}>
+											<Button
+												text="Tutorial"
+												styles={`${classes.btn} ${classes.tutorialBtn}`}
+												onClick={() => tutorialBtnClick(idx)}
+											/>
+											<Button
+												text="Exercise"
+												styles={`${classes.btn} ${classes.exerciseBtn}`}
+												onClick={() => exerciseBtnClick(idx)}
+											/>
+										</div>
+									</div>
 								</div>
-							</div>
-						</div>
-					))}
-				</Grid>
+							</Grid>
+						))}
+					</Grid>
+				</div>
 			</div>
 		</div>
 	);
