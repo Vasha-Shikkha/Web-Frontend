@@ -22,19 +22,52 @@ const JumbledSentence = () => {
 	useEffect(() => {
 		let data = [
 			{
-				chunks: ["Ser Waymer Royce", "glanced", "at", "the", "sky", "with", "disinterest"],
+				context:
+					"Priyoti has never seen hills before. So, her father decides to go on a vacation to -",
+				chunks: ["T", "G", "O", "C", "T", "H", "I", "G", "A", "N"],
+				answer: "CHITTAGONG",
 			},
 
 			{
-				chunks: ["the", "cow", "is having", "a nap"],
+				context:
+					"Bangladesh is famous for tea-gardening. Anyone who wants to see tea-garden can go to –",
+				chunks: ["T", "S", "H", "L", "Y", "E"],
+				answer: "SYLHET",
 			},
 
 			{
-				chunks: ["they", "are", "flying kites"],
+				context: "If you want to see the most beautiful sea-beach, you must go to-",
+				chunks: ["O", "B", "C", "Z", "R", "X", "A", "A", "S"],
+				answer: "COXSBAZAR",
 			},
 
 			{
-				chunks: ["we", "went", "to the", "Saint Martins", "island", "for", "our", "rag tour"],
+				context: "A person who captures a criminal is known as –",
+				chunks: ["E", "I", "P", "C", "L", "O"],
+				answer: "POLICE",
+			},
+
+			{
+				context: "Bangladesh is an agricultural country. Those who grows crops are known as-",
+				chunks: ["S", "E", "R", "F", "M", "A", "R"],
+				answer: "FARMERS",
+			},
+
+			{
+				context: "Ratul gives homework and assignments to children in an institution. He works in-",
+				chunks: ["C", "O", "L", "S", "O", "H"],
+				answer: "SCHOOL",
+			},
+
+			{
+				context: "We need vitamins and minerals to stay healthy. So we should eat a lot of- ",
+				chunks: ["E", "T", "B", "G", "A", "V", "S", "E", "L", "E"],
+				answer: "VEGETABLES",
+			},
+
+			{
+				chunks: ["completed her ", "She ", " to sleep", "homework ", "before going"],
+				answer: "She completed her homework before going to sleep",
 			},
 		];
 
@@ -92,7 +125,8 @@ const JumbledSentence = () => {
 				<Loading />
 			) : (
 				<ExerciseLayout
-					exerciseName="Jumbled Sentence"
+					exerciseName="Jumbled Word/Sentence"
+					scrollable={true}
 					totalQuestions={question.length}
 					currentQuestionNumber={currentQuestion + 1}
 					backToHome={backToHome}
