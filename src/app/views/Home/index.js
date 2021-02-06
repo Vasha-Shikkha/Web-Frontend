@@ -20,7 +20,7 @@ const Home = () => {
 					Keep practising your English by completing new lessons and revisiting your old lessons
 				</div>
 				<div className={classes.boxContainer}>
-					<Link to="/communicative" className={classes.box}>
+					<Link to="/communicative" className={`${classes.box} ${classes.m20}`}>
 						<div className={classes.thumbnail}>
 							<img className={classes.img} src={Vocabulary} alt="" />
 						</div>
