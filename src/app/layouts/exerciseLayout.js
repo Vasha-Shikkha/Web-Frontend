@@ -47,12 +47,12 @@ const styles = makeStyles((theme) => ({
 	},
 
 	btnContainer: {
-		height: "20vh",
+		height: "15vh",
 		flexWrap: "wrap",
 	},
 
 	child: {
-		height: "65vh",
+		height: "70vh",
 		width: "100%",
 		background: "white",
 	},
@@ -63,15 +63,8 @@ const styles = makeStyles((theme) => ({
 	},
 
 	btn: {
-		[theme.breakpoints.down("sm")]: {
-			width: "100%",
-			height: 40,
-		},
-
-		[theme.breakpoints.up("md")]: {
-			width: "45%",
-			height: "60%",
-		},
+		width: "45%",
+		height: 40,
 	},
 
 	m10: {
@@ -85,13 +78,19 @@ const styles = makeStyles((theme) => ({
 	},
 
 	btn1: {
-		color: "grey",
-		background: theme.palette.colors.secondary,
+		background: "white",
+		border: `1px solid ${theme.palette.colors.primary}`,
+		boxSizing: "border-box",
+		boxShadow: `0px 4px 4px ${theme.palette.colors.primary}`,
+		borderRadius: 10,
 	},
 
 	btn2: {
 		color: "white",
 		background: theme.palette.colors.primary,
+		boxSizing: "border-box",
+		boxShadow: `0px 4px 4px ${theme.palette.colors.primary}`,
+		borderRadius: 10,
 	},
 
 	nameContainer: {
@@ -153,7 +152,7 @@ const ExerciseLayout = (props) => {
 				{props.children}
 			</div>
 			<div className={`${classes.btnContainer} ${classes.container}`}>
-				<div className={`${classes.btn} ${classes.m10}`}>
+				<div className={`${classes.btn}`}>
 					<Button styles={classes.btn1} text="Skip" onClick={props.skip} />
 				</div>
 
