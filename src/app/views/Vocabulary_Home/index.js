@@ -86,7 +86,12 @@ const Vocabulary = () => {
 
 	const tooltipToggler = (idx) => {
 		let arr = [...showTooltip];
-		arr[idx] = !arr[idx];
+		if (arr[idx]) arr[idx] = false;
+		else {
+			arr = showTooltip.map(() => false);
+			arr[idx] = true;
+		}
+
 		setShowTooltip(arr);
 	};
 

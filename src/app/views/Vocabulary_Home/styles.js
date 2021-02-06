@@ -98,6 +98,7 @@ const styles = makeStyles((theme) => ({
 
 		marginBottom: 10,
 		cursor: "pointer",
+		position: "relative",
 	},
 
 	taskBoxInner: {
@@ -165,9 +166,10 @@ const styles = makeStyles((theme) => ({
 
 	btn: {
 		width: "80%",
-		padding: 3,
+		height: 25,
 
 		borderRadius: 5,
+		fontSize: 12,
 	},
 
 	tutorialBtn: {
