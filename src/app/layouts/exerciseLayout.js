@@ -13,7 +13,7 @@ const styles = makeStyles((theme) => ({
 
 	nav: {
 		height: "15vh",
-		background: theme.palette.colors.background,
+		background: "white",
 	},
 
 	outerNav: {
@@ -35,7 +35,7 @@ const styles = makeStyles((theme) => ({
 
 	container: {
 		width: "100%",
-		background: theme.palette.colors.background,
+		background: "white",
 
 		display: "flex",
 		flexDirection: "row",
@@ -54,12 +54,12 @@ const styles = makeStyles((theme) => ({
 	child: {
 		height: "65vh",
 		width: "100%",
-		background: theme.palette.colors.background,
+		background: "white",
 	},
 
 	childScrollable: {
 		width: "100%",
-		background: theme.palette.colors.background,
+		background: "white",
 	},
 
 	btn: {
