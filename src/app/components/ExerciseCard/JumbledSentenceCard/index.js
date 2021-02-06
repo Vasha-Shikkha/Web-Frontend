@@ -10,18 +10,36 @@ const JumbledSentenceCard = forwardRef((props, ref) => {
 
 	const classes = styles();
 	const [chunks, setChunks] = useState([]);
+	const [shuffled, setShuffled] = useState([]);
 
 	useEffect(() => {
-		let chunks = shuffle(props.question.chunks);
-		setChunks(chunks);
-	}, [props.question.chunks]);
+		setShuffled(props.question.chunks.map(() => true));
+	}, []);
+
+	const useWord = (idx) => {
+		// if activated
+		if (shuffled[idx]) {
+			let arr = [...shuffled];
+			arr[idx] = false;
+			setShuffled(arr);
+		}
+	};
 
 	return (
 		<div
 			style={{zIndex: props.elevation ? props.elevation : 0}}
-			className={
-				props.moveAway === false ? classes.root : `${classes.root} ${classes.transition}`
-			}></div>
+			className={props.moveAway === false ? classes.root : `${classes.root} ${classes.transition}`}>
+			<div className={classes.context}>{props.question.context}</div>
+			<div className={classes.shuffledWordContainer}>
+				{props.question.chunks.map((obj, idx) => (
+					<div
+						onClick={() => useWord(idx)}
+						className={shuffled[idx] ? classes.shuffledWordActive : classes.shuffledWordInactive}>
+						{obj}
+					</div>
+				))}
+			</div>
+		</div>
 	);
 });
 
