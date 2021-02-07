@@ -92,17 +92,17 @@ const SentenceMatching = () => {
 		let answer = childRef.current.check();
 
 		// save the answer
-		// let tempQuestion = [...question];
-		// tempQuestion[currentQuestion].users_answer = [...answer.users_answer];
-		// setQuestion(tempQuestion);
+		let tempQuestion = [...question];
+		tempQuestion[currentQuestion].users_answer = [...answer.users_answer];
+		setQuestion(tempQuestion);
 
-		// // mark this question as checked
-		// let arr = [...checked];
-		// arr[currentQuestion] = true;
-		// setChecked(arr);
+		// mark this question as checked
+		let arr = [...checked];
+		arr[currentQuestion] = true;
+		setChecked(arr);
 
-		// // show verdict
-		// setShowVerdict(true);
+		// show verdict
+		setShowVerdict(true);
 		setCorrect(answer.isCorrect);
 	};
 

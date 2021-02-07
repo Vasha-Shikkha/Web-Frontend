@@ -8,10 +8,8 @@ import "../../../styles/scrollbar.css";
 const SentenceMatchingCard = forwardRef((props, ref) => {
 	useImperativeHandle(ref, () => ({
 		check() {
-			// let answer = {users_answer: selected};
-			// if (selected === props.question.answer) answer.isCorrect = true;
-			// else answer.isCorrect = false;
-			// return answer;
+			let answer = {users_answer: [], isCorrect: correct === currentSentences.length / 2};
+			return answer;
 		},
 	}));
 
@@ -115,28 +113,30 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 			className={
 				props.moveAway === false ? `${classes.root}` : `${classes.root} ${classes.transition}`
 			}>
-			<Grid
-				container
-				spacing={3}
-				wrap="wrap"
-				alignItems="center"
-				alignContent="center"
-				justify="space-between"
-				className={classes.optionContainer}>
-				{currentSentences.map((obj, idx) => (
-					<Grid item xs={12} sm={12} md={6} lg={6} xl={6} key={idx}>
-						<div
-							style={{background: boxColors[idx]}}
-							draggable={movable[idx]}
-							onDrag={(event) => onDrag(event, idx)}
-							onDrop={() => onDrop(idx)}
-							onDragOver={(event) => onDragOver(event, idx)}
-							className={`${classes.options} ${classes.centered}`}>
-							{obj}
-						</div>
-					</Grid>
-				))}
-			</Grid>
+			<div className={classes.gridroot}>
+				<Grid
+					container
+					spacing={3}
+					wrap="wrap"
+					alignItems="center"
+					alignContent="center"
+					justify="space-between"
+					className={classes.optionContainer}>
+					{currentSentences.map((obj, idx) => (
+						<Grid item xs={12} sm={12} md={6} lg={6} xl={6} key={idx}>
+							<div
+								style={{background: boxColors[idx]}}
+								draggable={movable[idx]}
+								onDrag={(event) => onDrag(event, idx)}
+								onDrop={() => onDrop(idx)}
+								onDragOver={(event) => onDragOver(event, idx)}
+								className={`${classes.options} ${classes.centered}`}>
+								{obj}
+							</div>
+						</Grid>
+					))}
+				</Grid>
+			</div>
 		</div>
 	);
 });

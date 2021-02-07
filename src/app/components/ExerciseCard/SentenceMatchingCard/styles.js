@@ -7,15 +7,18 @@ const styles = makeStyles((theme) => ({
 		background: "white",
 	},
 
+	gridroot: {
+		flexGrow: 1,
+		marginTop: 25,
+	},
+
 	transition: {
 		transformOrigin: "left",
 		transform: "translate(-150%, -15%) rotate(-25deg)",
 		transitionDuration: "1.0s",
 	},
 
-	optionContainer: {
-		padding: "5%",
-	},
+	optionContainer: {},
 
 	options: {
 		padding: 10,
