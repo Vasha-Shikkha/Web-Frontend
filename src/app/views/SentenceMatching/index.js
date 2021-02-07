@@ -24,54 +24,43 @@ const SentenceMatching = () => {
 			{
 				sentences: [
 					{
-						part_one: "the cat",
-						part_two: "is sleeping",
+						part_one: "Village life represents a lifestyle",
+						part_two: "which is rural",
 					},
 
 					{
-						part_one: "the cow are",
-						part_two: "eating grass",
+						part_one: "City life represents a lifestyle",
+						part_two: "which is urban",
 					},
 
 					{
-						part_one: "She likes to",
-						part_two: "eat apple",
+						part_one: "There are trees everywhere in the village",
+						part_two: "but there are very few trees in cities",
 					},
 
 					{
-						part_one: "The dog",
-						part_two: "is wagging its tail",
+						part_one: "Moreover, the environment in village",
+						part_two: "is very calm",
 					},
 
 					{
-						part_one: "It is raining",
-						part_two: "since morning",
+						part_one: "On the other hand the city life",
+						part_two: "is very loud and crowded",
 					},
 
 					{
-						part_one: "The bus has",
-						part_two: "manual gear",
-					},
-				],
-
-				user_answer: [],
-			},
-
-			{
-				sentences: [
-					{
-						part_one: "The dog",
-						part_two: "is wagging its tail",
+						part_one: "Educated people like cities",
+						part_two: "because there are lots of technology",
 					},
 
 					{
-						part_one: "It is raining",
-						part_two: "since morning",
+						part_one: "But a village is not fully modern",
+						part_two: "due to lack of science",
 					},
 
 					{
-						part_one: "The bus has",
-						part_two: "manual gear",
+						part_one: "Obviously village life is",
+						part_two: "more natural",
 					},
 				],
 
