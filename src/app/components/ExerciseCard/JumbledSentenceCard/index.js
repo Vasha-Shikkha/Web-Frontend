@@ -4,7 +4,19 @@ import styles from "./styles";
 
 const JumbledSentenceCard = forwardRef((props, ref) => {
 	useImperativeHandle(ref, () => ({
-		check() {},
+		check() {
+			let answer = {isCorrect: true, users_answer: ""};
+
+			for (let i = 0; i < usersAnswer.length; i++) {
+				answer.users_answer += props.question.chunks[usersAnswer[i]];
+			}
+
+			answer.isCorrect = answer.users_answer === props.question.answer;
+
+			console.log(answer.users_answer, props.question.answer);
+
+			return answer;
+		},
 	}));
 
 	const classes = styles();
@@ -13,7 +25,7 @@ const JumbledSentenceCard = forwardRef((props, ref) => {
 
 	useEffect(() => {
 		setShuffled(props.question.chunks.map(() => true));
-	}, []);
+	}, [props.question.chunks]);
 
 	const useWord = (idx) => {
 		// if activated
