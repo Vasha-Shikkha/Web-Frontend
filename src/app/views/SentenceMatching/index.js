@@ -42,7 +42,13 @@ const SentenceMatching = () => {
 						part_one: "Moreover, the environment in village",
 						part_two: "is very calm",
 					},
+				],
 
+				user_answer: [],
+			},
+
+			{
+				sentences: [
 					{
 						part_one: "On the other hand the city life",
 						part_two: "is very loud and crowded",
