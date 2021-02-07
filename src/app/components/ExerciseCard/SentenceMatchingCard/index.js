@@ -109,8 +109,9 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 
 	return (
 		<div
-			style={{zIndex: props.elevation ? props.elevation : 0}}
-			id="myScroll"
+			style={{
+				display: props.thisQuestionNumber === props.currentQuestionNumber ? "initial" : "none",
+			}}
 			className={
 				props.moveAway === false ? `${classes.root}` : `${classes.root} ${classes.transition}`
 			}>

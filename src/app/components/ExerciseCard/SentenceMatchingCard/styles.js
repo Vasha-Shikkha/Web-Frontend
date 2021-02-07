@@ -2,14 +2,9 @@ import {makeStyles} from "@material-ui/core";
 
 const styles = makeStyles((theme) => ({
 	root: {
-		width: "80%",
-		height: "90%",
+		width: "90%",
+		minHeight: "70vh",
 		background: "white",
-		borderRadius: 30,
-
-		position: "absolute",
-		overflowY: "auto",
-		overflowX: "hidden",
 	},
 
 	transition: {
