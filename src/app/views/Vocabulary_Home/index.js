@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from "react";
-import {Link, Redirect} from "react-router-dom";
+import {Redirect} from "react-router-dom";
 import colors from "../../styles/colors";
 
 import Triangle from "../../components/Triangle";
 import Button from "../../components/Button";
+import BackArrowButton from "../../components/BackArrowButton";
 import {Grid} from "@material-ui/core";
 import Girl_Reading from "../../assets/girl_reading.svg";
-import ArrowBackOutlinedIcon from "@material-ui/icons/ArrowBackOutlined";
 
 import Places from "../../assets/topics/places.svg";
 import Birds from "../../assets/topics/birds.svg";
@@ -102,7 +102,8 @@ const Vocabulary = () => {
 		setRedirectLink("/tutorial");
 	};
 	const exerciseBtnClick = (idx) => {
-		console.log("ex idx", idx);
+		setRedirect(true);
+		setRedirectLink("/exercise");
 	};
 
 	if (redirect)
@@ -124,9 +125,7 @@ const Vocabulary = () => {
 					<img src={Girl_Reading} alt="" className={classes.img} />
 				</div>
 				<div className={classes.imageUpper} style={{padding: "5%"}}>
-					<Link to="/home" className={`${classes.backBtnOuter} ${classes.centered}`}>
-						<ArrowBackOutlinedIcon className={classes.backBtn} />
-					</Link>
+					<BackArrowButton link="/home" />
 				</div>
 			</div>
 

@@ -12,6 +12,7 @@ import Loading from "../components/Loading";
 const Auth = lazy(() => import("../views/Auth"));
 const Home = lazy(() => import("../views/Home"));
 const Tutorial = lazy(() => import("../views/Tutorial"));
+const Exercise = lazy(() => import("../views/ExerciseHome"));
 const Vocabulary_Home = lazy(() => import("../views/Vocabulary_Home"));
 const MCQ = lazy(() => import("../views/MCQ"));
 const TrueFalse = lazy(() => import("../views/TrueFalse"));
@@ -92,6 +93,7 @@ const BaseLayout = () => (
 
 							{/* <Route exact path="/" component={Landing} /> */}
 							<Route exact path="/tutorial" component={Tutorial} />
+							<Route exact path="/exercise" component={Exercise} />
 							<Route exact path="/auth" component={Auth} />
 							<Route exact path="/home" component={Home} />
 							<Route exact path="/" component={Home} />

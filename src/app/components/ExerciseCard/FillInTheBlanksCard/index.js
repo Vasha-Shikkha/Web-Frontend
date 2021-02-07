@@ -61,7 +61,7 @@ const FillInTheBlanksCard = forwardRef((props, ref) => {
 
 		setTokenizedQuestion(final_words);
 		setIsBlank(blankIdx);
-		setWordColor(final_words.map(() => colors.background));
+		setWordColor(final_words.map(() => "white"));
 
 		// this array will save ith option is in which blank
 		setOptionMApping(props.question.options.map(() => -1));
