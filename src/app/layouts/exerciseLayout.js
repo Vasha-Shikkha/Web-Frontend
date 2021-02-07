@@ -78,6 +78,7 @@ const styles = makeStyles((theme) => ({
 	},
 
 	btn1: {
+		color: theme.palette.colors.primary,
 		background: "white",
 		border: `1px solid ${theme.palette.colors.primary}`,
 		boxSizing: "border-box",
@@ -89,7 +90,7 @@ const styles = makeStyles((theme) => ({
 		color: "white",
 		background: theme.palette.colors.primary,
 		boxSizing: "border-box",
-		boxShadow: `0px 4px 4px ${theme.palette.colors.primary}`,
+		boxShadow: `0px 4px 4px rgba(128, 0, 255, 0.5)`,
 		borderRadius: 10,
 	},
 
