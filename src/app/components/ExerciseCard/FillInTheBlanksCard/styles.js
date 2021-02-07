@@ -3,7 +3,7 @@ import {makeStyles} from "@material-ui/core";
 const styles = makeStyles((theme) => ({
 	root: {
 		width: "90%",
-		minHeight: "65vh",
+		minHeight: "70vh",
 	},
 
 	transition: {

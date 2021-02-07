@@ -3,15 +3,15 @@ import {makeStyles} from "@material-ui/core";
 const styles = makeStyles((theme) => ({
 	root: {
 		width: "100%",
-		height: "65vh",
-		background: theme.palette.colors.background,
+		height: "70vh",
+		background: "white",
 
 		position: "relative",
 	},
 
 	scrollableRoot: {
 		width: "100%",
-		background: theme.palette.colors.background,
+		background: "white",
 	},
 
 	centered: {
