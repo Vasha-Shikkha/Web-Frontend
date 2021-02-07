@@ -132,12 +132,13 @@ const JumbledSentence = () => {
 					backToHome={backToHome}
 					skip={skip}
 					check={check}>
-					<div className={`${classes.root} ${classes.centered}`}>
+					<div className={`${classes.scrollableRoot} ${classes.centered}`}>
 						{question.map((obj, idx) => (
 							<JumbledSentenceCard
 								key={idx}
 								ref={childRef}
-								elevation={question.length - idx + 1}
+								thisQuestionNumber={idx}
+								currentQuestionNumber={currentQuestion}
 								question={obj}
 								moveAway={moveAway[idx]}
 								isReview={false}

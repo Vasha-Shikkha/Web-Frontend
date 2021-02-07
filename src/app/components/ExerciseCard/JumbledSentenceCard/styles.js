@@ -2,11 +2,8 @@ import {makeStyles} from "@material-ui/core";
 
 const styles = makeStyles((theme) => ({
 	root: {
-		width: "100%",
-		height: "90%",
-		padding: "0 5% 0 5%",
-
-		position: "absolute",
+		width: "90%",
+		minHeight: "70vh",
 		background: "white",
 	},
 
@@ -56,6 +53,21 @@ const styles = makeStyles((theme) => ({
 
 	answerContainer: {
 		marginTop: 50,
+		position: "relative",
+		height: 200,
+		width: "100%",
+	},
+
+	lineContainer: {
+		width: "100%",
+		position: "absolute",
+	},
+
+	line: {
+		width: "100%",
+		padding: 20,
+		borderBottom: "1px solid #2F2E41",
+		color: "transparent",
 	},
 
 	centered: {

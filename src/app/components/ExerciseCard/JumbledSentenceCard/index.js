@@ -12,9 +12,6 @@ const JumbledSentenceCard = forwardRef((props, ref) => {
 			}
 
 			answer.isCorrect = answer.users_answer === props.question.answer;
-
-			console.log(answer.users_answer, props.question.answer);
-
 			return answer;
 		},
 	}));
@@ -52,7 +49,9 @@ const JumbledSentenceCard = forwardRef((props, ref) => {
 
 	return (
 		<div
-			style={{zIndex: props.elevation ? props.elevation : 0}}
+			style={{
+				display: props.thisQuestionNumber === props.currentQuestionNumber ? "initial" : "none",
+			}}
 			className={props.moveAway === false ? classes.root : `${classes.root} ${classes.transition}`}>
 			<div className={classes.context}>{props.question.context}</div>
 			<div className={classes.wordContainer}>
@@ -65,12 +64,19 @@ const JumbledSentenceCard = forwardRef((props, ref) => {
 					</div>
 				))}
 			</div>
-			<div className={`${classes.wordContainer} ${classes.answerContainer}`}>
-				{usersAnswer.map((obj, idx) => (
-					<div onClick={() => unuseWord(idx)} className={classes.shuffledWordActive} key={idx}>
-						{props.question.chunks[obj]}
-					</div>
-				))}
+			<div className={`${classes.answerContainer}`}>
+				<div className={classes.lineContainer}>
+					<div className={classes.line}>dummy text that is invisible</div>
+					<div className={classes.line}>dummy text that is invisible</div>
+					<div className={classes.line}>dummy text that is invisible</div>
+				</div>
+				<div style={{position: "absolute"}} className={classes.wordContainer}>
+					{usersAnswer.map((obj, idx) => (
+						<div onClick={() => unuseWord(idx)} className={classes.shuffledWordActive} key={idx}>
+							{props.question.chunks[obj]}
+						</div>
+					))}
+				</div>
 			</div>
 		</div>
 	);
@@ -79,7 +85,8 @@ const JumbledSentenceCard = forwardRef((props, ref) => {
 JumbledSentenceCard.propTypes = {
 	question: PropTypes.object.isRequired,
 	moveAway: PropTypes.bool,
-	elevation: PropTypes.number,
+	thisQuestionNumber: PropTypes.number,
+	currentQuestionNumber: PropTypes.number,
 	isReview: PropTypes.bool.isRequired,
 	isChecked: PropTypes.bool.isRequired,
 };

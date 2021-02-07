@@ -11,7 +11,6 @@ const styles = makeStyles((theme) => ({
 
 	scrollableRoot: {
 		width: "100%",
-		minHeight: "70vh",
 		background: "white",
 	},
 
