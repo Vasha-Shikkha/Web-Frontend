@@ -25,6 +25,8 @@ const JumbledSentenceCard = forwardRef((props, ref) => {
 	}, [props.question.chunks]);
 
 	const useWord = (idx) => {
+		if (props.isReview || props.isChecked) return;
+
 		// if activated
 		if (shuffled[idx]) {
 			let arr = [...shuffled];
@@ -38,6 +40,8 @@ const JumbledSentenceCard = forwardRef((props, ref) => {
 	};
 
 	const unuseWord = (idx) => {
+		if (props.isReview || props.isChecked) return;
+
 		let arr = [...shuffled];
 		arr[usersAnswer[idx]] = true;
 		setShuffled(arr);
