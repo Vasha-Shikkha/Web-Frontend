@@ -10,7 +10,6 @@ import styles from "../../styles/exerciseViewStyles";
 const FillInTheBlanks = () => {
 	const classes = styles();
 	const [question, setQuestion] = useState([]);
-	const [moveAway, setMoveAway] = useState([]);
 	const [checked, setChecked] = useState([]);
 	const [currentQuestion, setCurrentQuestion] = useState(0);
 	const [loading, setLoading] = useState(true);
@@ -38,8 +37,8 @@ const FillInTheBlanks = () => {
 					"would you mind",
 					"interested in",
 					"What’s your favorite",
-					"share our views",
 					"I prefer",
+					"share our views",
 					"I’m really excited",
 				],
 				users_answer: [],
@@ -77,7 +76,6 @@ const FillInTheBlanks = () => {
 			},
 		];
 
-		setMoveAway(data.map(() => false));
 		setChecked(data.map(() => false));
 		setQuestion(data);
 		setLoading(false);
@@ -110,11 +108,6 @@ const FillInTheBlanks = () => {
 	};
 
 	const getNext = () => {
-		// make the showTransition flag true for the current question
-		let arr = [...moveAway];
-		arr[currentQuestion] = true;
-		setMoveAway(arr);
-
 		// hide verdict
 		setShowVerdict(false);
 
@@ -139,18 +132,14 @@ const FillInTheBlanks = () => {
 					skip={skip}
 					check={check}>
 					<div className={`${classes.scrollableRoot} ${classes.centered}`}>
-						{question.map((obj, idx) => (
-							<FillInTheBlanksCard
-								key={idx}
-								ref={childRef}
-								thisQuestionNumber={idx}
-								currentQuestionNumber={currentQuestion}
-								question={obj}
-								moveAway={moveAway[idx]}
-								isReview={false}
-								isChecked={checked[idx]}
-							/>
-						))}
+						<FillInTheBlanksCard
+							ref={childRef}
+							currentQuestionNumber={currentQuestion}
+							question={question[currentQuestion]}
+							moveAway={false}
+							isReview={false}
+							isChecked={checked[currentQuestion]}
+						/>
 						<VerdictBanner correct={correct} anime={showVerdict} getNext={getNext} />
 					</div>
 				</ExerciseLayout>

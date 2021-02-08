@@ -43,7 +43,7 @@ const FillInTheBlanksCard = forwardRef((props, ref) => {
 			if (splited_word[i].match(/_[.,?!]*/g)) {
 				final_words.push("_");
 				blankIdx.push(true);
-				console.log("inside");
+
 				if (splited_word[i].length > 1) {
 					final_words.push(splited_word[i][1]);
 					blankIdx.push(false);
@@ -89,11 +89,7 @@ const FillInTheBlanksCard = forwardRef((props, ref) => {
 	};
 
 	return (
-		<div
-			style={{
-				display: props.thisQuestionNumber === props.currentQuestionNumber ? "initial" : "none",
-			}}
-			className={props.moveAway === false ? classes.root : `${classes.root} ${classes.transition}`}>
+		<div className={classes.root}>
 			<div className={classes.context}>{props.question.context}</div>
 			<div className={classes.optionContainer}>
 				{props.question.options.map((obj, idx) => (
@@ -128,8 +124,6 @@ const FillInTheBlanksCard = forwardRef((props, ref) => {
 
 FillInTheBlanksCard.propTypes = {
 	question: PropTypes.object.isRequired,
-	moveAway: PropTypes.bool,
-	thisQuestionNumber: PropTypes.number,
 	currentQuestionNumber: PropTypes.number,
 	isReview: PropTypes.bool.isRequired,
 	isChecked: PropTypes.bool.isRequired,

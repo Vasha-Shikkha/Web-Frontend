@@ -84,7 +84,7 @@ const Vocabulary = () => {
 
 	useEffect(() => {
 		setShowTooltip(topics.map(() => false));
-	}, [topics]);
+	}, []);
 
 	const tooltipToggler = (idx) => {
 		let arr = [...showTooltip];
