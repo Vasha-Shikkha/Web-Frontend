@@ -32,7 +32,6 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 		let temp_mapping = Array(len).fill(-1);
 
 		// fill the first
-		temp = shuffle(temp);
 		for (let i = 0, j = 0; i < temp.length; i++, j += 2) {
 			temp_sentences[j] = props.question.sentences[temp[i]].part_one;
 			temp_mapping[j] = temp[i];

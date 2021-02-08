@@ -20,7 +20,7 @@ const Vocabulary = () => {
 	const [showTooltip, setShowTooltip] = useState([]);
 	const [redirect, setRedirect] = useState(false);
 	const [redirectLink, setRedirectLink] = useState("");
-	const [topics, setTopics] = useState([
+	const topics = [
 		{
 			name: "Places",
 			image: Places,
@@ -80,11 +80,11 @@ const Vocabulary = () => {
 			name: "Food",
 			image: Food,
 		},
-	]);
+	];
 
 	useEffect(() => {
 		setShowTooltip(topics.map(() => false));
-	}, []);
+	}, [topics]);
 
 	const tooltipToggler = (idx) => {
 		let arr = [...showTooltip];
