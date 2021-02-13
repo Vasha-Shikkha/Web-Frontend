@@ -83,6 +83,7 @@ const styles = makeStyles((theme) => ({
 		fontSize: 14,
 		textAlign: "center",
 		color: theme.palette.colors.violetText,
+		fontStyle: "italic",
 	},
 
 	btnContainer: {
