@@ -9,6 +9,31 @@ const styles = makeStyles((theme) => ({
 	navContainer: {
 		height: "15vh",
 		width: "100%",
+
+		paddingLeft: "5%",
+		paddingRight: "5%",
+		position: "relative",
+	},
+
+	nav_inner: {
+		position: "absolute",
+		height: "100%",
+		width: "100%",
+		color: theme.palette.colors.violetDark,
+		fontSize: 18,
+	},
+
+	crossContainer: {
+		display: "flex",
+		flexDirection: "column",
+		justifyContent: "center",
+	},
+
+	cross: {
+		color: theme.palette.colors.mediumPink,
+		height: 30,
+		width: 30,
+		cursor: "pointer",
 	},
 
 	contentContainer: {
