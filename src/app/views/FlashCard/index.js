@@ -41,10 +41,11 @@ const FlashCard = (props) => {
 			<div className={`${classes.contentContainer} ${classes.centered}`}>
 				{cards.map((obj, idx) => (
 					<div
-						className={classes.card}
+						className={`${classes.card} ${
+							idx === 1 ? classes.rotate5 : idx === 2 ? classes.rotate10 : ""
+						}`}
 						style={{
 							zIndex: cards.length - idx,
-							transform: idx === 1 ? "rotate(-5deg)" : idx === 2 ? "rotate(-10deg)" : "rotate(0)",
 						}}>
 						<div className={classes.centered}>
 							<div className={classes.word}>{obj.word.toUpperCase()}</div>

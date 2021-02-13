@@ -9,9 +9,6 @@ const styles = makeStyles((theme) => ({
 	navContainer: {
 		height: "15vh",
 		width: "100%",
-
-		paddingLeft: "5%",
-		paddingRight: "5%",
 		position: "relative",
 	},
 
@@ -19,6 +16,7 @@ const styles = makeStyles((theme) => ({
 		position: "absolute",
 		height: "100%",
 		width: "100%",
+
 		color: theme.palette.colors.violetDark,
 		fontSize: 18,
 	},
@@ -106,6 +104,26 @@ const styles = makeStyles((theme) => ({
 		justifyContent: "center",
 		alignContent: "center",
 		alignItems: "center",
+	},
+
+	rotate5: {
+		[theme.breakpoints.down(700)]: {
+			transform: "rotate(-5deg)",
+		},
+
+		[theme.breakpoints.up(700)]: {
+			transform: "rotate(0deg)",
+		},
+	},
+
+	rotate10: {
+		[theme.breakpoints.down(700)]: {
+			transform: "rotate(-10deg)",
+		},
+
+		[theme.breakpoints.up(700)]: {
+			transform: "rotate(0deg)",
+		},
 	},
 }));
 
