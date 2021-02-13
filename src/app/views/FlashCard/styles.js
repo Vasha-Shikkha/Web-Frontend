@@ -39,6 +39,19 @@ const styles = makeStyles((theme) => ({
 	contentContainer: {
 		height: "70vh",
 		width: "100%",
+		position: "relative",
+	},
+
+	card: {
+		width: "80%",
+		height: "90%",
+		background: "white",
+		borderRadius: 20,
+
+		position: "absolute",
+
+		border: `0.5px solid ${theme.palette.colors.violetMedium}`,
+		boxShadow: `10px 10px 5px ${theme.palette.colors.violetLight}`,
 	},
 
 	btnContainer: {
