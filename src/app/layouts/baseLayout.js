@@ -14,6 +14,7 @@ const Home = lazy(() => import("../views/Home"));
 const Tutorial = lazy(() => import("../views/Tutorial"));
 const Exercise = lazy(() => import("../views/ExerciseHome"));
 const Vocabulary_Home = lazy(() => import("../views/Vocabulary_Home"));
+const FlashCard = lazy(() => import("../views/FlashCard"));
 const MCQ = lazy(() => import("../views/MCQ"));
 const TrueFalse = lazy(() => import("../views/TrueFalse"));
 const WordToPicture = lazy(() => import("../views/WordToPicture"));
@@ -92,6 +93,7 @@ const BaseLayout = () => (
 							<Route exact path="/fill-in-the-blanks" component={FillInTheBlanks} />
 
 							{/* <Route exact path="/" component={Landing} /> */}
+							<Route exact path="/flash-card" component={FlashCard} />
 							<Route exact path="/tutorial" component={Tutorial} />
 							<Route exact path="/exercise" component={Exercise} />
 							<Route exact path="/auth" component={Auth} />
