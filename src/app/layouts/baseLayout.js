@@ -35,6 +35,7 @@ const theme = createMuiTheme({
 			violetLight: "#ECE0FF",
 			violetMedium: "#CEAFFF",
 			violetDark: "#9E63FF",
+			violetText: "#6C63FF",
 			mediumPink: "#FFB8B8",
 			lightPink: "#fff0ff",
 		},

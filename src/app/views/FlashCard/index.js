@@ -44,8 +44,15 @@ const FlashCard = (props) => {
 						className={classes.card}
 						style={{
 							zIndex: cards.length - idx,
-							transform: idx === 1 ? "rotate(-7deg)" : idx === 2 ? "rotate(-14deg)" : "rotate(0)",
-						}}></div>
+							transform: idx === 1 ? "rotate(-5deg)" : idx === 2 ? "rotate(-10deg)" : "rotate(0)",
+						}}>
+						<div className={classes.centered}>
+							<div className={classes.word}>{obj.word.toUpperCase()}</div>
+						</div>
+						<div className={classes.meaning}>{obj.meaning}</div>
+						<div className={classes.exampleHead}>Example</div>
+						<div className={classes.example}>{obj.example}</div>
+					</div>
 				))}
 			</div>
 			<div className={`${classes.btnContainer} ${classes.centered}`}>

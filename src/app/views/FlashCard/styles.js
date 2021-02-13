@@ -52,6 +52,39 @@ const styles = makeStyles((theme) => ({
 
 		border: `0.5px solid ${theme.palette.colors.violetMedium}`,
 		boxShadow: `10px 10px 5px ${theme.palette.colors.violetLight}`,
+
+		padding: "5% 5% 0 5%",
+	},
+
+	word: {
+		fontSize: 16,
+		fontWeight: 600,
+		borderBottom: `1px solid ${theme.palette.colors.violetText}`,
+		color: theme.palette.colors.violetText,
+
+		marginBottom: 25,
+	},
+
+	meaning: {
+		fontSize: 14,
+		textAlign: "center",
+
+		marginBottom: 50,
+	},
+
+	exampleHead: {
+		fontSize: 14,
+		fontWeight: 600,
+		textAlign: "center",
+
+		marginBottom: 5,
+		color: theme.palette.colors.violetDark,
+	},
+
+	example: {
+		fontSize: 14,
+		textAlign: "center",
+		color: theme.palette.colors.violetText,
 	},
 
 	btnContainer: {
