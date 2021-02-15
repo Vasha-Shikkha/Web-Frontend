@@ -52,12 +52,11 @@ const PictureToWordCard = forwardRef((props, ref) => {
 			<div className={classes.optionContainer}>
 				<Grid
 					container
-					spacing={3}
 					direction="row"
 					wrap="wrap"
-					justify="space-between"
-					alignContent="space-between"
-					alignItems="stretch">
+					justify="center"
+					alignContent="center"
+					alignItems="center">
 					{props.question.options.map((obj, idx) => (
 						<div
 							key={idx}

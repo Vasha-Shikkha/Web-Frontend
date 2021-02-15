@@ -32,7 +32,7 @@ const styles = makeStyles((theme) => ({
 		objectFit: "cover",
 		objectPosition: "center",
 
-		marginTop: 10,
+		marginTop: 25,
 	},
 
 	optionContainer: {
@@ -41,22 +41,21 @@ const styles = makeStyles((theme) => ({
 		padding: "0% 5% 0% 5%",
 		borderRadius: "0px 0px 30px 30px",
 		flexGrow: 1,
-
-		background: "cyan",
 	},
 
 	opt: {
-		padding: 15,
-		borderRadius: 30,
+		padding: "10px 15px 10px 15px",
+		borderRadius: 10,
+		margin: 10,
 		cursor: "pointer",
 	},
 
 	hi: {
-		boxShadow: `10px 10px 15px ${theme.palette.colors.secondary}`,
+		boxShadow: `0px 20px 25px ${theme.palette.colors.secondary}`,
 	},
 
 	lo: {
-		boxShadow: `2px 3px 4px ${theme.palette.colors.secondary}`,
+		boxShadow: `0px 5px 10px ${theme.palette.colors.secondary}`,
 	},
 
 	centered: {
