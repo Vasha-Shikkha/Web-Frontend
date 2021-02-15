@@ -22,25 +22,64 @@ const PictureToWord = () => {
 	useEffect(() => {
 		let data = [
 			{
-				question: "What is this?",
+				question: "Select the word that best matches the picture",
 				questionImage:
-					"https://raw.githubusercontent.com/Waqar-107/temp/620ffac0e260b6e0e1f6f08d0a86a38ad93e0547/word2Pic/hen.svg",
-				options: ["hen", "fish", "tree", "horse"],
-				answer: 0,
-				users_answer: -1,
-			},
-
-			{
-				questionImage: "https://raw.githubusercontent.com/Waqar-107/temp/master/word2Pic/tree.png",
-				options: ["hen", "fish", "tree", "horse"],
+					"https://raw.githubusercontent.com/Waqar-107/temp/5680d5fc30fb05aff4251f5e9dc3f8c371df674f/vashaShikkha/pic_to_word/doc.svg",
+				options: ["nurse", "teacher", "doctor", "police", "actor"],
 				answer: 2,
 				users_answer: -1,
 			},
 
 			{
+				question: "Can you select appropriate adjective for the expression from the box below?",
 				questionImage:
-					"https://raw.githubusercontent.com/Waqar-107/temp/620ffac0e260b6e0e1f6f08d0a86a38ad93e0547/word2Pic/fish.svg",
-				options: ["goat", "fish", "tree", "elephant"],
+					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/pic_to_word/unnamed.jpg",
+				options: ["sleepy", "happy", "confused", "angry"],
+				answer: 3,
+				users_answer: -1,
+			},
+
+			{
+				question: "Can you select appropriate adjective for the expression from the box below?",
+				questionImage:
+					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/pic_to_word/unnamed (1).jpg",
+				options: ["angry", "confused", "excited", "sad"],
+				answer: 1,
+				users_answer: -1,
+			},
+
+			{
+				question: "Can you select appropriate adjective for the expression from the box below?",
+				questionImage:
+					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/pic_to_word/unnamed (2).jpg",
+				options: ["cheerful", "confused", "afraid", "sleepy"],
+				answer: 2,
+				users_answer: -1,
+			},
+
+			{
+				question: "Can you select appropriate adjective for the expression from the box below?",
+				questionImage:
+					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/pic_to_word/unnamed (3).jpg",
+				options: ["sleepy", "depressed", "confused", "angry"],
+				answer: 0,
+				users_answer: -1,
+			},
+
+			{
+				question: "Can you select appropriate adjective for the expression from the box below?",
+				questionImage:
+					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/pic_to_word/unnamed (4).jpg",
+				options: ["sleepy", "gloomy", "confused", "angry"],
+				answer: 1,
+				users_answer: -1,
+			},
+
+			{
+				question: "Can you select appropriate adjective for the expression from the box below?",
+				questionImage:
+					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/pic_to_word/unnamed (5).jpg",
+				options: ["sleepy", "cheerful", "sad", "annoyed"],
 				answer: 1,
 				users_answer: -1,
 			},
