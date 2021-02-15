@@ -101,6 +101,7 @@ const PictureToWord = () => {
 			) : (
 				<ExerciseLayout
 					exerciseName="Picture to Word"
+					scrollable={true}
 					totalQuestions={question.length}
 					currentQuestionNumber={currentQuestion + 1}
 					backToHome={backToHome}
@@ -111,11 +112,11 @@ const PictureToWord = () => {
 							<PictureToWordCard
 								key={idx}
 								ref={childRef}
-								elevation={question.length - idx + 1}
-								question={obj}
-								moveAway={moveAway[idx]}
+								currentQuestionNumber={currentQuestion}
+								question={question[currentQuestion]}
+								moveAway={false}
 								isReview={false}
-								isChecked={checked[idx]}
+								isChecked={checked[currentQuestion]}
 							/>
 						))}
 						<VerdictBanner correct={correct} anime={showVerdict} getNext={getNext} />
