@@ -6,6 +6,7 @@ import BackArrowButton from "../../components/BackArrowButton";
 import JumbledSentenceIcon from "../../assets/exercise/jumbledSentence.svg";
 import SentenceMatchingIcon from "../../assets/exercise/sentenceMatching.svg";
 import FillInTheBlanksIcon from "../../assets/exercise/fillInTheBlanks.svg";
+import PictureToWordIcon from "../../assets/exercise/pictureToWord.svg";
 
 import styles from "./styles";
 
@@ -31,6 +32,13 @@ const Vocabulary = (props) => {
 			image: FillInTheBlanksIcon,
 			link: "/fill-in-the-blanks",
 			questionQuantity: 2,
+		},
+
+		{
+			name: "Picture to Word",
+			image: PictureToWordIcon,
+			link: "/picture-to-word",
+			questionQuantity: 6,
 		},
 	];
 
