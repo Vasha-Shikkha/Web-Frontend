@@ -46,29 +46,27 @@ const PictureToWordCard = forwardRef((props, ref) => {
 			style={{zIndex: props.elevation ? props.elevation : 0}}
 			className={props.moveAway === false ? classes.root : `${classes.root} ${classes.transition}`}>
 			<div className={`${classes.question} ${classes.centered}`}>
-				<img src={props.question.questionImage} alt="" className={classes.questionImage} />
 				{props.question.question}
+				<img src={props.question.questionImage} alt="" className={classes.questionImage} />
 			</div>
 			<div className={classes.optionContainer}>
 				<Grid
 					container
-					spacing={3}
 					direction="row"
 					wrap="wrap"
-					justify="space-between"
-					alignContent="space-between"
-					alignItems="stretch">
+					justify="center"
+					alignContent="center"
+					alignItems="center">
 					{props.question.options.map((obj, idx) => (
-						<Grid item xs={6} sm={6} md={6} lg={6} xl={6} key={idx}>
-							<div
-								style={{background: determineOptionColor(idx)}}
-								onClick={() => selectOption(idx)}
-								className={`${classes.opt} ${classes.centered} ${
-									selected === idx && !props.isChecked && !props.isReview ? classes.hi : classes.lo
-								}`}>
-								{obj}
-							</div>
-						</Grid>
+						<div
+							key={idx}
+							style={{background: determineOptionColor(idx)}}
+							onClick={() => selectOption(idx)}
+							className={`${classes.opt} ${classes.centered} ${
+								selected === idx && !props.isChecked && !props.isReview ? classes.hi : classes.lo
+							}`}>
+							{obj}
+						</div>
 					))}
 				</Grid>
 			</div>
