@@ -20,69 +20,70 @@ const Vocabulary = () => {
 	const [showTooltip, setShowTooltip] = useState([]);
 	const [redirect, setRedirect] = useState(false);
 	const [redirectLink, setRedirectLink] = useState("");
-	const topics = [
-		{
-			name: "Places",
-			image: Places,
-		},
-
-		{
-			name: "Birds",
-			image: Birds,
-		},
-
-		{
-			name: "Food",
-			image: Food,
-		},
-
-		{
-			name: "Places",
-			image: Places,
-		},
-
-		{
-			name: "Birds",
-			image: Birds,
-		},
-
-		{
-			name: "Food",
-			image: Food,
-		},
-
-		{
-			name: "Places",
-			image: Places,
-		},
-
-		{
-			name: "Birds",
-			image: Birds,
-		},
-
-		{
-			name: "Food",
-			image: Food,
-		},
-
-		{
-			name: "Places",
-			image: Places,
-		},
-
-		{
-			name: "Birds",
-			image: Birds,
-		},
-
-		{
-			name: "Food",
-			image: Food,
-		},
-	];
+	const [topics, setTopic] = useState([]);
 
 	useEffect(() => {
+		setTopic([
+			{
+				name: "Places",
+				image: Places,
+			},
+
+			{
+				name: "Birds",
+				image: Birds,
+			},
+
+			{
+				name: "Food",
+				image: Food,
+			},
+
+			{
+				name: "Places",
+				image: Places,
+			},
+
+			{
+				name: "Birds",
+				image: Birds,
+			},
+
+			{
+				name: "Food",
+				image: Food,
+			},
+
+			{
+				name: "Places",
+				image: Places,
+			},
+
+			{
+				name: "Birds",
+				image: Birds,
+			},
+
+			{
+				name: "Food",
+				image: Food,
+			},
+
+			{
+				name: "Places",
+				image: Places,
+			},
+
+			{
+				name: "Birds",
+				image: Birds,
+			},
+
+			{
+				name: "Food",
+				image: Food,
+			},
+		]);
 		setShowTooltip(topics.map(() => false));
 	}, []);
 

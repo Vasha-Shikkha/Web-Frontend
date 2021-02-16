@@ -51,7 +51,7 @@ const styles = makeStyles((theme) => ({
 	},
 
 	hi: {
-		boxShadow: `0px 20px 25px ${theme.palette.colors.secondary}`,
+		boxShadow: `0px 20px 25px rgba(0, 0, 0, 0.25)`,
 	},
 
 	lo: {
