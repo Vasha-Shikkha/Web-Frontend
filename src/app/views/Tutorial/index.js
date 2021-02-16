@@ -1,6 +1,5 @@
 import React from "react";
-import {Link} from "react-router-dom";
-import ArrowBackOutlinedIcon from "@material-ui/icons/ArrowBackOutlined";
+import BackArrowButton from "../../components/BackArrowButton";
 
 import styles from "./styles";
 
@@ -9,12 +8,9 @@ const Tutorial = (props) => {
 
 	return (
 		<div className={classes.root}>
-			<Link
-				to={props.location.state.from}
-				className={`${classes.backBtnOuter} ${classes.centered}`}>
-				<ArrowBackOutlinedIcon className={classes.backBtn} />
-			</Link>
-
+			<div className={classes.navContainer}>
+				<BackArrowButton link={props.location.state.from} />
+			</div>
 			<div className={classes.tutorialContainer}>tutorial</div>
 		</div>
 	);

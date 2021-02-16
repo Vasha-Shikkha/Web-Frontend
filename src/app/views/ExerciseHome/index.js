@@ -52,7 +52,9 @@ const Vocabulary = (props) => {
 
 	return (
 		<div className={classes.root}>
-			<BackArrowButton link={props.location.state.from} />
+			<div className={classes.navContainer}>
+				<BackArrowButton link={props.location.state.from} />
+			</div>
 			<div className={classes.exerciseContainer}>
 				<Grid container spacing={3}>
 					{exerciseTypes.map((obj, idx) => (

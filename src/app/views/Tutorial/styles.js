@@ -3,7 +3,14 @@ import {makeStyles} from "@material-ui/core";
 const styles = makeStyles((theme) => ({
 	root: {
 		width: "100%",
-		padding: "5%",
+		padding: "0% 5% 5% 5%",
+	},
+
+	navContainer: {
+		height: "15vh",
+		display: "flex",
+		flexDirection: "column",
+		justifyContent: "center",
 	},
 
 	centered: {
@@ -14,20 +21,8 @@ const styles = makeStyles((theme) => ({
 		alignItems: "center",
 	},
 
-	backBtnOuter: {
-		background: theme.palette.colors.mediumPink,
-		height: 30,
-		width: 30,
-		cursor: "pointer",
-		borderRadius: "100%",
-	},
-
-	backBtn: {
-		color: "white",
-	},
-
 	tutorialContainer: {
-		paddingTop: "5%",
+		marginTop: 25,
 	},
 }));
 
