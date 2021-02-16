@@ -7,6 +7,7 @@ import JumbledSentenceIcon from "../../assets/exercise/jumbledSentence.svg";
 import SentenceMatchingIcon from "../../assets/exercise/sentenceMatching.svg";
 import FillInTheBlanksIcon from "../../assets/exercise/fillInTheBlanks.svg";
 import PictureToWordIcon from "../../assets/exercise/pictureToWord.svg";
+import WordToPictureIcon from "../../assets/exercise/wordToPicture.svg";
 
 import styles from "./styles";
 
@@ -38,6 +39,13 @@ const Vocabulary = (props) => {
 			name: "Picture to Word",
 			image: PictureToWordIcon,
 			link: "/picture-to-word",
+			questionQuantity: 6,
+		},
+
+		{
+			name: "Word to Picture",
+			image: WordToPictureIcon,
+			link: "/word-to-picture",
 			questionQuantity: 6,
 		},
 	];

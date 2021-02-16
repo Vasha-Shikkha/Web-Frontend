@@ -45,30 +45,23 @@ const WordToPictureCard = forwardRef((props, ref) => {
 		<div
 			style={{zIndex: props.elevation ? props.elevation : 0}}
 			className={props.moveAway === false ? classes.root : `${classes.root} ${classes.transition}`}>
-			<div className={`${classes.question} ${classes.centered}`}>{props.question.question}</div>
-			<Grid
-				container
-				direction="row"
-				wrap="wrap"
-				justify="space-between"
-				alignContent="center"
-				alignItems="center"
-				className={classes.optionContainer}>
-				{props.question.options.map((obj, idx) => (
-					<Grid item xs={6} sm={3} md={3} lg={3} xl={3} key={idx}>
-						<Grid container justify="center" alignContent="center" alignItems="center">
+			<div className={`${classes.question}`}>{props.question.question}</div>
+			<div className={classes.optionContainer}>
+				<Grid container spacing={3}>
+					{props.question.options.map((obj, idx) => (
+						<Grid item xs={6} sm={6} md={3} lg={3} xl={3} key={idx}>
 							<div
 								style={{background: determineOptionColor(idx)}}
 								onClick={() => selectOption(idx)}
 								className={`${classes.opt} ${classes.centered} ${
 									selected === idx ? classes.hi : classes.lo
-								} ${idx <= 1 ? classes.optMarginBottom : null}`}>
+								}`}>
 								<img src={obj} alt="" className={classes.optImage} />
 							</div>
 						</Grid>
-					</Grid>
-				))}
-			</Grid>
+					))}
+				</Grid>
+			</div>
 		</div>
 	);
 });
