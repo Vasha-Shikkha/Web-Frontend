@@ -2,10 +2,9 @@ import {makeStyles} from "@material-ui/core";
 
 const styles = makeStyles((theme) => ({
 	root: {
-		width: "80%",
+		width: "90%",
 		height: "90%",
 		background: "white",
-		borderRadius: 30,
 
 		position: "absolute",
 	},
@@ -20,42 +19,33 @@ const styles = makeStyles((theme) => ({
 		height: "30%",
 		width: "100%",
 
-		paddingLeft: "5%",
-		paddingRight: "5%",
-
-		borderRadius: "30px 30px 0px 0px",
 		fontSize: 18,
 	},
 
 	optionContainer: {
 		height: "70%",
 		width: "100%",
-		borderRadius: "0px 0px 30px 30px",
+		flexGrow: 1,
+
+		// using spacing 3 with grid is causing the container to move a bit up
+		// it's approx. 12px so manually bringing it down
+		marginTop: 12,
 	},
 
 	opt: {
 		padding: 15,
-		borderRadius: 30,
+		borderRadius: 10,
 		cursor: "pointer",
+		width: "100%",
 
 		[theme.breakpoints.down("md")]: {
-			width: 130,
+			//width: 130,
 			height: 130,
 		},
 
 		[theme.breakpoints.up("lg")]: {
-			width: 200,
+			//width: 200,
 			height: 200,
-		},
-	},
-
-	optMarginBottom: {
-		[theme.breakpoints.down("600")]: {
-			marginBottom: 10,
-		},
-
-		[theme.breakpoints.up("600")]: {
-			marginBottom: 0,
 		},
 	},
 
@@ -68,11 +58,11 @@ const styles = makeStyles((theme) => ({
 	},
 
 	hi: {
-		boxShadow: `10px 10px 15px ${theme.palette.colors.secondary}`,
+		boxShadow: `0px 20px 25px ${theme.palette.colors.secondary}`,
 	},
 
 	lo: {
-		boxShadow: `2px 3px 4px ${theme.palette.colors.secondary}`,
+		boxShadow: `0px 5px 10px ${theme.palette.colors.secondary}`,
 	},
 
 	centered: {
