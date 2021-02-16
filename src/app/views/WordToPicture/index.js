@@ -22,38 +22,74 @@ const WordToPicture = () => {
 	useEffect(() => {
 		let data = [
 			{
-				question: "Which is a Tiger?",
+				question: "Find out the Saint Martin’s island from the following pictures:",
 				options: [
-					"https://raw.githubusercontent.com/Waqar-107/temp/620ffac0e260b6e0e1f6f08d0a86a38ad93e0547/word2Pic/hen.svg",
-					"https://raw.githubusercontent.com/Waqar-107/temp/620ffac0e260b6e0e1f6f08d0a86a38ad93e0547/word2Pic/elephant.svg",
-					"https://raw.githubusercontent.com/Waqar-107/temp/620ffac0e260b6e0e1f6f08d0a86a38ad93e0547/word2Pic/tiger.svg",
-					"https://raw.githubusercontent.com/Waqar-107/temp/620ffac0e260b6e0e1f6f08d0a86a38ad93e0547/word2Pic/horse.svg",
+					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/word_to_pic/image14.jpg",
+					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/word_to_pic/image2.jpg",
+					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/word_to_pic/image12.jpg",
+					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/word_to_pic/image3.jpg",
 				],
 				answer: 2,
 				users_answer: -1,
 			},
 
 			{
-				question: "Which is a fish?",
+				question: "Find out the 60 Gambuj Mosque from the following pictures:",
 				options: [
-					"https://raw.githubusercontent.com/Waqar-107/temp/620ffac0e260b6e0e1f6f08d0a86a38ad93e0547/word2Pic/fish.svg",
-					"https://raw.githubusercontent.com/Waqar-107/temp/620ffac0e260b6e0e1f6f08d0a86a38ad93e0547/word2Pic/hen.svg",
-					"https://raw.githubusercontent.com/Waqar-107/temp/620ffac0e260b6e0e1f6f08d0a86a38ad93e0547/word2Pic/tiger.svg",
-					"https://raw.githubusercontent.com/Waqar-107/temp/620ffac0e260b6e0e1f6f08d0a86a38ad93e0547/word2Pic/horse.svg",
+					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/word_to_pic/image1.jpg",
+					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/word_to_pic/image15.jpg",
+					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/word_to_pic/image9.jpg",
+					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/word_to_pic/image4.jpg",
 				],
 				answer: 0,
 				users_answer: -1,
 			},
 
 			{
-				question: "Which is a tree?",
+				question: "Find out the National Memorial of Bangladesh from the following pictures:",
 				options: [
-					"https://raw.githubusercontent.com/Waqar-107/temp/620ffac0e260b6e0e1f6f08d0a86a38ad93e0547/word2Pic/fish.svg",
-					"https://raw.githubusercontent.com/Waqar-107/temp/master/word2Pic/apple.jpg",
-					"https://raw.githubusercontent.com/Waqar-107/temp/620ffac0e260b6e0e1f6f08d0a86a38ad93e0547/word2Pic/tiger.svg",
-					"https://raw.githubusercontent.com/Waqar-107/temp/master/word2Pic/tree.png",
+					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/word_to_pic/image10.jpg",
+					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/word_to_pic/image16.jpg",
+					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/word_to_pic/image21.jpg",
+					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/word_to_pic/image24.jpg",
+				],
+				answer: 2,
+				users_answer: -1,
+			},
+
+			{
+				question: "Find out the national flower of Bangladesh:",
+				options: [
+					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/word_to_pic/image6.jpg",
+					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/word_to_pic/image7.jpg",
+					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/word_to_pic/image22.jpg",
+					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/word_to_pic/image5.jpg",
 				],
 				answer: 3,
+				users_answer: -1,
+			},
+
+			{
+				question: "Find out the national fruit of Bangladesh:",
+				options: [
+					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/word_to_pic/image20.jpg",
+					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/word_to_pic/image18.jpg",
+					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/word_to_pic/image19.jpg",
+					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/word_to_pic/image23.jpg",
+				],
+				answer: 1,
+				users_answer: -1,
+			},
+
+			{
+				question: "Find out the national poet of Bangladesh:",
+				options: [
+					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/word_to_pic/image17.jpg",
+					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/word_to_pic/image8.jpg",
+					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/word_to_pic/image11.jpg",
+					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/word_to_pic/image13.jpg",
+				],
+				answer: 0,
 				users_answer: -1,
 			},
 		];
