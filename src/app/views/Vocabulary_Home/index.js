@@ -125,7 +125,7 @@ const Vocabulary = () => {
 					className={`${classes.imageUpper} ${classes.centered}`}>
 					<img src={Girl_Reading} alt="" className={classes.img} />
 				</div>
-				<div className={classes.imageUpper} style={{padding: "5%"}}>
+				<div className={`${classes.arrowContainer}`}>
 					<BackArrowButton link="/home" />
 				</div>
 			</div>

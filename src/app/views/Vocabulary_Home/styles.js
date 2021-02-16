@@ -26,6 +26,15 @@ const styles = makeStyles((theme) => ({
 		},
 	},
 
+	arrowContainer: {
+		height: "15vh",
+		display: "flex",
+		flexDirection: "column",
+		justifyContent: "center",
+		paddingLeft: "5%",
+		position: "absolute",
+	},
+
 	imageUpper: {
 		width: "100%",
 		height: "100%",
