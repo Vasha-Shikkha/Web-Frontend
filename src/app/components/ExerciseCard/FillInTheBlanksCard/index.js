@@ -1,4 +1,5 @@
 import React, {useState, forwardRef, useImperativeHandle, useEffect} from "react";
+import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
 import PropTypes from "prop-types";
 import colors from "../../../styles/colors";
 import styles from "./styles";
@@ -88,18 +89,49 @@ const FillInTheBlanksCard = forwardRef((props, ref) => {
 		setOptionMApping(arr);
 	};
 
+	const handleOnDragEnd = (result) => {
+		if (!result.destination) return;
+
+		// let items = [...chunks];
+		// let reorderedItem = items.splice(result.source.index, 1);
+		// items.splice(result.destination.index, 0, reorderedItem[0]);
+
+		// setChunks(items);
+	};
+
 	return (
 		<div className={classes.root}>
 			<div className={classes.context}>{props.question.context}</div>
 			<div className={classes.optionContainer}>
-				{props.question.options.map((obj, idx) => (
-					<div
-						className={`${classes.box} ${optionMapping[idx] === -1 ? classes.lo : classes.hi}`}
-						key={idx}
-						onClick={() => selectOption(idx)}>
-						{obj}
-					</div>
-				))}
+				<DragDropContext onDragEnd={handleOnDragEnd}>
+					<Droppable droppableId="word_chunks" direction="horizontal">
+						{(provided) => (
+							<div
+								{...provided.droppableProps}
+								ref={provided.innerRef}
+								className={`${classes.optionContainer}`}>
+								{props.question.options.map((obj, idx) => (
+									<Draggable key={obj} draggableId={obj} index={idx}>
+										{(provided2) => {
+											return (
+												<div
+													className={classes.box}
+													key={idx}
+													ref={provided2.innerRef}
+													{...provided2.draggableProps}
+													{...provided2.dragHandleProps}
+													className={classes.box}>
+													{obj}
+												</div>
+											);
+										}}
+									</Draggable>
+								))}
+								{provided.placeholder}
+							</div>
+						)}
+					</Droppable>
+				</DragDropContext>
 			</div>
 			<div className={classes.questionContainer}>
 				{tokenizedQuestion.map((obj, idx) =>
