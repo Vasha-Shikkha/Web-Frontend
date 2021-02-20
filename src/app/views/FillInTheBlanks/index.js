@@ -6,6 +6,7 @@ import FillInTheBlanksCard from "../../components/ExerciseCard/FillInTheBlanksCa
 import VerdictBanner from "../../components/VerdictBanner";
 
 import styles from "../../styles/exerciseViewStyles";
+import {Redirect} from "react-router-dom";
 
 const FillInTheBlanks = () => {
 	const classes = styles();
@@ -15,6 +16,7 @@ const FillInTheBlanks = () => {
 	const [loading, setLoading] = useState(true);
 	const [showVerdict, setShowVerdict] = useState(false);
 	const [correct, setCorrect] = useState(true);
+	const [redirect, setRedirect] = useState(null);
 
 	const childRef = useRef();
 
@@ -113,10 +115,13 @@ const FillInTheBlanks = () => {
 
 		// gameover
 		if (currentQuestion + 1 === question.length) {
+			setRedirect("/finish");
 		} else {
 			setCurrentQuestion(currentQuestion + 1);
 		}
 	};
+
+	if (redirect) return <Redirect to={redirect} />;
 
 	return (
 		<>

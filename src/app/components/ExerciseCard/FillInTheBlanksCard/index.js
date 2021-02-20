@@ -153,10 +153,10 @@ const FillInTheBlanksCard = forwardRef((props, ref) => {
 								key={idx}
 								className={classes.word}
 								style={{
-									borderBottom: isBlank[idx] && obj !== "_" ? "2px solid black" : null,
+									//borderBottom: isBlank[idx] && obj !== "_" ? "2px solid black" : null,
 									background: wordColor[idx],
 								}}>
-								{obj === "_" ? "_______" : obj}
+								{obj}
 							</div>
 						)
 					)}
