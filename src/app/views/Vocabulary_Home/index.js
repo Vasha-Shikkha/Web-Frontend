@@ -85,6 +85,7 @@ const Vocabulary = () => {
 			},
 		]);
 		setShowTooltip(topics.map(() => false));
+		// eslint-disable-next-line
 	}, []);
 
 	const tooltipToggler = (idx) => {

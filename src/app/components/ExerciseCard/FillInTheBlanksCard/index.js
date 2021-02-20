@@ -1,4 +1,5 @@
 import React, {useState, forwardRef, useImperativeHandle, useEffect} from "react";
+import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
 import PropTypes from "prop-types";
 import colors from "../../../styles/colors";
 import styles from "./styles";
@@ -29,8 +30,8 @@ const FillInTheBlanksCard = forwardRef((props, ref) => {
 	}));
 
 	const classes = styles();
+
 	const [tokenizedQuestion, setTokenizedQuestion] = useState([]);
-	const [optionMapping, setOptionMApping] = useState([]);
 	const [isBlank, setIsBlank] = useState([]);
 	const [wordColor, setWordColor] = useState([]);
 
@@ -62,63 +63,106 @@ const FillInTheBlanksCard = forwardRef((props, ref) => {
 		setTokenizedQuestion(final_words);
 		setIsBlank(blankIdx);
 		setWordColor(final_words.map(() => "white"));
-
-		// this array will save ith option is in which blank
-		setOptionMApping(props.question.options.map(() => -1));
 	}, [props.question.question, props.question.options]);
 
-	const selectOption = (idx) => {
-		let temp_tokenized_question = [...tokenizedQuestion];
-		let arr = [...optionMapping];
+	const handleOnDragEnd = (result) => {
+		if (!result.destination) return;
 
-		if (optionMapping[idx] === -1) {
-			for (let i = 0; i < isBlank.length; i++) {
-				if (isBlank[i] && tokenizedQuestion[i] === "_") {
-					temp_tokenized_question[i] = props.question.options[idx];
-					arr[idx] = i;
-					break;
-				}
-			}
-		} else {
-			temp_tokenized_question[optionMapping[idx]] = "_";
-			arr[idx] = -1;
-		}
+		console.log(result);
 
-		setTokenizedQuestion(temp_tokenized_question);
-		setOptionMApping(arr);
+		// option~whatever_option_provided
+		// adding option~ to make unique draggableId
+		let dragged_option = result.draggableId.split("~")[1];
+		let dropped_idx = parseInt(result.destination.index);
+
+		let items = [...tokenizedQuestion];
+		items[dropped_idx] = dragged_option;
+		setTokenizedQuestion(items);
 	};
 
 	return (
-		<div className={classes.root}>
-			<div className={classes.context}>{props.question.context}</div>
-			<div className={classes.optionContainer}>
-				{props.question.options.map((obj, idx) => (
-					<div
-						className={`${classes.box} ${optionMapping[idx] === -1 ? classes.lo : classes.hi}`}
-						key={idx}
-						onClick={() => selectOption(idx)}>
-						{obj}
-					</div>
-				))}
+		<DragDropContext onDragEnd={handleOnDragEnd}>
+			<div className={classes.root}>
+				<div className={classes.context}>{props.question.context}</div>
+				<div className={classes.optionContainer}>
+					<Droppable droppableId="option_container" direction="horizontal" isDropDisabled={true}>
+						{(provided) => (
+							<div
+								{...provided.droppableProps}
+								ref={provided.innerRef}
+								className={`${classes.optionContainer}`}>
+								{props.question.options.map((obj, idx) => (
+									<Draggable key={idx} draggableId={`option~${obj}`} index={idx}>
+										{(provided2) => {
+											return (
+												<div
+													ref={provided2.innerRef}
+													{...provided2.draggableProps}
+													{...provided2.dragHandleProps}
+													className={classes.box}>
+													{obj}
+												</div>
+											);
+										}}
+									</Draggable>
+								))}
+								{provided.placeholder}
+							</div>
+						)}
+					</Droppable>
+				</div>
+				<div className={classes.questionContainer}>
+					{tokenizedQuestion.map((obj, idx) =>
+						obj === "\n" ? (
+							<div key={idx} style={{flexBasis: "100%", marginBottom: 20}}></div>
+						) : isBlank[idx] ? (
+							<Droppable
+								key={idx}
+								droppableId={`drop_blank~${idx.toString()}`}
+								direction="horizontal">
+								{(provided) => (
+									<div {...provided.droppableProps} ref={provided.innerRef}>
+										<Draggable
+											key={idx}
+											draggableId={`drag_blank${idx.toString()}`}
+											index={idx}
+											isDragDisabled={true}>
+											{(provided2) => {
+												return (
+													<div
+														ref={provided2.innerRef}
+														{...provided2.draggableProps}
+														{...provided2.dragHandleProps}
+														className={classes.word}
+														style={{
+															borderBottom: isBlank[idx] && obj !== "_" ? "2px solid black" : null,
+															background: wordColor[idx],
+														}}>
+														{obj === "_" ? "_______" : obj}
+													</div>
+												);
+											}}
+										</Draggable>
+
+										{provided.placeholder}
+									</div>
+								)}
+							</Droppable>
+						) : (
+							<div
+								key={idx}
+								className={classes.word}
+								style={{
+									//borderBottom: isBlank[idx] && obj !== "_" ? "2px solid black" : null,
+									background: wordColor[idx],
+								}}>
+								{obj}
+							</div>
+						)
+					)}
+				</div>
 			</div>
-			<div className={classes.questionContainer}>
-				{tokenizedQuestion.map((obj, idx) =>
-					obj === "\n" ? (
-						<div key={idx} style={{flexBasis: "100%", marginBottom: 20}}></div>
-					) : (
-						<div
-							key={idx}
-							className={classes.word}
-							style={{
-								borderBottom: isBlank[idx] && obj !== "_" ? "2px solid black" : null,
-								background: wordColor[idx],
-							}}>
-							{obj === "_" ? "_______" : obj}
-						</div>
-					)
-				)}
-			</div>
-		</div>
+		</DragDropContext>
 	);
 });
 

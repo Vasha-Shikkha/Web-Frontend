@@ -20,8 +20,8 @@ const styles = makeStyles((theme) => ({
 
 	optionContainer: {
 		width: "100%",
-		marginTop: 50,
-		marginBottom: 50,
+		marginTop: 20,
+		marginBottom: 20,
 
 		display: "flex",
 		flexDirection: "row",
@@ -35,6 +35,8 @@ const styles = makeStyles((theme) => ({
 		background: "white",
 		margin: "0px 15px 15px 0px",
 		userSelect: "none",
+
+		boxShadow: `2px 3px 4px ${theme.palette.colors.secondary}`,
 	},
 
 	questionContainer: {
