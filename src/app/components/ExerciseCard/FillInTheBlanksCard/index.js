@@ -90,11 +90,13 @@ const FillInTheBlanksCard = forwardRef((props, ref) => {
 	};
 
 	const handleOnDragEnd = (result) => {
-		if (!result.destination) {
-			console.log("destination err", result);
-			return;
-		}
+		if (!result.destination) return;
+
 		console.log(result);
+
+		// option~whatever_option_provided
+		// adding option~ to make unique draggableId
+		let dragged = result.draggableId.split("~")[1];
 
 		// let items = [...chunks];
 		// let reorderedItem = items.splice(result.source.index, 1);
@@ -108,14 +110,14 @@ const FillInTheBlanksCard = forwardRef((props, ref) => {
 			<div className={classes.root}>
 				<div className={classes.context}>{props.question.context}</div>
 				<div className={classes.optionContainer}>
-					<Droppable droppableId="option_container" direction="horizontal">
+					<Droppable droppableId="option_container" direction="horizontal" isDropDisabled={true}>
 						{(provided) => (
 							<div
 								{...provided.droppableProps}
 								ref={provided.innerRef}
 								className={`${classes.optionContainer}`}>
 								{props.question.options.map((obj, idx) => (
-									<Draggable key={idx} draggableId={`option${idx.toString()}`} index={idx}>
+									<Draggable key={idx} draggableId={`option~${obj}`} index={idx}>
 										{(provided2) => {
 											return (
 												<div

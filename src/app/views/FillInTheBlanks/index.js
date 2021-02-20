@@ -32,13 +32,6 @@ const FillInTheBlanks = () => {
 					"interested in",
 					"I’m really excited",
 					"would you mind",
-
-					"What’s your favorite",
-					"I prefer",
-					"share our views",
-					"interested in",
-					"I’m really excited",
-					"would you mind",
 				],
 				answer: [
 					"would you mind",
