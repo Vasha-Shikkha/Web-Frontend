@@ -30,8 +30,8 @@ const FillInTheBlanksCard = forwardRef((props, ref) => {
 	}));
 
 	const classes = styles();
+
 	const [tokenizedQuestion, setTokenizedQuestion] = useState([]);
-	const [optionMapping, setOptionMApping] = useState([]);
 	const [isBlank, setIsBlank] = useState([]);
 	const [wordColor, setWordColor] = useState([]);
 
@@ -63,31 +63,7 @@ const FillInTheBlanksCard = forwardRef((props, ref) => {
 		setTokenizedQuestion(final_words);
 		setIsBlank(blankIdx);
 		setWordColor(final_words.map(() => "white"));
-
-		// this array will save ith option is in which blank
-		setOptionMApping(props.question.options.map(() => -1));
 	}, [props.question.question, props.question.options]);
-
-	const selectOption = (idx) => {
-		let temp_tokenized_question = [...tokenizedQuestion];
-		let arr = [...optionMapping];
-
-		if (optionMapping[idx] === -1) {
-			for (let i = 0; i < isBlank.length; i++) {
-				if (isBlank[i] && tokenizedQuestion[i] === "_") {
-					temp_tokenized_question[i] = props.question.options[idx];
-					arr[idx] = i;
-					break;
-				}
-			}
-		} else {
-			temp_tokenized_question[optionMapping[idx]] = "_";
-			arr[idx] = -1;
-		}
-
-		setTokenizedQuestion(temp_tokenized_question);
-		setOptionMApping(arr);
-	};
 
 	const handleOnDragEnd = (result) => {
 		if (!result.destination) return;
@@ -96,13 +72,12 @@ const FillInTheBlanksCard = forwardRef((props, ref) => {
 
 		// option~whatever_option_provided
 		// adding option~ to make unique draggableId
-		let dragged = result.draggableId.split("~")[1];
+		let dragged_option = result.draggableId.split("~")[1];
+		let dropped_idx = parseInt(result.destination.index);
 
-		// let items = [...chunks];
-		// let reorderedItem = items.splice(result.source.index, 1);
-		// items.splice(result.destination.index, 0, reorderedItem[0]);
-
-		// setChunks(items);
+		let items = [...tokenizedQuestion];
+		items[dropped_idx] = dragged_option;
+		setTokenizedQuestion(items);
 	};
 
 	return (
@@ -143,11 +118,15 @@ const FillInTheBlanksCard = forwardRef((props, ref) => {
 						) : isBlank[idx] ? (
 							<Droppable
 								key={idx}
-								droppableId={`drop_blank${idx.toString()}`}
+								droppableId={`drop_blank~${idx.toString()}`}
 								direction="horizontal">
 								{(provided) => (
 									<div {...provided.droppableProps} ref={provided.innerRef}>
-										<Draggable key={idx} draggableId={`drag_blank${idx.toString()}`} index={idx}>
+										<Draggable
+											key={idx}
+											draggableId={`drag_blank${idx.toString()}`}
+											index={idx}
+											isDragDisabled={true}>
 											{(provided2) => {
 												return (
 													<div
