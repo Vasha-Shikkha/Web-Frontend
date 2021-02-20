@@ -90,7 +90,11 @@ const FillInTheBlanksCard = forwardRef((props, ref) => {
 	};
 
 	const handleOnDragEnd = (result) => {
-		if (!result.destination) return;
+		if (!result.destination) {
+			console.log("destination err", result);
+			return;
+		}
+		console.log(result);
 
 		// let items = [...chunks];
 		// let reorderedItem = items.splice(result.source.index, 1);
@@ -100,23 +104,21 @@ const FillInTheBlanksCard = forwardRef((props, ref) => {
 	};
 
 	return (
-		<div className={classes.root}>
-			<div className={classes.context}>{props.question.context}</div>
-			<div className={classes.optionContainer}>
-				<DragDropContext onDragEnd={handleOnDragEnd}>
-					<Droppable droppableId="word_chunks" direction="horizontal">
+		<DragDropContext onDragEnd={handleOnDragEnd}>
+			<div className={classes.root}>
+				<div className={classes.context}>{props.question.context}</div>
+				<div className={classes.optionContainer}>
+					<Droppable droppableId="option_container" direction="horizontal">
 						{(provided) => (
 							<div
 								{...provided.droppableProps}
 								ref={provided.innerRef}
 								className={`${classes.optionContainer}`}>
 								{props.question.options.map((obj, idx) => (
-									<Draggable key={obj} draggableId={obj} index={idx}>
+									<Draggable key={idx} draggableId={`option${idx.toString()}`} index={idx}>
 										{(provided2) => {
 											return (
 												<div
-													className={classes.box}
-													key={idx}
 													ref={provided2.innerRef}
 													{...provided2.draggableProps}
 													{...provided2.dragHandleProps}
@@ -131,26 +133,55 @@ const FillInTheBlanksCard = forwardRef((props, ref) => {
 							</div>
 						)}
 					</Droppable>
-				</DragDropContext>
+				</div>
+				<div className={classes.questionContainer}>
+					{tokenizedQuestion.map((obj, idx) =>
+						obj === "\n" ? (
+							<div key={idx} style={{flexBasis: "100%", marginBottom: 20}}></div>
+						) : isBlank[idx] ? (
+							<Droppable
+								key={idx}
+								droppableId={`drop_blank${idx.toString()}`}
+								direction="horizontal">
+								{(provided) => (
+									<div {...provided.droppableProps} ref={provided.innerRef}>
+										<Draggable key={idx} draggableId={`drag_blank${idx.toString()}`} index={idx}>
+											{(provided2) => {
+												return (
+													<div
+														ref={provided2.innerRef}
+														{...provided2.draggableProps}
+														{...provided2.dragHandleProps}
+														className={classes.word}
+														style={{
+															borderBottom: isBlank[idx] && obj !== "_" ? "2px solid black" : null,
+															background: wordColor[idx],
+														}}>
+														{obj === "_" ? "_______" : obj}
+													</div>
+												);
+											}}
+										</Draggable>
+
+										{provided.placeholder}
+									</div>
+								)}
+							</Droppable>
+						) : (
+							<div
+								key={idx}
+								className={classes.word}
+								style={{
+									borderBottom: isBlank[idx] && obj !== "_" ? "2px solid black" : null,
+									background: wordColor[idx],
+								}}>
+								{obj === "_" ? "_______" : obj}
+							</div>
+						)
+					)}
+				</div>
 			</div>
-			<div className={classes.questionContainer}>
-				{tokenizedQuestion.map((obj, idx) =>
-					obj === "\n" ? (
-						<div key={idx} style={{flexBasis: "100%", marginBottom: 20}}></div>
-					) : (
-						<div
-							key={idx}
-							className={classes.word}
-							style={{
-								borderBottom: isBlank[idx] && obj !== "_" ? "2px solid black" : null,
-								background: wordColor[idx],
-							}}>
-							{obj === "_" ? "_______" : obj}
-						</div>
-					)
-				)}
-			</div>
-		</div>
+		</DragDropContext>
 	);
 });
 
