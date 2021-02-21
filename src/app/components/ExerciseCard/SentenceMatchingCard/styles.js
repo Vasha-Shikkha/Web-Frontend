@@ -17,11 +17,16 @@ const styles = makeStyles((theme) => ({
 	},
 
 	options: {
-		padding: 10,
-		fontSize: 18,
+		width: "98%",
 
-		borderRadius: 30,
-		boxShadow: `2px 3px 4px ${theme.palette.colors.secondary}`,
+		padding: 10,
+		fontSize: 12,
+		marginBottom: 15,
+		borderRadius: 10,
+
+		textAlign: "center",
+		boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.25)",
+		background: "white",
 		cursor: "pointer",
 		userSelect: "none",
 	},

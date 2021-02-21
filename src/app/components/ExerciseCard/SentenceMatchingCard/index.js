@@ -1,68 +1,33 @@
 import React, {useState, useEffect, forwardRef, useImperativeHandle} from "react";
+import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
 import PropTypes from "prop-types";
-import {Grid} from "@material-ui/core";
+import {shuffle} from "../../../util/helpers";
 import colors from "../../../styles/colors";
 import styles from "./styles";
-import "../../../styles/scrollbar.css";
 
 const SentenceMatchingCard = forwardRef((props, ref) => {
 	useImperativeHandle(ref, () => ({
 		check() {
-			let answer = {users_answer: [], isCorrect: correct === currentSentences.length / 2};
-			return answer;
+			// let answer = {users_answer: [], isCorrect: correct === currentSentences.length / 2};
+			// return answer;
 		},
 	}));
 
 	const classes = styles();
-	const [currentSentences, setCurrentSentences] = useState([]);
-	const [sentenceMapping, setSentenceMapping] = useState([]);
+	const [rightSentenceMapping, setRightSentenceMapping] = useState([]);
 	const [boxColors, setBoxColors] = useState([]);
 	const [draggedIdx, setDraggedIdx] = useState(-1);
 	const [movable, setMovable] = useState([]);
 	const [correct, setCorrect] = useState(0);
 
 	useEffect(() => {
-		let len = props.question.sentences.length * 2;
-		let temp = props.question.sentences.map((obj, idx) => idx);
+		// keep the left part as it is. make them draggable. make the whole container non-droppable
+		// shuffle the right part
+		let shuffled_array = props.question.sentences.map((obj, idx) => idx);
+		shuffled_array = shuffle(shuffled_array);
 
-		// set initial color
-		setBoxColors(Array(len).fill(colors.white));
-
-		let temp_sentences = Array(len).fill("");
-		let temp_mapping = Array(len).fill(-1);
-
-		// fill the first
-		for (let i = 0, j = 0; i < temp.length; i++, j += 2) {
-			temp_sentences[j] = props.question.sentences[temp[i]].part_one;
-			temp_mapping[j] = temp[i];
-		}
-
-		// fill the second
-		temp = shuffle(temp);
-		for (let i = 0, j = 1; i < temp.length; i++, j += 2) {
-			temp_sentences[j] = props.question.sentences[temp[i]].part_two;
-			temp_mapping[j] = temp[i];
-		}
-
-		setCurrentSentences(temp_sentences);
-		setSentenceMapping(temp_mapping);
-		setMovable(Array(len).fill(true));
+		setRightSentenceMapping(shuffled_array);
 	}, [props.question.sentences]);
-
-	const shuffle = (array) => {
-		let currentIndex = array.length;
-		let temporaryValue;
-		let randomIndex;
-		while (currentIndex !== 0) {
-			randomIndex = Math.floor(Math.random() * currentIndex);
-			currentIndex -= 1;
-			temporaryValue = array[currentIndex];
-			array[currentIndex] = array[randomIndex];
-			array[randomIndex] = temporaryValue;
-		}
-
-		return array;
-	};
 
 	const handleOnDragEnd = (result) => {
 		if (!result.destination) return;
@@ -76,7 +41,28 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 				<div
 					className={classes.optionContainer}
 					style={{background: "yellow", alignContent: "flex-start", alignItems: "flex-start"}}>
-					left
+					<Droppable droppableId="left_part_container" isDropDisabled={false}>
+						{(provided) => (
+							<div {...provided.droppableProps} ref={provided.innerRef} style={{width: "100%"}}>
+								{props.question.sentences.map((obj, idx) => (
+									<Draggable key={idx} draggableId={`left~${obj.left_part}`} index={idx}>
+										{(provided2) => {
+											return (
+												<div
+													ref={provided2.innerRef}
+													{...provided2.draggableProps}
+													{...provided2.dragHandleProps}
+													className={classes.options}>
+													{obj.left_part}
+												</div>
+											);
+										}}
+									</Draggable>
+								))}
+								{provided.placeholder}
+							</div>
+						)}
+					</Droppable>
 				</div>
 				<div
 					className={classes.optionContainer}
