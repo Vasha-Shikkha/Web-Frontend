@@ -3,10 +3,20 @@ import {makeStyles} from "@material-ui/core";
 const styles = makeStyles((theme) => ({
 	root: {
 		width: "90%",
-		minHeight: "70vh",
 		background: "white",
+	},
 
+	undo: {
+		background: theme.palette.colors.primary,
+		marginBottom: 25,
+		padding: 10,
+		width: 100,
+		color: "white",
+	},
+
+	optionsOuter: {
 		display: "flex",
+		minHeight: "70vh",
 	},
 
 	optionContainer: {

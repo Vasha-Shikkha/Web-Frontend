@@ -1,6 +1,7 @@
 import React, {useState, useEffect, forwardRef, useImperativeHandle} from "react";
 import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
 import PropTypes from "prop-types";
+import Button from "../../Button";
 import {shuffle} from "../../../util/helpers";
 import colors from "../../../styles/colors";
 import styles from "./styles";
@@ -34,11 +35,6 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 	const handleOnDragEnd = (result) => {
 		if (!result.destination) return;
 
-		console.log(result);
-		// let temp = [...answer];
-		// temp[result.destination.index] = result.source.index;
-		// setAnswer(temp);
-
 		let temp = [...leftUsed];
 		temp[result.source.index] = true;
 		setLeftUsed(temp);
@@ -59,86 +55,109 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 		console.log(word);
 	};
 
+	const undo = () => {
+		let temp = [...stack];
+		let len = temp.length;
+		let left = stack[len - 1][0];
+		let right = stack[len - 1][1];
+		temp.pop();
+		setStack(temp);
+
+		// restore the left
+		temp = [...leftUsed];
+		temp[left] = false;
+		setLeftUsed(temp);
+
+		// restore the right
+		temp = [...currentRight];
+		temp[right] = props.question.sentences[rightSentenceMapping[right]].right_part;
+		setCurrentRight(temp);
+	};
+
 	return (
 		<DragDropContext onDragEnd={handleOnDragEnd}>
 			<div className={classes.root}>
-				<div
-					className={classes.optionContainer}
-					style={{alignContent: "flex-start", alignItems: "flex-start"}}>
-					<Droppable droppableId="left_part_container" isDropDisabled={true}>
-						{(provided) => (
-							<div {...provided.droppableProps} ref={provided.innerRef} style={{width: "100%"}}>
-								{props.question.sentences.map((obj, idx) => (
-									<Draggable
-										key={idx}
-										draggableId={`left~${obj.left_part}`}
-										index={idx}
-										isDragDisabled={leftUsed[idx]}>
-										{(provided2) => {
-											return (
-												<div
-													ref={provided2.innerRef}
-													{...provided2.draggableProps}
-													{...provided2.dragHandleProps}
-													className={classes.options}>
-													{leftUsed[idx]
-														? null
-														: obj.left_part.split(" ").map((word, wdx) => (
-																<span
-																	className={classes.option_span}
-																	key={wdx}
-																	onMouseOver={() => showMeaning(word)}>
-																	{word}
-																</span>
-														  ))}
-												</div>
-											);
-										}}
-									</Draggable>
-								))}
-								{provided.placeholder}
-							</div>
-						)}
-					</Droppable>
-				</div>
-				<div
-					className={classes.optionContainer}
-					style={{alignContent: "flex-end", alignItems: "flex-end"}}>
-					{props.question.sentences.map((obj, idx) => (
-						<Droppable key={idx} droppableId={`right_sentence~${idx}`} isDropDisabled={false}>
+				<Button text="Undo" styles={classes.undo} onClick={() => undo()} />
+
+				<div className={classes.optionsOuter}>
+					<div
+						className={classes.optionContainer}
+						style={{alignContent: "flex-start", alignItems: "flex-start"}}>
+						<Droppable droppableId="left_part_container" isDropDisabled={true}>
 							{(provided) => (
 								<div {...provided.droppableProps} ref={provided.innerRef} style={{width: "100%"}}>
-									<Draggable
-										draggableId={`right~${obj.right_part}`}
-										index={idx}
-										isDragDisabled={true}>
-										{(provided2) => {
-											return (
-												<div
-													ref={provided2.innerRef}
-													{...provided2.draggableProps}
-													{...provided2.dragHandleProps}
-													className={classes.options}
-													style={{height: 70, background: boxColors[idx]}}>
-													{currentRight[idx]
-														? currentRight[idx].split(" ").map((word, wdx) => (
-																<span
-																	className={classes.option_span}
-																	key={wdx}
-																	onMouseOver={() => showMeaning(word)}>
-																	{word}
-																</span>
-														  ))
-														: ""}
-												</div>
-											);
-										}}
-									</Draggable>
+									{props.question.sentences.map((obj, idx) => (
+										<Draggable
+											key={idx}
+											draggableId={`left~${obj.left_part}`}
+											index={idx}
+											isDragDisabled={leftUsed[idx]}>
+											{(provided2) => {
+												return (
+													<div
+														ref={provided2.innerRef}
+														{...provided2.draggableProps}
+														{...provided2.dragHandleProps}
+														className={classes.options}>
+														{leftUsed[idx]
+															? null
+															: obj.left_part.split(" ").map((word, wdx) => (
+																	<span
+																		className={classes.option_span}
+																		key={wdx}
+																		onMouseOver={() => showMeaning(word)}>
+																		{word}
+																	</span>
+															  ))}
+													</div>
+												);
+											}}
+										</Draggable>
+									))}
 									{provided.placeholder}
 								</div>
 							)}
 						</Droppable>
-					))}
+					</div>
+					<div
+						className={classes.optionContainer}
+						style={{alignContent: "flex-end", alignItems: "flex-end"}}>
+						{props.question.sentences.map((obj, idx) => (
+							<Droppable key={idx} droppableId={`right_sentence~${idx}`} isDropDisabled={false}>
+								{(provided) => (
+									<div {...provided.droppableProps} ref={provided.innerRef} style={{width: "100%"}}>
+										<Draggable
+											draggableId={`right~${obj.right_part}`}
+											index={idx}
+											isDragDisabled={true}>
+											{(provided2) => {
+												return (
+													<div
+														ref={provided2.innerRef}
+														{...provided2.draggableProps}
+														{...provided2.dragHandleProps}
+														className={classes.options}
+														style={{height: 70, background: boxColors[idx]}}>
+														{currentRight[idx]
+															? currentRight[idx].split(" ").map((word, wdx) => (
+																	<span
+																		className={classes.option_span}
+																		key={wdx}
+																		onMouseOver={() => showMeaning(word)}>
+																		{word}
+																	</span>
+															  ))
+															: ""}
+													</div>
+												);
+											}}
+										</Draggable>
+										{provided.placeholder}
+									</div>
+								)}
+							</Droppable>
+						))}
+					</div>
 				</div>
 			</div>
 		</DragDropContext>

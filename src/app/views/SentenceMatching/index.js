@@ -42,26 +42,6 @@ const SentenceMatching = () => {
 						left_part: "Moreover, the environment in village",
 						right_part: "is very calm",
 					},
-
-					{
-						left_part: "On the other hand the city life",
-						right_part: "is very loud and crowded",
-					},
-
-					{
-						left_part: "Educated people like cities",
-						right_part: "because there are lots of technology",
-					},
-
-					{
-						left_part: "But a village is not fully modern",
-						right_part: "due to lack of science",
-					},
-
-					{
-						left_part: "Obviously village life is",
-						right_part: "more natural",
-					},
 				],
 
 				user_answer: [],
