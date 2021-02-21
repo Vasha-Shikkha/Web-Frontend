@@ -56,7 +56,7 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 		temp[result.source.index] = true;
 		setLeftUsed(temp);
 
-		let temp = [...rightUsed];
+		temp = [...rightUsed];
 		temp[result.destination.index] = true;
 		setRightUsed(temp);
 
