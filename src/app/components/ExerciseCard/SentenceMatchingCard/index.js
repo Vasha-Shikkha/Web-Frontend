@@ -33,6 +33,7 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 	const [currentRight, setCurrentRight] = useState([]);
 	const [boxColors, setBoxColors] = useState([]);
 	const [leftUsed, setLeftUsed] = useState([]);
+	const [rightUsed, setRightUsed] = useState([]);
 	const [stack, setStack] = useState([]);
 
 	useEffect(() => {
@@ -42,6 +43,8 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 		shuffled_array = shuffle(shuffled_array);
 
 		setRightSentenceMapping(shuffled_array);
+		setLeftUsed(shuffled_array.map(() => false));
+		setRightUsed(shuffled_array.map(() => false));
 		setCurrentRight(shuffled_array.map((obj) => props.question.sentences[obj].right_part));
 		setBoxColors(shuffled_array.map(() => colors.white));
 	}, [props.question.sentences]);
@@ -52,6 +55,10 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 		let temp = [...leftUsed];
 		temp[result.source.index] = true;
 		setLeftUsed(temp);
+
+		let temp = [...rightUsed];
+		temp[result.destination.index] = true;
+		setRightUsed(temp);
 
 		temp = [...currentRight];
 		temp[result.destination.index] =
@@ -70,6 +77,8 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 	};
 
 	const undo = () => {
+		if (stack.length === 0) return;
+
 		let temp = [...stack];
 		let len = temp.length;
 		let left = stack[len - 1][0];
@@ -137,7 +146,10 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 						className={classes.optionContainer}
 						style={{alignContent: "flex-end", alignItems: "flex-end"}}>
 						{props.question.sentences.map((obj, idx) => (
-							<Droppable key={idx} droppableId={`right_sentence~${idx}`} isDropDisabled={false}>
+							<Droppable
+								key={idx}
+								droppableId={`right_sentence~${idx}`}
+								isDropDisabled={rightUsed[idx]}>
 								{(provided) => (
 									<div {...provided.droppableProps} ref={provided.innerRef} style={{width: "100%"}}>
 										<Draggable
