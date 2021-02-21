@@ -5,20 +5,16 @@ const styles = makeStyles((theme) => ({
 		width: "90%",
 		minHeight: "70vh",
 		background: "white",
+
+		display: "flex",
 	},
 
-	gridroot: {
-		flexGrow: 1,
-		marginTop: 25,
-	},
+	optionContainer: {
+		width: "50%",
 
-	transition: {
-		transformOrigin: "left",
-		transform: "translate(-150%, -15%) rotate(-25deg)",
-		transitionDuration: "1.0s",
+		display: "flex",
+		flexDirection: "column",
 	},
-
-	optionContainer: {},
 
 	options: {
 		padding: 10,
