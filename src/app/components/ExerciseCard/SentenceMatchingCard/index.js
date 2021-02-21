@@ -9,8 +9,22 @@ import styles from "./styles";
 const SentenceMatchingCard = forwardRef((props, ref) => {
 	useImperativeHandle(ref, () => ({
 		check() {
-			// let answer = {users_answer: [], isCorrect: correct === currentSentences.length / 2};
-			// return answer;
+			let answer = {users_answer: [], isCorrect: true};
+
+			let temp_color = [...boxColors];
+			for (let i = 0; i < temp_color.length; i++) {
+				let sen = props.question.sentences[rightSentenceMapping[i]];
+
+				if (currentRight[i] === sen.left_part + " " + sen.right_part)
+					temp_color[i] = colors.correct;
+				else {
+					temp_color[i] = colors.incorrect;
+					answer.isCorrect = false;
+				}
+			}
+
+			setBoxColors(temp_color);
+			return answer;
 		},
 	}));
 
