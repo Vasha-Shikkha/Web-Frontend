@@ -17,7 +17,8 @@ const styles = makeStyles((theme) => ({
 	},
 
 	options: {
-		width: "98%",
+		width: "95%",
+		height: 50,
 
 		padding: 10,
 		fontSize: 12,
@@ -29,9 +30,7 @@ const styles = makeStyles((theme) => ({
 		background: "white",
 		cursor: "pointer",
 		userSelect: "none",
-	},
 
-	centered: {
 		display: "flex",
 		flexDirection: "column",
 		justifyContent: "center",

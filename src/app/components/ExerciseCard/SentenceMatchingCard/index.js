@@ -40,8 +40,8 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 			<div className={classes.root}>
 				<div
 					className={classes.optionContainer}
-					style={{background: "yellow", alignContent: "flex-start", alignItems: "flex-start"}}>
-					<Droppable droppableId="left_part_container" isDropDisabled={false}>
+					style={{alignContent: "flex-start", alignItems: "flex-start"}}>
+					<Droppable droppableId="left_part_container" isDropDisabled={true}>
 						{(provided) => (
 							<div {...provided.droppableProps} ref={provided.innerRef} style={{width: "100%"}}>
 								{props.question.sentences.map((obj, idx) => (
@@ -66,8 +66,35 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 				</div>
 				<div
 					className={classes.optionContainer}
-					style={{background: "cyan", alignContent: "flex-end", alignItems: "flex-end"}}>
-					right
+					style={{alignContent: "flex-end", alignItems: "flex-end"}}>
+					{props.question.sentences.map((obj, idx) => (
+						<Droppable key={idx} droppableId={`right_sentence~${idx}`} isDropDisabled={false}>
+							{(provided) => (
+								<div {...provided.droppableProps} ref={provided.innerRef} style={{width: "100%"}}>
+									<Draggable
+										draggableId={`right~${obj.right_part}`}
+										index={idx}
+										isDragDisabled={true}>
+										{(provided2) => {
+											return (
+												<div
+													ref={provided2.innerRef}
+													{...provided2.draggableProps}
+													{...provided2.dragHandleProps}
+													className={classes.options}
+													style={{height: 60}}>
+													{props.question.sentences[rightSentenceMapping[idx]]
+														? props.question.sentences[rightSentenceMapping[idx]].right_part
+														: ""}
+												</div>
+											);
+										}}
+									</Draggable>
+									{provided.placeholder}
+								</div>
+							)}
+						</Droppable>
+					))}
 				</div>
 			</div>
 		</DragDropContext>
