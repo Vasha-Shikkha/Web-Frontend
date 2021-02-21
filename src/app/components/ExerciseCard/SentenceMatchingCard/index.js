@@ -73,11 +73,11 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 	};
 
 	const showMeaning = (word) => {
-		console.log(word);
+		alert("double");
 	};
 
 	const undo = () => {
-		if (stack.length === 0) return;
+		if (stack.length === 0 || props.checked) return;
 
 		let temp = [...stack];
 		let len = temp.length;
@@ -128,7 +128,9 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 																	<span
 																		className={classes.option_span}
 																		key={wdx}
-																		onMouseOver={() => showMeaning(word)}>
+																		onDoubleClick={() => showMeaning(word)}
+																		// onMouseOver={() => showMeaning(word)}
+																	>
 																		{word}
 																	</span>
 															  ))}
@@ -163,13 +165,17 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 														{...provided2.draggableProps}
 														{...provided2.dragHandleProps}
 														className={classes.options}
-														style={{height: 70, background: boxColors[idx]}}>
+														style={{
+															height: rightUsed[idx] || props.isReview ? "auto" : 70,
+															background: boxColors[idx],
+														}}>
 														{currentRight[idx]
 															? currentRight[idx].split(" ").map((word, wdx) => (
 																	<span
 																		className={classes.option_span}
 																		key={wdx}
-																		onMouseOver={() => showMeaning(word)}>
+																		//onMouseOver={() => showMeaning(word)}
+																		onDoubleClick={() => showMeaning(word)}>
 																		{word}
 																	</span>
 															  ))
