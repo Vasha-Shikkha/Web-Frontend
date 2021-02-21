@@ -16,9 +16,8 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 	const classes = styles();
 	const [rightSentenceMapping, setRightSentenceMapping] = useState([]);
 	const [boxColors, setBoxColors] = useState([]);
-	const [draggedIdx, setDraggedIdx] = useState(-1);
-	const [movable, setMovable] = useState([]);
-	const [correct, setCorrect] = useState(0);
+	const [answer, setAnswer] = useState([]);
+	//const [];
 
 	useEffect(() => {
 		// keep the left part as it is. make them draggable. make the whole container non-droppable
@@ -33,6 +32,10 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 		if (!result.destination) return;
 
 		console.log(result);
+	};
+
+	const showMeaning = (word) => {
+		console.log(word);
 	};
 
 	return (
@@ -53,7 +56,14 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 													{...provided2.draggableProps}
 													{...provided2.dragHandleProps}
 													className={classes.options}>
-													{obj.left_part}
+													{obj.left_part.split(" ").map((word, wdx) => (
+														<span
+															className={classes.option_span}
+															key={wdx}
+															onMouseOver={() => showMeaning(word)}>
+															{word}
+														</span>
+													))}
 												</div>
 											);
 										}}
@@ -82,9 +92,18 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 													{...provided2.draggableProps}
 													{...provided2.dragHandleProps}
 													className={classes.options}
-													style={{height: 60}}>
+													style={{height: 70}}>
 													{props.question.sentences[rightSentenceMapping[idx]]
 														? props.question.sentences[rightSentenceMapping[idx]].right_part
+																.split(" ")
+																.map((word, wdx) => (
+																	<span
+																		className={classes.option_span}
+																		key={wdx}
+																		onMouseOver={() => showMeaning(word)}>
+																		{word}
+																	</span>
+																))
 														: ""}
 												</div>
 											);

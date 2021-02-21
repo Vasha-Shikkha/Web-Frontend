@@ -18,7 +18,7 @@ const styles = makeStyles((theme) => ({
 
 	options: {
 		width: "95%",
-		height: 50,
+		height: 60,
 
 		padding: 10,
 		fontSize: 12,
@@ -32,10 +32,16 @@ const styles = makeStyles((theme) => ({
 		userSelect: "none",
 
 		display: "flex",
-		flexDirection: "column",
+		flexDirection: "row",
+		flexWrap: "wrap",
 		justifyContent: "center",
 		alignContent: "center",
 		alignItems: "center",
+	},
+
+	option_span: {
+		margin: 3,
+		fontSize: 12,
 	},
 }));
 
