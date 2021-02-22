@@ -13,7 +13,6 @@ const RearrangeSentenceCard = forwardRef((props, ref) => {
 			};
 
 			for (let i = 0; i < shuffled.length; i++) {
-				console.log(shuffled[i], props.question.sentences[i]);
 				if (shuffled[i] !== props.question.sentences[i]) {
 					answer.isCorrect = false;
 					break;
@@ -81,7 +80,6 @@ const RearrangeSentenceCard = forwardRef((props, ref) => {
 
 RearrangeSentenceCard.propTypes = {
 	question: PropTypes.object.isRequired,
-	thisQuestionNumber: PropTypes.number,
 	currentQuestionNumber: PropTypes.number,
 	isReview: PropTypes.bool.isRequired,
 	isChecked: PropTypes.bool.isRequired,

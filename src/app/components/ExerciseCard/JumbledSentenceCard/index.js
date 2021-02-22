@@ -131,8 +131,6 @@ const JumbledSentenceCard = forwardRef((props, ref) => {
 
 JumbledSentenceCard.propTypes = {
 	question: PropTypes.object.isRequired,
-	moveAway: PropTypes.bool,
-	thisQuestionNumber: PropTypes.number,
 	currentQuestionNumber: PropTypes.number,
 	isReview: PropTypes.bool.isRequired,
 	isChecked: PropTypes.bool.isRequired,
