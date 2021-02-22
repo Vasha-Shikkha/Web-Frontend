@@ -8,11 +8,11 @@ const JumbledSentenceCard = forwardRef((props, ref) => {
 		check() {
 			let answer = {isCorrect: true, users_answer: ""};
 
-			for (let i = 0; i < usersAnswer.length; i++) {
-				answer.users_answer += props.question.chunks[usersAnswer[i]];
-			}
+			// for (let i = 0; i < usersAnswer.length; i++) {
+			// 	answer.users_answer += props.question.chunks[usersAnswer[i]];
+			// }
 
-			answer.isCorrect = answer.users_answer === props.question.answer;
+			// answer.isCorrect = answer.users_answer === props.question.answer;
 			return answer;
 		},
 	}));
@@ -34,29 +34,44 @@ const JumbledSentenceCard = forwardRef((props, ref) => {
 		<DragDropContext onDragEnd={handleOnDragEnd}>
 			<div className={classes.root}>
 				<div className={classes.context}>{props.question.context}</div>
-				<div className={classes.wordContainer}>
-					{props.question.chunks.map((obj, idx) => (
+				<Droppable droppableId="question_container" direction="horizontal" isDropDisabled={false}>
+					{(provided) => (
 						<div
-							key={idx}
-							onClick={() => useWord(idx)}
-							className={shuffled[idx] ? classes.shuffledWordActive : classes.shuffledWordInactive}>
-							{obj}
+							{...provided.droppableProps}
+							ref={provided.innerRef}
+							className={classes.wordContainer}>
+							{question.map((obj, idx) => (
+								<Draggable key={idx} draggableId={obj} index={idx}>
+									{(provided2) => {
+										return (
+											<div
+												ref={provided2.innerRef}
+												{...provided2.draggableProps}
+												{...provided2.dragHandleProps}
+												className={classes.options}>
+												{obj}
+											</div>
+										);
+									}}
+								</Draggable>
+							))}
+							{provided.placeholder}
 						</div>
-					))}
-				</div>
+					)}
+				</Droppable>
 				<div className={`${classes.answerContainer}`}>
 					<div className={classes.lineContainer}>
 						<div className={classes.line}>dummy text that is invisible</div>
 						<div className={classes.line}>dummy text that is invisible</div>
 						<div className={classes.line}>dummy text that is invisible</div>
 					</div>
-					<div style={{position: "absolute"}} className={classes.wordContainer}>
+					{/* <div style={{position: "absolute"}} className={classes.wordContainer}>
 						{usersAnswer.map((obj, idx) => (
 							<div onClick={() => unuseWord(idx)} className={classes.shuffledWordActive} key={idx}>
 								{props.question.chunks[obj]}
 							</div>
 						))}
-					</div>
+					</div> */}
 				</div>
 			</div>
 		</DragDropContext>

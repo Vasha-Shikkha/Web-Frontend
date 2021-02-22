@@ -7,12 +7,6 @@ const styles = makeStyles((theme) => ({
 		background: "white",
 	},
 
-	transition: {
-		transformOrigin: "left",
-		transform: "translate(-150%, -15%) rotate(-25deg)",
-		transitionDuration: "1.0s",
-	},
-
 	context: {
 		fontWeight: 500,
 		fontSize: 14,
@@ -30,7 +24,7 @@ const styles = makeStyles((theme) => ({
 		alignItems: "center",
 	},
 
-	shuffledWordActive: {
+	options: {
 		padding: "15px 20px 15px 20px",
 		borderRadius: 10,
 		marginRight: 10,
