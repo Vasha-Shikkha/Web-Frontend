@@ -41,7 +41,7 @@ const JumbledSentenceCard = forwardRef((props, ref) => {
 							ref={provided.innerRef}
 							className={classes.wordContainer}>
 							{question.map((obj, idx) => (
-								<Draggable key={idx} draggableId={obj} index={idx}>
+								<Draggable key={idx} draggableId={`question~${obj}`} index={idx}>
 									{(provided2) => {
 										return (
 											<div
@@ -65,13 +65,33 @@ const JumbledSentenceCard = forwardRef((props, ref) => {
 						<div className={classes.line}>dummy text that is invisible</div>
 						<div className={classes.line}>dummy text that is invisible</div>
 					</div>
-					{/* <div style={{position: "absolute"}} className={classes.wordContainer}>
-						{usersAnswer.map((obj, idx) => (
-							<div onClick={() => unuseWord(idx)} className={classes.shuffledWordActive} key={idx}>
-								{props.question.chunks[obj]}
-							</div>
-						))}
-					</div> */}
+					<div style={{position: "absolute"}}>
+						<Droppable droppableId="answer_container" direction="horizontal" isDropDisabled={false}>
+							{(provided) => (
+								<div
+									{...provided.droppableProps}
+									ref={provided.innerRef}
+									className={classes.wordContainer}>
+									{answer.map((obj, idx) => (
+										<Draggable key={idx} draggableId={`answer~${obj}`} index={idx}>
+											{(provided2) => {
+												return (
+													<div
+														ref={provided2.innerRef}
+														{...provided2.draggableProps}
+														{...provided2.dragHandleProps}
+														className={classes.options}>
+														{obj}
+													</div>
+												);
+											}}
+										</Draggable>
+									))}
+									{provided.placeholder}
+								</div>
+							)}
+						</Droppable>
+					</div>
 				</div>
 			</div>
 		</DragDropContext>
