@@ -30,6 +30,25 @@ const JumbledSentenceCard = forwardRef((props, ref) => {
 			console.log("err", result);
 			return;
 		}
+
+		// swap
+		if (result.destination.droppableId === result.source.droppableId) {
+			if (result.destination.droppableId === "question_container") {
+				let temp = [...question];
+				let word = temp[result.source.index];
+				temp[result.source.index] = temp[result.destination.index];
+				temp[result.destination.index] = word;
+				console.log(temp);
+				setQuestion(temp);
+			} else {
+				let temp = [...answer];
+				let word = temp[result.source.index];
+				temp[result.source.index] = temp[result.destination.index];
+				temp[result.destination.index] = word;
+				setAnswer(temp);
+			}
+		} else {
+		}
 		console.log(result);
 	};
 
@@ -44,7 +63,7 @@ const JumbledSentenceCard = forwardRef((props, ref) => {
 							ref={provided.innerRef}
 							className={classes.wordContainer}>
 							{question.map((obj, idx) => (
-								<Draggable key={idx} draggableId={`question~${obj}`} index={idx}>
+								<Draggable key={idx} draggableId={`question~${idx.toString()}`} index={idx}>
 									{(provided2) => {
 										return (
 											<div
@@ -77,7 +96,7 @@ const JumbledSentenceCard = forwardRef((props, ref) => {
 									className={classes.wordContainer}
 									style={{position: "absolute", height: "100%", width: "100%"}}>
 									{answer.map((obj, idx) => (
-										<Draggable key={idx} draggableId={`answer~${obj}`} index={idx}>
+										<Draggable key={idx} draggableId={`answer~${idx.toString()}`} index={idx}>
 											{(provided2) => {
 												return (
 													<div
