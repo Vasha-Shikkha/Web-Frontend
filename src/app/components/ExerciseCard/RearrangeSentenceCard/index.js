@@ -7,11 +7,19 @@ import styles from "./styles";
 const RearrangeSentenceCard = forwardRef((props, ref) => {
 	useImperativeHandle(ref, () => ({
 		check() {
-			// let ret = {
-			// 	isCorrect: answer.join("") === props.question.answer,
-			// 	users_answer: answer.join(""),
-			// };
-			// return ret;
+			let answer = {
+				isCorrect: true,
+				users_answer: [...shuffled],
+			};
+
+			for (let i = 0; i < shuffled.length; i++) {
+				console.log(shuffled[i], props.question.sentences[i]);
+				if (shuffled[i] !== props.question.sentences[i]) {
+					answer.isCorrect = false;
+					break;
+				}
+			}
+			return answer;
 		},
 	}));
 
@@ -19,28 +27,19 @@ const RearrangeSentenceCard = forwardRef((props, ref) => {
 	const [shuffled, setShuffled] = useState([]);
 
 	useEffect(() => {
-		setShuffled(shuffle(props.question.sentences).map((obj) => obj));
+		let temp = [...props.question.sentences];
+		setShuffled(shuffle(temp).map((obj) => obj));
 	}, [props.question.sentences]);
 
 	const handleOnDragEnd = (result) => {
 		if (!result.destination) return;
 
-		// swap
-		if (result.destination.droppableId === result.source.droppableId) {
-			// if (result.destination.droppableId === "question_container") {
-			// 	let temp = [...question];
-			// 	let word = temp[result.source.index];
-			// 	temp[result.source.index] = temp[result.destination.index];
-			// 	temp[result.destination.index] = word;
-			// 	setQuestion(temp);
-			// } else {
-			// 	let temp = [...answer];
-			// 	let word = temp[result.source.index];
-			// 	temp[result.source.index] = temp[result.destination.index];
-			// 	temp[result.destination.index] = word;
-			// 	setAnswer(temp);
-			// }
-		}
+		let temp = [...shuffled];
+		let sentence = temp[result.source.index];
+		temp[result.source.index] = temp[result.destination.index];
+		temp[result.destination.index] = sentence;
+
+		setShuffled(temp);
 	};
 
 	return (
@@ -49,6 +48,33 @@ const RearrangeSentenceCard = forwardRef((props, ref) => {
 			<div className={`${classes.contextImageContainer} ${classes.centered}`}>
 				<img className={classes.contextImage} src={props.question.contextImage} alt="" />
 			</div>
+			<DragDropContext onDragEnd={handleOnDragEnd}>
+				<Droppable droppableId="sentence_container" isDropDisabled={false}>
+					{(provided) => (
+						<div
+							{...provided.droppableProps}
+							ref={provided.innerRef}
+							className={classes.sentenceContainer}>
+							{shuffled.map((obj, idx) => (
+								<Draggable key={idx} draggableId={`sen~${idx.toString()}`} index={idx}>
+									{(provided2) => {
+										return (
+											<div
+												ref={provided2.innerRef}
+												{...provided2.draggableProps}
+												{...provided2.dragHandleProps}
+												className={classes.options}>
+												{obj}
+											</div>
+										);
+									}}
+								</Draggable>
+							))}
+							{provided.placeholder}
+						</div>
+					)}
+				</Droppable>
+			</DragDropContext>
 		</div>
 	);
 });

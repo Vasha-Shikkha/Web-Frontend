@@ -4,8 +4,8 @@ import ExerciseLayout from "../../layouts/exerciseLayout";
 import Loading from "../../components/Loading";
 import RearrangeSentenceCard from "../../components/ExerciseCard/RearrangeSentenceCard";
 import VerdictBanner from "../../components/VerdictBanner";
-
 import styles from "../../styles/exerciseViewStyles";
+import {Redirect} from "react-router-dom";
 
 const RearrangeSentence = () => {
 	const classes = styles();
@@ -15,6 +15,7 @@ const RearrangeSentence = () => {
 	const [loading, setLoading] = useState(true);
 	const [showVerdict, setShowVerdict] = useState(false);
 	const [correct, setCorrect] = useState(true);
+	const [redirect, setRedirect] = useState(null);
 
 	const childRef = useRef();
 
@@ -74,10 +75,13 @@ const RearrangeSentence = () => {
 
 		// gameover
 		if (currentQuestion + 1 === question.length) {
+			setRedirect("/finish");
 		} else {
 			setCurrentQuestion(currentQuestion + 1);
 		}
 	};
+
+	if (redirect) return <Redirect to="/finish" />;
 
 	return (
 		<>

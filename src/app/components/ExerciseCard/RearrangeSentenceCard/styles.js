@@ -8,7 +8,6 @@ const styles = makeStyles((theme) => ({
 	},
 
 	context: {
-		fontWeight: 500,
 		fontSize: 14,
 		marginBottom: 25,
 		fontWeight: "bold",
@@ -29,6 +28,22 @@ const styles = makeStyles((theme) => ({
 			height: 300,
 			width: "auto",
 		},
+	},
+
+	sentenceContainer: {
+		width: "100%",
+		margin: "25px 0px 25px 0px",
+	},
+
+	options: {
+		width: "100%",
+		padding: 20,
+		borderRadius: 10,
+		marginBottom: 20,
+
+		userSelect: "none",
+		cursor: "pointer",
+		boxShadow: `0px 5px 10px ${theme.palette.colors.secondary}`,
 	},
 
 	centered: {
