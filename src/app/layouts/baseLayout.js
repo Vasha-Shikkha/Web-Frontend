@@ -23,6 +23,7 @@ const PictureToWord = lazy(() => import("../views/PictureToWord"));
 const SentenceMatching = lazy(() => import("../views/SentenceMatching"));
 const JumbledSentence = lazy(() => import("../views/JumbledSentence"));
 const FillInTheBlanks = lazy(() => import("../views/FillInTheBlanks"));
+const RearrangeSentence = lazy(() => import("../views/RearrangeSentence"));
 
 const theme = createMuiTheme({
 	palette: {
@@ -93,6 +94,7 @@ const BaseLayout = () => (
 							<Route exact path="/true-false" component={TrueFalse} />
 							<Route exact path="/jumbled-sentence" component={JumbledSentence} />
 							<Route exact path="/fill-in-the-blanks" component={FillInTheBlanks} />
+							<Route exact path="/rearrange-sentence" component={RearrangeSentence} />
 
 							{/* <Route exact path="/" component={Landing} /> */}
 							<Route exact path="/flash-card" component={FlashCard} />

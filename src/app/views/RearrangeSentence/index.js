@@ -19,7 +19,23 @@ const RearrangeSentence = () => {
 	const childRef = useRef();
 
 	useEffect(() => {
-		let data = [];
+		let data = [
+			{
+				context:
+					"Shwapnil is new in the class. During tiffin break, all the students are planning to play hide-and-seek. But Shwapnil has never played hide-and-seek before. So Maruf explains to him how to play the game. Can you rearrange all the steps of the game that Maruf says?",
+				contextImage:
+					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/hide_n_seek.jpg",
+				sentences: [
+					"At first, we toss and find the seeker who seeks and finds the others.",
+					"The others are the hiders who will hide.",
+					"Once the seeker is chosen, he will close his eyes and count loudly from 1 to 10.",
+					"And while the seeker counts, the hiders will all in different places.",
+					"After the counting is done, the seeker will yell- “Ready or not, here I come!”",
+					"And then he will search for all the hiders and find all of them.",
+					"In the end, the first hider found will lose and become the next seeker.",
+				],
+			},
+		];
 
 		setChecked(data.map(() => false));
 		setQuestion(data);
