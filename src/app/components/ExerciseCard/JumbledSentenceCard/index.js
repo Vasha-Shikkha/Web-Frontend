@@ -1,88 +1,131 @@
 import React, {useState, forwardRef, useImperativeHandle, useEffect} from "react";
+import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
 import PropTypes from "prop-types";
 import styles from "./styles";
 
 const JumbledSentenceCard = forwardRef((props, ref) => {
 	useImperativeHandle(ref, () => ({
 		check() {
-			let answer = {isCorrect: true, users_answer: ""};
+			let ret = {
+				isCorrect: answer.join("") === props.question.answer,
+				users_answer: answer.join(""),
+			};
 
-			for (let i = 0; i < usersAnswer.length; i++) {
-				answer.users_answer += props.question.chunks[usersAnswer[i]];
-			}
-
-			answer.isCorrect = answer.users_answer === props.question.answer;
-			return answer;
+			return ret;
 		},
 	}));
 
 	const classes = styles();
-	const [shuffled, setShuffled] = useState([]);
-	const [usersAnswer, setUsersAnswer] = useState([]);
+	const [question, setQuestion] = useState([]);
+	const [answer, setAnswer] = useState([]);
 
 	useEffect(() => {
-		setShuffled(props.question.chunks.map(() => true));
+		setQuestion(props.question.chunks.map((obj) => obj));
+		setAnswer([]);
 	}, [props.question.chunks]);
 
-	const useWord = (idx) => {
-		if (props.isReview || props.isChecked) return;
+	const handleOnDragEnd = (result) => {
+		if (!result.destination) return;
 
-		// if activated
-		if (shuffled[idx]) {
-			let arr = [...shuffled];
-			arr[idx] = false;
-			setShuffled(arr);
+		// swap
+		if (result.destination.droppableId === result.source.droppableId) {
+			if (result.destination.droppableId === "question_container") {
+				let temp = [...question];
+				let word = temp[result.source.index];
+				temp[result.source.index] = temp[result.destination.index];
+				temp[result.destination.index] = word;
 
-			arr = [...usersAnswer];
-			arr.push(idx);
-			setUsersAnswer(arr);
+				setQuestion(temp);
+			} else {
+				let temp = [...answer];
+				let word = temp[result.source.index];
+				temp[result.source.index] = temp[result.destination.index];
+				temp[result.destination.index] = word;
+
+				setAnswer(temp);
+			}
+		} else {
+			let temp_question = [...question];
+			let temp_answer = [...answer];
+
+			if (result.source.droppableId === "question_container") {
+				let word = temp_question.splice(result.source.index, 1);
+				temp_answer.splice(result.destination.index, 0, word);
+			} else {
+				let word = temp_answer.splice(result.source.index, 1);
+				temp_question.splice(result.destination.index, 0, word);
+			}
+
+			setQuestion(temp_question);
+			setAnswer(temp_answer);
 		}
 	};
 
-	const unuseWord = (idx) => {
-		if (props.isReview || props.isChecked) return;
-
-		let arr = [...shuffled];
-		arr[usersAnswer[idx]] = true;
-		setShuffled(arr);
-
-		arr = [...usersAnswer];
-		arr.splice(idx, 1);
-		setUsersAnswer(arr);
-	};
-
 	return (
-		<div
-			style={{
-				display: props.thisQuestionNumber === props.currentQuestionNumber ? "initial" : "none",
-			}}
-			className={props.moveAway === false ? classes.root : `${classes.root} ${classes.transition}`}>
-			<div className={classes.context}>{props.question.context}</div>
-			<div className={classes.wordContainer}>
-				{props.question.chunks.map((obj, idx) => (
-					<div
-						key={idx}
-						onClick={() => useWord(idx)}
-						className={shuffled[idx] ? classes.shuffledWordActive : classes.shuffledWordInactive}>
-						{obj}
-					</div>
-				))}
-			</div>
-			<div className={`${classes.answerContainer}`}>
-				<div className={classes.lineContainer}>
-					<div className={classes.line}>dummy text that is invisible</div>
-					<div className={classes.line}>dummy text that is invisible</div>
-					<div className={classes.line}>dummy text that is invisible</div>
-				</div>
-				<div style={{position: "absolute"}} className={classes.wordContainer}>
-					{usersAnswer.map((obj, idx) => (
-						<div onClick={() => unuseWord(idx)} className={classes.shuffledWordActive} key={idx}>
-							{props.question.chunks[obj]}
+		<DragDropContext onDragEnd={handleOnDragEnd}>
+			<div className={classes.root}>
+				<div className={classes.context}>{props.question.context}</div>
+				<Droppable droppableId="question_container" direction="horizontal" isDropDisabled={false}>
+					{(provided) => (
+						<div
+							{...provided.droppableProps}
+							ref={provided.innerRef}
+							className={classes.wordContainer}>
+							{question.map((obj, idx) => (
+								<Draggable key={idx} draggableId={`question~${idx.toString()}`} index={idx}>
+									{(provided2) => {
+										return (
+											<div
+												ref={provided2.innerRef}
+												{...provided2.draggableProps}
+												{...provided2.dragHandleProps}
+												className={classes.options}>
+												{obj}
+											</div>
+										);
+									}}
+								</Draggable>
+							))}
+							{provided.placeholder}
 						</div>
-					))}
+					)}
+				</Droppable>
+				<div className={`${classes.answerContainer}`}>
+					<div className={classes.lineContainer}>
+						<div className={classes.line}>dummy text that is invisible</div>
+						<div className={classes.line}>dummy text that is invisible</div>
+						<div className={classes.line}>dummy text that is invisible</div>
+					</div>
+					<div className={classes.answerContainerInner}>
+						<Droppable droppableId="answer_container" direction="horizontal" isDropDisabled={false}>
+							{(provided) => (
+								<div
+									{...provided.droppableProps}
+									ref={provided.innerRef}
+									className={classes.answerContainerInner}>
+									{answer.map((obj, idx) => (
+										<Draggable key={idx} draggableId={`answer~${idx.toString()}`} index={idx}>
+											{(provided2) => {
+												return (
+													<div
+														ref={provided2.innerRef}
+														{...provided2.draggableProps}
+														{...provided2.dragHandleProps}
+														className={classes.options}>
+														{obj}
+													</div>
+												);
+											}}
+										</Draggable>
+									))}
+									{provided.placeholder}
+								</div>
+							)}
+						</Droppable>
+					</div>
 				</div>
 			</div>
-		</div>
+		</DragDropContext>
 	);
 });
 

@@ -7,12 +7,6 @@ const styles = makeStyles((theme) => ({
 		background: "white",
 	},
 
-	transition: {
-		transformOrigin: "left",
-		transform: "translate(-150%, -15%) rotate(-25deg)",
-		transitionDuration: "1.0s",
-	},
-
 	context: {
 		fontWeight: 500,
 		fontSize: 14,
@@ -30,7 +24,27 @@ const styles = makeStyles((theme) => ({
 		alignItems: "center",
 	},
 
-	shuffledWordActive: {
+	answerContainer: {
+		marginTop: 50,
+		position: "relative",
+		height: 200,
+		width: "100%",
+	},
+
+	answerContainerInner: {
+		position: "absolute",
+		height: "inherit",
+		width: "100%",
+
+		display: "flex",
+		flexWrap: "wrap",
+		flexDirection: "row",
+		justifyContent: "flex-start",
+		alignContent: "flex-start",
+		alignItems: "flex-start",
+	},
+
+	options: {
 		padding: "15px 20px 15px 20px",
 		borderRadius: 10,
 		marginRight: 10,
@@ -38,24 +52,6 @@ const styles = makeStyles((theme) => ({
 		userSelect: "none",
 		cursor: "pointer",
 		boxShadow: `0px 5px 10px ${theme.palette.colors.secondary}`,
-	},
-
-	shuffledWordInactive: {
-		padding: "15px 20px 15px 20px",
-		background: "#D0CDE1",
-		color: "#D0CDE1",
-		borderRadius: 10,
-		marginRight: 10,
-		marginBottom: 10,
-		userSelect: "none",
-		cursor: "pointer",
-	},
-
-	answerContainer: {
-		marginTop: 50,
-		position: "relative",
-		height: 200,
-		width: "100%",
 	},
 
 	lineContainer: {
