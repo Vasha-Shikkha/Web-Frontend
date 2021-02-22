@@ -24,6 +24,26 @@ const styles = makeStyles((theme) => ({
 		alignItems: "center",
 	},
 
+	answerContainer: {
+		marginTop: 50,
+		position: "relative",
+		height: 200,
+		width: "100%",
+	},
+
+	answerContainerInner: {
+		position: "absolute",
+		height: "inherit",
+		width: "100%",
+
+		display: "flex",
+		flexWrap: "wrap",
+		flexDirection: "row",
+		justifyContent: "flex-start",
+		alignContent: "flex-start",
+		alignItems: "flex-start",
+	},
+
 	options: {
 		padding: "15px 20px 15px 20px",
 		borderRadius: 10,
@@ -32,13 +52,6 @@ const styles = makeStyles((theme) => ({
 		userSelect: "none",
 		cursor: "pointer",
 		boxShadow: `0px 5px 10px ${theme.palette.colors.secondary}`,
-	},
-
-	answerContainer: {
-		marginTop: 50,
-		position: "relative",
-		height: 200,
-		width: "100%",
 	},
 
 	lineContainer: {

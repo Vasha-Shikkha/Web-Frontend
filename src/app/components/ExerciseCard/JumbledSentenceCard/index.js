@@ -6,14 +6,12 @@ import styles from "./styles";
 const JumbledSentenceCard = forwardRef((props, ref) => {
 	useImperativeHandle(ref, () => ({
 		check() {
-			let answer = {isCorrect: true, users_answer: ""};
+			let ret = {
+				isCorrect: answer.join("") === props.question.answer,
+				users_answer: answer.join(""),
+			};
 
-			// for (let i = 0; i < usersAnswer.length; i++) {
-			// 	answer.users_answer += props.question.chunks[usersAnswer[i]];
-			// }
-
-			// answer.isCorrect = answer.users_answer === props.question.answer;
-			return answer;
+			return ret;
 		},
 	}));
 
@@ -23,13 +21,11 @@ const JumbledSentenceCard = forwardRef((props, ref) => {
 
 	useEffect(() => {
 		setQuestion(props.question.chunks.map((obj) => obj));
+		setAnswer([]);
 	}, [props.question.chunks]);
 
 	const handleOnDragEnd = (result) => {
-		if (!result.destination) {
-			console.log("err", result);
-			return;
-		}
+		if (!result.destination) return;
 
 		// swap
 		if (result.destination.droppableId === result.source.droppableId) {
@@ -38,18 +34,31 @@ const JumbledSentenceCard = forwardRef((props, ref) => {
 				let word = temp[result.source.index];
 				temp[result.source.index] = temp[result.destination.index];
 				temp[result.destination.index] = word;
-				console.log(temp);
+
 				setQuestion(temp);
 			} else {
 				let temp = [...answer];
 				let word = temp[result.source.index];
 				temp[result.source.index] = temp[result.destination.index];
 				temp[result.destination.index] = word;
+
 				setAnswer(temp);
 			}
 		} else {
+			let temp_question = [...question];
+			let temp_answer = [...answer];
+
+			if (result.source.droppableId === "question_container") {
+				let word = temp_question.splice(result.source.index, 1);
+				temp_answer.splice(result.destination.index, 0, word);
+			} else {
+				let word = temp_answer.splice(result.source.index, 1);
+				temp_question.splice(result.destination.index, 0, word);
+			}
+
+			setQuestion(temp_question);
+			setAnswer(temp_answer);
 		}
-		console.log(result);
 	};
 
 	return (
@@ -87,14 +96,13 @@ const JumbledSentenceCard = forwardRef((props, ref) => {
 						<div className={classes.line}>dummy text that is invisible</div>
 						<div className={classes.line}>dummy text that is invisible</div>
 					</div>
-					<div style={{position: "absolute", height: "inherit", width: "100%"}}>
+					<div className={classes.answerContainerInner}>
 						<Droppable droppableId="answer_container" direction="horizontal" isDropDisabled={false}>
 							{(provided) => (
 								<div
 									{...provided.droppableProps}
 									ref={provided.innerRef}
-									className={classes.wordContainer}
-									style={{position: "absolute", height: "100%", width: "100%"}}>
+									className={classes.answerContainerInner}>
 									{answer.map((obj, idx) => (
 										<Draggable key={idx} draggableId={`answer~${idx.toString()}`} index={idx}>
 											{(provided2) => {
