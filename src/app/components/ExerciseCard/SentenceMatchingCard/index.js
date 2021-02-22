@@ -9,6 +9,8 @@ import styles from "./styles";
 const SentenceMatchingCard = forwardRef((props, ref) => {
 	useImperativeHandle(ref, () => ({
 		check() {
+			setDisableUndo(true);
+
 			let answer = {users_answer: [], isCorrect: true};
 
 			let temp_color = [...boxColors];
@@ -35,6 +37,7 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 	const [leftUsed, setLeftUsed] = useState([]);
 	const [rightUsed, setRightUsed] = useState([]);
 	const [stack, setStack] = useState([]);
+	const [disableUndo, setDisableUndo] = useState(false);
 
 	useEffect(() => {
 		// keep the left part as it is. make them draggable. make the whole container non-droppable
@@ -72,12 +75,8 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 		setStack(temp);
 	};
 
-	const showMeaning = (word) => {
-		alert("double");
-	};
-
 	const undo = () => {
-		if (stack.length === 0 || props.checked) return;
+		if (stack.length === 0 || props.checked || disableUndo) return;
 
 		let temp = [...stack];
 		let len = temp.length;
@@ -95,6 +94,10 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 		temp = [...currentRight];
 		temp[right] = props.question.sentences[rightSentenceMapping[right]].right_part;
 		setCurrentRight(temp);
+
+		temp = [...rightUsed];
+		temp[right] = false;
+		setRightUsed(temp);
 	};
 
 	return (
@@ -122,18 +125,7 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 														{...provided2.draggableProps}
 														{...provided2.dragHandleProps}
 														className={classes.options}>
-														{leftUsed[idx]
-															? null
-															: obj.left_part.split(" ").map((word, wdx) => (
-																	<span
-																		className={classes.option_span}
-																		key={wdx}
-																		onDoubleClick={() => showMeaning(word)}
-																		// onMouseOver={() => showMeaning(word)}
-																	>
-																		{word}
-																	</span>
-															  ))}
+														{leftUsed[idx] ? null : obj.left_part}
 													</div>
 												);
 											}}
@@ -169,17 +161,7 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 															height: rightUsed[idx] || props.isReview ? "auto" : 70,
 															background: boxColors[idx],
 														}}>
-														{currentRight[idx]
-															? currentRight[idx].split(" ").map((word, wdx) => (
-																	<span
-																		className={classes.option_span}
-																		key={wdx}
-																		//onMouseOver={() => showMeaning(word)}
-																		onDoubleClick={() => showMeaning(word)}>
-																		{word}
-																	</span>
-															  ))
-															: ""}
+														{currentRight[idx] ? currentRight[idx] : ""}
 													</div>
 												);
 											}}
