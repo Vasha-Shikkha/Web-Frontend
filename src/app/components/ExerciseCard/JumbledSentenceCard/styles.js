@@ -34,17 +34,6 @@ const styles = makeStyles((theme) => ({
 		boxShadow: `0px 5px 10px ${theme.palette.colors.secondary}`,
 	},
 
-	shuffledWordInactive: {
-		padding: "15px 20px 15px 20px",
-		background: "#D0CDE1",
-		color: "#D0CDE1",
-		borderRadius: 10,
-		marginRight: 10,
-		marginBottom: 10,
-		userSelect: "none",
-		cursor: "pointer",
-	},
-
 	answerContainer: {
 		marginTop: 50,
 		position: "relative",

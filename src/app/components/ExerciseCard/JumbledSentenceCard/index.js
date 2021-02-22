@@ -26,7 +26,10 @@ const JumbledSentenceCard = forwardRef((props, ref) => {
 	}, [props.question.chunks]);
 
 	const handleOnDragEnd = (result) => {
-		if (!result.destination) return;
+		if (!result.destination) {
+			console.log("err", result);
+			return;
+		}
 		console.log(result);
 	};
 
@@ -65,13 +68,14 @@ const JumbledSentenceCard = forwardRef((props, ref) => {
 						<div className={classes.line}>dummy text that is invisible</div>
 						<div className={classes.line}>dummy text that is invisible</div>
 					</div>
-					<div style={{position: "absolute"}}>
+					<div style={{position: "absolute", height: "inherit", width: "100%"}}>
 						<Droppable droppableId="answer_container" direction="horizontal" isDropDisabled={false}>
 							{(provided) => (
 								<div
 									{...provided.droppableProps}
 									ref={provided.innerRef}
-									className={classes.wordContainer}>
+									className={classes.wordContainer}
+									style={{position: "absolute", height: "100%", width: "100%"}}>
 									{answer.map((obj, idx) => (
 										<Draggable key={idx} draggableId={`answer~${obj}`} index={idx}>
 											{(provided2) => {
