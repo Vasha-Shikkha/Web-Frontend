@@ -133,18 +133,13 @@ const JumbledSentence = () => {
 					skip={skip}
 					check={check}>
 					<div className={`${classes.scrollableRoot} ${classes.centered}`}>
-						{question.map((obj, idx) => (
-							<JumbledSentenceCard
-								key={idx}
-								ref={childRef}
-								thisQuestionNumber={idx}
-								currentQuestionNumber={currentQuestion}
-								question={obj}
-								moveAway={moveAway[idx]}
-								isReview={false}
-								isChecked={checked[idx]}
-							/>
-						))}
+						<JumbledSentenceCard
+							ref={childRef}
+							currentQuestionNumber={currentQuestion}
+							question={question[currentQuestion]}
+							isReview={false}
+							isChecked={checked[currentQuestion]}
+						/>
 						<VerdictBanner correct={correct} anime={showVerdict} getNext={getNext} />
 					</div>
 				</ExerciseLayout>
