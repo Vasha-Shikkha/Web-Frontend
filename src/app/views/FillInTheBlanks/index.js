@@ -141,7 +141,6 @@ const FillInTheBlanks = () => {
 							ref={childRef}
 							currentQuestionNumber={currentQuestion}
 							question={question[currentQuestion]}
-							moveAway={false}
 							isReview={false}
 							isChecked={checked[currentQuestion]}
 						/>

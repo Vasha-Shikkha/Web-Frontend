@@ -24,23 +24,23 @@ const SentenceMatching = () => {
 			{
 				sentences: [
 					{
-						part_one: "Village life represents a lifestyle",
-						part_two: "which is rural",
+						left_part: "Village life represents a lifestyle",
+						right_part: "which is rural",
 					},
 
 					{
-						part_one: "City life represents a lifestyle",
-						part_two: "which is urban",
+						left_part: "City life represents a lifestyle",
+						right_part: "which is urban",
 					},
 
 					{
-						part_one: "There are trees everywhere in the village",
-						part_two: "but there are very few trees in cities",
+						left_part: "There are trees everywhere in the village",
+						right_part: "but there are very few trees in cities",
 					},
 
 					{
-						part_one: "Moreover, the environment in village",
-						part_two: "is very calm",
+						left_part: "Moreover, the environment in village",
+						right_part: "is very calm",
 					},
 				],
 
@@ -50,23 +50,23 @@ const SentenceMatching = () => {
 			{
 				sentences: [
 					{
-						part_one: "On the other hand the city life",
-						part_two: "is very loud and crowded",
+						left_part: "On the other hand the city life",
+						right_part: "is very loud and crowded",
 					},
 
 					{
-						part_one: "Educated people like cities",
-						part_two: "because there are lots of technology",
+						left_part: "Educated people like cities",
+						right_part: "because there are lots of technology",
 					},
 
 					{
-						part_one: "But a village is not fully modern",
-						part_two: "due to lack of science",
+						left_part: "But a village is not fully modern",
+						right_part: "due to lack of science",
 					},
 
 					{
-						part_one: "Obviously village life is",
-						part_two: "more natural",
+						left_part: "Obviously village life is",
+						right_part: "more natural",
 					},
 				],
 
@@ -136,18 +136,13 @@ const SentenceMatching = () => {
 					skip={skip}
 					check={check}>
 					<div className={`${classes.scrollableRoot} ${classes.centered}`}>
-						{question.map((obj, idx) => (
-							<SentenceMatchingCard
-								key={idx}
-								ref={childRef}
-								thisQuestionNumber={idx}
-								currentQuestionNumber={currentQuestion}
-								question={obj}
-								moveAway={moveAway[idx]}
-								isReview={false}
-								isChecked={checked[idx]}
-							/>
-						))}
+						<SentenceMatchingCard
+							ref={childRef}
+							currentQuestionNumber={currentQuestion}
+							question={question[currentQuestion]}
+							isReview={false}
+							isChecked={checked[currentQuestion]}
+						/>
 						<VerdictBanner correct={correct} anime={showVerdict} getNext={getNext} />
 					</div>
 				</ExerciseLayout>

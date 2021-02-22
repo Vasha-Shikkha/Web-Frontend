@@ -1,149 +1,186 @@
 import React, {useState, useEffect, forwardRef, useImperativeHandle} from "react";
+import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
 import PropTypes from "prop-types";
-import {Grid} from "@material-ui/core";
+import Button from "../../Button";
+import {shuffle} from "../../../util/helpers";
 import colors from "../../../styles/colors";
 import styles from "./styles";
-import "../../../styles/scrollbar.css";
 
 const SentenceMatchingCard = forwardRef((props, ref) => {
 	useImperativeHandle(ref, () => ({
 		check() {
-			let answer = {users_answer: [], isCorrect: correct === currentSentences.length / 2};
+			setDisableUndo(true);
+
+			let answer = {users_answer: [], isCorrect: true};
+
+			let temp_color = [...boxColors];
+			for (let i = 0; i < temp_color.length; i++) {
+				let sen = props.question.sentences[rightSentenceMapping[i]];
+
+				if (currentRight[i] === sen.left_part + " " + sen.right_part)
+					temp_color[i] = colors.correct;
+				else {
+					temp_color[i] = colors.incorrect;
+					answer.isCorrect = false;
+				}
+			}
+
+			setBoxColors(temp_color);
 			return answer;
 		},
 	}));
 
 	const classes = styles();
-	const [currentSentences, setCurrentSentences] = useState([]);
-	const [sentenceMapping, setSentenceMapping] = useState([]);
+	const [rightSentenceMapping, setRightSentenceMapping] = useState([]);
+	const [currentRight, setCurrentRight] = useState([]);
 	const [boxColors, setBoxColors] = useState([]);
-	const [draggedIdx, setDraggedIdx] = useState(-1);
-	const [movable, setMovable] = useState([]);
-	const [correct, setCorrect] = useState(0);
+	const [leftUsed, setLeftUsed] = useState([]);
+	const [rightUsed, setRightUsed] = useState([]);
+	const [stack, setStack] = useState([]);
+	const [disableUndo, setDisableUndo] = useState(false);
 
 	useEffect(() => {
-		let len = props.question.sentences.length * 2;
-		let temp = props.question.sentences.map((obj, idx) => idx);
+		// keep the left part as it is. make them draggable. make the whole container non-droppable
+		// shuffle the right part
+		let shuffled_array = props.question.sentences.map((obj, idx) => idx);
+		shuffled_array = shuffle(shuffled_array);
 
-		// set initial color
-		setBoxColors(Array(len).fill(colors.white));
-
-		let temp_sentences = Array(len).fill("");
-		let temp_mapping = Array(len).fill(-1);
-
-		// fill the first
-		for (let i = 0, j = 0; i < temp.length; i++, j += 2) {
-			temp_sentences[j] = props.question.sentences[temp[i]].part_one;
-			temp_mapping[j] = temp[i];
-		}
-
-		// fill the second
-		temp = shuffle(temp);
-		for (let i = 0, j = 1; i < temp.length; i++, j += 2) {
-			temp_sentences[j] = props.question.sentences[temp[i]].part_two;
-			temp_mapping[j] = temp[i];
-		}
-
-		setCurrentSentences(temp_sentences);
-		setSentenceMapping(temp_mapping);
-		setMovable(Array(len).fill(true));
+		setRightSentenceMapping(shuffled_array);
+		setLeftUsed(shuffled_array.map(() => false));
+		setRightUsed(shuffled_array.map(() => false));
+		setCurrentRight(shuffled_array.map((obj) => props.question.sentences[obj].right_part));
+		setBoxColors(shuffled_array.map(() => colors.white));
 	}, [props.question.sentences]);
 
-	const shuffle = (array) => {
-		let currentIndex = array.length;
-		let temporaryValue;
-		let randomIndex;
-		while (currentIndex !== 0) {
-			randomIndex = Math.floor(Math.random() * currentIndex);
-			currentIndex -= 1;
-			temporaryValue = array[currentIndex];
-			array[currentIndex] = array[randomIndex];
-			array[randomIndex] = temporaryValue;
-		}
+	const handleOnDragEnd = (result) => {
+		if (!result.destination) return;
 
-		return array;
+		let temp = [...leftUsed];
+		temp[result.source.index] = true;
+		setLeftUsed(temp);
+
+		temp = [...rightUsed];
+		temp[result.destination.index] = true;
+		setRightUsed(temp);
+
+		temp = [...currentRight];
+		temp[result.destination.index] =
+			props.question.sentences[result.source.index].left_part +
+			" " +
+			currentRight[result.destination.index];
+		setCurrentRight(temp);
+
+		temp = [...stack];
+		temp.push([result.source.index, result.destination.index]);
+		setStack(temp);
 	};
 
-	//-------------------------------------------
-	const onDrag = (event, idx) => {
-		event.preventDefault();
-		setDraggedIdx(idx);
+	const undo = () => {
+		if (stack.length === 0 || props.checked || disableUndo) return;
+
+		let temp = [...stack];
+		let len = temp.length;
+		let left = stack[len - 1][0];
+		let right = stack[len - 1][1];
+		temp.pop();
+		setStack(temp);
+
+		// restore the left
+		temp = [...leftUsed];
+		temp[left] = false;
+		setLeftUsed(temp);
+
+		// restore the right
+		temp = [...currentRight];
+		temp[right] = props.question.sentences[rightSentenceMapping[right]].right_part;
+		setCurrentRight(temp);
+
+		temp = [...rightUsed];
+		temp[right] = false;
+		setRightUsed(temp);
 	};
-
-	const onDrop = (idx) => {
-		// idx + draggedIdx or draggedIdx + idx
-		let temp_movable = [...movable];
-		temp_movable[idx] = false;
-		temp_movable[draggedIdx] = false;
-		setMovable(temp_movable);
-
-		let temp_sentences = [...currentSentences];
-		// even index means this is the first part of the sentence
-		if (draggedIdx % 2 === 0)
-			temp_sentences[idx] = temp_sentences[draggedIdx] + " " + temp_sentences[idx];
-		else temp_sentences[idx] += " " + temp_sentences[draggedIdx];
-		temp_sentences[draggedIdx] = "";
-
-		let temp_boxColors = [...boxColors];
-		if (sentenceMapping[idx] === sentenceMapping[draggedIdx]) {
-			temp_boxColors[idx] = colors.correct;
-			setCorrect(correct + 1);
-		} else temp_boxColors[idx] = colors.incorrect;
-
-		setBoxColors(temp_boxColors);
-		setCurrentSentences(temp_sentences);
-	};
-
-	const onDragOver = (event, idx) => {
-		if (movable[idx]) {
-			// first part of the sentence are in the indexes, 0, 2, 4, ....
-			// second part of the sentence are in the indexes are on 1, 3, 5, ...
-			// we will not let the user drop first + first or second + second
-			if (idx % 2 !== draggedIdx % 2) event.preventDefault();
-		}
-	};
-	//-------------------------------------------
 
 	return (
-		<div
-			style={{
-				display: props.thisQuestionNumber === props.currentQuestionNumber ? "initial" : "none",
-			}}
-			className={
-				props.moveAway === false ? `${classes.root}` : `${classes.root} ${classes.transition}`
-			}>
-			<div className={classes.gridroot}>
-				<Grid
-					container
-					spacing={3}
-					wrap="wrap"
-					alignItems="center"
-					alignContent="center"
-					justify="space-between"
-					className={classes.optionContainer}>
-					{currentSentences.map((obj, idx) => (
-						<Grid item xs={12} sm={12} md={6} lg={6} xl={6} key={idx}>
-							<div
-								style={{background: boxColors[idx]}}
-								draggable={movable[idx]}
-								onDrag={(event) => onDrag(event, idx)}
-								onDrop={() => onDrop(idx)}
-								onDragOver={(event) => onDragOver(event, idx)}
-								className={`${classes.options} ${classes.centered}`}>
-								{obj}
-							</div>
-						</Grid>
-					))}
-				</Grid>
+		<DragDropContext onDragEnd={handleOnDragEnd}>
+			<div className={classes.root}>
+				<Button text="Undo" styles={classes.undo} onClick={() => undo()} />
+
+				<div className={classes.optionsOuter}>
+					<div
+						className={classes.optionContainer}
+						style={{alignContent: "flex-start", alignItems: "flex-start"}}>
+						<Droppable droppableId="left_part_container" isDropDisabled={true}>
+							{(provided) => (
+								<div {...provided.droppableProps} ref={provided.innerRef} style={{width: "100%"}}>
+									{props.question.sentences.map((obj, idx) => (
+										<Draggable
+											key={idx}
+											draggableId={`left~${obj.left_part}`}
+											index={idx}
+											isDragDisabled={leftUsed[idx]}>
+											{(provided2) => {
+												return (
+													<div
+														ref={provided2.innerRef}
+														{...provided2.draggableProps}
+														{...provided2.dragHandleProps}
+														className={classes.options}>
+														{leftUsed[idx] ? null : obj.left_part}
+													</div>
+												);
+											}}
+										</Draggable>
+									))}
+									{provided.placeholder}
+								</div>
+							)}
+						</Droppable>
+					</div>
+					<div
+						className={classes.optionContainer}
+						style={{alignContent: "flex-end", alignItems: "flex-end"}}>
+						{props.question.sentences.map((obj, idx) => (
+							<Droppable
+								key={idx}
+								droppableId={`right_sentence~${idx}`}
+								isDropDisabled={rightUsed[idx]}>
+								{(provided) => (
+									<div {...provided.droppableProps} ref={provided.innerRef} style={{width: "100%"}}>
+										<Draggable
+											draggableId={`right~${obj.right_part}`}
+											index={idx}
+											isDragDisabled={true}>
+											{(provided2) => {
+												return (
+													<div
+														ref={provided2.innerRef}
+														{...provided2.draggableProps}
+														{...provided2.dragHandleProps}
+														className={classes.options}
+														style={{
+															height: rightUsed[idx] || props.isReview ? "auto" : 70,
+															background: boxColors[idx],
+														}}>
+														{currentRight[idx] ? currentRight[idx] : ""}
+													</div>
+												);
+											}}
+										</Draggable>
+										{provided.placeholder}
+									</div>
+								)}
+							</Droppable>
+						))}
+					</div>
+				</div>
 			</div>
-		</div>
+		</DragDropContext>
 	);
 });
 
 SentenceMatchingCard.propTypes = {
 	question: PropTypes.object.isRequired,
-	moveAway: PropTypes.bool,
-	elevation: PropTypes.number,
+	currentQuestionNumber: PropTypes.number,
 	isReview: PropTypes.bool.isRequired,
 	isChecked: PropTypes.bool.isRequired,
 };
