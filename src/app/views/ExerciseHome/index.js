@@ -60,7 +60,11 @@ const Vocabulary = (props) => {
 	return (
 		<div className={classes.root}>
 			<div className={classes.navContainer}>
-				<BackArrowButton link={props.location.state.from} />
+				<BackArrowButton
+					link={
+						props.location.state && props.location.state.from ? props.location.state.from : "/home"
+					}
+				/>
 			</div>
 			<div className={classes.exerciseContainer}>
 				<Grid container spacing={3}>
