@@ -1,10 +1,10 @@
-import {makeStyles} from "@material-ui/core";
-import React from "react";
+import React, {useState} from "react";
 import PropTypes from "prop-types";
+import {makeStyles} from "@material-ui/core";
 
 import QuestionNumber from "../components/QuestionNumber";
 import Button from "../components/Button";
-import CancelIcon from "@material-ui/icons/Cancel";
+import MenuIcon from "@material-ui/icons/Menu";
 
 const styles = makeStyles((theme) => ({
 	root: {
@@ -122,23 +122,46 @@ const styles = makeStyles((theme) => ({
 		alignItems: "center",
 	},
 
-	backBtn: {
-		color: theme.palette.colors.mediumPink,
+	menuBtn: {
+		color: theme.palette.colors.primary,
 		fontSize: 30,
 		cursor: "pointer",
+	},
+
+	sidebar: {
+		position: "absolute",
+		height: "100vh",
+		top: 0,
+		background: "yellow",
+		zIndex: 5,
+
+		transformOrigin: "left",
+		transitionDuration: "1.0s",
+
+		[theme.breakpoints.down("md")]: {
+			width: "70%",
+			left: "-70%",
+		},
+
+		[theme.breakpoints.up("lg")]: {
+			width: "50%",
+			left: "-50%",
+		},
 	},
 }));
 
 const ExerciseLayout = (props) => {
 	const classes = styles();
+	const [showSidebar, setShowSidebar] = useState(false);
 
 	return (
 		<div className={classes.root}>
+			<div className={classes.sidebar} style={showSidebar ? {left: 0} : null}></div>
 			<div className={`${classes.nav}`}>
 				<div className={classes.outerNav}>
 					<div className={classes.nameContainer}>{props.exerciseName}</div>
 					<div className={classes.iconContainer}>
-						<CancelIcon className={classes.backBtn} />
+						<MenuIcon className={classes.menuBtn} onClick={() => setShowSidebar(true)} />
 					</div>
 				</div>
 
