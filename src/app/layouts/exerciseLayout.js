@@ -12,7 +12,6 @@ import Loading from "../components/Loading";
 import VerdictBanner from "../components/VerdictBanner";
 
 import "../styles/scrollbar.css";
-import axios from "axios";
 
 const styles = makeStyles((theme) => ({
 	outerContainer: {

@@ -28,7 +28,16 @@ const styles = makeStyles((theme) => ({
 
 	options: {
 		width: "95%",
-		height: 60,
+
+		[theme.breakpoints.down("360")]: {
+			height: 160,
+		},
+		[theme.breakpoints.up("360")]: {
+			height: 140,
+		},
+		[theme.breakpoints.up("600")]: {
+			height: 100,
+		},
 
 		padding: 10,
 		fontSize: 16,
