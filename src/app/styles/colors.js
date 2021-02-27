@@ -1,6 +1,6 @@
 const colors = {
 	white: "#FFFFFF",
-	primary: "#8577E2",
+	primary: "#9E63FF",
 	secondary: "#e5e5e5",
 	background: "#F2F2F2",
 	textLight: "#2E303E",
@@ -9,7 +9,9 @@ const colors = {
 	violetLight: "#ECE0FF",
 	violetMedium: "#CEAFFF",
 	violetDark: "#9E63FF",
+	violetText: "#6C63FF",
 	mediumPink: "#FFB8B8",
+	lightPink: "#fff0ff",
 };
 
 export default colors;

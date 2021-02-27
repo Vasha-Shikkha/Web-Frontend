@@ -1,11 +1,12 @@
 import React, {useState} from "react";
 import PropTypes from "prop-types";
-import {makeStyles} from "@material-ui/core";
+import {makeStyles, TextField} from "@material-ui/core";
 
 import QuestionNumber from "../components/QuestionNumber";
 import Button from "../components/Button";
 import CancelIcon from "@material-ui/icons/Cancel";
 import MenuIcon from "@material-ui/icons/Menu";
+import colors from "../styles/colors";
 
 const styles = makeStyles((theme) => ({
 	root: {
@@ -95,6 +96,13 @@ const styles = makeStyles((theme) => ({
 		borderRadius: 10,
 	},
 
+	btn3: {
+		color: "white",
+		background: theme.palette.colors.primary,
+		boxSizing: "border-box",
+		borderRadius: 10,
+	},
+
 	nameContainer: {
 		width: "100%",
 		height: "100%",
@@ -146,6 +154,7 @@ const styles = makeStyles((theme) => ({
 		height: "100vh",
 		top: 0,
 		zIndex: 5,
+		background: theme.palette.colors.lightPink,
 
 		overflowY: "auto",
 
@@ -162,18 +171,53 @@ const styles = makeStyles((theme) => ({
 			left: "-50%",
 		},
 	},
+
+	textfieldContainer: {
+		padding: "25px 5% 25px 5%",
+		display: "flex",
+		justifyContent: "space-between",
+		alignContent: "center",
+		alignItems: "center",
+	},
+
+	textField: {
+		width: "60%",
+		height: 50,
+	},
+
+	searchBtn: {
+		width: "30%",
+		height: 50,
+	},
 }));
 
 const ExerciseLayout = (props) => {
 	const classes = styles();
-	const [showSidebar, setShowSidebar] = useState(false);
+	const [showSidebar, setShowSidebar] = useState(true);
+	const [dictionarySearch, setDictionarySearch] = useState("");
+
+	const searchWord = () => {};
 
 	return (
 		<>
 			<div className={classes.sidebar} style={showSidebar ? {left: 0} : null}>
-				<div className={`${classes.nav}`}>
+				<div className={`${classes.nav}`} style={{background: colors.lightPink}}>
 					<div className={classes.cancelIconContainer}>
 						<CancelIcon className={classes.menuBtn} onClick={() => setShowSidebar(false)} />
+					</div>
+				</div>
+
+				<div className={classes.textfieldContainer}>
+					<TextField
+						variant="outlined"
+						onChange={(e) => setDictionarySearch(e.target.value)}
+						value={dictionarySearch}
+						name="dictionary_search"
+						className={classes.textField}
+					/>
+
+					<div className={classes.searchBtn}>
+						<Button styles={classes.btn3} text="Search" onClick={searchWord} />
 					</div>
 				</div>
 			</div>
