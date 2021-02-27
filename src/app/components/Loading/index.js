@@ -15,7 +15,7 @@ const Loading = (props) => {
 };
 
 Loading.propTypes = {
-	container: PropTypes.object.isRequired,
+	container: PropTypes.string.isRequired,
 };
 
 export default Loading;

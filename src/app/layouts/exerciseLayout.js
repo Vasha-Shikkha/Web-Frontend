@@ -214,6 +214,34 @@ const styles = makeStyles((theme) => ({
 	dictionaryContainer: {
 		padding: "5%",
 	},
+
+	word: {
+		fontSize: 16,
+		fontWeight: 600,
+		textDecoration: `underline ${theme.palette.colors.violetText}`,
+		color: theme.palette.colors.violetText,
+
+		marginBottom: 25,
+	},
+
+	meaning: {
+		fontSize: 14,
+		marginBottom: 50,
+	},
+
+	exampleHead: {
+		fontSize: 14,
+		fontWeight: 600,
+
+		marginBottom: 5,
+		color: theme.palette.colors.violetDark,
+	},
+
+	example: {
+		fontSize: 14,
+		color: theme.palette.colors.violetText,
+		fontStyle: "italic",
+	},
 }));
 
 const ExerciseLayout = (props) => {
@@ -233,13 +261,17 @@ const ExerciseLayout = (props) => {
 				example: ["The storm continued without abatement"],
 			});
 			setLoading(false);
-		}, 3000);
+		}, 1000);
 	};
 
 	return (
 		<div className={classes.outerContainer}>
 			<VerdictBanner correct={props.correct} anime={props.anime} getNext={props.getNext} />
-			<div id="dictionaryScroll" className={classes.sidebar} style={showSidebar ? {left: 0} : null}>
+
+			<div
+				id="dictionaryScroll"
+				className={classes.sidebar}
+				style={showSidebar && !props.anime ? {left: 0} : null}>
 				<div className={`${classes.nav}`} style={{background: colors.lightPink}}>
 					<div className={classes.cancelIconContainer}>
 						<CancelIcon className={classes.menuBtn} onClick={() => setShowSidebar(false)} />
@@ -261,12 +293,26 @@ const ExerciseLayout = (props) => {
 				</div>
 
 				{loading ? (
-					<Loading container={classes.loadingContainer} />
+					<Loading container={`${classes.loadingContainer}`} />
 				) : (
-					<div className={classes.dictionaryContainer}></div>
+					<div className={classes.dictionaryContainer}>
+						<div className={classes.word}>{searchRes.word ? searchRes.word.toUpperCase() : ""}</div>
+						<div className={classes.meaning}>
+							{searchRes.meaning ? searchRes.meaning.join(", ") : ""}
+						</div>
+						{searchRes.example && searchRes.example.length && (
+							<div className={classes.exampleHead}>Example</div>
+						)}
+
+						<div className={classes.example}>
+							{searchRes.example ? searchRes.example.join(",") : ""}
+						</div>
+					</div>
 				)}
 			</div>
-			<div className={classes.root} style={showSidebar ? {filter: "blur(4px)"} : {}}>
+			<div
+				className={classes.root}
+				style={showSidebar && !props.anime ? {filter: "blur(4px)"} : {}}>
 				<div className={`${classes.nav}`}>
 					<div className={classes.outerNav}>
 						<div className={classes.nameContainer}>{props.exerciseName}</div>
