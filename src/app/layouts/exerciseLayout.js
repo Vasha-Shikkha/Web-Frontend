@@ -254,8 +254,11 @@ const ExerciseLayout = (props) => {
 		getWordMeaning(dictionarySearch, (err, axios_data) => {
 			if (!err) {
 				setSearchRes(axios_data);
-				setLoading(false);
+			} else {
+				setSearchRes({word: "word not found"});
 			}
+
+			setLoading(false);
 		});
 	};
 
