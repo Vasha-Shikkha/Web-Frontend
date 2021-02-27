@@ -1,8 +1,7 @@
 import {makeStyles} from "@material-ui/core";
 
-const styles = makeStyles((theme) => ({
+const styles = makeStyles(() => ({
 	root: {
-		height: "100vh",
 		width: "100%",
 	},
 
