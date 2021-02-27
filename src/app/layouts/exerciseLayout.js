@@ -4,6 +4,7 @@ import {makeStyles} from "@material-ui/core";
 
 import QuestionNumber from "../components/QuestionNumber";
 import Button from "../components/Button";
+import CancelIcon from "@material-ui/icons/Cancel";
 import MenuIcon from "@material-ui/icons/Menu";
 
 const styles = makeStyles((theme) => ({
@@ -128,12 +129,25 @@ const styles = makeStyles((theme) => ({
 		cursor: "pointer",
 	},
 
+	cancelIconContainer: {
+		height: "100%",
+		width: "100%",
+		paddingLeft: "5%",
+
+		display: "flex",
+		flexDirection: "row",
+		justifyContent: "flex-start",
+		alignContent: "center",
+		alignItems: "center",
+	},
+
 	sidebar: {
 		position: "absolute",
 		height: "100vh",
 		top: 0,
-		background: "yellow",
 		zIndex: 5,
+
+		overflowY: "auto",
 
 		transformOrigin: "left",
 		transitionDuration: "1.0s",
@@ -155,36 +169,44 @@ const ExerciseLayout = (props) => {
 	const [showSidebar, setShowSidebar] = useState(false);
 
 	return (
-		<div className={classes.root}>
-			<div className={classes.sidebar} style={showSidebar ? {left: 0} : null}></div>
-			<div className={`${classes.nav}`}>
-				<div className={classes.outerNav}>
-					<div className={classes.nameContainer}>{props.exerciseName}</div>
-					<div className={classes.iconContainer}>
-						<MenuIcon className={classes.menuBtn} onClick={() => setShowSidebar(true)} />
+		<>
+			<div className={classes.sidebar} style={showSidebar ? {left: 0} : null}>
+				<div className={`${classes.nav}`}>
+					<div className={classes.cancelIconContainer}>
+						<CancelIcon className={classes.menuBtn} onClick={() => setShowSidebar(false)} />
 					</div>
 				</div>
+			</div>
+			<div className={classes.root} style={showSidebar ? {filter: "blur(4px)"} : {}}>
+				<div className={`${classes.nav}`}>
+					<div className={classes.outerNav}>
+						<div className={classes.nameContainer}>{props.exerciseName}</div>
+						<div className={classes.iconContainer}>
+							<MenuIcon className={classes.menuBtn} onClick={() => setShowSidebar(true)} />
+						</div>
+					</div>
 
-				<div className={classes.barContainer}>
-					<QuestionNumber
-						totalQuestions={props.totalQuestions}
-						currentQuestionNumber={props.currentQuestionNumber}
-					/>
+					<div className={classes.barContainer}>
+						<QuestionNumber
+							totalQuestions={props.totalQuestions}
+							currentQuestionNumber={props.currentQuestionNumber}
+						/>
+					</div>
 				</div>
-			</div>
-			<div className={props.scrollable ? classes.childScrollable : classes.child}>
-				{props.children}
-			</div>
-			<div className={`${classes.btnContainer} ${classes.container}`}>
-				<div className={`${classes.btn}`}>
-					<Button styles={classes.btn1} text="Skip" onClick={props.skip} />
+				<div className={props.scrollable ? classes.childScrollable : classes.child}>
+					{props.children}
 				</div>
+				<div className={`${classes.btnContainer} ${classes.container}`}>
+					<div className={`${classes.btn}`}>
+						<Button styles={classes.btn1} text="Skip" onClick={props.skip} />
+					</div>
 
-				<div className={classes.btn}>
-					<Button styles={classes.btn2} text="Check" onClick={props.check} />
+					<div className={classes.btn}>
+						<Button styles={classes.btn2} text="Check" onClick={props.check} />
+					</div>
 				</div>
 			</div>
-		</div>
+		</>
 	);
 };
 
