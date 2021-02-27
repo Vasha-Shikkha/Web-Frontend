@@ -3,7 +3,6 @@ import React, {useEffect, useState, useRef} from "react";
 import ExerciseLayout from "../../layouts/exerciseLayout";
 import Loading from "../../components/Loading";
 import JumbledSentenceCard from "../../components/ExerciseCard/JumbledSentenceCard";
-import VerdictBanner from "../../components/VerdictBanner";
 
 import styles from "../../styles/exerciseViewStyles";
 
@@ -131,7 +130,10 @@ const JumbledSentence = () => {
 					currentQuestionNumber={currentQuestion + 1}
 					backToHome={backToHome}
 					skip={skip}
-					check={check}>
+					check={check}
+					correct={correct}
+					anime={showVerdict}
+					getNext={getNext}>
 					<div className={`${classes.scrollableRoot} ${classes.centered}`}>
 						<JumbledSentenceCard
 							ref={childRef}
@@ -140,7 +142,6 @@ const JumbledSentence = () => {
 							isReview={false}
 							isChecked={checked[currentQuestion]}
 						/>
-						<VerdictBanner correct={correct} anime={showVerdict} getNext={getNext} />
 					</div>
 				</ExerciseLayout>
 			)}
