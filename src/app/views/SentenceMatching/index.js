@@ -3,7 +3,6 @@ import React, {useEffect, useState, useRef} from "react";
 import ExerciseLayout from "../../layouts/exerciseLayout";
 import Loading from "../../components/Loading";
 import SentenceMatchingCard from "../../components/ExerciseCard/SentenceMatchingCard";
-import VerdictBanner from "../../components/VerdictBanner";
 
 import styles from "../../styles/exerciseViewStyles";
 
@@ -134,7 +133,10 @@ const SentenceMatching = () => {
 					currentQuestionNumber={currentQuestion + 1}
 					backToHome={backToHome}
 					skip={skip}
-					check={check}>
+					check={check}
+					correct={correct}
+					anime={showVerdict}
+					getNext={getNext}>
 					<div className={`${classes.scrollableRoot} ${classes.centered}`}>
 						<SentenceMatchingCard
 							ref={childRef}
@@ -143,7 +145,6 @@ const SentenceMatching = () => {
 							isReview={false}
 							isChecked={checked[currentQuestion]}
 						/>
-						<VerdictBanner correct={correct} anime={showVerdict} getNext={getNext} />
 					</div>
 				</ExerciseLayout>
 			)}

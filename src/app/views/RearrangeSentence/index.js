@@ -3,7 +3,6 @@ import React, {useEffect, useState, useRef} from "react";
 import ExerciseLayout from "../../layouts/exerciseLayout";
 import Loading from "../../components/Loading";
 import RearrangeSentenceCard from "../../components/ExerciseCard/RearrangeSentenceCard";
-import VerdictBanner from "../../components/VerdictBanner";
 import styles from "../../styles/exerciseViewStyles";
 import {Redirect} from "react-router-dom";
 
@@ -95,7 +94,10 @@ const RearrangeSentence = () => {
 					currentQuestionNumber={currentQuestion + 1}
 					backToHome={backToHome}
 					skip={skip}
-					check={check}>
+					check={check}
+					correct={correct}
+					anime={showVerdict}
+					getNext={getNext}>
 					<div className={`${classes.scrollableRoot} ${classes.centered}`}>
 						<RearrangeSentenceCard
 							ref={childRef}
@@ -104,7 +106,6 @@ const RearrangeSentence = () => {
 							isReview={false}
 							isChecked={checked[currentQuestion]}
 						/>
-						<VerdictBanner correct={correct} anime={showVerdict} getNext={getNext} />
 					</div>
 				</ExerciseLayout>
 			)}

@@ -3,7 +3,6 @@ import React, {useEffect, useState, useRef} from "react";
 import ExerciseLayout from "../../layouts/exerciseLayout";
 import Loading from "../../components/Loading";
 import FillInTheBlanksCard from "../../components/ExerciseCard/FillInTheBlanksCard";
-import VerdictBanner from "../../components/VerdictBanner";
 
 import styles from "../../styles/exerciseViewStyles";
 import {Redirect} from "react-router-dom";
@@ -135,7 +134,10 @@ const FillInTheBlanks = () => {
 					currentQuestionNumber={currentQuestion + 1}
 					backToHome={backToHome}
 					skip={skip}
-					check={check}>
+					check={check}
+					correct={correct}
+					anime={showVerdict}
+					getNext={getNext}>
 					<div className={`${classes.scrollableRoot} ${classes.centered}`}>
 						<FillInTheBlanksCard
 							ref={childRef}
@@ -144,7 +146,6 @@ const FillInTheBlanks = () => {
 							isReview={false}
 							isChecked={checked[currentQuestion]}
 						/>
-						<VerdictBanner correct={correct} anime={showVerdict} getNext={getNext} />
 					</div>
 				</ExerciseLayout>
 			)}
