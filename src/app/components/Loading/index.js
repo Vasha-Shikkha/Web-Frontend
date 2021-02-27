@@ -8,14 +8,16 @@ import colors from "../../styles/colors";
 const Loading = (props) => {
 	const classes = styles();
 	return (
-		<div className={`${classes.root} ${props.container} ${classes.centered}`}>
+		<div
+			style={props.container ? null : {height: "100vh"}}
+			className={`${classes.root} ${props.container ? props.container : ""} ${classes.centered}`}>
 			<CircularProgress style={{color: colors.primary}} />
 		</div>
 	);
 };
 
 Loading.propTypes = {
-	container: PropTypes.string.isRequired,
+	container: PropTypes.string,
 };
 
 export default Loading;

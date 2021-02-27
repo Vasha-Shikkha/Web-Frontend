@@ -290,7 +290,7 @@ const ExerciseLayout = (props) => {
 				</div>
 
 				{loading ? (
-					<Loading container={`${classes.loadingContainer}`} />
+					<Loading container={classes.loadingContainer} />
 				) : (
 					<div className={classes.dictionaryContainer}>
 						<div className={classes.word}>{searchRes.word ? searchRes.word.toUpperCase() : ""}</div>
