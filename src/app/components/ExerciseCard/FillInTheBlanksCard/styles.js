@@ -48,7 +48,7 @@ const styles = makeStyles((theme) => ({
 	},
 
 	word: {
-		margin: "0px 5px 5px 10px",
+		margin: "0px 5px 5px 5px",
 		userSelect: "none",
 	},
 

@@ -158,7 +158,7 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 														{...provided2.dragHandleProps}
 														className={classes.options}
 														style={{
-															height: rightUsed[idx] || props.isReview ? "auto" : 70,
+															//height: rightUsed[idx] || props.isReview ? "auto" : 70,
 															background: boxColors[idx],
 														}}>
 														{currentRight[idx] ? currentRight[idx] : ""}

@@ -9,6 +9,10 @@ const styles = makeStyles((theme) => ({
 		position: "relative",
 	},
 
+	loadingContainer: {
+		height: "100vh",
+	},
+
 	scrollableRoot: {
 		width: "100%",
 		background: "white",

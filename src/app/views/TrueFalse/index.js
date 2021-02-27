@@ -3,7 +3,6 @@ import React, {useEffect, useState, useRef} from "react";
 import ExerciseLayout from "../../layouts/exerciseLayout";
 import Loading from "../../components/Loading";
 import TrueFalseCard from "../../components/ExerciseCard/TrueFalseCard";
-import VerdictBanner from "../../components/VerdictBanner";
 
 import styles from "../../styles/exerciseViewStyles";
 
@@ -97,7 +96,10 @@ const TrueFalse = () => {
 					currentQuestionNumber={currentQuestion + 1}
 					backToHome={backToHome}
 					skip={skip}
-					check={check}>
+					check={check}
+					correct={correct}
+					anime={showVerdict}
+					getNext={getNext}>
 					<div className={`${classes.root} ${classes.centered}`}>
 						{question.map((obj, idx) => (
 							<TrueFalseCard
@@ -110,7 +112,6 @@ const TrueFalse = () => {
 								isChecked={checked[idx]}
 							/>
 						))}
-						<VerdictBanner correct={correct} anime={showVerdict} getNext={getNext} />
 					</div>
 				</ExerciseLayout>
 			)}
