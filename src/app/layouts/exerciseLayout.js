@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import PropTypes from "prop-types";
 import {makeStyles, TextField} from "@material-ui/core";
+import {getWordMeaning} from "../axios/services/dictionary";
 
 import QuestionNumber from "../components/QuestionNumber";
 import Button from "../components/Button";
@@ -11,6 +12,7 @@ import Loading from "../components/Loading";
 import VerdictBanner from "../components/VerdictBanner";
 
 import "../styles/scrollbar.css";
+import axios from "axios";
 
 const styles = makeStyles((theme) => ({
 	outerContainer: {
@@ -250,15 +252,12 @@ const ExerciseLayout = (props) => {
 
 	const searchWord = () => {
 		setLoading(true);
-
-		setTimeout(() => {
-			setSearchRes({
-				word: "Abatement",
-				meaning: ["অবসান", "কমে যাওয়া"],
-				example: ["The storm continued without abatement"],
-			});
-			setLoading(false);
-		}, 1000);
+		getWordMeaning(dictionarySearch, (err, axios_data) => {
+			if (!err) {
+				setSearchRes(axios_data);
+				setLoading(false);
+			}
+		});
 	};
 
 	return (
