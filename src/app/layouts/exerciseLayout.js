@@ -176,26 +176,23 @@ const styles = makeStyles((theme) => ({
 		},
 
 		[theme.breakpoints.up("lg")]: {
-			width: "50%",
-			left: "-50%",
+			width: "40%",
+			left: "-40%",
 		},
 	},
 
 	textfieldContainer: {
 		padding: "25px 5% 25px 5%",
-		display: "flex",
-		justifyContent: "space-between",
-		alignContent: "center",
-		alignItems: "center",
 	},
 
 	textField: {
 		width: "60%",
 		height: 50,
+		marginBottom: 25,
 	},
 
 	searchBtn: {
-		width: "30%",
+		width: 100,
 		height: 50,
 	},
 
