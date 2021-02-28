@@ -21,11 +21,6 @@ const JumbledSentence = () => {
 	useEffect(() => {
 		let data = [
 			{
-				chunks: ["completed her ", "She ", " to sleep", "homework ", "before going"],
-				answer: "She completed her homework before going to sleep",
-			},
-
-			{
 				context:
 					"Priyoti has never seen hills before. So, her father decides to go on a vacation to -",
 				chunks: ["T", "G", "O", "C", "T", "H", "I", "G", "A", "N"],

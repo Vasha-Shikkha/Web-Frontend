@@ -18,70 +18,46 @@ const Vocabulary = () => {
 	const classes = styles();
 	const [level, setLevel] = useState(1);
 	const [showTooltip, setShowTooltip] = useState([]);
-	const [redirect, setRedirect] = useState(false);
-	const [redirectLink, setRedirectLink] = useState("");
+	const [redirect, setRedirect] = useState(null);
 	const [topics, setTopic] = useState([]);
+	const [routingStates, setRoutingStates] = useState({});
 
 	useEffect(() => {
 		setTopic([
 			{
-				name: "Places",
+				name: "Understanding Moods with images",
 				image: Places,
+				availableTasks: "Picture to Word",
 			},
 
 			{
-				name: "Birds",
+				name: "Conversation about interests",
 				image: Birds,
+				availableTasks: "Fill in The Blanks",
 			},
 
 			{
-				name: "Food",
+				name: "Games and sports",
 				image: Food,
+				availableTasks: "Rearrange Sentence",
 			},
 
 			{
-				name: "Places",
+				name: "Names of different things  (Places, Professions, Things)",
 				image: Places,
+				availableTasks: "Jumbled Sentence/Word",
 			},
 
 			{
-				name: "Birds",
+				name: "City life vs. Village life",
 				image: Birds,
+				availableTasks: "Sentence Matching",
 			},
 
 			{
-				name: "Food",
-				image: Food,
-			},
-
-			{
-				name: "Places",
+				name: "Visiting Places",
 				image: Places,
-			},
-
-			{
-				name: "Birds",
-				image: Birds,
-			},
-
-			{
-				name: "Food",
-				image: Food,
-			},
-
-			{
-				name: "Places",
-				image: Places,
-			},
-
-			{
-				name: "Birds",
-				image: Birds,
-			},
-
-			{
-				name: "Food",
-				image: Food,
+				availableTasks: "Word to Picture",
 			},
 		]);
 		setShowTooltip(topics.map(() => false));
@@ -100,20 +76,24 @@ const Vocabulary = () => {
 	};
 
 	const tutorialBtnClick = (idx) => {
-		setRedirect(true);
-		setRedirectLink("/tutorial");
+		setRedirect("/tutorial");
 	};
 	const exerciseBtnClick = (idx) => {
-		setRedirect(true);
-		setRedirectLink("/exercise");
+		setRedirect("/exercise");
+		setRoutingStates({
+			from: "/communicative",
+			level: level,
+			topic: topics[idx].name,
+			availableTasks: topics[idx].availableTasks,
+		});
 	};
 
 	if (redirect)
 		return (
 			<Redirect
 				to={{
-					pathname: redirectLink,
-					state: {from: "/communicative"},
+					pathname: redirect,
+					state: routingStates,
 				}}
 			/>
 		);
