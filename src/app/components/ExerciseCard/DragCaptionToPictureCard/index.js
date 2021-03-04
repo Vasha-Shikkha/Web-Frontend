@@ -1,6 +1,7 @@
 import React, {useState, forwardRef, useImperativeHandle, useEffect} from "react";
 import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
 import PropTypes from "prop-types";
+import {Grid} from "@material-ui/core";
 import colors from "../../../styles/colors";
 import styles from "./styles";
 
@@ -55,6 +56,16 @@ const DragCaptionToPictureCard = forwardRef((props, ref) => {
 							</div>
 						)}
 					</Droppable>
+				</div>
+
+				<div className={classes.gridroot}>
+					<Grid container spacing={3}>
+						{props.question.images.map((obj, idx) => (
+							<Grid item xs={12} sm={12} md={6} lg={3} xl={3}>
+								<div className={classes.imageBox}>{idx}</div>
+							</Grid>
+						))}
+					</Grid>
 				</div>
 			</div>
 		</DragDropContext>

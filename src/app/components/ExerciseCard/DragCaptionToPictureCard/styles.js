@@ -33,12 +33,13 @@ const styles = makeStyles((theme) => ({
 		boxShadow: `2px 3px 4px ${theme.palette.colors.secondary}`,
 	},
 
-	hi: {
-		boxShadow: `10px 10px 15px ${theme.palette.colors.secondary}`,
+	gridroot: {
+		flexGrow: 1,
 	},
 
-	lo: {
-		boxShadow: `2px 3px 4px ${theme.palette.colors.secondary}`,
+	imageBox: {
+		width: "100%",
+		background: "yellow",
 	},
 }));
 
