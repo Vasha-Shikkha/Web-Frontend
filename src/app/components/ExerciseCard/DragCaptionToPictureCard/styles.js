@@ -6,12 +6,6 @@ const styles = makeStyles((theme) => ({
 		minHeight: "70vh",
 	},
 
-	transition: {
-		transformOrigin: "left",
-		transform: "translate(-150%, -15%) rotate(-25deg)",
-		transitionDuration: "1.0s",
-	},
-
 	context: {
 		paddingTop: "5%",
 		fontSize: 18,
@@ -37,19 +31,6 @@ const styles = makeStyles((theme) => ({
 		userSelect: "none",
 
 		boxShadow: `2px 3px 4px ${theme.palette.colors.secondary}`,
-	},
-
-	questionContainer: {
-		marginBottom: "5%",
-
-		display: "flex",
-		flexDirection: "row",
-		flexWrap: "wrap",
-	},
-
-	word: {
-		margin: "0px 5px 5px 5px",
-		userSelect: "none",
 	},
 
 	hi: {
