@@ -59,10 +59,13 @@ const DragCaptionToPictureCard = forwardRef((props, ref) => {
 				</div>
 
 				<div className={classes.gridroot}>
-					<Grid container spacing={3}>
+					<Grid container spacing={5}>
 						{props.question.images.map((obj, idx) => (
-							<Grid item xs={12} sm={12} md={6} lg={3} xl={3}>
-								<div className={classes.imageBox}>{idx}</div>
+							<Grid item xs={12} sm={6} md={6} lg={4} xl={4} key={idx}>
+								<div className={classes.imageBox}>
+									<img src={obj} alt="" className={classes.image} />
+									<div className={classes.answerContainer}></div>
+								</div>
 							</Grid>
 						))}
 					</Grid>

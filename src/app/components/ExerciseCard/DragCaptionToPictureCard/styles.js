@@ -39,7 +39,18 @@ const styles = makeStyles((theme) => ({
 
 	imageBox: {
 		width: "100%",
-		background: "yellow",
+	},
+
+	image: {
+		width: "100%",
+		height: "auto",
+		marginBottom: 10,
+	},
+
+	answerContainer: {
+		width: "100%",
+		height: 50,
+		border: "1px solid black",
 	},
 }));
 

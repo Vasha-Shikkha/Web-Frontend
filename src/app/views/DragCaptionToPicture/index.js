@@ -54,7 +54,7 @@ const DragCaptionToPicture = () => {
 					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/drag_caption/4.jpg",
 					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/drag_caption/5.jpg",
 					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/drag_caption/6.jpg",
-					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/drag_caption/7.jpg",
+					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/drag_caption/7.png",
 					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/drag_caption/8.jpg",
 					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/drag_caption/9.jpg",
 				],
