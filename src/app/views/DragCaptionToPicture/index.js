@@ -20,7 +20,46 @@ const DragCaptionToPicture = () => {
 	const childRef = useRef();
 
 	useEffect(() => {
-		let data = [];
+		let data = [
+			{
+				context:
+					"Below are some pictures of some people who are in some kind of action. Can you identify from the box in which ‘verb’ they are involved?",
+				options: [
+					"Walking",
+					"Sleeping",
+					"Studying",
+					"Singing",
+					"Cooking",
+					"Swimming",
+					"Working",
+					"Jumping",
+					"Playing",
+				],
+				answer: [
+					"Sleeping",
+					"Working",
+					"Walking",
+					"Studying",
+					"Cooking",
+					"Playing",
+					"Swimming",
+					"Singing",
+					"Jumping",
+				],
+
+				images: [
+					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/drag_caption/1.jpg",
+					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/drag_caption/2.jpg",
+					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/drag_caption/3.jpg",
+					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/drag_caption/4.jpg",
+					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/drag_caption/5.jpg",
+					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/drag_caption/6.jpg",
+					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/drag_caption/7.jpg",
+					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/drag_caption/8.jpg",
+					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/drag_caption/9.jpg",
+				],
+			},
+		];
 
 		setChecked(data.map(() => false));
 		setQuestion(data);
