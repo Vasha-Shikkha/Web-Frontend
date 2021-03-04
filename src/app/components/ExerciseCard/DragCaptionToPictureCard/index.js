@@ -15,15 +15,20 @@ const DragCaptionToPictureCard = forwardRef((props, ref) => {
 	}));
 
 	const classes = styles();
+	const [boxColors, setBoxColors] = useState([]);
+	const [currentAnswers, setCurrentAnswers] = useState([]);
 
 	useEffect(() => {
-		console.log(props.question.options);
+		setBoxColors(props.question.images.map(() => colors.white));
+		setCurrentAnswers(props.question.images.map(() => ""));
 	}, [props.question]);
 
 	const handleOnDragEnd = (result) => {
 		if (!result.destination) return;
 
-		console.log(result);
+		let temp = [...currentAnswers];
+		temp[result.destination.index] = props.question.options[result.source.index];
+		setCurrentAnswers(temp);
 	};
 
 	return (
@@ -64,7 +69,18 @@ const DragCaptionToPictureCard = forwardRef((props, ref) => {
 							<Grid item xs={12} sm={6} md={6} lg={4} xl={4} key={idx}>
 								<div className={classes.imageBox}>
 									<img src={obj} alt="" className={classes.image} />
-									<div className={classes.answerContainer}></div>
+									<Droppable droppableId={`drop_blank~${idx.toString()}`} isDropDisabled={false}>
+										{(provided) => (
+											<div
+												{...provided.droppableProps}
+												ref={provided.innerRef}
+												className={`${classes.answerContainer}`}
+												style={{background: boxColors[idx]}}>
+												{currentAnswers[idx]}
+												{provided.placeholder}
+											</div>
+										)}
+									</Droppable>
 								</div>
 							</Grid>
 						))}
