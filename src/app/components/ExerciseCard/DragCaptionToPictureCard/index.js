@@ -9,7 +9,18 @@ const DragCaptionToPictureCard = forwardRef((props, ref) => {
 	useImperativeHandle(ref, () => ({
 		check() {
 			let answer = {users_answer: [], isCorrect: true};
+			answer.users_answer = [...currentAnswers];
 
+			let temp_color = [...boxColors];
+			for (let i = 0; i < temp_color.length; i++) {
+				if (props.question.answer[i] === currentAnswers[i]) temp_color[i] = colors.correct;
+				else {
+					temp_color[i] = colors.incorrect;
+					answer.isCorrect = false;
+				}
+			}
+
+			setBoxColors(temp_color);
 			return answer;
 		},
 	}));
@@ -27,7 +38,8 @@ const DragCaptionToPictureCard = forwardRef((props, ref) => {
 		if (!result.destination) return;
 
 		let temp = [...currentAnswers];
-		temp[result.destination.index] = props.question.options[result.source.index];
+		let dest_index = parseInt(result.destination.droppableId.split("~")[1]);
+		temp[dest_index] = props.question.options[result.source.index];
 		setCurrentAnswers(temp);
 	};
 
