@@ -132,11 +132,12 @@ const styles = makeStyles((theme) => ({
 		width: "100%",
 		height: "100%",
 		paddingLeft: "5%",
+		paddingRight: "5%",
 		position: "absolute",
 
 		display: "flex",
 		flexDirection: "row",
-		justifyContent: "flex-start",
+		justifyContent: "space-between",
 		alignContent: "center",
 		alignItems: "center",
 	},
@@ -163,22 +164,23 @@ const styles = makeStyles((theme) => ({
 		position: "fixed",
 		height: "100vh",
 		top: 0,
+
 		zIndex: 10,
 		background: theme.palette.colors.lightPink,
 
 		overflowY: "auto",
 
-		transformOrigin: "left",
+		transformOrigin: "right",
 		transitionDuration: "1.0s",
 
 		[theme.breakpoints.down("md")]: {
 			width: "70%",
-			left: "-70%",
+			right: "-70%",
 		},
 
 		[theme.breakpoints.up("lg")]: {
 			width: "40%",
-			left: "-40%",
+			right: "-40%",
 		},
 	},
 
@@ -262,6 +264,11 @@ const ExerciseLayout = (props) => {
 		});
 	};
 
+	const getBack = () => {
+		if (showSidebar) return;
+		console.log("getting back");
+	};
+
 	return (
 		<div className={classes.outerContainer}>
 			<VerdictBanner correct={props.correct} anime={props.anime} getNext={props.getNext} />
@@ -269,7 +276,7 @@ const ExerciseLayout = (props) => {
 			<div
 				id="dictionaryScroll"
 				className={classes.sidebar}
-				style={showSidebar && !props.anime ? {left: 0} : null}>
+				style={showSidebar && !props.anime ? {right: 0} : null}>
 				<div className={`${classes.nav}`} style={{background: colors.lightPink}}>
 					<div className={classes.cancelIconContainer}>
 						<CancelIcon className={classes.menuBtn} onClick={() => setShowSidebar(false)} />
@@ -315,6 +322,7 @@ const ExerciseLayout = (props) => {
 					<div className={classes.outerNav}>
 						<div className={classes.nameContainer}>{props.exerciseName}</div>
 						<div className={classes.iconContainer}>
+							<CancelIcon className={classes.menuBtn} onClick={() => getBack()} />
 							<MenuIcon className={classes.menuBtn} onClick={() => setShowSidebar(true)} />
 						</div>
 					</div>
