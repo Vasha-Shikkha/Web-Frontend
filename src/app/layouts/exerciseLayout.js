@@ -6,10 +6,11 @@ import {getWordMeaning} from "../axios/services/dictionary";
 import QuestionNumber from "../components/QuestionNumber";
 import Button from "../components/Button";
 import CancelIcon from "@material-ui/icons/Cancel";
-import MenuIcon from "@material-ui/icons/Menu";
+import SearchIcon from "@material-ui/icons/Search";
 import colors from "../styles/colors";
 import Loading from "../components/Loading";
 import VerdictBanner from "../components/VerdictBanner";
+import ClipboardIcon from "../assets/clipboard.svg";
 
 import "../styles/scrollbar.css";
 
@@ -24,19 +25,26 @@ const styles = makeStyles((theme) => ({
 	},
 
 	nav: {
-		height: "15vh",
 		background: "white",
+
+		[theme.breakpoints.down("sm")]: {
+			height: "30vh",
+		},
+
+		[theme.breakpoints.up("md")]: {
+			height: "25vh",
+		},
 	},
 
 	outerNav: {
 		width: "100%",
-		height: "60%",
+		height: "75%",
 		position: "relative",
 	},
 
 	barContainer: {
 		width: "100%",
-		height: "40%",
+		height: "25%",
 		padding: "0px 5% 0px 5%",
 	},
 
@@ -121,8 +129,8 @@ const styles = makeStyles((theme) => ({
 		display: "flex",
 		flexDirection: "row",
 		justifyContent: "center",
-		alignContent: "center",
-		alignItems: "center",
+		alignContent: "flex-end",
+		alignItems: "flex-end",
 
 		fontSize: 16,
 		fontWeight: 600,
@@ -175,21 +183,37 @@ const styles = makeStyles((theme) => ({
 
 		transformOrigin: "right",
 		transitionDuration: "1.0s",
+		boxShadow: "10px 10px 10px rgba(0, 0, 0, 0.25)",
 	},
 
-	textfieldContainer: {
-		padding: "25px 5% 25px 5%",
+	searchOuter: {
+		width: 200,
+		height: 40,
+		borderRadius: 20,
+		padding: 5,
+
+		border: `2px solid ${theme.palette.colors.violetMedium}`,
+
+		display: "flex",
+		flexDirection: "row",
+		justifyContent: "flex-start",
+		alignContent: "center",
+		alignItems: "center",
 	},
 
-	textField: {
-		width: "60%",
-		height: 50,
-		marginBottom: 25,
-	},
+	input: {
+		width: "75%",
+		height: "100%",
+		border: "0px solid transparent",
+		color: theme.palette.colors.violetMedium,
 
-	searchBtn: {
-		width: 100,
-		height: 50,
+		"&:focus": {
+			outline: "none",
+		},
+
+		"&::placeholder": {
+			color: theme.palette.colors.violetMedium,
+		},
 	},
 
 	loadingContainer: {
@@ -234,6 +258,13 @@ const styles = makeStyles((theme) => ({
 		fontSize: 14,
 		color: theme.palette.colors.violetText,
 		fontStyle: "italic",
+	},
+
+	topbarRight: {
+		display: "flex",
+		flexDirection: "row",
+		alignContent: "center",
+		alignItems: "center",
 	},
 }));
 
@@ -302,7 +333,26 @@ const ExerciseLayout = (props) => {
 						<div className={classes.nameContainer}>{props.exerciseName}</div>
 						<div className={classes.iconContainer}>
 							<CancelIcon className={classes.menuBtn} onClick={() => getBack()} />
-							<MenuIcon className={classes.menuBtn} onClick={() => setShowSidebar(true)} />
+							<div className={classes.topbarRight}>
+								<div className={classes.searchOuter}>
+									<SearchIcon
+										className={classes.menuBtn}
+										onClick={() => {
+											searchWord();
+											setShowSidebar(true);
+										}}
+									/>
+									<input
+										type="text"
+										name="dictionaryText"
+										placeholder="Search..."
+										autoFocus={false}
+										className={classes.input}
+										onChange={(e) => setDictionarySearch(e.target.value)}
+									/>
+								</div>
+								<img src={ClipboardIcon} alt="" style={{width: 30, height: 30, marginLeft: 10}} />
+							</div>
 						</div>
 					</div>
 
@@ -339,7 +389,6 @@ ExerciseLayout.propTypes = {
 	totalQuestions: PropTypes.number.isRequired,
 	currentQuestionNumber: PropTypes.number.isRequired,
 	scrollable: PropTypes.bool,
-
 	correct: PropTypes.bool.isRequired,
 	getNext: PropTypes.func.isRequired,
 	anime: PropTypes.bool.isRequired,
