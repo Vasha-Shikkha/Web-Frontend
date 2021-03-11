@@ -151,13 +151,15 @@ const styles = makeStyles((theme) => ({
 	cancelIconContainer: {
 		height: "100%",
 		width: "100%",
-		paddingLeft: "5%",
+		paddingRight: "5%",
 
 		display: "flex",
 		flexDirection: "row",
-		justifyContent: "flex-start",
+		justifyContent: "flex-end",
 		alignContent: "center",
 		alignItems: "center",
+
+		background: "#ECE0FF",
 	},
 
 	sidebar: {
@@ -167,7 +169,7 @@ const styles = makeStyles((theme) => ({
 		left: "5%",
 
 		zIndex: 10,
-		background: theme.palette.colors.lightPink,
+		background: "#ECE0FF",
 
 		overflowY: "auto",
 
