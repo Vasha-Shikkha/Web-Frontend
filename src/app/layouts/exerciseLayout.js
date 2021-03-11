@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import PropTypes from "prop-types";
-import {makeStyles, TextField} from "@material-ui/core";
+import {makeStyles} from "@material-ui/core";
 import {getWordMeaning} from "../axios/services/dictionary";
 
 import QuestionNumber from "../components/QuestionNumber";
@@ -276,6 +276,9 @@ const ExerciseLayout = (props) => {
 	const [loading, setLoading] = useState(false);
 
 	const searchWord = () => {
+		if (!dictionarySearch || dictionarySearch.length === 0) return;
+
+		setShowSidebar(true);
 		setLoading(true);
 		getWordMeaning(dictionarySearch, (err, axios_data) => {
 			if (!err) {
@@ -286,6 +289,12 @@ const ExerciseLayout = (props) => {
 
 			setLoading(false);
 		});
+	};
+
+	const handleKeyPress = (event) => {
+		if (event.key === "Enter") {
+			searchWord();
+		}
 	};
 
 	const getBack = () => {
@@ -339,7 +348,6 @@ const ExerciseLayout = (props) => {
 										className={classes.menuBtn}
 										onClick={() => {
 											searchWord();
-											setShowSidebar(true);
 										}}
 									/>
 									<input
@@ -348,6 +356,7 @@ const ExerciseLayout = (props) => {
 										placeholder="Search..."
 										autoFocus={false}
 										className={classes.input}
+										onKeyPress={handleKeyPress}
 										onChange={(e) => setDictionarySearch(e.target.value)}
 									/>
 								</div>
