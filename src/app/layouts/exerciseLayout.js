@@ -162,8 +162,9 @@ const styles = makeStyles((theme) => ({
 
 	sidebar: {
 		position: "fixed",
-		height: "100vh",
-		top: 0,
+		height: "80vh",
+		width: "90%",
+		left: "5%",
 
 		zIndex: 10,
 		background: theme.palette.colors.lightPink,
@@ -172,16 +173,6 @@ const styles = makeStyles((theme) => ({
 
 		transformOrigin: "right",
 		transitionDuration: "1.0s",
-
-		[theme.breakpoints.down("md")]: {
-			width: "70%",
-			right: "-70%",
-		},
-
-		[theme.breakpoints.up("lg")]: {
-			width: "40%",
-			right: "-40%",
-		},
 	},
 
 	textfieldContainer: {
@@ -276,24 +267,10 @@ const ExerciseLayout = (props) => {
 			<div
 				id="dictionaryScroll"
 				className={classes.sidebar}
-				style={showSidebar && !props.anime ? {right: 0} : null}>
+				style={showSidebar && !props.anime ? {top: "10vh"} : {top: "-100vh"}}>
 				<div className={`${classes.nav}`} style={{background: colors.lightPink}}>
 					<div className={classes.cancelIconContainer}>
 						<CancelIcon className={classes.menuBtn} onClick={() => setShowSidebar(false)} />
-					</div>
-				</div>
-
-				<div className={classes.textfieldContainer}>
-					<TextField
-						variant="outlined"
-						onChange={(e) => setDictionarySearch(e.target.value)}
-						value={dictionarySearch}
-						name="dictionary_search"
-						className={classes.textField}
-					/>
-
-					<div className={classes.searchBtn}>
-						<Button styles={classes.btn3} text="Search" onClick={searchWord} />
 					</div>
 				</div>
 
