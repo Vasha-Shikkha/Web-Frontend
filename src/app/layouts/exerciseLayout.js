@@ -7,7 +7,6 @@ import QuestionNumber from "../components/QuestionNumber";
 import Button from "../components/Button";
 import CancelIcon from "@material-ui/icons/Cancel";
 import SearchIcon from "@material-ui/icons/Search";
-import colors from "../styles/colors";
 import Loading from "../components/Loading";
 import VerdictBanner from "../components/VerdictBanner";
 import ClipboardIcon from "../assets/clipboard.svg";
@@ -228,36 +227,20 @@ const styles = makeStyles((theme) => ({
 		alignItems: "center",
 	},
 
+	dictionaryNav: {
+		width: "100%",
+		height: "10%",
+
+		display: "flex",
+		flexDirection: "row",
+		justifyContent: "flex-end",
+		alignContent: "center",
+		alignItems: "center",
+	},
+
 	dictionaryContainer: {
-		padding: "5%",
-	},
-
-	word: {
-		fontSize: 16,
-		fontWeight: 600,
-		textDecoration: `underline ${theme.palette.colors.violetText}`,
-		color: theme.palette.colors.violetText,
-
-		marginBottom: 25,
-	},
-
-	meaning: {
-		fontSize: 14,
-		marginBottom: 50,
-	},
-
-	exampleHead: {
-		fontSize: 14,
-		fontWeight: 600,
-
-		marginBottom: 5,
-		color: theme.palette.colors.violetDark,
-	},
-
-	example: {
-		fontSize: 14,
-		color: theme.palette.colors.violetText,
-		fontStyle: "italic",
+		width: "100%",
+		height: "90%",
 	},
 
 	topbarRight: {
@@ -265,6 +248,53 @@ const styles = makeStyles((theme) => ({
 		flexDirection: "row",
 		alignContent: "center",
 		alignItems: "center",
+	},
+
+	card: {
+		width: "80%",
+		height: "80%",
+		background: "white",
+		borderRadius: 20,
+
+		position: "absolute",
+
+		border: `0.5px solid ${theme.palette.colors.violetMedium}`,
+		boxShadow: `10px 10px 5px ${theme.palette.colors.violetLight}`,
+
+		padding: "5% 5% 0 5%",
+	},
+
+	word: {
+		fontSize: 16,
+		fontWeight: 600,
+		borderBottom: `1px solid ${theme.palette.colors.violetText}`,
+		color: theme.palette.colors.violetText,
+
+		marginBottom: 25,
+		textAlign: "center",
+	},
+
+	meaning: {
+		fontSize: 14,
+		textAlign: "center",
+
+		marginBottom: 50,
+	},
+
+	exampleHead: {
+		fontSize: 14,
+		fontWeight: 600,
+		textAlign: "center",
+
+		marginBottom: 5,
+		color: theme.palette.colors.violetDark,
+	},
+
+	example: {
+		fontSize: 14,
+		textAlign: "center",
+		color: theme.palette.colors.violetText,
+		fontStyle: "italic",
 	},
 }));
 
@@ -310,7 +340,7 @@ const ExerciseLayout = (props) => {
 				id="dictionaryScroll"
 				className={classes.sidebar}
 				style={showSidebar && !props.anime ? {top: "10vh"} : {top: "-100vh"}}>
-				<div className={`${classes.nav}`} style={{background: colors.lightPink}}>
+				<div className={`${classes.dictionaryNav}`}>
 					<div className={classes.cancelIconContainer}>
 						<CancelIcon className={classes.menuBtn} onClick={() => setShowSidebar(false)} />
 					</div>
@@ -319,17 +349,24 @@ const ExerciseLayout = (props) => {
 				{loading ? (
 					<Loading container={classes.loadingContainer} />
 				) : (
-					<div className={classes.dictionaryContainer}>
-						<div className={classes.word}>{searchRes.word ? searchRes.word.toUpperCase() : ""}</div>
-						<div className={classes.meaning}>
-							{searchRes.meaning ? searchRes.meaning.join(", ") : ""}
-						</div>
-						{searchRes.example && searchRes.example.length && (
-							<div className={classes.exampleHead}>Example</div>
-						)}
-
-						<div className={classes.example}>
-							{searchRes.example ? searchRes.example.join(",") : ""}
+					<div className={`${classes.dictionaryContainer} ${classes.centererd}`}>
+						<div
+							className={classes.card}
+							style={{
+								zIndex: 2,
+							}}>
+							<div className={classes.word}>
+								{dictionarySearch ? dictionarySearch.toUpperCase() : ""}
+							</div>
+							<div className={classes.meaning}>
+								{searchRes.meaning ? searchRes.meaning.join(", ") : null}
+							</div>
+							{searchRes && searchRes.example ? (
+								<div className={classes.exampleHead}>Example</div>
+							) : null}
+							<div className={classes.example}>
+								{searchRes.example ? searchRes.example.join(", ") : null}
+							</div>
 						</div>
 					</div>
 				)}
