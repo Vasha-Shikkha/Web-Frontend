@@ -58,19 +58,10 @@ const MCQCard = forwardRef((props, ref) => {
 	};
 
 	return (
-		<div
-			style={{zIndex: props.elevation ? props.elevation : 0}}
-			className={props.moveAway === false ? classes.root : `${classes.root} ${classes.transition}`}>
+		<div className={classes.root}>
 			<div className={`${classes.question} ${classes.centered}`}>{props.question.question}</div>
 			<div className={classes.optionContainer}>
-				<Grid
-					container
-					spacing={3}
-					direction="row"
-					wrap="wrap"
-					justify="space-between"
-					alignContent="space-between"
-					alignItems="stretch">
+				<Grid container spacing={3}>
 					{props.question.options.map((obj, idx) => (
 						<Grid item xs={6} sm={6} md={6} lg={6} xl={6} key={idx}>
 							<div
@@ -91,8 +82,7 @@ const MCQCard = forwardRef((props, ref) => {
 
 MCQCard.propTypes = {
 	question: PropTypes.object.isRequired,
-	moveAway: PropTypes.bool,
-	elevation: PropTypes.number,
+	currentQuestionNumber: PropTypes.number,
 	isReview: PropTypes.bool.isRequired,
 	isChecked: PropTypes.bool.isRequired,
 };
