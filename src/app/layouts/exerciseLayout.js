@@ -1,15 +1,15 @@
 import React, {useState} from "react";
 import PropTypes from "prop-types";
-import {makeStyles, TextField} from "@material-ui/core";
+import {makeStyles} from "@material-ui/core";
 import {getWordMeaning} from "../axios/services/dictionary";
 
 import QuestionNumber from "../components/QuestionNumber";
 import Button from "../components/Button";
 import CancelIcon from "@material-ui/icons/Cancel";
-import MenuIcon from "@material-ui/icons/Menu";
-import colors from "../styles/colors";
+import SearchIcon from "@material-ui/icons/Search";
 import Loading from "../components/Loading";
 import VerdictBanner from "../components/VerdictBanner";
+import ClipboardIcon from "../assets/clipboard.svg";
 
 import "../styles/scrollbar.css";
 
@@ -24,19 +24,19 @@ const styles = makeStyles((theme) => ({
 	},
 
 	nav: {
-		height: "15vh",
 		background: "white",
+		height: "30vh",
 	},
 
 	outerNav: {
 		width: "100%",
-		height: "60%",
+		height: "75%",
 		position: "relative",
 	},
 
 	barContainer: {
 		width: "100%",
-		height: "40%",
+		height: "25%",
 		padding: "0px 5% 0px 5%",
 	},
 
@@ -59,7 +59,7 @@ const styles = makeStyles((theme) => ({
 	},
 
 	btnContainer: {
-		height: "15vh",
+		height: "20vh",
 		flexWrap: "wrap",
 	},
 
@@ -121,8 +121,8 @@ const styles = makeStyles((theme) => ({
 		display: "flex",
 		flexDirection: "row",
 		justifyContent: "center",
-		alignContent: "center",
-		alignItems: "center",
+		alignContent: "flex-end",
+		alignItems: "flex-end",
 
 		fontSize: 16,
 		fontWeight: 600,
@@ -151,7 +151,40 @@ const styles = makeStyles((theme) => ({
 	cancelIconContainer: {
 		height: "100%",
 		width: "100%",
-		paddingLeft: "5%",
+		paddingRight: "5%",
+
+		display: "flex",
+		flexDirection: "row",
+		justifyContent: "flex-end",
+		alignContent: "center",
+		alignItems: "center",
+
+		background: "#ECE0FF",
+	},
+
+	sidebar: {
+		position: "fixed",
+		height: "80vh",
+		width: "90%",
+		left: "5%",
+
+		zIndex: 10,
+		background: "#ECE0FF",
+
+		overflowY: "auto",
+
+		transformOrigin: "right",
+		transitionDuration: "1.0s",
+		boxShadow: "10px 10px 10px rgba(0, 0, 0, 0.25)",
+	},
+
+	searchOuter: {
+		width: 200,
+		height: 40,
+		borderRadius: 20,
+		padding: 5,
+
+		border: `2px solid ${theme.palette.colors.violetMedium}`,
 
 		display: "flex",
 		flexDirection: "row",
@@ -160,43 +193,19 @@ const styles = makeStyles((theme) => ({
 		alignItems: "center",
 	},
 
-	sidebar: {
-		position: "fixed",
-		height: "100vh",
-		top: 0,
+	input: {
+		width: "75%",
+		height: "100%",
+		border: "0px solid transparent",
+		color: theme.palette.colors.violetMedium,
 
-		zIndex: 10,
-		background: theme.palette.colors.lightPink,
-
-		overflowY: "auto",
-
-		transformOrigin: "right",
-		transitionDuration: "1.0s",
-
-		[theme.breakpoints.down("md")]: {
-			width: "70%",
-			right: "-70%",
+		"&:focus": {
+			outline: "none",
 		},
 
-		[theme.breakpoints.up("lg")]: {
-			width: "40%",
-			right: "-40%",
+		"&::placeholder": {
+			color: theme.palette.colors.violetMedium,
 		},
-	},
-
-	textfieldContainer: {
-		padding: "25px 5% 25px 5%",
-	},
-
-	textField: {
-		width: "60%",
-		height: 50,
-		marginBottom: 25,
-	},
-
-	searchBtn: {
-		width: 100,
-		height: 50,
 	},
 
 	loadingContainer: {
@@ -211,27 +220,64 @@ const styles = makeStyles((theme) => ({
 		alignItems: "center",
 	},
 
+	dictionaryNav: {
+		width: "100%",
+		height: "10%",
+
+		display: "flex",
+		flexDirection: "row",
+		justifyContent: "flex-end",
+		alignContent: "center",
+		alignItems: "center",
+	},
+
 	dictionaryContainer: {
-		padding: "5%",
+		width: "100%",
+		height: "90%",
+	},
+
+	topbarRight: {
+		display: "flex",
+		flexDirection: "row",
+		alignContent: "center",
+		alignItems: "center",
+	},
+
+	card: {
+		width: "80%",
+		height: "80%",
+		background: "white",
+		borderRadius: 20,
+
+		position: "absolute",
+
+		border: `0.5px solid ${theme.palette.colors.violetMedium}`,
+		boxShadow: `10px 10px 5px ${theme.palette.colors.violetLight}`,
+
+		padding: "5% 5% 0 5%",
 	},
 
 	word: {
 		fontSize: 16,
 		fontWeight: 600,
-		textDecoration: `underline ${theme.palette.colors.violetText}`,
+		borderBottom: `1px solid ${theme.palette.colors.violetText}`,
 		color: theme.palette.colors.violetText,
 
 		marginBottom: 25,
+		textAlign: "center",
 	},
 
 	meaning: {
 		fontSize: 14,
+		textAlign: "center",
+
 		marginBottom: 50,
 	},
 
 	exampleHead: {
 		fontSize: 14,
 		fontWeight: 600,
+		textAlign: "center",
 
 		marginBottom: 5,
 		color: theme.palette.colors.violetDark,
@@ -239,6 +285,7 @@ const styles = makeStyles((theme) => ({
 
 	example: {
 		fontSize: 14,
+		textAlign: "center",
 		color: theme.palette.colors.violetText,
 		fontStyle: "italic",
 	},
@@ -252,6 +299,9 @@ const ExerciseLayout = (props) => {
 	const [loading, setLoading] = useState(false);
 
 	const searchWord = () => {
+		if (!dictionarySearch || dictionarySearch.length === 0) return;
+
+		setShowSidebar(true);
 		setLoading(true);
 		getWordMeaning(dictionarySearch, (err, axios_data) => {
 			if (!err) {
@@ -262,6 +312,12 @@ const ExerciseLayout = (props) => {
 
 			setLoading(false);
 		});
+	};
+
+	const handleKeyPress = (event) => {
+		if (event.key === "Enter") {
+			searchWord();
+		}
 	};
 
 	const getBack = () => {
@@ -276,41 +332,34 @@ const ExerciseLayout = (props) => {
 			<div
 				id="dictionaryScroll"
 				className={classes.sidebar}
-				style={showSidebar && !props.anime ? {right: 0} : null}>
-				<div className={`${classes.nav}`} style={{background: colors.lightPink}}>
+				style={showSidebar && !props.anime ? {top: "10vh"} : {top: "-100vh"}}>
+				<div className={`${classes.dictionaryNav}`}>
 					<div className={classes.cancelIconContainer}>
 						<CancelIcon className={classes.menuBtn} onClick={() => setShowSidebar(false)} />
-					</div>
-				</div>
-
-				<div className={classes.textfieldContainer}>
-					<TextField
-						variant="outlined"
-						onChange={(e) => setDictionarySearch(e.target.value)}
-						value={dictionarySearch}
-						name="dictionary_search"
-						className={classes.textField}
-					/>
-
-					<div className={classes.searchBtn}>
-						<Button styles={classes.btn3} text="Search" onClick={searchWord} />
 					</div>
 				</div>
 
 				{loading ? (
 					<Loading container={classes.loadingContainer} />
 				) : (
-					<div className={classes.dictionaryContainer}>
-						<div className={classes.word}>{searchRes.word ? searchRes.word.toUpperCase() : ""}</div>
-						<div className={classes.meaning}>
-							{searchRes.meaning ? searchRes.meaning.join(", ") : ""}
-						</div>
-						{searchRes.example && searchRes.example.length && (
-							<div className={classes.exampleHead}>Example</div>
-						)}
-
-						<div className={classes.example}>
-							{searchRes.example ? searchRes.example.join(",") : ""}
+					<div className={`${classes.dictionaryContainer} ${classes.centererd}`}>
+						<div
+							className={classes.card}
+							style={{
+								zIndex: 2,
+							}}>
+							<div className={classes.word}>
+								{dictionarySearch ? dictionarySearch.toUpperCase() : ""}
+							</div>
+							<div className={classes.meaning}>
+								{searchRes.meaning ? searchRes.meaning.join(", ") : null}
+							</div>
+							{searchRes && searchRes.example ? (
+								<div className={classes.exampleHead}>Example</div>
+							) : null}
+							<div className={classes.example}>
+								{searchRes.example ? searchRes.example.join(", ") : null}
+							</div>
 						</div>
 					</div>
 				)}
@@ -323,7 +372,26 @@ const ExerciseLayout = (props) => {
 						<div className={classes.nameContainer}>{props.exerciseName}</div>
 						<div className={classes.iconContainer}>
 							<CancelIcon className={classes.menuBtn} onClick={() => getBack()} />
-							<MenuIcon className={classes.menuBtn} onClick={() => setShowSidebar(true)} />
+							<div className={classes.topbarRight}>
+								<div className={classes.searchOuter}>
+									<SearchIcon
+										className={classes.menuBtn}
+										onClick={() => {
+											searchWord();
+										}}
+									/>
+									<input
+										type="text"
+										name="dictionaryText"
+										placeholder="Search..."
+										autoFocus={false}
+										className={classes.input}
+										onKeyPress={handleKeyPress}
+										onChange={(e) => setDictionarySearch(e.target.value)}
+									/>
+								</div>
+								<img src={ClipboardIcon} alt="" style={{width: 30, height: 30, marginLeft: 10}} />
+							</div>
 						</div>
 					</div>
 
@@ -360,7 +428,6 @@ ExerciseLayout.propTypes = {
 	totalQuestions: PropTypes.number.isRequired,
 	currentQuestionNumber: PropTypes.number.isRequired,
 	scrollable: PropTypes.bool,
-
 	correct: PropTypes.bool.isRequired,
 	getNext: PropTypes.func.isRequired,
 	anime: PropTypes.bool.isRequired,
