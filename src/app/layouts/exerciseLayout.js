@@ -25,14 +25,7 @@ const styles = makeStyles((theme) => ({
 
 	nav: {
 		background: "white",
-
-		[theme.breakpoints.down("sm")]: {
-			height: "30vh",
-		},
-
-		[theme.breakpoints.up("md")]: {
-			height: "25vh",
-		},
+		height: "30vh",
 	},
 
 	outerNav: {
@@ -66,7 +59,7 @@ const styles = makeStyles((theme) => ({
 	},
 
 	btnContainer: {
-		height: "15vh",
+		height: "20vh",
 		flexWrap: "wrap",
 	},
 

@@ -3,7 +3,7 @@ import {makeStyles} from "@material-ui/core";
 const styles = makeStyles((theme) => ({
 	root: {
 		width: "90%",
-		minHeight: "70vh",
+		minHeight: "50vh",
 		background: "white",
 	},
 
@@ -64,6 +64,7 @@ const styles = makeStyles((theme) => ({
 		padding: 20,
 		borderBottom: "1px solid #2F2E41",
 		color: "transparent",
+		userSelect: "none",
 	},
 
 	centered: {
