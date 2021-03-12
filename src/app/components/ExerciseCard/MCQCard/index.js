@@ -1,4 +1,4 @@
-import React, {useState, forwardRef, useImperativeHandle} from "react";
+import React, {useState, forwardRef, useImperativeHandle, useEffect} from "react";
 import PropTypes from "prop-types";
 import {Grid} from "@material-ui/core";
 import colors from "../../../styles/colors";
@@ -34,7 +34,11 @@ const MCQCard = forwardRef((props, ref) => {
 	}));
 
 	const classes = styles();
-	const [selected, setSelected] = useState(props.question.options.map(() => false));
+	const [selected, setSelected] = useState([]);
+
+	useEffect(() => {
+		setSelected(props.question.options.map(() => false));
+	}, [props.question]);
 
 	const selectOption = (idx) => {
 		if (!props.isReview && !props.isChecked) {
