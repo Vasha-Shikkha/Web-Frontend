@@ -53,8 +53,9 @@ const SignIn = (props) => {
 				setSnackType(0);
 				setMsg(err.msg);
 			} else {
-				props.login(axios_data.user);
-				setAuthenticated(true);
+				props.login(axios_data.user, () => {
+					setAuthenticated(true);
+				});
 			}
 
 			setOpen(true);

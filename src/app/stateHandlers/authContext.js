@@ -23,9 +23,10 @@ export const AuthProvider = (props) => {
 		} else return false;
 	};
 
-	const login = (user) => {
+	const login = (user, cb) => {
 		setIsAuthenticated(isAuthenticated);
 		setUser(user);
+		cb();
 	};
 
 	const logout = () => {
