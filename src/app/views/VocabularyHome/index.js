@@ -32,7 +32,8 @@ const VocabularyHome = () => {
 				setShowTooltip(topics.map(() => false));
 			}
 		});
-	}, [topics]);
+		// eslint-disable-next-line
+	}, []);
 
 	const tooltipToggler = (idx) => {
 		let arr = [...showTooltip];
