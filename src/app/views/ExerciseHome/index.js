@@ -68,24 +68,20 @@ const Vocabulary = (props) => {
 			</div>
 			<div className={classes.exerciseContainer}>
 				<Grid container spacing={3}>
-					{exerciseTypes.map((obj, idx) =>
-						props.location.state && props.location.state.availableTasks === obj.name ? (
-							<Grid key={idx} item xs={12} sm={12} md={6} lg={6} xl={6}>
-								<Link to={obj.link} className={classes.box}>
-									<div className={classes.imageContainer}>
-										<img src={obj.image} alt="" className={classes.boxImage} />
-									</div>
-									<div className={classes.titleContainer}>
-										<div className={classes.title}>{obj.name}</div>
-										<div
-											className={
-												classes.questionQuantity
-											}>{`${obj.questionQuantity} Questions`}</div>
-									</div>
-								</Link>
-							</Grid>
-						) : null
-					)}
+					{exerciseTypes.map((obj, idx) => (
+						<Grid key={idx} item xs={12} sm={12} md={6} lg={6} xl={6}>
+							<Link to={obj.link} className={classes.box}>
+								<div className={classes.imageContainer}>
+									<img src={obj.image} alt="" className={classes.boxImage} />
+								</div>
+								<div className={classes.titleContainer}>
+									<div className={classes.title}>{obj.name}</div>
+									<div
+										className={classes.questionQuantity}>{`${obj.questionQuantity} Questions`}</div>
+								</div>
+							</Link>
+						</Grid>
+					))}
 				</Grid>
 			</div>
 		</div>

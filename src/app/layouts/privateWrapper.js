@@ -6,7 +6,7 @@ import {AuthConsumer} from "../stateHandlers/authContext";
 
 class PrivateComponent extends Component {
 	state = {
-		status: undefined,
+		status: null,
 	};
 
 	componentDidMount() {
