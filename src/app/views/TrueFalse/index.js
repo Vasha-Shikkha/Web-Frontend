@@ -9,7 +9,6 @@ import styles from "../../styles/exerciseViewStyles";
 const TrueFalse = () => {
 	const classes = styles();
 	const [question, setQuestion] = useState([]);
-	const [moveAway, setMoveAway] = useState([]);
 	const [checked, setChecked] = useState([]);
 	const [currentQuestion, setCurrentQuestion] = useState(0);
 	const [loading, setLoading] = useState(true);
@@ -39,7 +38,6 @@ const TrueFalse = () => {
 			},
 		];
 
-		setMoveAway(data.map(() => false));
 		setQuestion(data);
 		setLoading(false);
 		setChecked(data.map(() => false));
@@ -72,11 +70,6 @@ const TrueFalse = () => {
 	};
 
 	const getNext = () => {
-		// make the showTransition flag true for the current question
-		let arr = [...moveAway];
-		arr[currentQuestion] = true;
-		setMoveAway(arr);
-
 		// hide verdict
 		setShowVerdict(false);
 
@@ -91,7 +84,8 @@ const TrueFalse = () => {
 				<Loading />
 			) : (
 				<ExerciseLayout
-					exerciseName="True-False"
+					exerciseName="Find the Wrong Sentence"
+					scrollable={true}
 					totalQuestions={question.length}
 					currentQuestionNumber={currentQuestion + 1}
 					backToHome={backToHome}
@@ -100,18 +94,14 @@ const TrueFalse = () => {
 					correct={correct}
 					anime={showVerdict}
 					getNext={getNext}>
-					<div className={`${classes.root} ${classes.centered}`}>
-						{question.map((obj, idx) => (
-							<TrueFalseCard
-								key={idx}
-								ref={childRef}
-								elevation={question.length - idx + 1}
-								question={obj}
-								moveAway={moveAway[idx]}
-								isReview={false}
-								isChecked={checked[idx]}
-							/>
-						))}
+					<div className={`${classes.scrollableRoot} ${classes.centered}`}>
+						<TrueFalseCard
+							ref={childRef}
+							currentQuestionNumber={currentQuestion}
+							question={question[currentQuestion]}
+							isReview={false}
+							isChecked={checked[currentQuestion]}
+						/>
 					</div>
 				</ExerciseLayout>
 			)}

@@ -1,4 +1,4 @@
-import React, {useState, forwardRef, useImperativeHandle} from "react";
+import React, {useState, forwardRef, useImperativeHandle, useEffect} from "react";
 import PropTypes from "prop-types";
 import {Grid} from "@material-ui/core";
 import colors from "../../../styles/colors";
@@ -17,12 +17,16 @@ const TrueFalseCard = forwardRef((props, ref) => {
 	}));
 
 	const classes = styles();
-	const [selected, setSelected] = useState(props.question.users_answer);
+	const [selected, setSelected] = useState(-1);
+
+	useEffect(() => {
+		setSelected(-1);
+	}, [props.question]);
 
 	// if not reviewing or done checking then let the user select an option
-	const selectOption = (idx) => {
+	const selectOption = (val) => {
 		if (!props.isReview && !props.isChecked) {
-			setSelected(idx);
+			setSelected(val);
 		}
 	};
 
@@ -47,14 +51,7 @@ const TrueFalseCard = forwardRef((props, ref) => {
 			className={props.moveAway === false ? classes.root : `${classes.root} ${classes.transition}`}>
 			<div className={`${classes.question} ${classes.centered}`}>{props.question.question}</div>
 			<div className={classes.optionContainer}>
-				<Grid
-					container
-					spacing={3}
-					direction="row"
-					wrap="wrap"
-					justify="space-between"
-					alignContent="space-between"
-					alignItems="stretch">
+				<Grid container spacing={3}>
 					<Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
 						<div
 							style={{background: determineOptionColor(1)}}
@@ -84,7 +81,6 @@ const TrueFalseCard = forwardRef((props, ref) => {
 
 TrueFalseCard.propTypes = {
 	question: PropTypes.object.isRequired,
-	moveAway: PropTypes.bool,
 	elevation: PropTypes.number,
 	isReview: PropTypes.bool.isRequired,
 	isChecked: PropTypes.bool.isRequired,
