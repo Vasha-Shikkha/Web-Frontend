@@ -1,5 +1,5 @@
-import {postReqAuth} from "../index";
+import {getReqAuth} from "../index";
 
-const getCommunicativeTopics = (cb) => postReqAuth("/user/topics", {}, "", cb);
+const getCommunicativeTopics = (cb) => getReqAuth("/user/topics", "", cb);
 
 export {getCommunicativeTopics};

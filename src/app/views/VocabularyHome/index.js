@@ -1,13 +1,14 @@
 import React, {useEffect, useState} from "react";
 import {Redirect} from "react-router-dom";
-import colors from "../../styles/colors";
+import {getCommunicativeTopics} from "../../axios/services/topics";
 
+import colors from "../../styles/colors";
 import Triangle from "../../components/Triangle";
 import Button from "../../components/Button";
 import BackArrowButton from "../../components/BackArrowButton";
+
 import {Grid} from "@material-ui/core";
 import Girl_Reading from "../../assets/girl_reading.svg";
-
 import Places from "../../assets/topics/places.svg";
 import Birds from "../../assets/topics/birds.svg";
 import Food from "../../assets/topics/food.svg";
@@ -23,6 +24,10 @@ const VocabularyHome = () => {
 	const [routingStates, setRoutingStates] = useState({});
 
 	useEffect(() => {
+		getCommunicativeTopics((err, axios_data) => {
+			console.log(err, axios_data);
+		});
+
 		setTopic([
 			{
 				name: "Understanding Moods with images",
@@ -78,6 +83,7 @@ const VocabularyHome = () => {
 	const tutorialBtnClick = (idx) => {
 		setRedirect("/tutorial");
 	};
+
 	const exerciseBtnClick = (idx) => {
 		setRedirect("/exercise");
 		setRoutingStates({

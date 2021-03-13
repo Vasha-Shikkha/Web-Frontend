@@ -4,7 +4,7 @@ import config from "../util/config";
 
 // used to send post request to private routes
 export const postReqAuth = (route, data, param, cb) => {
-	const token = localStorage.getItem("jwtToken");
+	const token = localStorage.getItem("vasha_shikkha_jwtToken");
 	if (token) {
 		axios.defaults.headers.common["Authorization"] = token;
 		axios
@@ -39,7 +39,7 @@ export const postReq = (route, data, param, cb, setAuth) => {
 
 // used to send get request to private routes
 export const getReqAuth = (route, param, cb) => {
-	const token = localStorage.getItem("jwtToken");
+	const token = localStorage.getItem("vasha_shikkha_jwtToken");
 	if (token) {
 		axios.defaults.headers.common["Authorization"] = token;
 		axios

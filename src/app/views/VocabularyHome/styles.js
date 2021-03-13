@@ -76,7 +76,6 @@ const styles = makeStyles((theme) => ({
 
 		display: "flex",
 		flexDirection: "row",
-		flexWrap: "wrap",
 		alignContent: "center",
 		alignItems: "center",
 		justifyContent: "space-around",
@@ -88,7 +87,7 @@ const styles = makeStyles((theme) => ({
 	levelBox: {
 		padding: 10,
 		borderRadius: 10,
-		width: "24%",
+		width: "16.67%",
 		textAlign: "center",
 		cursor: "pointer",
 	},
