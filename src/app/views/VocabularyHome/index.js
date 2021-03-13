@@ -14,7 +14,7 @@ import Food from "../../assets/topics/food.svg";
 
 import styles from "./styles";
 
-const Vocabulary = () => {
+const VocabularyHome = () => {
 	const classes = styles();
 	const [level, setLevel] = useState(1);
 	const [showTooltip, setShowTooltip] = useState([]);
@@ -115,7 +115,7 @@ const Vocabulary = () => {
 				<div className={classes.heading}>COMMUNICATIVE</div>
 
 				<div className={classes.levelContainer}>
-					{[1, 2, 3, 4].map((obj, idx) => (
+					{[1, 2, 3, 4, 5, 6].map((obj, idx) => (
 						<div
 							key={idx}
 							onClick={() => setLevel(obj)}
@@ -165,4 +165,4 @@ const Vocabulary = () => {
 	);
 };
 
-export default Vocabulary;
+export default VocabularyHome;

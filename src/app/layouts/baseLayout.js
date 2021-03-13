@@ -3,18 +3,18 @@ import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import {MuiThemeProvider, createMuiTheme} from "@material-ui/core/styles";
 
 import {AuthProvider} from "../stateHandlers/authContext";
-// import PrivateWrapper from "./privateWrapper";
+import PrivateWrapper from "./privateWrapper";
 
 import Loading from "../components/Loading";
 
 // use code splitting for better ux
-// const Landing = lazy(() => import("../views/Landing"));
+const Landing = lazy(() => import("../views/Landing"));
 const Auth = lazy(() => import("../views/Auth"));
 const Home = lazy(() => import("../views/Home"));
 const FinishLine = lazy(() => import("../views/FinishLine"));
 const Tutorial = lazy(() => import("../views/Tutorial"));
 const Exercise = lazy(() => import("../views/ExerciseHome"));
-const Vocabulary_Home = lazy(() => import("../views/Vocabulary_Home"));
+const VocabularyHome = lazy(() => import("../views/VocabularyHome"));
 const FlashCard = lazy(() => import("../views/FlashCard"));
 const MCQ = lazy(() => import("../views/MCQ"));
 const TrueFalse = lazy(() => import("../views/TrueFalse"));
@@ -43,12 +43,6 @@ const theme = createMuiTheme({
 			lightPink: "#fff0ff",
 		},
 	},
-
-	typography: {
-		// Use the system font instead of the default Roboto font.
-		// fontFamily: "Montserrat",
-		// useNextVariants: true,
-	},
 });
 
 const BaseLayout = () => (
@@ -58,19 +52,19 @@ const BaseLayout = () => (
 				<MuiThemeProvider theme={theme}>
 					<div>
 						<Switch>
-							{/* <Route
+							<Route
 								exact
 								path="/home"
 								render={(props) => <PrivateWrapper component={<Home {...props} />} />}
-							/> */}
+							/>
 
-							{/* <Route
+							<Route
 								exact
-								path="/vocabulary"
-								render={(props) => <PrivateWrapper component={<Vocabulary_Home {...props} />} />}
-							/> */}
+								path="/communicative"
+								render={(props) => <PrivateWrapper component={<VocabularyHome {...props} />} />}
+							/>
 
-							{/* <Route
+							<Route
 								exact
 								path="/mcq"
 								render={(props) => <PrivateWrapper component={<MCQ {...props} />} />}
@@ -86,27 +80,78 @@ const BaseLayout = () => (
 								exact
 								path="/word-to-picture"
 								render={(props) => <PrivateWrapper component={<WordToPicture {...props} />} />}
-							/> */}
+							/>
 
-							<Route exact path="/sentence-matching" component={SentenceMatching} />
-							<Route exact path="/picture-to-word" component={PictureToWord} />
-							<Route exact path="/word-to-picture" component={WordToPicture} />
-							<Route exact path="/mcq" component={MCQ} />
-							<Route exact path="/true-false" component={TrueFalse} />
-							<Route exact path="/jumbled-sentence" component={JumbledSentence} />
-							<Route exact path="/fill-in-the-blanks" component={FillInTheBlanks} />
-							<Route exact path="/rearrange-sentence" component={RearrangeSentence} />
-							<Route exact path="/drag-caption-to-picture" component={DragCaptionToPicture} />
+							<Route
+								exact
+								path="/picture-to-word"
+								render={(props) => <PrivateWrapper component={<PictureToWord {...props} />} />}
+							/>
 
-							{/* <Route exact path="/" component={Landing} /> */}
-							<Route exact path="/flash-card" component={FlashCard} />
-							<Route exact path="/tutorial" component={Tutorial} />
-							<Route exact path="/exercise" component={Exercise} />
+							<Route
+								exact
+								path="/sentence-matching"
+								render={(props) => <PrivateWrapper component={<SentenceMatching {...props} />} />}
+							/>
+
+							<Route
+								exact
+								path="/jumbled-sentence"
+								render={(props) => <PrivateWrapper component={<JumbledSentence {...props} />} />}
+							/>
+
+							<Route
+								exact
+								path="/fill-in-the-blanks"
+								render={(props) => <PrivateWrapper component={<FillInTheBlanks {...props} />} />}
+							/>
+
+							<Route
+								exact
+								path="/rearrange-sentence"
+								render={(props) => <PrivateWrapper component={<RearrangeSentence {...props} />} />}
+							/>
+
+							<Route
+								exact
+								path="/drag-caption-to-picture"
+								render={(props) => (
+									<PrivateWrapper component={<DragCaptionToPicture {...props} />} />
+								)}
+							/>
+
+							<Route
+								exact
+								path="/flash-card"
+								render={(props) => <PrivateWrapper component={<FlashCard {...props} />} />}
+							/>
+
+							<Route
+								exact
+								path="/tutorial"
+								render={(props) => <PrivateWrapper component={<Tutorial {...props} />} />}
+							/>
+
+							<Route
+								exact
+								path="/exercise"
+								render={(props) => <PrivateWrapper component={<Exercise {...props} />} />}
+							/>
+
+							<Route
+								exact
+								path="/home"
+								render={(props) => <PrivateWrapper component={<Home {...props} />} />}
+							/>
+
+							<Route
+								exact
+								path="/finish"
+								render={(props) => <PrivateWrapper component={<FinishLine {...props} />} />}
+							/>
+
+							<Route exact path="/" component={Landing} />
 							<Route exact path="/auth" component={Auth} />
-							<Route exact path="/home" component={Home} />
-							<Route exact path="/" component={Home} />
-							<Route exact path="/finish" component={FinishLine} />
-							<Route exact path="/communicative" component={Vocabulary_Home} />
 						</Switch>
 					</div>
 				</MuiThemeProvider>

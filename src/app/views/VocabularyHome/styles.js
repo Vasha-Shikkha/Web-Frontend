@@ -76,6 +76,7 @@ const styles = makeStyles((theme) => ({
 
 		display: "flex",
 		flexDirection: "row",
+		flexWrap: "wrap",
 		alignContent: "center",
 		alignItems: "center",
 		justifyContent: "space-around",

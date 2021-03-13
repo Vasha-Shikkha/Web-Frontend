@@ -79,6 +79,7 @@ const SignIn = (props) => {
 				console.error("error in signup", err);
 				setMsg(err.msg);
 				setSnackType(0);
+				setErrors({});
 			} else {
 				setMsg("Registered Successfully!!!");
 				setSnackType(1);
