@@ -2,18 +2,9 @@ import {makeStyles} from "@material-ui/core";
 
 const styles = makeStyles((theme) => ({
 	root: {
-		width: "80%",
-		height: "90%",
+		width: "90%",
+		minHeight: "50vh",
 		background: "white",
-		borderRadius: 30,
-
-		position: "absolute",
-	},
-
-	transition: {
-		transformOrigin: "left",
-		transform: "translate(-150%, -15%) rotate(-25deg)",
-		transitionDuration: "1.0s",
 	},
 
 	question: {
@@ -28,8 +19,8 @@ const styles = makeStyles((theme) => ({
 	optionContainer: {
 		height: "70%",
 		width: "100%",
-		padding: "5%",
-		borderRadius: "0px 0px 30px 30px",
+
+		flexGrow: 1,
 	},
 
 	opt: {
