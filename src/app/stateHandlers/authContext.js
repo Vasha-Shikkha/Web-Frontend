@@ -15,6 +15,13 @@ export const AuthProvider = (props) => {
 		let user = localStorage.getItem("vasha_shikkha_user");
 		let jwtToken = localStorage.getItem("vasha_shikkha_jwtToken");
 
+		// if something is undefined while saving, it's stored as undefined
+		// in the local storage. when retrieving it from the storage,
+		// it becomes a string and it becomes difficult to realize that this is causing error
+		// because you print it and see `undefined` in the console, so you hardly bother about it
+		if (user && user === "undefined") user = null;
+		if (jwtToken && jwtToken === "undefined") jwtToken = null;
+
 		if (jwtToken) {
 			setIsAuthenticated(true);
 			setUser(user);
