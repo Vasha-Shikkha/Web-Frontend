@@ -3,10 +3,11 @@ import React, {useEffect, useState, useRef} from "react";
 import ExerciseLayout from "../../layouts/exerciseLayout";
 import Loading from "../../components/Loading";
 import MCQCard from "../../components/ExerciseCard/MCQCard";
+import {getMCQ} from "../../axios/services/exercise/mcq";
 
 import styles from "../../styles/exerciseViewStyles";
 
-const MCQ = () => {
+const MCQ = (props) => {
 	const classes = styles();
 	const [question, setQuestion] = useState([]);
 	const [checked, setChecked] = useState([]);
@@ -18,33 +19,22 @@ const MCQ = () => {
 	const childRef = useRef();
 
 	useEffect(() => {
-		let data = [
-			{
-				question: "What is the meaning of door?",
-				options: ["জানালা", "দরজা", "বাড়ী", "উঠান"],
-				answer: [1],
-				users_answer: [],
-			},
+		let params = {
+			topic_id: props.location.state.topicId,
+			offset: 0,
+			limit: 5,
+		};
 
-			{
-				question: "Which are articles?",
-				options: ["a", "of", "an", "the"],
-				answer: [0, 2, 3],
-				users_answer: [],
-			},
-
-			{
-				question: "A Tree - which is the correct translation?",
-				options: ["একটি গাছ", "একটি বিড়াল", "একটি লোক", "একটি মাছ"],
-				answer: [0],
-				users_answer: [],
-			},
-		];
-
-		setChecked(data.map(() => false));
-		setQuestion(data);
-		setLoading(false);
-	}, []);
+		getMCQ(params, (err, axios_data) => {
+			if (err) console.error(err);
+			else {
+				console.log(axios_data);
+				setQuestion(axios_data);
+				setChecked(axios_data.map(() => false));
+				setLoading(false);
+			}
+		});
+	}, [props.location.state.topicId]);
 
 	const backToHome = () => {
 		console.log("time to get back kid");

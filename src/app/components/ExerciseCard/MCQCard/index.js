@@ -17,7 +17,7 @@ const MCQCard = forwardRef((props, ref) => {
 				}
 			}
 
-			for (let i = 0; i < props.question.answer.length; i++) {
+			for (let i = 0; i < props.question.Answer.length; i++) {
 				// correct option not selected
 				if (!selected[props.question.answer[i]]) {
 					answer.isCorrect = false;
@@ -37,7 +37,8 @@ const MCQCard = forwardRef((props, ref) => {
 	const [selected, setSelected] = useState([]);
 
 	useEffect(() => {
-		setSelected(props.question.options.map(() => false));
+		console.log(props.question);
+		setSelected(props.question.Options.map(() => false));
 	}, [props.question]);
 
 	const selectOption = (idx) => {
@@ -51,7 +52,7 @@ const MCQCard = forwardRef((props, ref) => {
 	const determineOptionColor = (idx) => {
 		if (!props.isChecked && !props.isReview) return colors.white;
 		else {
-			let x = new Set(props.question.answer);
+			let x = new Set(props.question.Answer);
 			let y = new Set(props.question.users_answer);
 
 			if (x.has(idx) && y.has(idx)) return colors.correct;
@@ -63,10 +64,14 @@ const MCQCard = forwardRef((props, ref) => {
 
 	return (
 		<div className={classes.root}>
-			<div className={`${classes.question} ${classes.centered}`}>{props.question.question}</div>
+			<div
+				className={`${classes.question}`}
+				contentEditable="false"
+				dangerouslySetInnerHTML={{__html: props.question.Question}}></div>
+
 			<div className={classes.optionContainer}>
 				<Grid container spacing={3}>
-					{props.question.options.map((obj, idx) => (
+					{props.question.Options.map((obj, idx) => (
 						<Grid item xs={6} sm={6} md={6} lg={6} xl={6} key={idx}>
 							<div
 								style={{background: determineOptionColor(idx)}}
