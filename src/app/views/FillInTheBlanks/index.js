@@ -3,11 +3,12 @@ import React, {useEffect, useState, useRef} from "react";
 import ExerciseLayout from "../../layouts/exerciseLayout";
 import Loading from "../../components/Loading";
 import FillInTheBlanksCard from "../../components/ExerciseCard/FillInTheBlanksCard";
+import {getFillInTheBlanks} from "../../axios/services/exercise/fillInTheBlanks";
 
 import styles from "../../styles/exerciseViewStyles";
 import {Redirect} from "react-router-dom";
 
-const FillInTheBlanks = () => {
+const FillInTheBlanks = (props) => {
 	const classes = styles();
 	const [question, setQuestion] = useState([]);
 	const [checked, setChecked] = useState([]);
@@ -20,36 +21,23 @@ const FillInTheBlanks = () => {
 	const childRef = useRef();
 
 	useEffect(() => {
-		let data = [
-			{
-				context:
-					"Reza and Rony are classmates. They suddenly meet on the street and have a conversation about their interests in games. Can you help them complete their chat with the group of words from the box?",
-				question:
-					"Reza: Hi Rony! What’s in your hand? _  showing it to me?\n Rony: Hey! Yes sure. This is a book on chess techniques\n Reza: Are you _ chess? I find it difficult to be honest\n Rony: I am crazy about chess. _ game?\n Reza: Well, _ cricket to any other sports.\n Rony: That’s great! Then we can _ when we’re free.\n Reza: Sure, _ about it. Let’s meet some time soon.",
-				options: [
-					"What’s your favorite",
-					"I prefer",
-					"share our views",
-					"interested in",
-					"I’m really excited",
-					"would you mind",
-				],
-				answer: [
-					"would you mind",
-					"interested in",
-					"What’s your favorite",
-					"I prefer",
-					"share our views",
-					"I’m really excited",
-				],
-				users_answer: [],
-			},
-		];
+		let params = {
+			topic_id: props.location.state.topicId,
+			offset: 0,
+			limit: 5,
+			context: "true",
+		};
 
-		setChecked(data.map(() => false));
-		setQuestion(data);
-		setLoading(false);
-	}, []);
+		setLoading(true);
+		getFillInTheBlanks(params, (err, axios_data) => {
+			if (err) console.error(err);
+			else {
+				setChecked(axios_data.map(() => false));
+				setQuestion(axios_data);
+				setLoading(false);
+			}
+		});
+	}, [props.location.state.topicId]);
 
 	const backToHome = () => {
 		console.log("time to get back kid");

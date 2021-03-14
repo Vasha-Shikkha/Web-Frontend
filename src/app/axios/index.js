@@ -43,6 +43,7 @@ export const getReqAuth = (route, param, cb) => {
 
 	if (token) {
 		axios.defaults.headers.common["Authorization"] = token;
+
 		axios
 			.get(config.BASE_API_URL + route, {params: param})
 			.then((res) => {
