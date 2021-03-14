@@ -10,7 +10,7 @@ const styles = makeStyles((theme) => ({
 	question: {
 		height: "30%",
 		width: "100%",
-		padding: "5%",
+		marginBottom: 50,
 
 		fontSize: 18,
 	},

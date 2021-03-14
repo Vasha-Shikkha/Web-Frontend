@@ -55,6 +55,13 @@ const Vocabulary = (props) => {
 			link: "/rearrange-sentence",
 			questionQuantity: 6,
 		},
+
+		{
+			name: "Finding Error in Sentence",
+			image: WordToPictureIcon,
+			link: "/mcq",
+			questionQuantity: 6,
+		},
 	];
 
 	return (
