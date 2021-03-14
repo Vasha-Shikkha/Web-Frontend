@@ -55,7 +55,7 @@ const VocabularyHome = () => {
 		setRoutingStates({
 			from: "/communicative",
 			level: level,
-			topic: topics[idx].name,
+			topicId: topics[idx].id,
 		});
 	};
 

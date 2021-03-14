@@ -13,7 +13,7 @@ const FillInTheBlanksCard = forwardRef((props, ref) => {
 			let jdx = 0;
 			for (let i = 0; i < tokenizedQuestion.length; i++) {
 				if (isBlank[i]) {
-					if (tokenizedQuestion[i] !== props.question.answer[jdx]) {
+					if (tokenizedQuestion[i] !== props.question.answers[jdx]) {
 						answer.isCorrect = false;
 						temp_color[i] = colors.incorrect;
 					} else temp_color[i] = colors.correct;
@@ -36,13 +36,13 @@ const FillInTheBlanksCard = forwardRef((props, ref) => {
 	const [wordColor, setWordColor] = useState([]);
 
 	useEffect(() => {
-		let splited_word = props.question.question.split(" ");
+		let splited_word = props.question.paragraph.split(" ");
 		let final_words = [];
 		let blankIdx = [];
 
 		for (let i = 0; i < splited_word.length; i++) {
-			if (splited_word[i].match(/_[.,?!]*/g)) {
-				final_words.push("_");
+			if (splited_word[i].match(/#[.,?!]*/g)) {
+				final_words.push("#");
 				blankIdx.push(true);
 
 				if (splited_word[i].length > 1) {
@@ -63,12 +63,10 @@ const FillInTheBlanksCard = forwardRef((props, ref) => {
 		setTokenizedQuestion(final_words);
 		setIsBlank(blankIdx);
 		setWordColor(final_words.map(() => "white"));
-	}, [props.question.question, props.question.options]);
+	}, [props.question.paragraph, props.question.options]);
 
 	const handleOnDragEnd = (result) => {
 		if (!result.destination) return;
-
-		console.log(result);
 
 		// option~whatever_option_provided
 		// adding option~ to make unique draggableId
@@ -135,10 +133,10 @@ const FillInTheBlanksCard = forwardRef((props, ref) => {
 														{...provided2.dragHandleProps}
 														className={classes.word}
 														style={{
-															borderBottom: isBlank[idx] && obj !== "_" ? "2px solid black" : null,
+															borderBottom: isBlank[idx] && obj !== "#" ? "2px solid black" : null,
 															background: wordColor[idx],
 														}}>
-														{obj === "_" ? "_______" : obj}
+														{obj === "#" ? "_______" : obj}
 													</div>
 												);
 											}}
