@@ -195,6 +195,11 @@ const styles = makeStyles((theme) => ({
 	gridroot: {
 		flexGrow: 1,
 	},
+
+	loadingContainer: {
+		height: "30vh",
+		width: "100%",
+	},
 }));
 
 export default styles;
