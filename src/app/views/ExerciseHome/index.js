@@ -57,7 +57,7 @@ const Vocabulary = (props) => {
 		},
 
 		{
-			name: "Finding Error in Sentence",
+			name: "Multiple Choice Question",
 			image: WordToPictureIcon,
 			link: "/mcq",
 			questionQuantity: 6,
