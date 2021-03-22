@@ -383,7 +383,7 @@ const ExerciseLayout = (props) => {
 									<input
 										type="text"
 										name="dictionaryText"
-										placeholder="Search..."
+										placeholder="Search Meaning"
 										autoFocus={false}
 										className={classes.input}
 										onKeyPress={handleKeyPress}

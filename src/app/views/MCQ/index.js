@@ -79,7 +79,7 @@ const MCQ = (props) => {
 				<Loading />
 			) : (
 				<ExerciseLayout
-					exerciseName="Multiple Choice Question"
+					exerciseName="Finding Error in Sentence"
 					scrollable={true}
 					totalQuestions={question.length}
 					currentQuestionNumber={currentQuestion + 1}
