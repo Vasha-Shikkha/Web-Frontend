@@ -118,11 +118,12 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 											{(provided2) => {
 												return (
 													<div
+														dangerouslySetInnerHTML={{__html: leftUsed[idx] ? null : obj.part_one}}
 														ref={provided2.innerRef}
 														{...provided2.draggableProps}
 														{...provided2.dragHandleProps}
 														className={classes.options}>
-														{leftUsed[idx] ? null : obj.part_one}
+														{/* {leftUsed[idx] ? null : obj.part_one} */}
 													</div>
 												);
 											}}
@@ -150,6 +151,9 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 											{(provided2) => {
 												return (
 													<div
+														dangerouslySetInnerHTML={{
+															__html: currentRight[idx] ? currentRight[idx] : "",
+														}}
 														ref={provided2.innerRef}
 														{...provided2.draggableProps}
 														{...provided2.dragHandleProps}
@@ -158,7 +162,7 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 															//height: rightUsed[idx] || props.isReview ? "auto" : 70,
 															background: boxColors[idx],
 														}}>
-														{currentRight[idx] ? currentRight[idx] : ""}
+														{/* {currentRight[idx] ? currentRight[idx] : ""} */}
 													</div>
 												);
 											}}
