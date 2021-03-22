@@ -3,10 +3,12 @@ import React, {useEffect, useState, useRef} from "react";
 import ExerciseLayout from "../../layouts/exerciseLayout";
 import Loading from "../../components/Loading";
 import SentenceMatchingCard from "../../components/ExerciseCard/SentenceMatchingCard";
+import {getSentenceMatching} from "../../axios/services/exercise/sentenceMatching";
 
 import styles from "../../styles/exerciseViewStyles";
+import {Redirect} from "react-router-dom";
 
-const SentenceMatching = () => {
+const SentenceMatching = (props) => {
 	const classes = styles();
 	const [question, setQuestion] = useState([]);
 	const [moveAway, setMoveAway] = useState([]);
@@ -15,69 +17,30 @@ const SentenceMatching = () => {
 	const [loading, setLoading] = useState(true);
 	const [showVerdict, setShowVerdict] = useState(false);
 	const [correct, setCorrect] = useState(true);
+	const [redirect, setRedirect] = useState(null);
 
 	const childRef = useRef();
 
 	useEffect(() => {
-		let data = [
-			{
-				sentences: [
-					{
-						left_part: "Village life represents a lifestyle",
-						right_part: "which is rural",
-					},
+		let params = {
+			topic_id: props.location.state.topicId,
+			offset: 0,
+			limit: 5,
+			level: props.location.state.level,
+		};
 
-					{
-						left_part: "City life represents a lifestyle",
-						right_part: "which is urban",
-					},
-
-					{
-						left_part: "There are trees everywhere in the village",
-						right_part: "but there are very few trees in cities",
-					},
-
-					{
-						left_part: "Moreover, the environment in village",
-						right_part: "is very calm",
-					},
-				],
-
-				user_answer: [],
-			},
-
-			{
-				sentences: [
-					{
-						left_part: "On the other hand the city life",
-						right_part: "is very loud and crowded",
-					},
-
-					{
-						left_part: "Educated people like cities",
-						right_part: "because there are lots of technology",
-					},
-
-					{
-						left_part: "But a village is not fully modern",
-						right_part: "due to lack of science",
-					},
-
-					{
-						left_part: "Obviously village life is",
-						right_part: "more natural",
-					},
-				],
-
-				user_answer: [],
-			},
-		];
-
-		setMoveAway(data.map(() => false));
-		setChecked(data.map(() => false));
-		setQuestion(data);
-		setLoading(false);
-	}, []);
+		setLoading(true);
+		getSentenceMatching(params, (err, axios_data) => {
+			console.log(err, axios_data);
+			if (err) console.error(err);
+			else {
+				setMoveAway(axios_data.map(() => false));
+				setChecked(axios_data.map(() => false));
+				setQuestion(axios_data);
+				setLoading(false);
+			}
+		});
+	}, [props.location.state.topicId, props.location.state.level]);
 
 	const backToHome = () => {
 		console.log("time to get back kid");
@@ -116,10 +79,13 @@ const SentenceMatching = () => {
 
 		// gameover
 		if (currentQuestion + 1 === question.length) {
+			setRedirect("/finish");
 		} else {
 			setCurrentQuestion(currentQuestion + 1);
 		}
 	};
+
+	if (redirect) return <Redirect to={redirect} />;
 
 	return (
 		<>
