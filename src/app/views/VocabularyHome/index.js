@@ -32,6 +32,10 @@ const VocabularyHome = (props) => {
 		};
 
 		setLoading(true);
+		if (params.type.length === 0) {
+			return;
+		}
+
 		getCommunicativeTopics(params, (err, axios_data) => {
 			if (err) console.error(err);
 			else {
@@ -40,7 +44,7 @@ const VocabularyHome = (props) => {
 				//setShowTooltip(topics.map(() => false));
 			}
 		});
-	}, [level]);
+	}, [level, props.match.params.type, type]);
 
 	// const tooltipToggler = (idx) => {
 	// 	let arr = [...showTooltip];

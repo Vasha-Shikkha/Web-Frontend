@@ -197,7 +197,7 @@ const styles = makeStyles((theme) => ({
 	},
 
 	loadingContainer: {
-		height: "30vh",
+		//height: "30vh",
 		width: "100%",
 	},
 }));
