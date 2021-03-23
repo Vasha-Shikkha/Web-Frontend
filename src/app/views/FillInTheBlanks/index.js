@@ -37,7 +37,7 @@ const FillInTheBlanks = (props) => {
 				setLoading(false);
 			}
 		});
-	}, [props.location.state.topicId]);
+	}, [props.location.state.topicId, props.location.state.level]);
 
 	const backToHome = () => {
 		console.log("time to get back kid");
