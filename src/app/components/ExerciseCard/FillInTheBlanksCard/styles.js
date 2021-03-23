@@ -20,7 +20,6 @@ const styles = makeStyles((theme) => ({
 
 	optionContainer: {
 		width: "100%",
-		marginTop: 20,
 		marginBottom: 20,
 
 		display: "flex",

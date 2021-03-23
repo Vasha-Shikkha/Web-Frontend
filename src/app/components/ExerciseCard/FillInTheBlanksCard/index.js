@@ -36,10 +36,18 @@ const FillInTheBlanksCard = forwardRef((props, ref) => {
 	const [wordColor, setWordColor] = useState([]);
 
 	useEffect(() => {
-		let splited_word = props.question.paragraph.split(" ");
+		let paragraph = "";
+		for (let i = 0; i < props.question.paragraph.length; i++) {
+			if (props.question.paragraph[i] === "\n") paragraph += " @ ";
+			else paragraph += props.question.paragraph[i];
+		}
+
+		paragraph = paragraph.replace(/#/i, " #");
+
+		let splited_word = paragraph.split(" ");
 		let final_words = [];
 		let blankIdx = [];
-
+		console.log(splited_word);
 		for (let i = 0; i < splited_word.length; i++) {
 			if (splited_word[i].match(/#[.,?!]*/g)) {
 				final_words.push("#");
@@ -49,12 +57,12 @@ const FillInTheBlanksCard = forwardRef((props, ref) => {
 					final_words.push(splited_word[i][1]);
 					blankIdx.push(false);
 				}
-			} else if (splited_word[i] !== "") {
+			} else if (splited_word[i] !== "" && splited_word[i] !== "@") {
 				final_words.push(splited_word[i]);
 				blankIdx.push(false);
 			}
 
-			if (splited_word[i][splited_word[i].length - 1] === "\n") {
+			if (splited_word[i] === "@") {
 				final_words.push("\n");
 				blankIdx.push(false);
 			}
