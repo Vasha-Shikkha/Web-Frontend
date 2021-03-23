@@ -60,7 +60,7 @@ const BaseLayout = () => (
 
 							<Route
 								exact
-								path="/communicative"
+								path="/practice/:type"
 								render={(props) => <PrivateWrapper component={<VocabularyHome {...props} />} />}
 							/>
 
