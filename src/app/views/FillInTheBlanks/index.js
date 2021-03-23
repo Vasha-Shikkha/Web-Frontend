@@ -25,7 +25,7 @@ const FillInTheBlanks = (props) => {
 			topic_id: props.location.state.topicId,
 			offset: 0,
 			limit: 5,
-			context: "true",
+			level: props.location.state.level,
 		};
 
 		setLoading(true);
@@ -96,13 +96,15 @@ const FillInTheBlanks = (props) => {
 					anime={showVerdict}
 					getNext={getNext}>
 					<div className={`${classes.scrollableRoot} ${classes.centered}`}>
-						<FillInTheBlanksCard
-							ref={childRef}
-							currentQuestionNumber={currentQuestion}
-							question={question[currentQuestion]}
-							isReview={false}
-							isChecked={checked[currentQuestion]}
-						/>
+						{question[currentQuestion].length === 1 ? (
+							<FillInTheBlanksCard
+								ref={childRef}
+								currentQuestionNumber={currentQuestion}
+								question={question[currentQuestion][0]}
+								isReview={false}
+								isChecked={checked[currentQuestion]}
+							/>
+						) : null}
 					</div>
 				</ExerciseLayout>
 			)}
