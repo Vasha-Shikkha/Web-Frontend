@@ -14,8 +14,9 @@ import DummyTopic from "../../assets/dummyTopic.svg";
 
 import styles from "./styles";
 
-const VocabularyHome = () => {
+const VocabularyHome = (props) => {
 	const classes = styles();
+	const [type, setType] = useState("");
 	const [level, setLevel] = useState(1);
 	//const [showTooltip, setShowTooltip] = useState([]);
 	const [redirect, setRedirect] = useState(null);
@@ -24,12 +25,17 @@ const VocabularyHome = () => {
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
+		setType(props.match.params.type);
 		let params = {
 			level: level,
-			type: "communicative",
+			type: type,
 		};
 
 		setLoading(true);
+		if (params.type.length === 0) {
+			return;
+		}
+
 		getCommunicativeTopics(params, (err, axios_data) => {
 			if (err) console.error(err);
 			else {
@@ -38,7 +44,7 @@ const VocabularyHome = () => {
 				//setShowTooltip(topics.map(() => false));
 			}
 		});
-	}, [level]);
+	}, [level, props.match.params.type, type]);
 
 	// const tooltipToggler = (idx) => {
 	// 	let arr = [...showTooltip];
@@ -58,7 +64,7 @@ const VocabularyHome = () => {
 	const exerciseBtnClick = (idx) => {
 		setRedirect("/exercise");
 		setRoutingStates({
-			from: "/communicative",
+			from: `/practice/${type}`,
 			level: level,
 			topicId: topics[idx].id,
 		});
@@ -88,7 +94,7 @@ const VocabularyHome = () => {
 			</div>
 
 			<div className={classes.taskContainer}>
-				<div className={classes.heading}>COMMUNICATIVE</div>
+				<div className={classes.heading}>{type.toUpperCase()}</div>
 
 				<div className={classes.levelContainer}>
 					{[1, 2, 3, 4, 5, 6].map((obj, idx) => (
