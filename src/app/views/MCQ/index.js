@@ -1,4 +1,5 @@
 import React, {useEffect, useState, useRef} from "react";
+import {Redirect} from "react-router-dom";
 
 import ExerciseLayout from "../../layouts/exerciseLayout";
 import Loading from "../../components/Loading";
@@ -15,6 +16,7 @@ const MCQ = (props) => {
 	const [loading, setLoading] = useState(true);
 	const [showVerdict, setShowVerdict] = useState(false);
 	const [correct, setCorrect] = useState(true);
+	const [redirect, setRedirect] = useState(null);
 
 	const childRef = useRef();
 
@@ -23,18 +25,20 @@ const MCQ = (props) => {
 			topic_id: props.location.state.topicId,
 			offset: 0,
 			limit: 5,
+			level: props.location.state.level,
 		};
 
 		getMCQ(params, (err, axios_data) => {
 			if (err) console.error(err);
 			else {
-				console.log(axios_data);
+				//**********************change this - array of array will come */
 				setQuestion(axios_data);
 				setChecked(axios_data.map(() => false));
 				setLoading(false);
+				setCurrentQuestion(0);
 			}
 		});
-	}, [props.location.state.topicId]);
+	}, [props.location.state.topicId, props.location.state.level]);
 
 	const backToHome = () => {
 		console.log("time to get back kid");
@@ -68,10 +72,13 @@ const MCQ = (props) => {
 
 		// gameover
 		if (currentQuestion + 1 === question.length) {
+			setRedirect("/finish");
 		} else {
 			setCurrentQuestion(currentQuestion + 1);
 		}
 	};
+
+	if (redirect) return <Redirect to={redirect} />;
 
 	return (
 		<>
@@ -79,7 +86,7 @@ const MCQ = (props) => {
 				<Loading />
 			) : (
 				<ExerciseLayout
-					exerciseName="Finding Error in Sentence"
+					exerciseName="Multiple Choice Questions"
 					scrollable={true}
 					totalQuestions={question.length}
 					currentQuestionNumber={currentQuestion + 1}

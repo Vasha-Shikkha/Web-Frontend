@@ -21,7 +21,7 @@ const TrueFalse = lazy(() => import("../views/TrueFalse"));
 const WordToPicture = lazy(() => import("../views/WordToPicture"));
 const PictureToWord = lazy(() => import("../views/PictureToWord"));
 const SentenceMatching = lazy(() => import("../views/SentenceMatching"));
-const JumbledSentence = lazy(() => import("../views/JumbledSentence"));
+const JumbledWord = lazy(() => import("../views/JumbledWord"));
 const FillInTheBlanks = lazy(() => import("../views/FillInTheBlanks"));
 const RearrangeSentence = lazy(() => import("../views/RearrangeSentence"));
 const DragCaptionToPicture = lazy(() => import("../views/DragCaptionToPicture"));
@@ -96,8 +96,8 @@ const BaseLayout = () => (
 
 							<Route
 								exact
-								path="/jumbled-sentence"
-								render={(props) => <PrivateWrapper component={<JumbledSentence {...props} />} />}
+								path="/jumbled-word"
+								render={(props) => <PrivateWrapper component={<JumbledWord {...props} />} />}
 							/>
 
 							<Route
