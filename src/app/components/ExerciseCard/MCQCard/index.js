@@ -21,7 +21,6 @@ const MCQCard = forwardRef((props, ref) => {
 
 	useEffect(() => {
 		setSelected(-1);
-		console.log("prop", props.question);
 	}, [props.currentQuestionNumber]);
 
 	const selectOption = (idx) => {

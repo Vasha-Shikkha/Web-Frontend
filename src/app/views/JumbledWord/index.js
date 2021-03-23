@@ -1,12 +1,14 @@
 import React, {useEffect, useState, useRef} from "react";
+import {Redirect} from "react-router-dom";
 
 import ExerciseLayout from "../../layouts/exerciseLayout";
 import Loading from "../../components/Loading";
-import JumbledSentenceCard from "../../components/ExerciseCard/JumbledSentenceCard";
+import JumbledWordCard from "../../components/ExerciseCard/JumbledWordCard";
+import {getJumbledWord} from "../../axios/services/exercise/jumbledWord";
 
 import styles from "../../styles/exerciseViewStyles";
 
-const JumbledSentence = () => {
+const JumbledWord = (props) => {
 	const classes = styles();
 	const [question, setQuestion] = useState([]);
 	const [moveAway, setMoveAway] = useState([]);
@@ -15,61 +17,31 @@ const JumbledSentence = () => {
 	const [loading, setLoading] = useState(true);
 	const [showVerdict, setShowVerdict] = useState(false);
 	const [correct, setCorrect] = useState(true);
+	const [redirect, setRedirect] = useState(null);
 
 	const childRef = useRef();
 
 	useEffect(() => {
-		let data = [
-			{
-				context:
-					"Priyoti has never seen hills before. So, her father decides to go on a vacation to -",
-				chunks: ["T", "G", "O", "C", "T", "H", "I", "G", "A", "N"],
-				answer: "CHITTAGONG",
-			},
+		setLoading(true);
 
-			{
-				context:
-					"Bangladesh is famous for tea-gardening. Anyone who wants to see tea-garden can go to –",
-				chunks: ["T", "S", "H", "L", "Y", "E"],
-				answer: "SYLHET",
-			},
+		let params = {
+			topic_id: props.location.state.topicId,
+			offset: 0,
+			limit: 5,
+			level: props.location.state.level,
+		};
 
-			{
-				context: "If you want to see the most beautiful sea-beach, you must go to-",
-				chunks: ["O", "B", "C", "Z", "R", "X", "A", "A", "S"],
-				answer: "COXSBAZAR",
-			},
-
-			{
-				context: "A person who captures a criminal is known as –",
-				chunks: ["E", "I", "P", "C", "L", "O"],
-				answer: "POLICE",
-			},
-
-			{
-				context: "Bangladesh is an agricultural country. Those who grows crops are known as-",
-				chunks: ["S", "E", "R", "F", "M", "A", "R"],
-				answer: "FARMERS",
-			},
-
-			{
-				context: "Ratul gives homework and assignments to children in an institution. He works in-",
-				chunks: ["C", "O", "L", "S", "O", "H"],
-				answer: "SCHOOL",
-			},
-
-			{
-				context: "We need vitamins and minerals to stay healthy. So we should eat a lot of- ",
-				chunks: ["E", "T", "B", "G", "A", "V", "S", "E", "L", "E"],
-				answer: "VEGETABLES",
-			},
-		];
-
-		setMoveAway(data.map(() => false));
-		setChecked(data.map(() => false));
-		setQuestion(data);
-		setLoading(false);
-	}, []);
+		getJumbledWord(params, (err, axios_data) => {
+			if (err) console.error(err);
+			else {
+				//**********************change this - array of array will come */
+				setQuestion(axios_data);
+				setChecked(axios_data.map(() => false));
+				setLoading(false);
+				setCurrentQuestion(0);
+			}
+		});
+	}, [props.location.state.topicId, props.location.state.level]);
 
 	const backToHome = () => {
 		console.log("time to get back kid");
@@ -108,10 +80,13 @@ const JumbledSentence = () => {
 
 		// gameover
 		if (currentQuestion + 1 === question.length) {
+			setRedirect("/finish");
 		} else {
 			setCurrentQuestion(currentQuestion + 1);
 		}
 	};
+
+	if (redirect) return <Redirect to={redirect} />;
 
 	return (
 		<>
@@ -119,7 +94,7 @@ const JumbledSentence = () => {
 				<Loading />
 			) : (
 				<ExerciseLayout
-					exerciseName="Jumbled Word/Sentence"
+					exerciseName="Jumbled Word"
 					scrollable={true}
 					totalQuestions={question.length}
 					currentQuestionNumber={currentQuestion + 1}
@@ -130,7 +105,7 @@ const JumbledSentence = () => {
 					anime={showVerdict}
 					getNext={getNext}>
 					<div className={`${classes.scrollableRoot} ${classes.centered}`}>
-						<JumbledSentenceCard
+						<JumbledWordCard
 							ref={childRef}
 							currentQuestionNumber={currentQuestion}
 							question={question[currentQuestion]}
@@ -144,4 +119,4 @@ const JumbledSentence = () => {
 	);
 };
 
-export default JumbledSentence;
+export default JumbledWord;

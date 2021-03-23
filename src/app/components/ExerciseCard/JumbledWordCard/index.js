@@ -3,7 +3,7 @@ import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
 import PropTypes from "prop-types";
 import styles from "./styles";
 
-const JumbledSentenceCard = forwardRef((props, ref) => {
+const JumbledWordCard = forwardRef((props, ref) => {
 	useImperativeHandle(ref, () => ({
 		check() {
 			let ret = {
@@ -64,7 +64,7 @@ const JumbledSentenceCard = forwardRef((props, ref) => {
 	return (
 		<DragDropContext onDragEnd={handleOnDragEnd}>
 			<div className={classes.root}>
-				<div className={classes.context}>{props.question.context}</div>
+				<div className={classes.context}>{props.question.paragraph}</div>
 				<Droppable droppableId="question_container" direction="horizontal" isDropDisabled={false}>
 					{(provided) => (
 						<div
@@ -129,11 +129,11 @@ const JumbledSentenceCard = forwardRef((props, ref) => {
 	);
 });
 
-JumbledSentenceCard.propTypes = {
+JumbledWordCard.propTypes = {
 	question: PropTypes.object.isRequired,
 	currentQuestionNumber: PropTypes.number,
 	isReview: PropTypes.bool.isRequired,
 	isChecked: PropTypes.bool.isRequired,
 };
 
-export default JumbledSentenceCard;
+export default JumbledWordCard;

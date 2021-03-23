@@ -15,9 +15,9 @@ const Vocabulary = (props) => {
 	const classes = styles();
 	const exerciseTypes = [
 		{
-			name: "Jumbled Sentence/Word",
+			name: "Jumbled Word",
 			image: JumbledSentenceIcon,
-			link: "/jumbled-sentence",
+			link: "/jumbled-word",
 			questionQuantity: 8,
 		},
 

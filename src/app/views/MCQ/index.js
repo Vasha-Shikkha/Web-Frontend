@@ -32,8 +32,8 @@ const MCQ = (props) => {
 			if (err) console.error(err);
 			else {
 				//**********************change this - array of array will come */
-				setQuestion(axios_data[0]);
-				setChecked(axios_data[0].map(() => false));
+				setQuestion(axios_data);
+				setChecked(axios_data.map(() => false));
 				setLoading(false);
 				setCurrentQuestion(0);
 			}
