@@ -17,7 +17,7 @@ import styles from "./styles";
 const Vocabulary = (props) => {
 	const classes = styles();
 	const [loading, setLoading] = useState(true);
-	const exerciseTypes = [
+	const [exerciseTypes, setExerciseTypes] = useState([
 		{
 			name: "Jumbled Word",
 			dbName: "Jumbled Word",
@@ -70,7 +70,7 @@ const Vocabulary = (props) => {
 			link: "/mcq",
 			questionQuantity: 0,
 		},
-	];
+	]);
 
 	useEffect(() => {
 		let params = {
@@ -78,12 +78,23 @@ const Vocabulary = (props) => {
 			level: props.location.state.level,
 		};
 
-		setLoading(true);
-		getAvailableExercises(params, (err, axios_data) => {
-			if (err) console.error(err);
-			else {
-			}
-		});
+		if (params.topic && params.level) {
+			setLoading(true);
+			getAvailableExercises(params, (err, axios_data) => {
+				if (err) console.error(err);
+				else {
+					let exercises = [...exerciseTypes];
+					for (let i = 0; i < exercises.length; i++) {
+						exercises[i].questionQuantity = axios_data[exercises[i].dbName]
+							? axios_data[exercises[i].dbName]
+							: 0;
+					}
+
+					setExerciseTypes(exercises);
+					setLoading(false);
+				}
+			});
+		}
 	}, [props.location.state.level, props.location.state.topicId]);
 
 	if (loading) return <Loading />;
@@ -99,25 +110,32 @@ const Vocabulary = (props) => {
 			</div>
 			<div className={classes.exerciseContainer}>
 				<Grid container spacing={3}>
-					{exerciseTypes.map((obj, idx) => (
-						<Grid key={idx} item xs={12} sm={12} md={6} lg={6} xl={6}>
-							<Link
-								to={{
-									pathname: obj.link,
-									state: {topicId: props.location.state.topicId, level: props.location.state.level},
-								}}
-								className={classes.box}>
-								<div className={classes.imageContainer}>
-									<img src={obj.image} alt="" className={classes.boxImage} />
-								</div>
-								<div className={classes.titleContainer}>
-									<div className={classes.title}>{obj.name}</div>
-									<div
-										className={classes.questionQuantity}>{`${obj.questionQuantity} Questions`}</div>
-								</div>
-							</Link>
-						</Grid>
-					))}
+					{exerciseTypes.map((obj, idx) =>
+						obj.questionQuantity ? (
+							<Grid key={idx} item xs={12} sm={12} md={6} lg={6} xl={6}>
+								<Link
+									to={{
+										pathname: obj.link,
+										state: {
+											topicId: props.location.state.topicId,
+											level: props.location.state.level,
+										},
+									}}
+									className={classes.box}>
+									<div className={classes.imageContainer}>
+										<img src={obj.image} alt="" className={classes.boxImage} />
+									</div>
+									<div className={classes.titleContainer}>
+										<div className={classes.title}>{obj.name}</div>
+										<div
+											className={
+												classes.questionQuantity
+											}>{`${obj.questionQuantity} Questions`}</div>
+									</div>
+								</Link>
+							</Grid>
+						) : null
+					)}
 				</Grid>
 			</div>
 		</div>
