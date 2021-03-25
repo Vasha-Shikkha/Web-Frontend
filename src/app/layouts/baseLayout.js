@@ -6,6 +6,7 @@ import {AuthProvider} from "../stateHandlers/authContext";
 import PrivateWrapper from "./privateWrapper";
 
 import Loading from "../components/Loading";
+import ErrorBoundary from "../util/errorBoundary";
 
 // use code splitting for better ux
 const Landing = lazy(() => import("../views/Landing"));
@@ -50,110 +51,114 @@ const BaseLayout = () => (
 		<Suspense fallback={<Loading />}>
 			<AuthProvider>
 				<MuiThemeProvider theme={theme}>
-					<div>
-						<Switch>
-							<Route
-								exact
-								path="/home"
-								render={(props) => <PrivateWrapper component={<Home {...props} />} />}
-							/>
+					<ErrorBoundary>
+						<div>
+							<Switch>
+								<Route
+									exact
+									path="/home"
+									render={(props) => <PrivateWrapper component={<Home {...props} />} />}
+								/>
 
-							<Route
-								exact
-								path="/practice/:type"
-								render={(props) => <PrivateWrapper component={<VocabularyHome {...props} />} />}
-							/>
+								<Route
+									exact
+									path="/practice/:type"
+									render={(props) => <PrivateWrapper component={<VocabularyHome {...props} />} />}
+								/>
 
-							<Route
-								exact
-								path="/mcq"
-								render={(props) => <PrivateWrapper component={<MCQ {...props} />} />}
-							/>
+								<Route
+									exact
+									path="/mcq"
+									render={(props) => <PrivateWrapper component={<MCQ {...props} />} />}
+								/>
 
-							<Route
-								exact
-								path="/true-false"
-								render={(props) => <PrivateWrapper component={<TrueFalse {...props} />} />}
-							/>
+								<Route
+									exact
+									path="/true-false"
+									render={(props) => <PrivateWrapper component={<TrueFalse {...props} />} />}
+								/>
 
-							<Route
-								exact
-								path="/word-to-picture"
-								render={(props) => <PrivateWrapper component={<WordToPicture {...props} />} />}
-							/>
+								<Route
+									exact
+									path="/word-to-picture"
+									render={(props) => <PrivateWrapper component={<WordToPicture {...props} />} />}
+								/>
 
-							<Route
-								exact
-								path="/picture-to-word"
-								render={(props) => <PrivateWrapper component={<PictureToWord {...props} />} />}
-							/>
+								<Route
+									exact
+									path="/picture-to-word"
+									render={(props) => <PrivateWrapper component={<PictureToWord {...props} />} />}
+								/>
 
-							<Route
-								exact
-								path="/sentence-matching"
-								render={(props) => <PrivateWrapper component={<SentenceMatching {...props} />} />}
-							/>
+								<Route
+									exact
+									path="/sentence-matching"
+									render={(props) => <PrivateWrapper component={<SentenceMatching {...props} />} />}
+								/>
 
-							<Route
-								exact
-								path="/jumbled-word"
-								render={(props) => <PrivateWrapper component={<JumbledWord {...props} />} />}
-							/>
+								<Route
+									exact
+									path="/jumbled-word"
+									render={(props) => <PrivateWrapper component={<JumbledWord {...props} />} />}
+								/>
 
-							<Route
-								exact
-								path="/fill-in-the-blanks"
-								render={(props) => <PrivateWrapper component={<FillInTheBlanks {...props} />} />}
-							/>
+								<Route
+									exact
+									path="/fill-in-the-blanks"
+									render={(props) => <PrivateWrapper component={<FillInTheBlanks {...props} />} />}
+								/>
 
-							<Route
-								exact
-								path="/rearrange-sentence"
-								render={(props) => <PrivateWrapper component={<RearrangeSentence {...props} />} />}
-							/>
+								<Route
+									exact
+									path="/rearrange-sentence"
+									render={(props) => (
+										<PrivateWrapper component={<RearrangeSentence {...props} />} />
+									)}
+								/>
 
-							<Route
-								exact
-								path="/drag-caption-to-picture"
-								render={(props) => (
-									<PrivateWrapper component={<DragCaptionToPicture {...props} />} />
-								)}
-							/>
+								<Route
+									exact
+									path="/drag-caption-to-picture"
+									render={(props) => (
+										<PrivateWrapper component={<DragCaptionToPicture {...props} />} />
+									)}
+								/>
 
-							<Route
-								exact
-								path="/flash-card"
-								render={(props) => <PrivateWrapper component={<FlashCard {...props} />} />}
-							/>
+								<Route
+									exact
+									path="/flash-card"
+									render={(props) => <PrivateWrapper component={<FlashCard {...props} />} />}
+								/>
 
-							<Route
-								exact
-								path="/tutorial"
-								render={(props) => <PrivateWrapper component={<Tutorial {...props} />} />}
-							/>
+								<Route
+									exact
+									path="/tutorial"
+									render={(props) => <PrivateWrapper component={<Tutorial {...props} />} />}
+								/>
 
-							<Route
-								exact
-								path="/exercise"
-								render={(props) => <PrivateWrapper component={<Exercise {...props} />} />}
-							/>
+								<Route
+									exact
+									path="/exercise"
+									render={(props) => <PrivateWrapper component={<Exercise {...props} />} />}
+								/>
 
-							<Route
-								exact
-								path="/home"
-								render={(props) => <PrivateWrapper component={<Home {...props} />} />}
-							/>
+								<Route
+									exact
+									path="/home"
+									render={(props) => <PrivateWrapper component={<Home {...props} />} />}
+								/>
 
-							<Route
-								exact
-								path="/finish"
-								render={(props) => <PrivateWrapper component={<FinishLine {...props} />} />}
-							/>
+								<Route
+									exact
+									path="/finish"
+									render={(props) => <PrivateWrapper component={<FinishLine {...props} />} />}
+								/>
 
-							<Route exact path="/" component={Landing} />
-							<Route exact path="/auth" component={Auth} />
-						</Switch>
-					</div>
+								<Route exact path="/" component={Landing} />
+								<Route exact path="/auth" component={Auth} />
+							</Switch>
+						</div>
+					</ErrorBoundary>
 				</MuiThemeProvider>
 			</AuthProvider>
 		</Suspense>
