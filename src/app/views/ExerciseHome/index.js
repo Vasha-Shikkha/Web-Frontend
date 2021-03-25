@@ -17,60 +17,7 @@ import styles from "./styles";
 const Vocabulary = (props) => {
 	const classes = styles();
 	const [loading, setLoading] = useState(true);
-	const [exerciseTypes, setExerciseTypes] = useState([
-		{
-			name: "Jumbled Word",
-			dbName: "Jumbled Word",
-			image: JumbledSentenceIcon,
-			link: "/jumbled-word",
-			questionQuantity: 0,
-		},
-
-		{
-			name: "Sentence Matching",
-			dbName: "Sentence Matching",
-			image: SentenceMatchingIcon,
-			link: "/sentence-matching",
-			questionQuantity: 0,
-		},
-
-		{
-			name: "Fill in the Blanks",
-			dbName: "Fill in the Blanks",
-			image: FillInTheBlanksIcon,
-			link: "/fill-in-the-blanks",
-			questionQuantity: 0,
-		},
-
-		{
-			name: "Picture to Word",
-			image: PictureToWordIcon,
-			link: "/picture-to-word",
-			questionQuantity: 0,
-		},
-
-		{
-			name: "Word to Picture",
-			image: WordToPictureIcon,
-			link: "/word-to-picture",
-			questionQuantity: 0,
-		},
-
-		{
-			name: "Rearrange Sentence",
-			image: WordToPictureIcon,
-			link: "/rearrange-sentence",
-			questionQuantity: 0,
-		},
-
-		{
-			name: "Multiple Choice Question",
-			dbName: "MCQ",
-			image: WordToPictureIcon,
-			link: "/mcq",
-			questionQuantity: 0,
-		},
-	]);
+	const [exerciseTypes, setExerciseTypes] = useState([]);
 
 	useEffect(() => {
 		let params = {
@@ -83,7 +30,61 @@ const Vocabulary = (props) => {
 			getAvailableExercises(params, (err, axios_data) => {
 				if (err) console.error(err);
 				else {
-					let exercises = [...exerciseTypes];
+					let exercises = [
+						{
+							name: "Jumbled Word",
+							dbName: "Jumbled Word",
+							image: JumbledSentenceIcon,
+							link: "/jumbled-word",
+							questionQuantity: 0,
+						},
+
+						{
+							name: "Sentence Matching",
+							dbName: "Sentence Matching",
+							image: SentenceMatchingIcon,
+							link: "/sentence-matching",
+							questionQuantity: 0,
+						},
+
+						{
+							name: "Fill in the Blanks",
+							dbName: "Fill in the Blanks",
+							image: FillInTheBlanksIcon,
+							link: "/fill-in-the-blanks",
+							questionQuantity: 0,
+						},
+
+						{
+							name: "Picture to Word",
+							image: PictureToWordIcon,
+							link: "/picture-to-word",
+							questionQuantity: 0,
+						},
+
+						{
+							name: "Word to Picture",
+							image: WordToPictureIcon,
+							link: "/word-to-picture",
+							questionQuantity: 0,
+						},
+
+						{
+							name: "Rearrange Sentence",
+							image: WordToPictureIcon,
+							link: "/rearrange-sentence",
+							questionQuantity: 0,
+						},
+
+						{
+							name: "Multiple Choice Question",
+							dbName: "MCQ",
+							image: WordToPictureIcon,
+							link: "/mcq",
+							questionQuantity: 0,
+						},
+					];
+
 					for (let i = 0; i < exercises.length; i++) {
 						exercises[i].questionQuantity = axios_data[exercises[i].dbName]
 							? axios_data[exercises[i].dbName]
