@@ -1,7 +1,10 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 
+import {getAvailableExercises} from "../../axios/services/exercises";
+
 import {Grid} from "@material-ui/core";
+import Loading from "../../components/Loading";
 import BackArrowButton from "../../components/BackArrowButton";
 import JumbledSentenceIcon from "../../assets/exercise/jumbledSentence.svg";
 import SentenceMatchingIcon from "../../assets/exercise/sentenceMatching.svg";
@@ -13,56 +16,77 @@ import styles from "./styles";
 
 const Vocabulary = (props) => {
 	const classes = styles();
+	const [loading, setLoading] = useState(true);
 	const exerciseTypes = [
 		{
 			name: "Jumbled Word",
+			dbName: "Jumbled Word",
 			image: JumbledSentenceIcon,
 			link: "/jumbled-word",
-			questionQuantity: 8,
+			questionQuantity: 0,
 		},
 
 		{
 			name: "Sentence Matching",
+			dbName: "Sentence Matching",
 			image: SentenceMatchingIcon,
 			link: "/sentence-matching",
-			questionQuantity: 2,
+			questionQuantity: 0,
 		},
 
 		{
-			name: "Fill in The Blanks",
+			name: "Fill in the Blanks",
+			dbName: "Fill in the Blanks",
 			image: FillInTheBlanksIcon,
 			link: "/fill-in-the-blanks",
-			questionQuantity: 2,
+			questionQuantity: 0,
 		},
 
 		{
 			name: "Picture to Word",
 			image: PictureToWordIcon,
 			link: "/picture-to-word",
-			questionQuantity: 6,
+			questionQuantity: 0,
 		},
 
 		{
 			name: "Word to Picture",
 			image: WordToPictureIcon,
 			link: "/word-to-picture",
-			questionQuantity: 6,
+			questionQuantity: 0,
 		},
 
 		{
 			name: "Rearrange Sentence",
 			image: WordToPictureIcon,
 			link: "/rearrange-sentence",
-			questionQuantity: 6,
+			questionQuantity: 0,
 		},
 
 		{
 			name: "Multiple Choice Question",
+			dbName: "MCQ",
 			image: WordToPictureIcon,
 			link: "/mcq",
-			questionQuantity: 6,
+			questionQuantity: 0,
 		},
 	];
+
+	useEffect(() => {
+		let params = {
+			topic: props.location.state.topicId,
+			level: props.location.state.level,
+		};
+
+		setLoading(true);
+		getAvailableExercises(params, (err, axios_data) => {
+			if (err) console.error(err);
+			else {
+			}
+		});
+	}, [props.location.state.level, props.location.state.topicId]);
+
+	if (loading) return <Loading />;
 
 	return (
 		<div className={classes.root}>
