@@ -31,7 +31,6 @@ const SentenceMatching = (props) => {
 
 		setLoading(true);
 		getSentenceMatching(params, (err, axios_data) => {
-			console.log(err, axios_data);
 			if (err) console.error(err);
 			else {
 				setMoveAway(axios_data.map(() => false));

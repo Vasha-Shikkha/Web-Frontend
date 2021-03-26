@@ -15,7 +15,7 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 
 			let temp_color = [...boxColors];
 			for (let i = 0; i < temp_color.length; i++) {
-				let sen = props.question[rightSentenceMapping[i]];
+				let sen = props.question.sentences[rightSentenceMapping[i]];
 
 				if (currentRight[i] === sen.part_one + " " + sen.part_two) temp_color[i] = colors.correct;
 				else {
@@ -41,13 +41,13 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 	useEffect(() => {
 		// keep the left part as it is. make them draggable. make the whole container non-droppable
 		// shuffle the right part
-		let shuffled_array = props.question.map((obj, idx) => idx);
+		let shuffled_array = props.question.sentences.map((obj, idx) => idx);
 		shuffled_array = shuffle(shuffled_array);
 
 		setRightSentenceMapping(shuffled_array);
 		setLeftUsed(shuffled_array.map(() => false));
 		setRightUsed(shuffled_array.map(() => false));
-		setCurrentRight(shuffled_array.map((obj) => props.question[obj].part_two));
+		setCurrentRight(shuffled_array.map((obj) => props.question.sentences[obj].part_two));
 		setBoxColors(shuffled_array.map(() => colors.white));
 	}, [props.question]);
 
@@ -64,7 +64,9 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 
 		temp = [...currentRight];
 		temp[result.destination.index] =
-			props.question[result.source.index].part_one + " " + currentRight[result.destination.index];
+			props.question.sentences[result.source.index].part_one +
+			" " +
+			currentRight[result.destination.index];
 		setCurrentRight(temp);
 
 		temp = [...stack];
@@ -89,7 +91,7 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 
 		// restore the right
 		temp = [...currentRight];
-		temp[right] = props.question[rightSentenceMapping[right]].part_two;
+		temp[right] = props.question.sentences[rightSentenceMapping[right]].part_two;
 		setCurrentRight(temp);
 
 		temp = [...rightUsed];
@@ -101,7 +103,9 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 		<DragDropContext onDragEnd={handleOnDragEnd}>
 			<div className={classes.root}>
 				<Button text="Undo" styles={classes.undo} onClick={() => undo()} />
-
+				<div
+					dangerouslySetInnerHTML={{__html: props.question.taskDetail.instruction}}
+					className={classes.instruction}></div>
 				<div className={classes.optionsOuter}>
 					<div
 						className={classes.optionContainer}
@@ -109,26 +113,29 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 						<Droppable droppableId="part_one_container" isDropDisabled={true}>
 							{(provided) => (
 								<div {...provided.droppableProps} ref={provided.innerRef} style={{width: "100%"}}>
-									{props.question.map((obj, idx) => (
-										<Draggable
-											key={idx}
-											draggableId={`left~${obj.part_one}`}
-											index={idx}
-											isDragDisabled={leftUsed[idx]}>
-											{(provided2) => {
-												return (
-													<div
-														dangerouslySetInnerHTML={{__html: leftUsed[idx] ? null : obj.part_one}}
-														ref={provided2.innerRef}
-														{...provided2.draggableProps}
-														{...provided2.dragHandleProps}
-														className={classes.options}>
-														{/* {leftUsed[idx] ? null : obj.part_one} */}
-													</div>
-												);
-											}}
-										</Draggable>
-									))}
+									{props.question.sentences &&
+										props.question.sentences.map((obj, idx) => (
+											<Draggable
+												key={idx}
+												draggableId={`left~${obj.part_one}`}
+												index={idx}
+												isDragDisabled={leftUsed[idx]}>
+												{(provided2) => {
+													return (
+														<div
+															dangerouslySetInnerHTML={{
+																__html: leftUsed[idx] ? null : obj.part_one,
+															}}
+															ref={provided2.innerRef}
+															{...provided2.draggableProps}
+															{...provided2.dragHandleProps}
+															className={classes.options}>
+															{/* {leftUsed[idx] ? null : obj.part_one} */}
+														</div>
+													);
+												}}
+											</Draggable>
+										))}
 									{provided.placeholder}
 								</div>
 							)}
@@ -137,41 +144,45 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 					<div
 						className={classes.optionContainer}
 						style={{alignContent: "flex-end", alignItems: "flex-end"}}>
-						{props.question.map((obj, idx) => (
-							<Droppable
-								key={idx}
-								droppableId={`right_sentence~${idx}`}
-								isDropDisabled={rightUsed[idx]}>
-								{(provided) => (
-									<div {...provided.droppableProps} ref={provided.innerRef} style={{width: "100%"}}>
-										<Draggable
-											draggableId={`right~${obj.part_two}`}
-											index={idx}
-											isDragDisabled={true}>
-											{(provided2) => {
-												return (
-													<div
-														dangerouslySetInnerHTML={{
-															__html: currentRight[idx] ? currentRight[idx] : "",
-														}}
-														ref={provided2.innerRef}
-														{...provided2.draggableProps}
-														{...provided2.dragHandleProps}
-														className={classes.options}
-														style={{
-															//height: rightUsed[idx] || props.isReview ? "auto" : 70,
-															background: boxColors[idx],
-														}}>
-														{/* {currentRight[idx] ? currentRight[idx] : ""} */}
-													</div>
-												);
-											}}
-										</Draggable>
-										{provided.placeholder}
-									</div>
-								)}
-							</Droppable>
-						))}
+						{props.question.sentences &&
+							props.question.sentences.map((obj, idx) => (
+								<Droppable
+									key={idx}
+									droppableId={`right_sentence~${idx}`}
+									isDropDisabled={rightUsed[idx]}>
+									{(provided) => (
+										<div
+											{...provided.droppableProps}
+											ref={provided.innerRef}
+											style={{width: "100%"}}>
+											<Draggable
+												draggableId={`right~${obj.part_two}`}
+												index={idx}
+												isDragDisabled={true}>
+												{(provided2) => {
+													return (
+														<div
+															dangerouslySetInnerHTML={{
+																__html: currentRight[idx] ? currentRight[idx] : "",
+															}}
+															ref={provided2.innerRef}
+															{...provided2.draggableProps}
+															{...provided2.dragHandleProps}
+															className={classes.options}
+															style={{
+																//height: rightUsed[idx] || props.isReview ? "auto" : 70,
+																background: boxColors[idx],
+															}}>
+															{/* {currentRight[idx] ? currentRight[idx] : ""} */}
+														</div>
+													);
+												}}
+											</Draggable>
+											{provided.placeholder}
+										</div>
+									)}
+								</Droppable>
+							))}
 					</div>
 				</div>
 			</div>
@@ -180,7 +191,7 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 });
 
 SentenceMatchingCard.propTypes = {
-	question: PropTypes.array.isRequired,
+	question: PropTypes.object.isRequired,
 	currentQuestionNumber: PropTypes.number,
 	isReview: PropTypes.bool.isRequired,
 	isChecked: PropTypes.bool.isRequired,
