@@ -8,9 +8,19 @@ const MCQCard = forwardRef((props, ref) => {
 	useImperativeHandle(ref, () => ({
 		check() {
 			let answer = {
-				users_answer: selected,
-				isCorrect: props.question.options[selected] === props.question.answer,
+				users_answer: [...selected],
+				isCorrect: true,
 			};
+
+			for (let i = 0; i < selected.length; i++) {
+				if (
+					selected[i] <= -1 ||
+					props.question.questions[i].options[selected[i]] !== props.question.questions.answer
+				) {
+					answer.isCorrect = false;
+					break;
+				}
+			}
 
 			return answer;
 		},
