@@ -104,7 +104,9 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 			<div className={classes.root}>
 				<Button text="Undo" styles={classes.undo} onClick={() => undo()} />
 				<div
-					dangerouslySetInnerHTML={{__html: props.question.taskDetail.instruction}}
+					dangerouslySetInnerHTML={{
+						__html: props.question.taskDetail ? props.question.taskDetail.instruction : null,
+					}}
 					className={classes.instruction}></div>
 				<div className={classes.optionsOuter}>
 					<div
