@@ -8,33 +8,52 @@ const MCQCard = forwardRef((props, ref) => {
 	useImperativeHandle(ref, () => ({
 		check() {
 			let answer = {
-				users_answer: selected,
-				isCorrect: props.question.options[selected] === props.question.answer,
+				users_answer: [...selected],
+				isCorrect: true,
 			};
+
+			for (let i = 0; i < selected.length; i++) {
+				if (
+					selected[i] <= -1 ||
+					props.question.questions[i].options[selected[i]] !== props.question.questions.answer
+				) {
+					answer.isCorrect = false;
+					break;
+				}
+			}
 
 			return answer;
 		},
 	}));
 
 	const classes = styles();
-	const [selected, setSelected] = useState(-1);
+	const [selected, setSelected] = useState([]);
 
 	useEffect(() => {
-		setSelected(-1);
-	}, [props.currentQuestionNumber]);
+		setSelected(props.question.questions ? props.question.questions.map(() => -1) : []);
+		console.log(props.question);
+	}, [props.currentQuestionNumber, props.question]);
 
-	const selectOption = (idx) => {
+	const selectOption = (idx, jdx) => {
 		if (!props.isReview && !props.isChecked) {
-			setSelected(idx);
+			let temp = [...selected];
+			temp[idx] = jdx;
+			setSelected(temp);
 		}
 	};
 
-	const determineOptionColor = (idx) => {
-		if (!props.isChecked && !props.isReview) return colors.white;
-		else {
-			if (selected !== idx) return colors.white;
+	const determineOptionColor = (idx, jdx) => {
+		if (!props.isChecked && !props.isReview) {
+			if (selected[idx] === jdx) return colors.secondary;
+			return colors.white;
+		} else {
+			if (selected[idx] !== jdx) return colors.white;
 			else {
-				if (props.question.options[selected] === props.question.answer) return colors.correct;
+				if (
+					props.question.questions[idx].options[selected[idx]] ===
+					props.question.questions[idx].answer
+				)
+					return colors.correct;
 				return colors.incorrect;
 			}
 		}
@@ -43,29 +62,40 @@ const MCQCard = forwardRef((props, ref) => {
 	return (
 		<div className={classes.root}>
 			<div
-				className={`${classes.question}`}
 				contentEditable="false"
-				dangerouslySetInnerHTML={{__html: props.question.question}}></div>
+				dangerouslySetInnerHTML={{
+					__html: props.question.taskDetail ? props.question.taskDetail.instruction : null,
+				}}
+				className={classes.instruction}></div>
+			{props.question.questions &&
+				props.question.questions.map((obj, idx) => (
+					<div key={idx} className={classes.questionContainer}>
+						<div
+							className={`${classes.question}`}
+							contentEditable="false"
+							dangerouslySetInnerHTML={{__html: obj.question}}></div>
 
-			<div className={classes.optionContainer}>
-				<Grid container spacing={3}>
-					{props.question.options &&
-						props.question.options.map((obj, idx) => (
-							<Grid item xs={6} sm={6} md={6} lg={6} xl={6} key={idx}>
-								<div
-									style={{background: determineOptionColor(idx)}}
-									onClick={() => selectOption(idx)}
-									className={`${classes.opt} ${classes.centered} ${
-										selected === idx && !props.isChecked && !props.isReview
-											? classes.hi
-											: classes.lo
-									}`}>
-									{obj}
-								</div>
+						<div className={classes.optionContainer}>
+							<Grid container spacing={3}>
+								{props.question.questions[idx].options &&
+									props.question.questions[idx].options.map((opt, jdx) => (
+										<Grid item xs={6} sm={6} md={6} lg={6} xl={6} key={jdx}>
+											<div
+												style={{background: determineOptionColor(idx, jdx)}}
+												onClick={() => selectOption(idx, jdx)}
+												className={`${classes.opt} ${classes.centered} ${
+													selected[idx] === jdx && !props.isChecked && !props.isReview
+														? null
+														: classes.lo
+												}`}>
+												{opt}
+											</div>
+										</Grid>
+									))}
 							</Grid>
-						))}
-				</Grid>
-			</div>
+						</div>
+					</div>
+				))}
 		</div>
 	);
 });

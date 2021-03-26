@@ -29,9 +29,9 @@ const MCQ = (props) => {
 		};
 
 		getMCQ(params, (err, axios_data) => {
+			console.log(err, axios_data);
 			if (err) console.error(err);
 			else {
-				//**********************change this - array of array will come */
 				setQuestion(axios_data);
 				setChecked(axios_data.map(() => false));
 				setLoading(false);
