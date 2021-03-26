@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import {makeStyles} from "@material-ui/core";
 import {getWordMeaning} from "../axios/services/dictionary";
@@ -371,7 +372,9 @@ const ExerciseLayout = (props) => {
 					<div className={classes.outerNav}>
 						<div className={classes.nameContainer}>{props.exerciseName}</div>
 						<div className={classes.iconContainer}>
-							<CancelIcon className={classes.menuBtn} onClick={() => getBack()} />
+							<Link to="/home">
+								<CancelIcon className={classes.menuBtn} onClick={() => getBack()} />
+							</Link>
 							<div className={classes.topbarRight}>
 								<div className={classes.searchOuter}>
 									<SearchIcon
