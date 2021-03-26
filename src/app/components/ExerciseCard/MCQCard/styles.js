@@ -10,6 +10,7 @@ const styles = makeStyles((theme) => ({
 	question: {
 		height: "30%",
 		width: "100%",
+		textAlign: "center",
 		marginBottom: 50,
 
 		fontSize: 18,
@@ -49,10 +50,11 @@ const styles = makeStyles((theme) => ({
 		paddingBottom: 25,
 		paddingTop: 25,
 		lineHeight: 1.5,
+		marginBottom: 50,
 	},
 
 	questionContainer: {
-		marginBottom: 25,
+		marginBottom: 100,
 	},
 }));
 
