@@ -21,6 +21,7 @@ const MCQCard = forwardRef((props, ref) => {
 
 	useEffect(() => {
 		setSelected(-1);
+		console.log(props.question);
 	}, [props.currentQuestionNumber]);
 
 	const selectOption = (idx) => {
@@ -43,29 +44,40 @@ const MCQCard = forwardRef((props, ref) => {
 	return (
 		<div className={classes.root}>
 			<div
-				className={`${classes.question}`}
 				contentEditable="false"
-				dangerouslySetInnerHTML={{__html: props.question.question}}></div>
+				dangerouslySetInnerHTML={{
+					__html: props.question.taskDetail ? props.question.taskDetail.instruction : null,
+				}}
+				className={classes.instruction}></div>
+			{props.question.questions &&
+				props.question.questions.map((obj, idx) => (
+					<div className={classes.questionContainer}>
+						<div
+							className={`${classes.question}`}
+							contentEditable="false"
+							dangerouslySetInnerHTML={{__html: props.question.question}}></div>
 
-			<div className={classes.optionContainer}>
-				<Grid container spacing={3}>
-					{props.question.options &&
-						props.question.options.map((obj, idx) => (
-							<Grid item xs={6} sm={6} md={6} lg={6} xl={6} key={idx}>
-								<div
-									style={{background: determineOptionColor(idx)}}
-									onClick={() => selectOption(idx)}
-									className={`${classes.opt} ${classes.centered} ${
-										selected === idx && !props.isChecked && !props.isReview
-											? classes.hi
-											: classes.lo
-									}`}>
-									{obj}
-								</div>
+						<div className={classes.optionContainer}>
+							<Grid container spacing={3}>
+								{props.question.options &&
+									props.question.options.map((obj, idx) => (
+										<Grid item xs={6} sm={6} md={6} lg={6} xl={6} key={idx}>
+											<div
+												style={{background: determineOptionColor(idx)}}
+												onClick={() => selectOption(idx)}
+												className={`${classes.opt} ${classes.centered} ${
+													selected === idx && !props.isChecked && !props.isReview
+														? classes.hi
+														: classes.lo
+												}`}>
+												{obj}
+											</div>
+										</Grid>
+									))}
 							</Grid>
-						))}
-				</Grid>
-			</div>
+						</div>
+					</div>
+				))}
 		</div>
 	);
 });

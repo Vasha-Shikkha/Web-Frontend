@@ -104,6 +104,7 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 			<div className={classes.root}>
 				<Button text="Undo" styles={classes.undo} onClick={() => undo()} />
 				<div
+					contentEditable="false"
 					dangerouslySetInnerHTML={{
 						__html: props.question.taskDetail ? props.question.taskDetail.instruction : null,
 					}}
@@ -125,6 +126,7 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 												{(provided2) => {
 													return (
 														<div
+															contentEditable="false"
 															dangerouslySetInnerHTML={{
 																__html: leftUsed[idx] ? null : obj.part_one,
 															}}
@@ -164,6 +166,7 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 												{(provided2) => {
 													return (
 														<div
+															contentEditable="false"
 															dangerouslySetInnerHTML={{
 																__html: currentRight[idx] ? currentRight[idx] : "",
 															}}

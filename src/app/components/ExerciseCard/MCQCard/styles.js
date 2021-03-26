@@ -44,6 +44,16 @@ const styles = makeStyles((theme) => ({
 		alignContent: "center",
 		alignItems: "center",
 	},
+
+	instruction: {
+		paddingBottom: 25,
+		paddingTop: 25,
+		lineHeight: 1.5,
+	},
+
+	questionContainer: {
+		marginBottom: 25,
+	},
 }));
 
 export default styles;
