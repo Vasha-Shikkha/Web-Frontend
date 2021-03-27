@@ -65,7 +65,7 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 		temp = [...currentRight];
 		temp[result.destination.index] =
 			props.question.sentences[result.source.index].part_one +
-			" " +
+			"&nbsp;" +
 			currentRight[result.destination.index];
 		setCurrentRight(temp);
 
