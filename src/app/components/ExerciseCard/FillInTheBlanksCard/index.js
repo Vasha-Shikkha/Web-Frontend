@@ -144,7 +144,11 @@ const FillInTheBlanksCard = forwardRef((props, ref) => {
 															borderBottom: isBlank[idx] && obj !== "#" ? "2px solid black" : null,
 															background: wordColor[idx],
 														}}>
-														{obj === "#" ? "_______" : obj}
+														{obj === "#"
+															? "_______"
+															: idx === 0
+															? obj[0].toUpperCase() + obj.slice(1)
+															: obj}
 													</div>
 												);
 											}}
