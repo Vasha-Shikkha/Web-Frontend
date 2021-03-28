@@ -11,12 +11,16 @@ const JumbledSentenceCard = forwardRef((props, ref) => {
 				isCorrect: true,
 				users_answer: [...answer],
 			};
-			console.log(answer);
+
 			for (let i = 0; i < answer.length; i++) {
 				if (i !== answer[i].idx) {
 					ret.isCorrect = false;
 					break;
 				}
+			}
+
+			if (answer.length === 0) {
+				ret.isCorrect = false;
 			}
 
 			return ret;
