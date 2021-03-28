@@ -11,7 +11,7 @@ const JumbledSentenceCard = forwardRef((props, ref) => {
 				isCorrect: true,
 				users_answer: [...answer],
 			};
-
+			console.log(answer);
 			for (let i = 0; i < answer.length; i++) {
 				if (i !== answer[i].idx) {
 					ret.isCorrect = false;
@@ -33,7 +33,9 @@ const JumbledSentenceCard = forwardRef((props, ref) => {
 			temp.push({str: props.question.chunks[i], idx: i});
 		}
 
-		setQuestion(shuffle(temp));
+		temp = shuffle(temp);
+
+		setQuestion(temp);
 		setAnswer([]);
 	}, [props.question.chunks]);
 
