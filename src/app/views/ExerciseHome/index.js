@@ -40,6 +40,14 @@ const Vocabulary = (props) => {
 						},
 
 						{
+							name: "Jumbled Sentence",
+							dbName: "Jumbled Sentence",
+							image: JumbledSentenceIcon,
+							link: "/jumbled-sentence",
+							questionQuantity: 0,
+						},
+
+						{
 							name: "Sentence Matching",
 							dbName: "Sentence Matching",
 							image: SentenceMatchingIcon,
