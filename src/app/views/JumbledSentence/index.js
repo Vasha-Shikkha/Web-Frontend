@@ -25,13 +25,14 @@ const JumbledSentence = (props) => {
 		setLoading(true);
 
 		let params = {
-			topic_id: props.location.state.topicId,
+			topic_id: 1, //props.location.state.topicId,
 			offset: 0,
 			limit: 5,
-			level: props.location.state.level,
+			level: 1, //props.location.state.level,
 		};
 
 		getJumbledSentence(params, (err, axios_data) => {
+			console.log(err, axios_data);
 			if (err) console.error(err);
 			else {
 				//**********************change this - array of array will come */
@@ -41,7 +42,8 @@ const JumbledSentence = (props) => {
 				setCurrentQuestion(0);
 			}
 		});
-	}, [props.location.state.topicId, props.location.state.level]);
+		//props.location.state.topicId, props.location.state.level
+	}, []);
 
 	const backToHome = () => {
 		console.log("time to get back kid");

@@ -1,15 +1,23 @@
 import React, {useState, forwardRef, useImperativeHandle, useEffect} from "react";
 import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
 import PropTypes from "prop-types";
+import {shuffle} from "../../../util/helpers";
 import styles from "./styles";
 
 const JumbledSentenceCard = forwardRef((props, ref) => {
 	useImperativeHandle(ref, () => ({
 		check() {
 			let ret = {
-				isCorrect: false,
-				users_answer: [],
+				isCorrect: true,
+				users_answer: [...answer],
 			};
+
+			for (let i = 0; i < answer.length; i++) {
+				if (i !== answer[i].idx) {
+					ret.isCorrect = false;
+					break;
+				}
+			}
 
 			return ret;
 		},
@@ -20,7 +28,12 @@ const JumbledSentenceCard = forwardRef((props, ref) => {
 	const [answer, setAnswer] = useState([]);
 
 	useEffect(() => {
-		setQuestion(props.question.chunks.map((obj) => obj));
+		let temp = [];
+		for (let i = 0; i < props.question.chunks.length; i++) {
+			temp.push({str: props.question.chunks[i], idx: i});
+		}
+
+		setQuestion(shuffle(temp));
 		setAnswer([]);
 	}, [props.question.chunks]);
 
@@ -49,10 +62,10 @@ const JumbledSentenceCard = forwardRef((props, ref) => {
 			let temp_answer = [...answer];
 
 			if (result.source.droppableId === "question_container") {
-				let word = temp_question.splice(result.source.index, 1);
+				let word = temp_question.splice(result.source.index, 1)[0];
 				temp_answer.splice(result.destination.index, 0, word);
 			} else {
-				let word = temp_answer.splice(result.source.index, 1);
+				let word = temp_answer.splice(result.source.index, 1)[0];
 				temp_question.splice(result.destination.index, 0, word);
 			}
 
@@ -80,7 +93,7 @@ const JumbledSentenceCard = forwardRef((props, ref) => {
 												{...provided2.draggableProps}
 												{...provided2.dragHandleProps}
 												className={classes.options}>
-												{obj}
+												{obj.str}
 											</div>
 										);
 									}}
@@ -112,7 +125,7 @@ const JumbledSentenceCard = forwardRef((props, ref) => {
 														{...provided2.draggableProps}
 														{...provided2.dragHandleProps}
 														className={classes.options}>
-														{obj}
+														{obj.str}
 													</div>
 												);
 											}}

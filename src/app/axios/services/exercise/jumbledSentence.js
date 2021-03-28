@@ -4,6 +4,7 @@ const getJumbledSentence = (params, cb) => {
 	//getReqAuth("/user/task/fix_jumbled_word", params, cb);
 	let data = [
 		{
+			paragraph: "a cow",
 			chunks: ["the cow,", "eats grass.", "and runs ", "through the", "meadow"],
 			taskDetail: {},
 		},
