@@ -37,8 +37,9 @@ const VocabularyHome = (props) => {
 		}
 
 		getCommunicativeTopics(params, (err, axios_data) => {
-			if (err) console.error(err);
-			else {
+			if (err) {
+				console.error(err);
+			} else {
 				setTopic(axios_data);
 				setLoading(false);
 				//setShowTooltip(topics.map(() => false));
