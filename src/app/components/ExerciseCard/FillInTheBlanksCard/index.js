@@ -143,6 +143,7 @@ const FillInTheBlanksCard = forwardRef((props, ref) => {
 														style={{
 															borderBottom: isBlank[idx] && obj !== "#" ? "2px solid black" : null,
 															background: wordColor[idx],
+															padding: isBlank[idx] && obj !== "#" ? "0px 15px 0px 15px" : null,
 														}}>
 														{obj === "#"
 															? "______________"
