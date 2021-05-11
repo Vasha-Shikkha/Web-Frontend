@@ -19,20 +19,21 @@ const ExerciseHome = (props) => {
 	const [page, setPage] = useState(1);
 	const [questionSet, setQuestionSet] = useState([]);
 	const [total, setTotal] = useState(1);
-	const linkMapping = new Map();
+	const [linkMapping, setLinkMapping] = useState(new Map());
 
 	useEffect(() => {
 		// map the links
-		linkMapping.set("Sentence Matching", "/sentence-matching");
-		linkMapping.set("MCQ", "/mcq");
-		linkMapping.set("True False", "/true-false");
-		linkMapping.set("Word to Picture", "/word-to-picture");
-		linkMapping.set("Picture to Word", "/picture-to-word");
-		linkMapping.set("Jumbled Word", "/jumbled-word");
-		linkMapping.set("Jumbled Sentence", "/jumbled-sentence");
-		linkMapping.set("Fill in the Blanks", "/fill-in-the-blanks");
-		linkMapping.set("Drag Caption to Picture", "/drag-caption-to-picture");
-		//linkMapping.set("Rearrange Sentence", "/rearrange-sentence");
+		let temp = new Map();
+		temp.set("Sentence Matching", "/sentence-matching");
+		temp.set("MCQ", "/mcq");
+		temp.set("True False", "/true-false");
+		temp.set("Word to Picture", "/word-to-picture");
+		temp.set("Picture to Word", "/picture-to-word");
+		temp.set("Jumbled Word", "/jumbled-word");
+		temp.set("Jumbled Sentence", "/jumbled-sentence");
+		temp.set("Fill in the Blanks", "/fill-in-the-blanks");
+		temp.set("Drag Caption to Picture", "/drag-caption-to-picture");
+		setLinkMapping(temp);
 
 		let params = {
 			topic_id: props.location.state.topicId,
@@ -43,7 +44,6 @@ const ExerciseHome = (props) => {
 
 		setLoading(true);
 		getAllExercises(params, (err, axios_data) => {
-			console.log(err, axios_data);
 			if (!err) {
 				setTotal(axios_data.total);
 				setQuestionSet(axios_data.questionSet);
@@ -106,6 +106,7 @@ const ExerciseHome = (props) => {
 									<div className={classes.title}>{obj.taskDetail.name}</div>
 									<div
 										className={classes.questionQuantity}>{`${obj.question.length} questions`}</div>
+									<div>{`map: ${linkMapping.get(obj.taskDetail.name)}`}</div>
 								</div>
 							</div>
 						</Link>
