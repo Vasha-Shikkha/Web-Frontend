@@ -93,7 +93,7 @@ const ExerciseHome = (props) => {
 							to={{
 								pathname: linkMapping.get(obj.taskDetail.name),
 								state: {
-									question: obj,
+									task: obj,
 								},
 							}}
 							style={{textDecoration: "none"}}
