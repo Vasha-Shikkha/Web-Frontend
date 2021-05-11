@@ -27,7 +27,6 @@ const styles = makeStyles((theme) => ({
 		display: "flex",
 		flexDirection: "row",
 		cursor: "pointer",
-		textDecoration: "none",
 
 		marginBottom: 25,
 	},
