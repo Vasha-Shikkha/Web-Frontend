@@ -28,6 +28,8 @@ const styles = makeStyles((theme) => ({
 		flexDirection: "row",
 		cursor: "pointer",
 		textDecoration: "none",
+
+		marginBottom: 25,
 	},
 
 	imageContainer: {
@@ -60,6 +62,7 @@ const styles = makeStyles((theme) => ({
 		fontSize: "14px",
 		fontWeight: 400,
 		color: "black",
+		marginTop: 5,
 	},
 
 	paginationContainer: {

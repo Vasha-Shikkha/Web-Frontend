@@ -3,7 +3,6 @@ import {Link} from "react-router-dom";
 
 import {getAllExercises} from "../../axios/services/exercises";
 
-import {Grid} from "@material-ui/core";
 import Loading from "../../components/Loading";
 import BackArrowButton from "../../components/BackArrowButton";
 import JumbledSentenceIcon from "../../assets/exercise/jumbledSentence.svg";
@@ -45,6 +44,25 @@ const ExerciseHome = (props) => {
 		console.log("val", value);
 	};
 
+	const imagePicker = (name) => {
+		switch (name) {
+			case "Sentence Matching":
+				return SentenceMatchingIcon;
+			case "Jumbled Sentence":
+				return JumbledSentenceIcon;
+			case "Jumbled Word":
+				return JumbledSentenceIcon;
+			case "Word to Picture":
+				return WordToPictureIcon;
+			case "Picture to Word":
+				return PictureToWordIcon;
+			case "Fill in the Blanks":
+				return FillInTheBlanksIcon;
+			default:
+				return FillInTheBlanksIcon;
+		}
+	};
+
 	if (loading) return <Loading />;
 
 	return (
@@ -57,6 +75,18 @@ const ExerciseHome = (props) => {
 				/>
 			</div>
 			<div className={classes.exerciseContainer}>
+				{questionSet &&
+					questionSet.map((obj, idx) => (
+						<div className={classes.box} key={idx}>
+							<div className={classes.imageContainer}>
+								<img src={imagePicker(obj.taskDetail.name)} alt="" className={classes.boxImage} />
+							</div>
+							<div className={classes.titleContainer}>
+								<div className={classes.title}>{obj.taskDetail.name}</div>
+								<div className={classes.questionQuantity}>{`${obj.question.length} questions`}</div>
+							</div>
+						</div>
+					))}
 				<div className={classes.paginationContainer}>
 					<Pagination
 						count={total % 10 ? total / 10 + 1 : total / 10}
