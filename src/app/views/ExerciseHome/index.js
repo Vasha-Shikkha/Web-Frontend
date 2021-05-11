@@ -106,7 +106,6 @@ const ExerciseHome = (props) => {
 									<div className={classes.title}>{obj.taskDetail.name}</div>
 									<div
 										className={classes.questionQuantity}>{`${obj.question.length} questions`}</div>
-									<div>{`map: ${linkMapping.get(obj.taskDetail.name)}`}</div>
 								</div>
 							</div>
 						</Link>
