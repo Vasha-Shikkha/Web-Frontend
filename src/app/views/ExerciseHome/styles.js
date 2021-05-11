@@ -61,6 +61,11 @@ const styles = makeStyles((theme) => ({
 		fontWeight: 400,
 		color: "black",
 	},
+
+	paginationContainer: {
+		display: "flex",
+		justifyContent: "center",
+	},
 }));
 
 export default styles;
