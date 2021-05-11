@@ -27,7 +27,8 @@ const styles = makeStyles((theme) => ({
 		display: "flex",
 		flexDirection: "row",
 		cursor: "pointer",
-		textDecoration: "none",
+
+		marginBottom: 25,
 	},
 
 	imageContainer: {
@@ -60,6 +61,12 @@ const styles = makeStyles((theme) => ({
 		fontSize: "14px",
 		fontWeight: 400,
 		color: "black",
+		marginTop: 5,
+	},
+
+	paginationContainer: {
+		display: "flex",
+		justifyContent: "center",
 	},
 }));
 

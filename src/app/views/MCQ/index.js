@@ -1,48 +1,36 @@
 import React, {useEffect, useState, useRef} from "react";
-import {Redirect} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 
 import ExerciseLayout from "../../layouts/exerciseLayout";
 import Loading from "../../components/Loading";
 import MCQCard from "../../components/ExerciseCard/MCQCard";
-import {getMCQ} from "../../axios/services/exercise/mcq";
 
 import styles from "../../styles/exerciseViewStyles";
 
 const MCQ = (props) => {
 	const classes = styles();
+	const history = useHistory();
 	const [question, setQuestion] = useState([]);
+	const [taskDetail, setTaskDetail] = useState({});
 	const [checked, setChecked] = useState([]);
 	const [currentQuestion, setCurrentQuestion] = useState(0);
 	const [loading, setLoading] = useState(true);
 	const [showVerdict, setShowVerdict] = useState(false);
 	const [correct, setCorrect] = useState(true);
-	const [redirect, setRedirect] = useState(null);
 
 	const childRef = useRef();
 
 	useEffect(() => {
-		let params = {
-			topic_id: props.location.state.topicId,
-			offset: 0,
-			limit: 5,
-			level: props.location.state.level,
-		};
+		const {task} = props.location.state;
 
-		getMCQ(params, (err, axios_data) => {
-			console.log(err, axios_data);
-			if (err) console.error(err);
-			else {
-				setQuestion(axios_data);
-				setChecked(axios_data.map(() => false));
-				setLoading(false);
-				setCurrentQuestion(0);
-			}
-		});
-	}, [props.location.state.topicId, props.location.state.level]);
-
-	const backToHome = () => {
-		console.log("time to get back kid");
-	};
+		if (task) {
+			setQuestion(task.question);
+			setChecked(task.question.map(() => (task.taskDetail.solved_status ? true : false)));
+			setTaskDetail(task.taskDetail);
+			setCurrentQuestion(0);
+			setLoading(false);
+		}
+	}, [props.location.state]);
 
 	const skip = () => {
 		check();
@@ -72,13 +60,11 @@ const MCQ = (props) => {
 
 		// gameover
 		if (currentQuestion + 1 === question.length) {
-			setRedirect("/finish");
+			history.goBack();
 		} else {
 			setCurrentQuestion(currentQuestion + 1);
 		}
 	};
-
-	if (redirect) return <Redirect to={redirect} />;
 
 	return (
 		<>
@@ -90,7 +76,6 @@ const MCQ = (props) => {
 					scrollable={true}
 					totalQuestions={question.length}
 					currentQuestionNumber={currentQuestion + 1}
-					backToHome={backToHome}
 					skip={skip}
 					check={check}
 					correct={correct}
@@ -101,8 +86,9 @@ const MCQ = (props) => {
 							ref={childRef}
 							currentQuestionNumber={currentQuestion}
 							question={question[currentQuestion]}
-							isReview={false}
+							isReview={taskDetail.solved_status ? taskDetail.solved_status : false}
 							isChecked={checked[currentQuestion]}
+							taskDetail={taskDetail}
 						/>
 					</div>
 				</ExerciseLayout>

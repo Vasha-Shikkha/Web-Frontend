@@ -6,7 +6,7 @@ import config from "../util/config";
 export const postReqAuth = (route, data, param, cb) => {
 	const token = localStorage.getItem("vasha_shikkha_jwtToken");
 	if (token) {
-		axios.defaults.headers.common["Authorization"] = token;
+		axios.defaults.headers.common["Authorization"] = "Bearer " + token;
 		axios
 			.post(config.BASE_API_URL + route + param, data)
 			.then((res) => {
@@ -42,7 +42,7 @@ export const getReqAuth = (route, param, cb) => {
 	const token = localStorage.getItem("vasha_shikkha_jwtToken");
 
 	if (token) {
-		axios.defaults.headers.common["Authorization"] = token;
+		axios.defaults.headers.common["Authorization"] = "Bearer " + token;
 
 		axios
 			.get(config.BASE_API_URL + route, {params: param})

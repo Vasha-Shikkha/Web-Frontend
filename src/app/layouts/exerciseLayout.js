@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Link} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import PropTypes from "prop-types";
 import {makeStyles} from "@material-ui/core";
 import {getWordMeaning} from "../axios/services/dictionary";
@@ -294,6 +294,7 @@ const styles = makeStyles((theme) => ({
 
 const ExerciseLayout = (props) => {
 	const classes = styles();
+	const history = useHistory();
 	const [showSidebar, setShowSidebar] = useState(false);
 	const [dictionarySearch, setDictionarySearch] = useState("");
 	const [searchRes, setSearchRes] = useState({});
@@ -319,11 +320,6 @@ const ExerciseLayout = (props) => {
 		if (event.key === "Enter") {
 			searchWord();
 		}
-	};
-
-	const getBack = () => {
-		if (showSidebar) return;
-		console.log("getting back");
 	};
 
 	return (
@@ -372,9 +368,8 @@ const ExerciseLayout = (props) => {
 					<div className={classes.outerNav}>
 						<div className={classes.nameContainer}>{props.exerciseName}</div>
 						<div className={classes.iconContainer}>
-							<Link to="/home">
-								<CancelIcon className={classes.menuBtn} onClick={() => getBack()} />
-							</Link>
+							<CancelIcon className={classes.menuBtn} onClick={() => history.goBack()} />
+
 							<div className={classes.topbarRight}>
 								<div className={classes.searchOuter}>
 									<SearchIcon
@@ -427,7 +422,6 @@ ExerciseLayout.propTypes = {
 	exerciseName: PropTypes.string.isRequired,
 	skip: PropTypes.func.isRequired,
 	check: PropTypes.func.isRequired,
-	backToHome: PropTypes.func.isRequired,
 	totalQuestions: PropTypes.number.isRequired,
 	currentQuestionNumber: PropTypes.number.isRequired,
 	scrollable: PropTypes.bool,

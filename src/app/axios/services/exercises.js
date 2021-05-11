@@ -1,5 +1,5 @@
 import {getReqAuth} from "../index";
 
-const getAvailableExercises = (params, cb) => getReqAuth("/user/exercises", params, cb);
+const getAllExercises = (params, cb) => getReqAuth("/user/task/all", params, cb);
 
-export {getAvailableExercises};
+export {getAllExercises};
