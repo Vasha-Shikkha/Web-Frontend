@@ -39,6 +39,8 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 	const [disableUndo, setDisableUndo] = useState(false);
 
 	useEffect(() => {
+		console.log(props.question);
+
 		// keep the left part as it is. make them draggable. make the whole container non-droppable
 		// shuffle the right part
 		let shuffled_array = props.question.sentences.map((obj, idx) => idx);
@@ -106,7 +108,7 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 				<div
 					contentEditable="false"
 					dangerouslySetInnerHTML={{
-						__html: props.question.taskDetail ? props.question.taskDetail.instruction : null,
+						__html: props.taskDetail ? props.taskDetail.instruction : null,
 					}}
 					className={classes.instruction}></div>
 				<div className={classes.optionsOuter}>
@@ -200,6 +202,7 @@ SentenceMatchingCard.propTypes = {
 	currentQuestionNumber: PropTypes.number,
 	isReview: PropTypes.bool.isRequired,
 	isChecked: PropTypes.bool.isRequired,
+	taskDetail: PropTypes.object.isRequired,
 };
 
 export default SentenceMatchingCard;
