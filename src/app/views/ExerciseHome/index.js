@@ -44,7 +44,6 @@ const ExerciseHome = (props) => {
 
 		setLoading(true);
 		getAllExercises(params, (err, axios_data) => {
-			console.log(axios_data);
 			if (!err) {
 				setTotal(axios_data.total);
 				setQuestionSet(axios_data.questionSet);
