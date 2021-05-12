@@ -22,7 +22,7 @@ const JumbledWordCard = forwardRef((props, ref) => {
 	useEffect(() => {
 		setQuestion(props.question.chunks.map((obj) => obj));
 		setAnswer([]);
-	}, [props.question.chunks]);
+	}, [props.question]);
 
 	const handleOnDragEnd = (result) => {
 		if (!result.destination) return;
