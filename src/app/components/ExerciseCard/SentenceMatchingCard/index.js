@@ -16,8 +16,7 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 			let temp_color = [...boxColors];
 			for (let i = 0; i < temp_color.length; i++) {
 				let sen = props.question[rightSentenceMapping[i]];
-				console.log(currentRight[i]);
-				console.log(sen.part_one + " " + sen.part_two);
+
 				if (currentRight[i] === sen.part_one + " " + sen.part_two) temp_color[i] = colors.correct;
 				else {
 					temp_color[i] = colors.incorrect;
@@ -40,8 +39,6 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 	const [disableUndo, setDisableUndo] = useState(false);
 
 	useEffect(() => {
-		console.log(props.question);
-
 		// keep the left part as it is. make them draggable. make the whole container non-droppable
 		// shuffle the right part
 		let shuffled_array = props.question.map((obj, idx) => idx);
