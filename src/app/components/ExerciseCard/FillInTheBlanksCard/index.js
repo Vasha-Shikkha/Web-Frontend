@@ -42,28 +42,21 @@ const FillInTheBlanksCard = forwardRef((props, ref) => {
 			else paragraph += props.question.paragraph[i];
 		}
 
-		paragraph = paragraph.replace(/#/i, " #");
+		paragraph = paragraph.replace(/#/g, " # ");
 
 		let splited_word = paragraph.split(" ");
 		let final_words = [];
 		let blankIdx = [];
-		console.log(splited_word);
+
 		for (let i = 0; i < splited_word.length; i++) {
-			if (splited_word[i].match(/#[.,?!]*/g)) {
-				final_words.push("#");
-				blankIdx.push(true);
-
-				if (splited_word[i].length > 1) {
-					final_words.push(splited_word[i][1]);
-					blankIdx.push(false);
-				}
-			} else if (splited_word[i] !== "" && splited_word[i] !== "@") {
-				final_words.push(splited_word[i]);
-				blankIdx.push(false);
-			}
-
 			if (splited_word[i] === "@") {
 				final_words.push("\n");
+				blankIdx.push(false);
+			} else if (splited_word[i] === "#") {
+				final_words.push("#");
+				blankIdx.push(true);
+			} else {
+				final_words.push(splited_word[i]);
 				blankIdx.push(false);
 			}
 		}
@@ -71,7 +64,7 @@ const FillInTheBlanksCard = forwardRef((props, ref) => {
 		setTokenizedQuestion(final_words);
 		setIsBlank(blankIdx);
 		setWordColor(final_words.map(() => "white"));
-	}, [props.question.paragraph, props.question.options]);
+	}, [props.question]);
 
 	const handleOnDragEnd = (result) => {
 		if (!result.destination) return;
@@ -181,6 +174,7 @@ FillInTheBlanksCard.propTypes = {
 	currentQuestionNumber: PropTypes.number,
 	isReview: PropTypes.bool.isRequired,
 	isChecked: PropTypes.bool.isRequired,
+	taskDetail: PropTypes.object.isRequired,
 };
 
 export default FillInTheBlanksCard;
