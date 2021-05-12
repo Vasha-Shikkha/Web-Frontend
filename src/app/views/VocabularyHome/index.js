@@ -128,7 +128,7 @@ const VocabularyHome = (props) => {
 												<img
 													src={obj.image ? obj.image : DummyTopic}
 													alt=""
-													className={classes.topicImg}
+													className={classes.topicImage}
 												/>
 											</div>
 										</div>

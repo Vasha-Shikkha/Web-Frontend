@@ -38,11 +38,6 @@ const WordToPicture = (props) => {
 	const check = () => {
 		let answer = childRef.current.check();
 
-		// save the answer
-		let tempQuestion = [...question];
-		tempQuestion[currentQuestion].users_answer = answer.users_answer;
-		setQuestion(tempQuestion);
-
 		// mark this question as checked
 		let arr = [...checked];
 		arr[currentQuestion] = true;

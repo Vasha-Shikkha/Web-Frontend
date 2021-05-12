@@ -1,49 +1,34 @@
 import React, {useEffect, useState, useRef} from "react";
-
+import {useHistory} from "react-router-dom";
 import ExerciseLayout from "../../layouts/exerciseLayout";
 import Loading from "../../components/Loading";
 import SentenceMatchingCard from "../../components/ExerciseCard/SentenceMatchingCard";
-import {getSentenceMatching} from "../../axios/services/exercise/sentenceMatching";
 
 import styles from "../../styles/exerciseViewStyles";
-import {Redirect} from "react-router-dom";
 
 const SentenceMatching = (props) => {
 	const classes = styles();
+	const history = useHistory();
 	const [question, setQuestion] = useState([]);
-	const [moveAway, setMoveAway] = useState([]);
-	const [checked, setChecked] = useState([]);
-	const [currentQuestion, setCurrentQuestion] = useState(0);
+	const [taskDetail, setTaskDetail] = useState({});
+	const [checked, setChecked] = useState();
+	//const [currentQuestion, setCurrentQuestion] = useState(0);
 	const [loading, setLoading] = useState(true);
 	const [showVerdict, setShowVerdict] = useState(false);
 	const [correct, setCorrect] = useState(true);
-	const [redirect, setRedirect] = useState(null);
 
 	const childRef = useRef();
 
 	useEffect(() => {
-		let params = {
-			topic_id: props.location.state.topicId,
-			offset: 0,
-			limit: 5,
-			level: props.location.state.level,
-		};
+		const {task} = props.location.state;
 
-		setLoading(true);
-		getSentenceMatching(params, (err, axios_data) => {
-			if (err) console.error(err);
-			else {
-				setMoveAway(axios_data.map(() => false));
-				setChecked(axios_data.map(() => false));
-				setQuestion(axios_data);
-				setLoading(false);
-			}
-		});
-	}, [props.location.state.topicId, props.location.state.level]);
-
-	const backToHome = () => {
-		console.log("time to get back kid");
-	};
+		if (task) {
+			setQuestion(task.question);
+			setChecked(task.taskDetail.solved_status ? true : false);
+			setTaskDetail(task.taskDetail);
+			setLoading(false);
+		}
+	}, [props.location.state]);
 
 	const skip = () => {
 		check();
@@ -52,15 +37,8 @@ const SentenceMatching = (props) => {
 	const check = () => {
 		let answer = childRef.current.check();
 
-		// save the answer
-		let tempQuestion = [...question];
-		tempQuestion[currentQuestion].users_answer = [...answer.users_answer];
-		setQuestion(tempQuestion);
-
 		// mark this question as checked
-		let arr = [...checked];
-		arr[currentQuestion] = true;
-		setChecked(arr);
+		setChecked(true);
 
 		// show verdict
 		setShowVerdict(true);
@@ -68,23 +46,12 @@ const SentenceMatching = (props) => {
 	};
 
 	const getNext = () => {
-		// make the showTransition flag true for the current question
-		let arr = [...moveAway];
-		arr[currentQuestion] = true;
-		setMoveAway(arr);
-
 		// hide verdict
 		setShowVerdict(false);
 
 		// gameover
-		if (currentQuestion + 1 === question.length) {
-			setRedirect("/finish");
-		} else {
-			setCurrentQuestion(currentQuestion + 1);
-		}
+		history.goBack();
 	};
-
-	if (redirect) return <Redirect to={redirect} />;
 
 	return (
 		<>
@@ -95,8 +62,7 @@ const SentenceMatching = (props) => {
 					exerciseName="Sentence Matching"
 					scrollable={true}
 					totalQuestions={question.length}
-					currentQuestionNumber={currentQuestion + 1}
-					backToHome={backToHome}
+					currentQuestionNumber={1}
 					skip={skip}
 					check={check}
 					correct={correct}
@@ -105,10 +71,10 @@ const SentenceMatching = (props) => {
 					<div className={`${classes.scrollableRoot} ${classes.centered}`}>
 						<SentenceMatchingCard
 							ref={childRef}
-							currentQuestionNumber={currentQuestion}
-							question={question[currentQuestion]}
-							isReview={false}
-							isChecked={checked[currentQuestion]}
+							question={question}
+							isReview={taskDetail.solved_status ? taskDetail.solved_status : false}
+							isChecked={checked}
+							taskDetail={taskDetail}
 						/>
 					</div>
 				</ExerciseLayout>
