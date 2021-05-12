@@ -1,15 +1,16 @@
 import React, {useEffect, useState, useRef} from "react";
-
+import {useHistory} from "react-router-dom";
 import ExerciseLayout from "../../layouts/exerciseLayout";
 import Loading from "../../components/Loading";
 import WordToPictureCard from "../../components/ExerciseCard/WordToPictureCard";
 
 import styles from "../../styles/exerciseViewStyles";
 
-const WordToPicture = () => {
+const WordToPicture = (props) => {
 	const classes = styles();
+	const history = useHistory();
 	const [question, setQuestion] = useState([]);
-	const [moveAway, setMoveAway] = useState([]);
+	const [taskDetail, setTaskDetail] = useState({});
 	const [checked, setChecked] = useState([]);
 	const [currentQuestion, setCurrentQuestion] = useState(0);
 	const [loading, setLoading] = useState(true);
@@ -19,89 +20,16 @@ const WordToPicture = () => {
 	const childRef = useRef();
 
 	useEffect(() => {
-		let data = [
-			{
-				question: "Find out the Saint Martin’s island from the following pictures:",
-				options: [
-					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/word_to_pic/image14.jpg",
-					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/word_to_pic/image2.jpg",
-					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/word_to_pic/image12.jpg",
-					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/word_to_pic/image3.jpg",
-				],
-				answer: 2,
-				users_answer: -1,
-			},
+		const {task} = props.location.state;
 
-			{
-				question: "Find out the 60 Gambuj Mosque from the following pictures:",
-				options: [
-					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/word_to_pic/image1.jpg",
-					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/word_to_pic/image15.jpg",
-					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/word_to_pic/image9.jpg",
-					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/word_to_pic/image4.jpg",
-				],
-				answer: 0,
-				users_answer: -1,
-			},
-
-			{
-				question: "Find out the National Memorial of Bangladesh from the following pictures:",
-				options: [
-					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/word_to_pic/image10.jpg",
-					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/word_to_pic/image16.jpg",
-					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/word_to_pic/image21.jpg",
-					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/word_to_pic/image24.jpg",
-				],
-				answer: 2,
-				users_answer: -1,
-			},
-
-			{
-				question: "Find out the national flower of Bangladesh:",
-				options: [
-					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/word_to_pic/image6.jpg",
-					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/word_to_pic/image7.jpg",
-					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/word_to_pic/image22.jpg",
-					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/word_to_pic/image5.jpg",
-				],
-				answer: 3,
-				users_answer: -1,
-			},
-
-			{
-				question: "Find out the national fruit of Bangladesh:",
-				options: [
-					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/word_to_pic/image20.jpg",
-					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/word_to_pic/image18.jpg",
-					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/word_to_pic/image19.jpg",
-					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/word_to_pic/image23.jpg",
-				],
-				answer: 1,
-				users_answer: -1,
-			},
-
-			{
-				question: "Find out the national poet of Bangladesh:",
-				options: [
-					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/word_to_pic/image17.jpg",
-					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/word_to_pic/image8.jpg",
-					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/word_to_pic/image11.jpg",
-					"https://raw.githubusercontent.com/Waqar-107/temp/master/vashaShikkha/word_to_pic/image13.jpg",
-				],
-				answer: 0,
-				users_answer: -1,
-			},
-		];
-
-		setMoveAway(data.map(() => false));
-		setChecked(data.map(() => false));
-		setQuestion(data);
-		setLoading(false);
-	}, []);
-
-	const backToHome = () => {
-		console.log("time to get back kid");
-	};
+		if (task) {
+			setQuestion(task.question);
+			setChecked(task.question.map(() => (task.taskDetail.solved_status ? true : false)));
+			setTaskDetail(task.taskDetail);
+			setCurrentQuestion(0);
+			setLoading(false);
+		}
+	}, [props.location.state]);
 
 	const skip = () => {
 		check();
@@ -126,16 +54,12 @@ const WordToPicture = () => {
 	};
 
 	const getNext = () => {
-		// make the showTransition flag true for the current question
-		let arr = [...moveAway];
-		arr[currentQuestion] = true;
-		setMoveAway(arr);
-
 		// hide verdict
 		setShowVerdict(false);
 
 		// gameover
 		if (currentQuestion + 1 === question.length) {
+			history.goBack();
 		} else {
 			setCurrentQuestion(currentQuestion + 1);
 		}
@@ -150,24 +74,20 @@ const WordToPicture = () => {
 					exerciseName="Word to Picture"
 					totalQuestions={question.length}
 					currentQuestionNumber={currentQuestion + 1}
-					backToHome={backToHome}
 					skip={skip}
 					check={check}
 					correct={correct}
 					anime={showVerdict}
 					getNext={getNext}>
 					<div className={`${classes.root} ${classes.centered}`}>
-						{question.map((obj, idx) => (
-							<WordToPictureCard
-								key={idx}
-								ref={childRef}
-								elevation={question.length - idx + 1}
-								question={obj}
-								moveAway={moveAway[idx]}
-								isReview={false}
-								isChecked={checked[idx]}
-							/>
-						))}
+						<WordToPictureCard
+							ref={childRef}
+							currentQuestionNumber={currentQuestion}
+							question={question[currentQuestion]}
+							isReview={taskDetail.solved_status ? taskDetail.solved_status : false}
+							isChecked={checked[currentQuestion]}
+							taskDetail={taskDetail}
+						/>
 					</div>
 				</ExerciseLayout>
 			)}
