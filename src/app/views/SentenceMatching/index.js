@@ -11,8 +11,8 @@ const SentenceMatching = (props) => {
 	const history = useHistory();
 	const [question, setQuestion] = useState([]);
 	const [taskDetail, setTaskDetail] = useState({});
-	const [checked, setChecked] = useState([]);
-	const [currentQuestion, setCurrentQuestion] = useState(0);
+	const [checked, setChecked] = useState();
+	//const [currentQuestion, setCurrentQuestion] = useState(0);
 	const [loading, setLoading] = useState(true);
 	const [showVerdict, setShowVerdict] = useState(false);
 	const [correct, setCorrect] = useState(true);
@@ -24,9 +24,8 @@ const SentenceMatching = (props) => {
 
 		if (task) {
 			setQuestion(task.question);
-			setChecked(task.question.map(() => (task.taskDetail.solved_status ? true : false)));
+			setChecked(task.taskDetail.solved_status ? true : false);
 			setTaskDetail(task.taskDetail);
-			setCurrentQuestion(0);
 			setLoading(false);
 		}
 	}, [props.location.state]);
@@ -39,9 +38,7 @@ const SentenceMatching = (props) => {
 		let answer = childRef.current.check();
 
 		// mark this question as checked
-		let arr = [...checked];
-		arr[currentQuestion] = true;
-		setChecked(arr);
+		setChecked(true);
 
 		// show verdict
 		setShowVerdict(true);
@@ -53,11 +50,7 @@ const SentenceMatching = (props) => {
 		setShowVerdict(false);
 
 		// gameover
-		if (currentQuestion + 1 === question.length) {
-			history.goBack();
-		} else {
-			setCurrentQuestion(currentQuestion + 1);
-		}
+		history.goBack();
 	};
 
 	return (
@@ -69,7 +62,7 @@ const SentenceMatching = (props) => {
 					exerciseName="Sentence Matching"
 					scrollable={true}
 					totalQuestions={question.length}
-					currentQuestionNumber={currentQuestion + 1}
+					currentQuestionNumber={1}
 					skip={skip}
 					check={check}
 					correct={correct}
@@ -78,10 +71,9 @@ const SentenceMatching = (props) => {
 					<div className={`${classes.scrollableRoot} ${classes.centered}`}>
 						<SentenceMatchingCard
 							ref={childRef}
-							currentQuestionNumber={currentQuestion}
-							question={question[currentQuestion]}
+							question={question}
 							isReview={taskDetail.solved_status ? taskDetail.solved_status : false}
-							isChecked={checked[currentQuestion]}
+							isChecked={checked}
 							taskDetail={taskDetail}
 						/>
 					</div>
