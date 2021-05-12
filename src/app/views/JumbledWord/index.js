@@ -4,7 +4,6 @@ import {useHistory} from "react-router-dom";
 import ExerciseLayout from "../../layouts/exerciseLayout";
 import Loading from "../../components/Loading";
 import JumbledWordCard from "../../components/ExerciseCard/JumbledWordCard";
-import {getJumbledWord} from "../../axios/services/exercise/jumbledWord";
 
 import styles from "../../styles/exerciseViewStyles";
 
