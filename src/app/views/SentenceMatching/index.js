@@ -12,7 +12,6 @@ const SentenceMatching = (props) => {
 	const [question, setQuestion] = useState([]);
 	const [taskDetail, setTaskDetail] = useState({});
 	const [checked, setChecked] = useState();
-	//const [currentQuestion, setCurrentQuestion] = useState(0);
 	const [loading, setLoading] = useState(true);
 	const [showVerdict, setShowVerdict] = useState(false);
 	const [correct, setCorrect] = useState(true);
