@@ -176,7 +176,6 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 													);
 												}}
 											</Draggable>
-											{provided.placeholder}
 										</div>
 									)}
 								</Droppable>
