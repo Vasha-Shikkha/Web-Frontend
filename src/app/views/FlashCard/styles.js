@@ -25,6 +25,7 @@ const styles = makeStyles((theme) => ({
 		display: "flex",
 		flexDirection: "column",
 		justifyContent: "center",
+		zIndex: 5,
 	},
 
 	cross: {
