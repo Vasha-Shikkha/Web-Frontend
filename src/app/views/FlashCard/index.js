@@ -1,10 +1,22 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Button from "../../components/Button";
+import {getFlashCards} from "../../axios/services/flashCard";
 import CancelIcon from "@material-ui/icons/Cancel";
 import styles from "./styles";
 
 const FlashCard = (props) => {
 	const classes = styles();
+
+	useEffect(() => {
+		console.log("mounted");
+		let date = new Date();
+		date.setMonth(date.getMonth() - 1);
+
+		getFlashCards({date}, (err, axios_data) => {
+			console.log("ax", err, axios_data);
+		});
+	}, []);
+
 	const cards = [
 		{
 			word: "synonym",
@@ -41,6 +53,7 @@ const FlashCard = (props) => {
 			<div className={`${classes.contentContainer} ${classes.centered}`}>
 				{cards.map((obj, idx) => (
 					<div
+						key={idx}
 						className={`${classes.card} ${
 							idx === 1 ? classes.rotate5 : idx === 2 ? classes.rotate10 : ""
 						}`}
