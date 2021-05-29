@@ -19,7 +19,7 @@ export const AuthProvider = (props) => {
 		if (jwtTokenExpiryDate && isJwtValid(jwtTokenExpiryDate)) {
 			setIsAuthenticated(true);
 			setUser(user);
-			console.log("in state - logged in");
+
 			return true;
 		} else return false;
 	};

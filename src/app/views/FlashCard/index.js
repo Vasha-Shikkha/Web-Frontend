@@ -1,46 +1,47 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
+import {Link} from "react-router-dom";
 import Button from "../../components/Button";
+import {getFlashCards} from "../../axios/services/flashCard";
 import CancelIcon from "@material-ui/icons/Cancel";
 import styles from "./styles";
 
-const FlashCard = (props) => {
+const FlashCard = () => {
 	const classes = styles();
-	const cards = [
-		{
-			word: "synonym",
-			meaning: "A word having the same or almost the same meaning as another word",
-			example: "Huge is a synonym for the word large",
-		},
-		{
-			word: "synonym",
-			meaning: "A word having the same or almost the same meaning as another word",
-			example: "Huge is a synonym for the word large",
-		},
-		{
-			word: "synonym",
-			meaning: "A word having the same or almost the same meaning as another word",
-			example: "Huge is a synonym for the word large",
-		},
-		{
-			word: "synonym",
-			meaning: "A word having the same or almost the same meaning as another word",
-			example: "Huge is a synonym for the word large",
-		},
-	];
+	const [cards, setCards] = useState([]);
 
-	const next = () => {};
+	useEffect(() => {
+		let date = new Date();
+		date.setMonth(date.getMonth() - 1);
+
+		getFlashCards({date}, (err, axios_data) => {
+			if (!err) setCards(axios_data);
+		});
+	}, []);
+
+	const next = () => {
+		if (!cards.length) return;
+
+		let temp = [...cards];
+		let uno = {...cards[0]};
+		temp.splice(0, 1);
+		temp.push(uno);
+		setCards(temp);
+	};
 
 	return (
 		<div className={classes.root}>
 			<div className={classes.navContainer}>
 				<div className={`${classes.nav_inner} ${classes.crossContainer}`}>
-					<CancelIcon className={classes.cross} />
+					<Link to="/home">
+						<CancelIcon className={classes.cross} />
+					</Link>
 				</div>
 				<div className={`${classes.nav_inner} ${classes.centered}`}>FLASH CARDS</div>
 			</div>
 			<div className={`${classes.contentContainer} ${classes.centered}`}>
 				{cards.map((obj, idx) => (
 					<div
+						key={idx}
 						className={`${classes.card} ${
 							idx === 1 ? classes.rotate5 : idx === 2 ? classes.rotate10 : ""
 						}`}
@@ -50,7 +51,7 @@ const FlashCard = (props) => {
 						<div className={classes.centered}>
 							<div className={classes.word}>{obj.word.toUpperCase()}</div>
 						</div>
-						<div className={classes.meaning}>{obj.meaning}</div>
+						<div className={classes.meaning}>{obj.meaning ? obj.meaning.join(", ") : ""}</div>
 						<div className={classes.exampleHead}>Example</div>
 						<div className={classes.example}>{obj.example}</div>
 					</div>
