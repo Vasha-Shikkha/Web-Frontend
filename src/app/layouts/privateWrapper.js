@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import Loading from "../components/Loading";
 import {Redirect} from "react-router-dom";
-import {checkJWT} from "../axios/services/jwtVerifier";
 import {AuthConsumer} from "../stateHandlers/authContext";
 
 class PrivateComponent extends Component {
@@ -10,18 +9,8 @@ class PrivateComponent extends Component {
 	};
 
 	componentDidMount() {
-		checkJWT((err, data) => {
-			if (err) {
-				localStorage.removeItem("vasha_shikkha_user");
-				localStorage.removeItem("vasha_shikkha_jwtToken");
-				this.setState({status: false});
-			} else if (this.props.checkAuth()) this.setState({status: true});
-			else {
-				localStorage.removeItem("vasha_shikkha_user");
-				localStorage.removeItem("vasha_shikkha_jwtToken");
-				this.setState({status: false});
-			}
-		});
+		if (this.props.checkAuth()) this.setState({status: true});
+		else this.setState({status: false});
 	}
 
 	render() {

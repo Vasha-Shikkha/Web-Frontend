@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import PropTypes from "prop-types";
+import {isJwtValid} from "../util/helpers";
 
 export const AuthContext = React.createContext();
 
@@ -13,19 +14,12 @@ export const AuthProvider = (props) => {
 
 	const checkAuth = () => {
 		let user = localStorage.getItem("vasha_shikkha_user");
-		let jwtToken = localStorage.getItem("vasha_shikkha_jwtToken");
+		let jwtTokenExpiryDate = localStorage.getItem("vasha_shikkha_jwtToken_expiresAt");
 
-		// if something is undefined while saving, it's stored as undefined
-		// in the local storage. when retrieving it from the storage,
-		// it becomes a string and it becomes difficult to realize that this is causing error
-		// because you print it and see `undefined` in the console, so you hardly bother about it
-		if (user && user === "undefined") user = null;
-		if (jwtToken && jwtToken === "undefined") jwtToken = null;
-
-		if (jwtToken) {
+		if (jwtTokenExpiryDate && isJwtValid(jwtTokenExpiryDate)) {
 			setIsAuthenticated(true);
 			setUser(user);
-
+			console.log("in state - logged in");
 			return true;
 		} else return false;
 	};
@@ -39,6 +33,7 @@ export const AuthProvider = (props) => {
 	const logout = () => {
 		localStorage.removeItem("vasha_shikkha_user");
 		localStorage.removeItem("vasha_shikkha_jwtToken");
+		localStorage.removeItem("vasha_shikkha_jwtToken_expiresAt");
 
 		setUser({});
 		setIsAuthenticated(false);

@@ -12,3 +12,8 @@ module.exports.shuffle = (array) => {
 
 	return array;
 };
+
+module.exports.isJwtValid = (jwtTokenExpiryDate) => {
+	if (!jwtTokenExpiryDate) return false;
+	return Date.now() + 5 * 60 * 1000 < jwtTokenExpiryDate;
+};

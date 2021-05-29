@@ -32,8 +32,6 @@ module.exports.signup = (data) => {
 		errors.password = "password is required";
 	}
 
-	console.log("inside validator", errors);
-
 	return {
 		errors,
 		isValid: checker.isEmpty(errors),
