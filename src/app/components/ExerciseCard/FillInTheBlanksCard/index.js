@@ -61,10 +61,18 @@ const FillInTheBlanksCard = forwardRef((props, ref) => {
 			}
 		}
 
-		setTokenizedQuestion(final_words);
+		if (props.isReview) {
+			let j = 0;
+
+			for (let i = 0; i < final_words.length; i++) {
+				if (blankIdx[i]) final_words[i] = props.question.answers[j++];
+			}
+		}
+
 		setIsBlank(blankIdx);
 		setWordColor(final_words.map(() => "white"));
-	}, [props.question]);
+		setTokenizedQuestion(final_words);
+	}, [props.question, props.tried]);
 
 	const handleOnDragEnd = (result) => {
 		if (!result.destination) return;
@@ -91,7 +99,11 @@ const FillInTheBlanksCard = forwardRef((props, ref) => {
 								ref={provided.innerRef}
 								className={`${classes.optionContainer}`}>
 								{props.question.options.map((obj, idx) => (
-									<Draggable key={idx} draggableId={`option~${obj}`} index={idx}>
+									<Draggable
+										key={idx}
+										draggableId={`option~${obj}`}
+										index={idx}
+										isDragDisabled={props.isReview || props.isChecked}>
 										{(provided2) => {
 											return (
 												<div
@@ -172,6 +184,7 @@ FillInTheBlanksCard.propTypes = {
 	isReview: PropTypes.bool.isRequired,
 	isChecked: PropTypes.bool.isRequired,
 	taskDetail: PropTypes.object.isRequired,
+	tried: PropTypes.number.isRequired,
 };
 
 export default FillInTheBlanksCard;
