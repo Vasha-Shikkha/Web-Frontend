@@ -94,7 +94,6 @@ const MCQ = (props) => {
 				{open && (
 					<div className={classes.answerContainer}>
 						<MCQCard
-							//ref={childRef}
 							currentQuestionNumber={currentQuestion}
 							question={question[currentQuestion]}
 							isReview={true}
