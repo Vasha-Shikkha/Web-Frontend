@@ -29,7 +29,7 @@ const WordToPictureCard = forwardRef((props, ref) => {
 
 	useEffect(() => {
 		setSelected(-1);
-	}, [props.currentQuestionNumber, props.question]);
+	}, [props.currentQuestionNumber, props.question, props.tried]);
 
 	// if not reviewing or done checking then let the user select an option
 	const selectOption = (idx) => {
@@ -99,6 +99,7 @@ WordToPictureCard.propTypes = {
 	isReview: PropTypes.bool.isRequired,
 	isChecked: PropTypes.bool.isRequired,
 	taskDetail: PropTypes.object.isRequired,
+	tried: PropTypes.number.isRequired,
 };
 
 export default WordToPictureCard;

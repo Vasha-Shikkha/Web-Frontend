@@ -3,16 +3,8 @@ import {makeStyles} from "@material-ui/core";
 const styles = makeStyles((theme) => ({
 	root: {
 		width: "90%",
-		height: "90%",
+		minHeight: "50vh",
 		background: "white",
-
-		position: "absolute",
-	},
-
-	transition: {
-		transformOrigin: "left",
-		transform: "translate(-150%, -15%) rotate(-25deg)",
-		transitionDuration: "1.0s",
 	},
 
 	question: {

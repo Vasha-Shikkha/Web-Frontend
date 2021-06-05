@@ -29,7 +29,7 @@ const PictureToWordCard = forwardRef((props, ref) => {
 
 	useEffect(() => {
 		setSelected(-1);
-	}, [props.currentQuestionNumber, props.question]);
+	}, [props.currentQuestionNumber, props.question, props.tried]);
 
 	// if not reviewing or done checking then let the user select an option
 	const selectOption = (idx) => {

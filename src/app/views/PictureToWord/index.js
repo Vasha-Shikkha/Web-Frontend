@@ -98,6 +98,7 @@ const PictureToWord = (props) => {
 							isReview={true}
 							isChecked={true}
 							taskDetail={taskDetail}
+							tried={tried}
 						/>
 					</div>
 				)}
@@ -124,6 +125,7 @@ const PictureToWord = (props) => {
 							isReview={taskDetail.solved_status ? taskDetail.solved_status : false}
 							isChecked={checked[currentQuestion]}
 							taskDetail={taskDetail}
+							tried={tried}
 						/>
 					</div>
 				</ExerciseLayout>
