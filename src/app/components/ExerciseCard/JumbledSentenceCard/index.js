@@ -33,14 +33,9 @@ const JumbledSentenceCard = forwardRef((props, ref) => {
 
 	useEffect(() => {
 		if (props.isReview) {
-			setQuestion([]);
-			setAnswer([...props.question.chunks]);
+			setAnswer(props.question.chunks.map((obj, i) => ({str: obj, idx: i})));
 		} else {
-			let temp = [];
-			for (let i = 0; i < props.question.chunks.length; i++) {
-				temp.push({str: props.question.chunks[i], idx: i});
-			}
-
+			let temp = props.question.chunks.map((obj, i) => ({str: obj, idx: i}));
 			temp = shuffle(temp);
 
 			setQuestion(temp);

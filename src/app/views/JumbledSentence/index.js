@@ -93,7 +93,7 @@ const JumbledSentence = (props) => {
 		<>
 			<Dialog open={open} onClose={handleClose} maxWidth={false}>
 				{open && (
-					<div id="answerContainer" className={classes.answerContainer}>
+					<div id="answerContainer" className={classes.answerContainer} style={{width: "90vw"}}>
 						<JumbledSentenceCard
 							currentQuestionNumber={currentQuestion}
 							question={question[currentQuestion]}
