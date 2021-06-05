@@ -29,6 +29,7 @@ const styles = makeStyles((theme) => ({
 	answerContainer: {
 		display: "grid",
 		placeItems: "center",
+		padding: 25,
 	},
 }));
 

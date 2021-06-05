@@ -107,10 +107,11 @@ const PictureToWordCard = forwardRef((props, ref) => {
 
 PictureToWordCard.propTypes = {
 	question: PropTypes.object.isRequired,
-	moveAway: PropTypes.bool,
-	elevation: PropTypes.number,
+	currentQuestionNumber: PropTypes.number,
 	isReview: PropTypes.bool.isRequired,
 	isChecked: PropTypes.bool.isRequired,
+	taskDetail: PropTypes.object.isRequired,
+	tried: PropTypes.number.isRequired,
 };
 
 export default PictureToWordCard;
