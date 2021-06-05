@@ -6,6 +6,8 @@ import Loading from "../../components/Loading";
 import JumbledSentenceCard from "../../components/ExerciseCard/JumbledSentenceCard";
 
 import styles from "../../styles/exerciseViewStyles";
+import {Dialog} from "@material-ui/core";
+import "../../styles/answerContainer.css";
 
 const JumbledSentence = (props) => {
 	const classes = styles();
@@ -17,6 +19,8 @@ const JumbledSentence = (props) => {
 	const [loading, setLoading] = useState(true);
 	const [showVerdict, setShowVerdict] = useState(false);
 	const [correct, setCorrect] = useState(true);
+	const [tried, setTried] = useState(0);
+	const [open, setOpen] = useState(false);
 
 	const childRef = useRef();
 
@@ -49,6 +53,30 @@ const JumbledSentence = (props) => {
 		setCorrect(answer.isCorrect);
 	};
 
+	const tryAgain = () => {
+		// hide verdict
+		setShowVerdict(false);
+
+		// mark this checked question as un-checked
+		let arr = [...checked];
+		arr[currentQuestion] = false;
+		setChecked(arr);
+
+		// increase the tried
+		setTried(tried + 1);
+
+		// set the question again so that the component mounts again and resets
+		setCurrentQuestion(currentQuestion);
+	};
+
+	const showAnswer = () => {
+		setOpen(true);
+	};
+
+	const handleClose = () => {
+		setOpen(false);
+	};
+
 	const getNext = () => {
 		// hide verdict
 		setShowVerdict(false);
@@ -63,6 +91,21 @@ const JumbledSentence = (props) => {
 
 	return (
 		<>
+			<Dialog open={open} onClose={handleClose} maxWidth={false}>
+				{open && (
+					<div id="answerContainer" className={classes.answerContainer}>
+						<JumbledSentenceCard
+							currentQuestionNumber={currentQuestion}
+							question={question[currentQuestion]}
+							isReview={true}
+							isChecked={true}
+							taskDetail={taskDetail}
+							tried={tried}
+						/>
+					</div>
+				)}
+			</Dialog>
+
 			{loading ? (
 				<Loading />
 			) : (
@@ -75,6 +118,8 @@ const JumbledSentence = (props) => {
 					check={check}
 					correct={correct}
 					anime={showVerdict}
+					tryAgain={tryAgain}
+					showAnswer={showAnswer}
 					getNext={getNext}>
 					<div className={`${classes.scrollableRoot} ${classes.centered}`}>
 						<JumbledSentenceCard
@@ -84,6 +129,7 @@ const JumbledSentence = (props) => {
 							isReview={taskDetail.solved_status ? taskDetail.solved_status : false}
 							isChecked={checked[currentQuestion]}
 							taskDetail={taskDetail}
+							tried={tried}
 						/>
 					</div>
 				</ExerciseLayout>

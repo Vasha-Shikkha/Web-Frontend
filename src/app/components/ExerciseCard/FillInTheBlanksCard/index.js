@@ -72,7 +72,7 @@ const FillInTheBlanksCard = forwardRef((props, ref) => {
 		setIsBlank(blankIdx);
 		setWordColor(final_words.map(() => "white"));
 		setTokenizedQuestion(final_words);
-	}, [props.question, props.tried]);
+	}, [props.question, props.tried, props.isReview]);
 
 	const handleOnDragEnd = (result) => {
 		if (!result.destination) return;

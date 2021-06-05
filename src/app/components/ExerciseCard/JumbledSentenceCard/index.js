@@ -32,16 +32,21 @@ const JumbledSentenceCard = forwardRef((props, ref) => {
 	const [answer, setAnswer] = useState([]);
 
 	useEffect(() => {
-		let temp = [];
-		for (let i = 0; i < props.question.chunks.length; i++) {
-			temp.push({str: props.question.chunks[i], idx: i});
+		if (props.isReview) {
+			setQuestion([]);
+			setAnswer([...props.question.chunks]);
+		} else {
+			let temp = [];
+			for (let i = 0; i < props.question.chunks.length; i++) {
+				temp.push({str: props.question.chunks[i], idx: i});
+			}
+
+			temp = shuffle(temp);
+
+			setQuestion(temp);
+			setAnswer([]);
 		}
-
-		temp = shuffle(temp);
-
-		setQuestion(temp);
-		setAnswer([]);
-	}, [props.question.chunks]);
+	}, [props.question.chunks, props.tried, props.isReview]);
 
 	const handleOnDragEnd = (result) => {
 		if (!result.destination) return;
@@ -84,14 +89,21 @@ const JumbledSentenceCard = forwardRef((props, ref) => {
 		<DragDropContext onDragEnd={handleOnDragEnd}>
 			<div className={classes.root}>
 				<div className={classes.context}>{props.question.paragraph}</div>
-				<Droppable droppableId="question_container" direction="horizontal" isDropDisabled={false}>
+				<Droppable
+					droppableId="question_container"
+					direction="horizontal"
+					isDropDisabled={props.isReview || props.isChecked}>
 					{(provided) => (
 						<div
 							{...provided.droppableProps}
 							ref={provided.innerRef}
 							className={classes.wordContainer}>
 							{question.map((obj, idx) => (
-								<Draggable key={idx} draggableId={`question~${idx.toString()}`} index={idx}>
+								<Draggable
+									key={idx}
+									draggableId={`question~${idx.toString()}`}
+									index={idx}
+									isDragDisabled={props.isReview || props.isChecked}>
 									{(provided2) => {
 										return (
 											<div
@@ -116,14 +128,21 @@ const JumbledSentenceCard = forwardRef((props, ref) => {
 						<div className={classes.line}>dummy text that is invisible</div>
 					</div>
 					<div className={classes.answerContainerInner}>
-						<Droppable droppableId="answer_container" direction="horizontal" isDropDisabled={false}>
+						<Droppable
+							droppableId="answer_container"
+							direction="horizontal"
+							isDropDisabled={props.isReview || props.isChecked}>
 							{(provided) => (
 								<div
 									{...provided.droppableProps}
 									ref={provided.innerRef}
 									className={classes.answerContainerInner}>
 									{answer.map((obj, idx) => (
-										<Draggable key={idx} draggableId={`answer~${idx.toString()}`} index={idx}>
+										<Draggable
+											key={idx}
+											draggableId={`answer~${idx.toString()}`}
+											index={idx}
+											isDragDisabled={props.isReview || props.isChecked}>
 											{(provided2) => {
 												return (
 													<div
@@ -153,6 +172,7 @@ JumbledSentenceCard.propTypes = {
 	currentQuestionNumber: PropTypes.number,
 	isReview: PropTypes.bool.isRequired,
 	isChecked: PropTypes.bool.isRequired,
+	tried: PropTypes.number.isRequired,
 };
 
 export default JumbledSentenceCard;
