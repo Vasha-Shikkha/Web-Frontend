@@ -25,6 +25,11 @@ const styles = makeStyles((theme) => ({
 		alignContent: "center",
 		alignItems: "center",
 	},
+
+	answerContainer: {
+		display: "grid",
+		placeItems: "center",
+	},
 }));
 
 export default styles;
