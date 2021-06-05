@@ -105,7 +105,6 @@ const FillInTheBlanksCard = forwardRef((props, ref) => {
 										}}
 									</Draggable>
 								))}
-								{provided.placeholder}
 							</div>
 						)}
 					</Droppable>
@@ -147,8 +146,6 @@ const FillInTheBlanksCard = forwardRef((props, ref) => {
 												);
 											}}
 										</Draggable>
-
-										{provided.placeholder}
 									</div>
 								)}
 							</Droppable>
