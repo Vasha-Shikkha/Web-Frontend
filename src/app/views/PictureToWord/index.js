@@ -6,6 +6,7 @@ import PictureToWordCard from "../../components/ExerciseCard/PictureToWordCard";
 
 import styles from "../../styles/exerciseViewStyles";
 import {Dialog} from "@material-ui/core";
+import "../../styles/answerContainer.css";
 
 const PictureToWord = (props) => {
 	const classes = styles();
@@ -91,7 +92,7 @@ const PictureToWord = (props) => {
 		<>
 			<Dialog open={open} onClose={handleClose} maxWidth={false}>
 				{open && (
-					<div className={classes.answerContainer}>
+					<div id="answerContainer" className={classes.answerContainer}>
 						<PictureToWordCard
 							currentQuestionNumber={currentQuestion}
 							question={question[currentQuestion]}

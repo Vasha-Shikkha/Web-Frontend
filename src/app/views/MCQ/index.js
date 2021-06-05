@@ -7,6 +7,7 @@ import MCQCard from "../../components/ExerciseCard/MCQCard";
 
 import styles from "../../styles/exerciseViewStyles";
 import {Dialog} from "@material-ui/core";
+import "../../styles/answerContainer.css";
 
 const MCQ = (props) => {
 	const classes = styles();
@@ -92,7 +93,7 @@ const MCQ = (props) => {
 		<>
 			<Dialog open={open} onClose={handleClose} maxWidth={false}>
 				{open && (
-					<div className={classes.answerContainer}>
+					<div id="answerContainer" className={classes.answerContainer}>
 						<MCQCard
 							currentQuestionNumber={currentQuestion}
 							question={question[currentQuestion]}

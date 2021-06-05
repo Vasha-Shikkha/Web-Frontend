@@ -6,6 +6,7 @@ import FillInTheBlanksCard from "../../components/ExerciseCard/FillInTheBlanksCa
 
 import styles from "../../styles/exerciseViewStyles";
 import {Dialog} from "@material-ui/core";
+import "../../styles/answerContainer.css";
 
 const FillInTheBlanks = (props) => {
 	const classes = styles();
@@ -91,7 +92,7 @@ const FillInTheBlanks = (props) => {
 		<>
 			<Dialog open={open} onClose={handleClose} maxWidth={false}>
 				{open && (
-					<div className={classes.answerContainer}>
+					<div id="answerContainer" className={classes.answerContainer}>
 						<FillInTheBlanksCard
 							currentQuestionNumber={currentQuestion}
 							question={question[currentQuestion]}
