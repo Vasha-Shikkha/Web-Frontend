@@ -51,7 +51,7 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 		setRightUsed(shuffled_array.map(() => false));
 		setCurrentRight(shuffled_array.map((obj) => props.question[obj].part_two));
 		setBoxColors(shuffled_array.map(() => colors.white));
-	}, [props.question, props.tried]);
+	}, [props.question, props.tried, props.isReview]);
 
 	const handleOnDragEnd = (result) => {
 		if (!result.destination) return;

@@ -3,7 +3,7 @@ import {makeStyles} from "@material-ui/core";
 const styles = makeStyles((theme) => ({
 	root: {
 		width: "90%",
-		minHeight: "50vh",
+		//minHeight: "60vh",
 	},
 
 	context: {
@@ -35,15 +35,21 @@ const styles = makeStyles((theme) => ({
 
 	gridroot: {
 		flexGrow: 1,
+		//marginBottom: 100,
 	},
 
 	imageBox: {
 		width: "100%",
+		height: 350,
+		background: theme.palette.colors.violetLight,
 	},
 
 	image: {
 		width: "100%",
-		height: "auto",
+		height: "calc(100% - 60px)",
+
+		objectFit: "contain",
+		objectPosition: "center",
 		marginBottom: 10,
 	},
 
