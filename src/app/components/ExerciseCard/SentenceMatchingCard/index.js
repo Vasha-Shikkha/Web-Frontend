@@ -42,14 +42,16 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 		// keep the left part as it is. make them draggable. make the whole container non-droppable
 		// shuffle the right part
 		let shuffled_array = props.question.map((obj, idx) => idx);
-		shuffled_array = shuffle(shuffled_array);
+
+		// if review then no need to shuffle
+		if (!props.isReview) shuffled_array = shuffle(shuffled_array);
 
 		setRightSentenceMapping(shuffled_array);
 		setLeftUsed(shuffled_array.map(() => false));
 		setRightUsed(shuffled_array.map(() => false));
 		setCurrentRight(shuffled_array.map((obj) => props.question[obj].part_two));
 		setBoxColors(shuffled_array.map(() => colors.white));
-	}, [props.question]);
+	}, [props.question, props.tried, props.isReview]);
 
 	const handleOnDragEnd = (result) => {
 		if (!result.destination) return;
@@ -73,7 +75,7 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 	};
 
 	const undo = () => {
-		if (stack.length === 0 || props.isChecked || disableUndo) return;
+		if (stack.length === 0 || props.isChecked || props.review || disableUndo) return;
 
 		let temp = [...stack];
 		let len = temp.length;
@@ -100,7 +102,7 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 	return (
 		<DragDropContext onDragEnd={handleOnDragEnd}>
 			<div className={classes.root}>
-				<Button text="Undo" styles={classes.undo} onClick={() => undo()} />
+				{!props.isReview && <Button text="Undo" styles={classes.undo} onClick={() => undo()} />}
 				<div
 					contentEditable="false"
 					dangerouslySetInnerHTML={{
@@ -120,7 +122,7 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 												key={idx}
 												draggableId={`left~${obj.part_one}`}
 												index={idx}
-												isDragDisabled={leftUsed[idx]}>
+												isDragDisabled={leftUsed[idx] || props.isReview || props.isChecked}>
 												{(provided2) => {
 													return (
 														<div
@@ -149,7 +151,7 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 								<Droppable
 									key={idx}
 									droppableId={`right_sentence~${idx}`}
-									isDropDisabled={rightUsed[idx]}>
+									isDropDisabled={rightUsed[idx] || props.isReview || props.isChecked}>
 									{(provided) => (
 										<div
 											{...provided.droppableProps}
@@ -192,6 +194,7 @@ SentenceMatchingCard.propTypes = {
 	isReview: PropTypes.bool.isRequired,
 	isChecked: PropTypes.bool.isRequired,
 	taskDetail: PropTypes.object.isRequired,
+	tried: PropTypes.number.isRequired,
 };
 
 export default SentenceMatchingCard;

@@ -31,8 +31,10 @@ const DragCaptionToPictureCard = forwardRef((props, ref) => {
 
 	useEffect(() => {
 		setBoxColors(props.question.map(() => colors.white));
-		setCurrentAnswers(props.question.map(() => ""));
-	}, [props.question]);
+
+		if (props.isReview) setCurrentAnswers(props.question.map((obj) => obj.caption));
+		else setCurrentAnswers(props.question.map(() => ""));
+	}, [props.question, props.tried, props.isReview]);
 
 	const handleOnDragEnd = (result) => {
 		if (!result.destination) return;
@@ -55,7 +57,11 @@ const DragCaptionToPictureCard = forwardRef((props, ref) => {
 								className={`${classes.optionContainer}`}>
 								{props.question &&
 									props.question.map((obj, idx) => (
-										<Draggable key={idx} draggableId={`option~${obj.caption}`} index={idx}>
+										<Draggable
+											key={idx}
+											draggableId={`option~${obj.caption}`}
+											index={idx}
+											isDragDisabled={props.isChecked || props.isReview}>
 											{(provided2) => {
 												return (
 													<div
@@ -76,7 +82,7 @@ const DragCaptionToPictureCard = forwardRef((props, ref) => {
 				</div>
 
 				<div className={classes.gridroot}>
-					<Grid container spacing={5}>
+					<Grid container spacing={3}>
 						{props.question &&
 							props.question.map((obj, idx) => (
 								<Grid item xs={12} sm={6} md={6} lg={4} xl={4} key={idx}>
@@ -109,6 +115,7 @@ DragCaptionToPictureCard.propTypes = {
 	isReview: PropTypes.bool.isRequired,
 	isChecked: PropTypes.bool.isRequired,
 	taskDetail: PropTypes.object.isRequired,
+	tried: PropTypes.number.isRequired,
 };
 
 export default DragCaptionToPictureCard;

@@ -5,6 +5,8 @@ import Loading from "../../components/Loading";
 import DragCaptionToPictureCard from "../../components/ExerciseCard/DragCaptionToPictureCard";
 
 import styles from "../../styles/exerciseViewStyles";
+import {Dialog} from "@material-ui/core";
+import "../../styles/answerContainer.css";
 
 const DragCaptionToPicture = (props) => {
 	const classes = styles();
@@ -15,6 +17,8 @@ const DragCaptionToPicture = (props) => {
 	const [loading, setLoading] = useState(true);
 	const [showVerdict, setShowVerdict] = useState(false);
 	const [correct, setCorrect] = useState(true);
+	const [tried, setTried] = useState(0);
+	const [open, setOpen] = useState(false);
 
 	const childRef = useRef();
 
@@ -43,6 +47,21 @@ const DragCaptionToPicture = (props) => {
 		setCorrect(answer.isCorrect);
 	};
 
+	const tryAgain = () => {
+		// hide verdict
+		setShowVerdict(false);
+
+		// mark this checked question as un-checked
+		setChecked(false);
+
+		// increase the tried so that the component mounts again and resets stats
+		setTried(tried + 1);
+	};
+
+	const showAnswer = () => {
+		setOpen(true);
+	};
+
 	const getNext = () => {
 		// hide verdict
 		setShowVerdict(false);
@@ -51,8 +70,26 @@ const DragCaptionToPicture = (props) => {
 		history.goBack();
 	};
 
+	const handleClose = () => {
+		setOpen(false);
+	};
+
 	return (
 		<>
+			<Dialog open={open} onClose={handleClose} maxWidth={false}>
+				{open && (
+					<div id="answerContainer" className={classes.answerContainer}>
+						<DragCaptionToPictureCard
+							question={question}
+							isReview={true}
+							isChecked={true}
+							taskDetail={taskDetail}
+							tried={tried}
+						/>
+					</div>
+				)}
+			</Dialog>
+
 			{loading ? (
 				<Loading />
 			) : (
@@ -65,6 +102,8 @@ const DragCaptionToPicture = (props) => {
 					check={check}
 					correct={correct}
 					anime={showVerdict}
+					tryAgain={tryAgain}
+					showAnswer={showAnswer}
 					getNext={getNext}>
 					<div className={`${classes.scrollableRoot} ${classes.centered}`}>
 						<DragCaptionToPictureCard
@@ -73,6 +112,7 @@ const DragCaptionToPicture = (props) => {
 							isReview={taskDetail.solved_status ? taskDetail.solved_status : false}
 							isChecked={checked}
 							taskDetail={taskDetail}
+							tried={tried}
 						/>
 					</div>
 				</ExerciseLayout>

@@ -47,9 +47,14 @@ const styles = makeStyles((theme) => ({
 		marginLeft: 10,
 	},
 
-	right: {
+	btnWrapper: {
 		width: 150,
 		height: 50,
+	},
+
+	right: {
+		display: "flex",
+		flexDirection: "row",
 	},
 
 	correct_btn: {
@@ -60,6 +65,16 @@ const styles = makeStyles((theme) => ({
 	incorrect_btn: {
 		color: theme.palette.colors.incorrect,
 		background: " #d06079",
+	},
+
+	try_again_btn: {
+		color: "white",
+		background: "lightcoral",
+	},
+
+	show_answer_btn: {
+		color: "white",
+		background: "skyblue",
 	},
 }));
 

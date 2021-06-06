@@ -1,0 +1,15 @@
+#answerContainer::-webkit-scrollbar {
+	width: 7px;
+}
+
+#answerContainer {
+	scrollbar-width: thin;
+	scrollbar-color: #ceafff white;
+}
+#answerContainer::-webkit-scrollbar-track {
+	background: white;
+}
+#answerContainer::-webkit-scrollbar-thumb {
+	background-color: #ceafff;
+	border-radius: 5px;
+}

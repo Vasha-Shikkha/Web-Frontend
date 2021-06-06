@@ -98,11 +98,29 @@ const VerdictBanner = (props) => {
 				</div>
 
 				<div className={classes.right}>
-					<Button
-						text="Get Next"
-						onClick={props.getNext}
-						styles={props.correct ? classes.correct_btn : classes.incorrect_btn}
-					/>
+					{!props.correct && (
+						<div className={classes.btnWrapper} style={{marginRight: 15}}>
+							<Button text="Try Again" onClick={props.tryAgain} styles={classes.try_again_btn} />
+						</div>
+					)}
+
+					{!props.correct && (
+						<div className={classes.btnWrapper} style={{marginRight: 15}}>
+							<Button
+								text="Show Answer"
+								onClick={props.showAnswer}
+								styles={classes.show_answer_btn}
+							/>
+						</div>
+					)}
+
+					<div className={classes.btnWrapper}>
+						<Button
+							text="Get Next"
+							onClick={props.getNext}
+							styles={props.correct ? classes.correct_btn : classes.incorrect_btn}
+						/>
+					</div>
 				</div>
 			</div>
 		</>
@@ -113,6 +131,8 @@ VerdictBanner.propTypes = {
 	correct: PropTypes.bool.isRequired,
 	anime: PropTypes.bool.isRequired,
 	getNext: PropTypes.func.isRequired,
+	tryAgain: PropTypes.func.isRequired,
+	showAnswer: PropTypes.func.isRequired,
 };
 
 export default VerdictBanner;

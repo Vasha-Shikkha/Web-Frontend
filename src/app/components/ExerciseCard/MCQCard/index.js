@@ -30,7 +30,7 @@ const MCQCard = forwardRef((props, ref) => {
 
 	useEffect(() => {
 		setSelected(-1);
-	}, [props.currentQuestionNumber, props.question]);
+	}, [props.currentQuestionNumber, props.question, props.tried]);
 
 	const selectOption = (idx) => {
 		if (!props.isReview && !props.isChecked) {
@@ -109,6 +109,7 @@ MCQCard.propTypes = {
 	isReview: PropTypes.bool.isRequired,
 	isChecked: PropTypes.bool.isRequired,
 	taskDetail: PropTypes.object.isRequired,
+	tried: PropTypes.number.isRequired,
 };
 
 export default MCQCard;

@@ -20,9 +20,13 @@ const JumbledWordCard = forwardRef((props, ref) => {
 	const [answer, setAnswer] = useState([]);
 
 	useEffect(() => {
-		setQuestion(props.question.chunks.map((obj) => obj));
-		setAnswer([]);
-	}, [props.question]);
+		if (props.isReview) {
+			setAnswer(props.question.answer.split(""));
+		} else {
+			setQuestion(props.question.chunks.map((obj) => obj));
+			setAnswer([]);
+		}
+	}, [props.question, props.tried, props.isReview]);
 
 	const handleOnDragEnd = (result) => {
 		if (!result.destination) return;
@@ -65,14 +69,21 @@ const JumbledWordCard = forwardRef((props, ref) => {
 		<DragDropContext onDragEnd={handleOnDragEnd}>
 			<div className={classes.root}>
 				<div className={classes.context}>{props.question.paragraph}</div>
-				<Droppable droppableId="question_container" direction="horizontal" isDropDisabled={false}>
+				<Droppable
+					droppableId="question_container"
+					direction="horizontal"
+					isDropDisabled={props.isReview || props.isChecked}>
 					{(provided) => (
 						<div
 							{...provided.droppableProps}
 							ref={provided.innerRef}
 							className={classes.wordContainer}>
 							{question.map((obj, idx) => (
-								<Draggable key={idx} draggableId={`question~${idx.toString()}`} index={idx}>
+								<Draggable
+									key={idx}
+									draggableId={`question~${idx.toString()}`}
+									index={idx}
+									isDragDisabled={props.isReview || props.isChecked}>
 									{(provided2) => {
 										return (
 											<div
@@ -97,14 +108,21 @@ const JumbledWordCard = forwardRef((props, ref) => {
 						<div className={classes.line}>dummy text that is invisible</div>
 					</div>
 					<div className={classes.answerContainerInner}>
-						<Droppable droppableId="answer_container" direction="horizontal" isDropDisabled={false}>
+						<Droppable
+							droppableId="answer_container"
+							direction="horizontal"
+							isDropDisabled={props.isReview || props.isChecked}>
 							{(provided) => (
 								<div
 									{...provided.droppableProps}
 									ref={provided.innerRef}
 									className={classes.answerContainerInner}>
 									{answer.map((obj, idx) => (
-										<Draggable key={idx} draggableId={`answer~${idx.toString()}`} index={idx}>
+										<Draggable
+											key={idx}
+											draggableId={`answer~${idx.toString()}`}
+											index={idx}
+											isDragDisabled={props.isReview || props.isChecked}>
 											{(provided2) => {
 												return (
 													<div
@@ -134,6 +152,7 @@ JumbledWordCard.propTypes = {
 	currentQuestionNumber: PropTypes.number,
 	isReview: PropTypes.bool.isRequired,
 	isChecked: PropTypes.bool.isRequired,
+	tried: PropTypes.number.isRequired,
 };
 
 export default JumbledWordCard;

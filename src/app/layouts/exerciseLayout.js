@@ -324,7 +324,13 @@ const ExerciseLayout = (props) => {
 
 	return (
 		<div className={classes.outerContainer}>
-			<VerdictBanner correct={props.correct} anime={props.anime} getNext={props.getNext} />
+			<VerdictBanner
+				correct={props.correct}
+				anime={props.anime}
+				getNext={props.getNext}
+				tryAgain={props.tryAgain}
+				showAnswer={props.showAnswer}
+			/>
 
 			<div
 				id="dictionaryScroll"
@@ -427,6 +433,8 @@ ExerciseLayout.propTypes = {
 	scrollable: PropTypes.bool,
 	correct: PropTypes.bool.isRequired,
 	getNext: PropTypes.func.isRequired,
+	tryAgain: PropTypes.func.isRequired,
+	showAnswer: PropTypes.func.isRequired,
 	anime: PropTypes.bool.isRequired,
 };
 

@@ -28,3 +28,18 @@ body {
 code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
+
+body::-webkit-scrollbar {
+	width: 8px;
+}
+body {
+	scrollbar-width: thin;
+	scrollbar-color: #ceafff white;
+}
+body::-webkit-scrollbar-track {
+	background: white;
+}
+body::-webkit-scrollbar-thumb {
+	background-color: #ceafff;
+	border-radius: 5px;
+}
