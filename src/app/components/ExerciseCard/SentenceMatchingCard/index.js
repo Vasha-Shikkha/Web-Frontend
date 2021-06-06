@@ -42,7 +42,9 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 		// keep the left part as it is. make them draggable. make the whole container non-droppable
 		// shuffle the right part
 		let shuffled_array = props.question.map((obj, idx) => idx);
-		shuffled_array = shuffle(shuffled_array);
+
+		// if review then no need to shuffle
+		if (!props.isReview) shuffled_array = shuffle(shuffled_array);
 
 		setRightSentenceMapping(shuffled_array);
 		setLeftUsed(shuffled_array.map(() => false));
