@@ -11,11 +11,11 @@ const VerdictBanner = (props) => {
 	const classes = styles();
 	return (
 		<>
-			{props.anime && (
+			{/* {props.anime && (
 				<audio controls={false} autoPlay>
 					<source src={props.correct ? SuccessSound : ErrorSound} type="audio/mpeg" />
 				</audio>
-			)}
+			)} */}
 			<div
 				className={`${classes.root} ${props.correct ? classes.correct : classes.incorrect} ${
 					props.anime ? classes.anime : null
