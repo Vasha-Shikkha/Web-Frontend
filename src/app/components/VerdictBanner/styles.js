@@ -2,25 +2,39 @@ import {makeStyles} from "@material-ui/core";
 
 const styles = makeStyles((theme) => ({
 	root: {
-		height: "20vh",
 		width: "100%",
 
 		position: "fixed",
 
 		zIndex: 100,
-		bottom: "-20vh",
 
 		display: "flex",
 		flexDirection: "row",
+		flexWrap: "wrap",
 		justifyContent: "space-between",
 		alignContent: "center",
 		alignItems: "center",
 
 		padding: "0% 5% 0% 5%",
+
+		[theme.breakpoints.down("600")]: {
+			height: "35vh",
+			bottom: "-35vh",
+		},
+		[theme.breakpoints.up("600")]: {
+			height: "20vh",
+			bottom: "-20vh",
+		},
 	},
 
 	anime: {
-		transform: "translateY(-20vh)",
+		[theme.breakpoints.down("600")]: {
+			transform: "translateY(-35vh)",
+		},
+		[theme.breakpoints.up("600")]: {
+			transform: "translateY(-20vh)",
+		},
+
 		transition: "all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1) 0s",
 	},
 
@@ -55,6 +69,14 @@ const styles = makeStyles((theme) => ({
 	right: {
 		display: "flex",
 		flexDirection: "row",
+		flexWrap: "wrap",
+
+		[theme.breakpoints.down("600")]: {
+			marginTop: 15,
+		},
+		[theme.breakpoints.up("600")]: {
+			marginTop: 0,
+		},
 	},
 
 	correct_btn: {
@@ -65,6 +87,13 @@ const styles = makeStyles((theme) => ({
 	incorrect_btn: {
 		color: theme.palette.colors.incorrect,
 		background: " #d06079",
+
+		[theme.breakpoints.down("600")]: {
+			marginTop: 15,
+		},
+		[theme.breakpoints.up("600")]: {
+			marginTop: 0,
+		},
 	},
 
 	try_again_btn: {
@@ -75,6 +104,13 @@ const styles = makeStyles((theme) => ({
 	show_answer_btn: {
 		color: "white",
 		background: "skyblue",
+
+		[theme.breakpoints.down("600")]: {
+			marginTop: 15,
+		},
+		[theme.breakpoints.up("600")]: {
+			marginTop: 0,
+		},
 	},
 }));
 
