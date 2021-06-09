@@ -1,6 +1,4 @@
 import axios from "axios";
-import React from "react";
-import {Redirect} from "react-router";
 import showErr from "./errorAxios";
 import config from "../util/config";
 import {isJwtValid} from "../util/helpers";
@@ -12,7 +10,7 @@ export const postReqAuth = (route, data, param, cb) => {
 
 	// check if token exists
 	// check if it valid
-	if (!isJwtValid(jwtTokenExpiryDate) || !token) return <Redirect to="/auth" />;
+	if (!isJwtValid(jwtTokenExpiryDate) || !token) window.location = "/auth";
 
 	if (token) {
 		axios.defaults.headers.common["Authorization"] = "Bearer " + token;
@@ -56,7 +54,7 @@ export const getReqAuth = (route, param, cb) => {
 
 	// check if token exists
 	// check if it valid
-	if (!isJwtValid(jwtTokenExpiryDate) || !token) return <Redirect to="/auth" />;
+	if (!isJwtValid(jwtTokenExpiryDate) || !token) window.location = "/auth";
 
 	if (token) {
 		axios.defaults.headers.common["Authorization"] = "Bearer " + token;
