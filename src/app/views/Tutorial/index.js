@@ -16,7 +16,7 @@ const Tutorial = (props) => {
 			<div className={classes.navContainer}>
 				<BackArrowButton />
 			</div>
-			<div className={classes.tutorialContainer}>tutorial</div>
+			<div className={classes.tutorialContainer}>No Tutorial Available for This Topic</div>
 		</div>
 	);
 };

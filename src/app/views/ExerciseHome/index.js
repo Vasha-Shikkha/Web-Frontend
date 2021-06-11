@@ -43,8 +43,6 @@ const ExerciseHome = (props) => {
 			limit: 10,
 		};
 
-		console.log(params);
-
 		setLoading(true);
 		getAllExercises(params, (err, axios_data) => {
 			if (!err) {
@@ -84,9 +82,11 @@ const ExerciseHome = (props) => {
 		<div className={classes.root}>
 			<div className={classes.navContainer}>
 				<BackArrowButton />
-				<div onClick={() => history.push("/tutorial", {topicId: props.location.state.topicId})}>
-					check tutorials
-				</div>
+			</div>
+			<div
+				onClick={() => history.push("/tutorial", {topicId: props.location.state.topicId})}
+				className={classes.tutorial}>
+				Check Tutorials
 			</div>
 			<div className={classes.exerciseContainer}>
 				{questionSet &&
