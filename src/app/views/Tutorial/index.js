@@ -11,7 +11,7 @@ const Tutorial = (props) => {
 			<div className={classes.navContainer}>
 				<BackArrowButton link={props.location.state.from} />
 			</div>
-			<div className={classes.tutorialContainer}>tutorial</div>
+			<div className={classes.tutorialContainer}>tutorial changed</div>
 		</div>
 	);
 };

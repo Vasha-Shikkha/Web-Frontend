@@ -2,8 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import styles from "./styles";
 
-import ErrorSound from "../../assets/sounds/error.mp3";
-import SuccessSound from "../../assets/sounds/success.mp3";
+// import ErrorSound from "../../assets/sounds/error.mp3";
+// import SuccessSound from "../../assets/sounds/success.mp3";
 import Button from "../Button";
 import "../../styles/verdictBanner.css";
 
