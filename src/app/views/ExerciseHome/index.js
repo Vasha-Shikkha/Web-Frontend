@@ -83,6 +83,11 @@ const ExerciseHome = (props) => {
 			<div className={classes.navContainer}>
 				<BackArrowButton />
 			</div>
+			<div
+				onClick={() => history.push("/tutorial", {topicId: props.location.state.topicId})}
+				className={classes.tutorial}>
+				Check Tutorials
+			</div>
 			<div className={classes.exerciseContainer}>
 				{questionSet &&
 					questionSet.map((obj, idx) => (

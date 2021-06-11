@@ -14,6 +14,13 @@ const styles = makeStyles((theme) => ({
 		justifyContent: "center",
 	},
 
+	tutorial: {
+		color: theme.palette.colors.violetMedium,
+		fontWeight: 600,
+		textDecoration: "underline",
+		cursor: "pointer",
+	},
+
 	exerciseContainer: {
 		marginTop: 25,
 	},
