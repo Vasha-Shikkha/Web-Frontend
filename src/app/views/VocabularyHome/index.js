@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Redirect} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import {getCommunicativeTopics} from "../../axios/services/topics";
 
 import Loading from "../../components/Loading";
@@ -16,12 +16,11 @@ import styles from "./styles";
 
 const VocabularyHome = (props) => {
 	const classes = styles();
+	const history = useHistory();
 	const [type, setType] = useState("");
 	const [level, setLevel] = useState(1);
 	//const [showTooltip, setShowTooltip] = useState([]);
-	const [redirect, setRedirect] = useState(null);
 	const [topics, setTopic] = useState([]);
-	const [routingStates, setRoutingStates] = useState({});
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
@@ -63,22 +62,8 @@ const VocabularyHome = (props) => {
 	// };
 
 	const exerciseBtnClick = (idx) => {
-		setRedirect("/exercise");
-		setRoutingStates({
-			level: level,
-			topicId: topics[idx].id,
-		});
+		history.push("/exercise", {level, topicId: topics[idx].id});
 	};
-
-	if (redirect)
-		return (
-			<Redirect
-				to={{
-					pathname: redirect,
-					state: routingStates,
-				}}
-			/>
-		);
 
 	return (
 		<div className={classes.root}>
@@ -89,7 +74,7 @@ const VocabularyHome = (props) => {
 					<img src={Girl_Reading} alt="" className={classes.img} />
 				</div>
 				<div className={`${classes.arrowContainer}`}>
-					<BackArrowButton link="/home" />
+					<BackArrowButton />
 				</div>
 			</div>
 

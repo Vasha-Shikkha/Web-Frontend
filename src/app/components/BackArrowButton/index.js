@@ -28,13 +28,7 @@ const BackArrowBtn = () => {
 
 	return (
 		<div className={`${classes.backBtnOuter} ${classes.centered}`}>
-			<ArrowBackOutlinedIcon
-				onClick={() => {
-					console.log("back-arrow clicked");
-					history.goBack();
-				}}
-				className={classes.backBtn}
-			/>
+			<ArrowBackOutlinedIcon onClick={() => history.goBack()} className={classes.backBtn} />
 		</div>
 	);
 };
