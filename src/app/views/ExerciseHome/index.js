@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Link, useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 
 import {getAllExercises} from "../../axios/services/exercises";
 
@@ -86,13 +86,8 @@ const ExerciseHome = (props) => {
 			<div className={classes.exerciseContainer}>
 				{questionSet &&
 					questionSet.map((obj, idx) => (
-						<Link
-							to={{
-								pathname: linkMapping.get(obj.taskDetail.name),
-								state: {
-									task: obj,
-								},
-							}}
+						<div
+							onClick={() => history.push(linkMapping.get(obj.taskDetail.name), {task: obj})}
 							style={{textDecoration: "none"}}
 							key={idx}>
 							<div className={classes.box}>
@@ -105,7 +100,7 @@ const ExerciseHome = (props) => {
 										className={classes.questionQuantity}>{`${obj.question.length} questions`}</div>
 								</div>
 							</div>
-						</Link>
+						</div>
 					))}
 				<div className={classes.paginationContainer}>
 					<Pagination
