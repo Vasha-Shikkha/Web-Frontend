@@ -65,7 +65,6 @@ const VocabularyHome = (props) => {
 	const exerciseBtnClick = (idx) => {
 		setRedirect("/exercise");
 		setRoutingStates({
-			from: `/practice/${type}`,
 			level: level,
 			topicId: topics[idx].id,
 		});

@@ -1,7 +1,5 @@
 import React from "react";
-import {Link} from "react-router-dom";
-import PropTypes from "prop-types";
-
+import {useHistory} from "react-router-dom";
 import {makeStyles} from "@material-ui/core";
 import ArrowBackOutlinedIcon from "@material-ui/icons/ArrowBackOutlined";
 
@@ -24,18 +22,21 @@ const styles = makeStyles((theme) => ({
 	},
 }));
 
-const BackArrowBtn = (props) => {
+const BackArrowBtn = () => {
 	const classes = styles();
+	const history = useHistory();
 
 	return (
-		<Link to={props.link} className={`${classes.backBtnOuter} ${classes.centered}`}>
-			<ArrowBackOutlinedIcon className={classes.backBtn} />
-		</Link>
+		<div className={`${classes.backBtnOuter} ${classes.centered}`}>
+			<ArrowBackOutlinedIcon
+				onClick={() => {
+					console.log("back-arrow clicked");
+					history.goBack();
+				}}
+				className={classes.backBtn}
+			/>
+		</div>
 	);
-};
-
-BackArrowBtn.propTypes = {
-	link: PropTypes.string.isRequired,
 };
 
 export default BackArrowBtn;

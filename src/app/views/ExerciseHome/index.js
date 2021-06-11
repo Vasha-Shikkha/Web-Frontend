@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 
 import {getAllExercises} from "../../axios/services/exercises";
 
@@ -15,6 +15,7 @@ import styles from "./styles";
 
 const ExerciseHome = (props) => {
 	const classes = styles();
+	const history = useHistory();
 	const [loading, setLoading] = useState(true);
 	const [page, setPage] = useState(1);
 	const [questionSet, setQuestionSet] = useState([]);
@@ -80,11 +81,7 @@ const ExerciseHome = (props) => {
 	return (
 		<div className={classes.root}>
 			<div className={classes.navContainer}>
-				<BackArrowButton
-					link={
-						props.location.state && props.location.state.from ? props.location.state.from : "/home"
-					}
-				/>
+				<BackArrowButton />
 			</div>
 			<div className={classes.exerciseContainer}>
 				{questionSet &&
