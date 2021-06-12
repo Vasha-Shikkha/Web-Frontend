@@ -86,9 +86,11 @@ const ExerciseHome = (props) => {
 			</div>
 
 			<div className={classes.contentContainer}>
+				<BackArrowButton />
 				<div
-					onClick={() => history.push("/tutorial", {topicId: props.location.state.topicId})}
-					className={classes.tutorial}>
+					className={`${classes.box} ${classes.tutorial}`}
+					style={{paddingTop: 20, paddingBottom: 20}}
+					onClick={() => history.push("/tutorial", {topicId: props.location.state.topicId})}>
 					Check Tutorials
 				</div>
 				<div className={classes.exerciseContainer}>

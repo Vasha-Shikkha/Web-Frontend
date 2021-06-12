@@ -19,8 +19,9 @@ const styles = makeStyles((theme) => ({
 	tutorial: {
 		color: theme.palette.colors.violetMedium,
 		fontWeight: 600,
-		textDecoration: "underline",
 		cursor: "pointer",
+
+		marginTop: 30,
 	},
 
 	exerciseContainer: {
