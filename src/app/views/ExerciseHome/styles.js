@@ -5,6 +5,7 @@ const styles = makeStyles((theme) => ({
 		width: "100%",
 		padding: "0% 5% 5% 5%",
 		paddingBottom: 100,
+		marginTop: 30,
 	},
 
 	navContainer: {

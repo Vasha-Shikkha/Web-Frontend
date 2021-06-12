@@ -5,6 +5,7 @@ import {getAllExercises} from "../../axios/services/exercises";
 
 import Loading from "../../components/Loading";
 import BackArrowButton from "../../components/BackArrowButton";
+import Navbar from "../../components/Navbar";
 import JumbledSentenceIcon from "../../assets/exercise/jumbledSentence.svg";
 import SentenceMatchingIcon from "../../assets/exercise/sentenceMatching.svg";
 import FillInTheBlanksIcon from "../../assets/exercise/fillInTheBlanks.svg";
@@ -79,47 +80,57 @@ const ExerciseHome = (props) => {
 	if (loading) return <Loading />;
 
 	return (
-		<div className={classes.root}>
-			<div className={classes.navContainer}>
+		<>
+			<Navbar />
+			<div className={classes.root}>
+				{/* <div className={classes.navContainer}>
 				<BackArrowButton />
-			</div>
-			<div
-				onClick={() => history.push("/tutorial", {topicId: props.location.state.topicId})}
-				className={classes.tutorial}>
-				Check Tutorials
-			</div>
-			<div className={classes.exerciseContainer}>
-				{questionSet &&
-					questionSet.map((obj, idx) => (
-						<div
-							onClick={() => history.push(linkMapping.get(obj.taskDetail.name), {task: obj})}
-							style={{textDecoration: "none"}}
-							key={idx}>
-							<div className={classes.box}>
-								<div className={classes.imageContainer}>
-									<img src={imagePicker(obj.taskDetail.name)} alt="" className={classes.boxImage} />
-								</div>
-								<div className={classes.titleContainer}>
-									<div className={classes.title}>{obj.taskDetail.name}</div>
-									<div
-										className={classes.questionQuantity}>{`${obj.question.length} questions`}</div>
+			</div> */}
+
+				<div
+					onClick={() => history.push("/tutorial", {topicId: props.location.state.topicId})}
+					className={classes.tutorial}>
+					Check Tutorials
+				</div>
+				<div className={classes.exerciseContainer}>
+					{questionSet &&
+						questionSet.map((obj, idx) => (
+							<div
+								onClick={() => history.push(linkMapping.get(obj.taskDetail.name), {task: obj})}
+								style={{textDecoration: "none"}}
+								key={idx}>
+								<div className={classes.box}>
+									<div className={classes.imageContainer}>
+										<img
+											src={imagePicker(obj.taskDetail.name)}
+											alt=""
+											className={classes.boxImage}
+										/>
+									</div>
+									<div className={classes.titleContainer}>
+										<div className={classes.title}>{obj.taskDetail.name}</div>
+										<div
+											className={
+												classes.questionQuantity
+											}>{`${obj.question.length} questions`}</div>
+									</div>
 								</div>
 							</div>
-						</div>
-					))}
-				<div className={classes.paginationContainer}>
-					<Pagination
-						count={total % 10 ? parseInt(total / 10, 10) + 1 : parseInt(total / 10, 10)}
-						variant="outlined"
-						shape="rounded"
-						size="large"
-						page={page}
-						onChange={handlePageChange}
-						color="primary"
-					/>
+						))}
+					<div className={classes.paginationContainer}>
+						<Pagination
+							count={total % 10 ? parseInt(total / 10, 10) + 1 : parseInt(total / 10, 10)}
+							variant="outlined"
+							shape="rounded"
+							size="large"
+							page={page}
+							onChange={handlePageChange}
+							color="primary"
+						/>
+					</div>
 				</div>
 			</div>
-		</div>
+		</>
 	);
 };
 
