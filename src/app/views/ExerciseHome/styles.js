@@ -9,6 +9,7 @@ const styles = makeStyles((theme) => ({
 		height: 70,
 		width: "100%",
 		position: "fixed",
+		zIndex: 2,
 	},
 
 	contentContainer: {
