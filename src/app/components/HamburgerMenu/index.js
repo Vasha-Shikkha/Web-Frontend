@@ -1,10 +1,11 @@
 import React, {useState} from "react";
-import {Link} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 
 import styles from "./styles";
 
 const HamburgerMenu = () => {
 	const classes = styles();
+	const history = useHistory();
 	const [checked, setChecked] = useState(false);
 
 	const handleCheckBox = () => {
@@ -26,18 +27,18 @@ const HamburgerMenu = () => {
 			</div>
 
 			<div className={classes.menu} style={{right: checked ? "0" : "-75vw"}}>
-				<Link to="/" className={classes.link}>
+				<div to="/" className={classes.link} onClick={() => history.push("/")}>
 					Home
-				</Link>
-				<Link to="/dictionary" className={classes.link}>
+				</div>
+				<div to="/dictionary" className={classes.link} onClick={() => history.push("/dictionary")}>
 					Dictionary
-				</Link>
-				<Link to="/flash-card" className={classes.link}>
+				</div>
+				<div to="/flash-card" className={classes.link} onClick={() => history.push("/flash-card")}>
 					Flashcard
-				</Link>
-				<Link to="/" className={classes.link}>
+				</div>
+				<div to="/" className={classes.link} onClick={() => history.push("/acknowledgement")}>
 					Acknowledgement
-				</Link>
+				</div>
 				<div className={classes.link}>Logout</div>
 			</div>
 		</div>

@@ -1,12 +1,12 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import HamburgerMenu from "../HamburgerMenu";
-import BackArrowButton from "../../components/BackArrowButton";
 
 import styles from "./styles";
 
-const Navbar = (props) => {
+const Navbar = () => {
 	const classes = styles();
+	const history = useHistory();
 
 	return (
 		<div className={classes.root}>
@@ -15,8 +15,25 @@ const Navbar = (props) => {
 			</div>
 			<div className={classes.contentContainer}>
 				<div className={classes.webNav}>
-					<Link to="/"></Link>
-					<div>Logout</div>
+					<div to="/" className={classes.link} onClick={() => history.push("/")}>
+						Home
+					</div>
+					<div
+						to="/dictionary"
+						className={classes.link}
+						onClick={() => history.push("/dictionary")}>
+						Dictionary
+					</div>
+					<div
+						to="/flash-card"
+						className={classes.link}
+						onClick={() => history.push("/flash-card")}>
+						Flashcard
+					</div>
+					<div to="/" className={classes.link} onClick={() => history.push("/acknowledgement")}>
+						Acknowledgement
+					</div>
+					<div className={classes.link}>Logout</div>
 				</div>
 				<div className={classes.mobileNav}>
 					<HamburgerMenu />

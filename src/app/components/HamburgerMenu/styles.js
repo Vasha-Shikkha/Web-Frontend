@@ -135,6 +135,7 @@ const styles = makeStyles((theme) => ({
 		color: theme.palette.colors.primary,
 		marginBottom: "20px",
 		textDecoration: "none",
+		cursor: "pointer",
 	},
 }));
 

@@ -5,7 +5,7 @@ const styles = makeStyles((theme) => ({
 		height: "100%",
 		width: "100%",
 		padding: "0px 5% 0 5%",
-		boxShadow: `0 0 2px ${theme.palette.colors.lightPink}`,
+		boxShadow: `0 0 2px ${theme.palette.colors.primary}`,
 
 		display: "flex",
 		flexDirection: "row",
@@ -58,7 +58,11 @@ const styles = makeStyles((theme) => ({
 	webNav: {
 		width: "100%",
 		height: "100%",
-		background: "blue",
+
+		display: "flex",
+		justifyContent: "flex-end",
+		alignContent: "center",
+		alignItems: "center",
 
 		[theme.breakpoints.down("md")]: {
 			display: "none",
@@ -66,6 +70,17 @@ const styles = makeStyles((theme) => ({
 
 		[theme.breakpoints.up("md")]: {
 			display: "flex",
+		},
+	},
+
+	link: {
+		color: theme.palette.colors.primary,
+		textDecoration: "none",
+		cursor: "pointer",
+		marginRight: 25,
+
+		"&:nth-last-child(1)": {
+			marginRight: 0,
 		},
 	},
 }));
