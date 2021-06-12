@@ -26,12 +26,19 @@ const HamburgerMenu = () => {
 			</div>
 
 			<div className={classes.menu} style={{right: checked ? "0" : "-75vw"}}>
-				<div className={classes.hamItem}>
-					<Link to="/" className={classes.LINK}>
-						<div className={classes.p1}>01.</div>
-						<div className={classes.p2H}>About</div>
-					</Link>
-				</div>
+				<Link to="/" className={classes.link}>
+					Home
+				</Link>
+				<Link to="/dictionary" className={classes.link}>
+					Dictionary
+				</Link>
+				<Link to="/flash-card" className={classes.link}>
+					Flashcard
+				</Link>
+				<Link to="/" className={classes.link}>
+					Acknowledgement
+				</Link>
+				<div className={classes.link}>Logout</div>
 			</div>
 		</div>
 	);

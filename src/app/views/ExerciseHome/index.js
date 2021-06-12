@@ -80,13 +80,12 @@ const ExerciseHome = (props) => {
 	if (loading) return <Loading />;
 
 	return (
-		<>
-			<Navbar />
-			<div className={classes.root}>
-				{/* <div className={classes.navContainer}>
-				<BackArrowButton />
-			</div> */}
+		<div className={classes.root}>
+			<div className={classes.navContainer}>
+				<Navbar />
+			</div>
 
+			<div className={classes.contentContainer}>
 				<div
 					onClick={() => history.push("/tutorial", {topicId: props.location.state.topicId})}
 					className={classes.tutorial}>
@@ -130,7 +129,7 @@ const ExerciseHome = (props) => {
 					</div>
 				</div>
 			</div>
-		</>
+		</div>
 	);
 };
 

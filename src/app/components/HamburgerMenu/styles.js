@@ -1,6 +1,6 @@
 import {makeStyles} from "@material-ui/core";
 
-const styles = makeStyles(() => ({
+const styles = makeStyles((theme) => ({
 	/* MENU STYLES */
 	menu_wrap: {
 		position: "absolute",
@@ -49,7 +49,7 @@ const styles = makeStyles(() => ({
 		flex: "none",
 		width: "70%",
 		height: "2px",
-		backgroundColor: "#64FFDA",
+		backgroundColor: theme.palette.colors.primary,
 		display: "flex",
 		alignItems: "center",
 		justifyContent: "center",
@@ -62,7 +62,7 @@ const styles = makeStyles(() => ({
 			top: "10px",
 			width: "100%",
 			height: "2px",
-			backgroundColor: "#64FFDA",
+			backgroundColor: theme.palette.colors.primary,
 		},
 
 		"&:after": {
@@ -72,7 +72,7 @@ const styles = makeStyles(() => ({
 			top: "-10px",
 			width: "100%",
 			height: "2px",
-			backgroundColor: "#64FFDA",
+			backgroundColor: theme.palette.colors.primary,
 		},
 	},
 
@@ -82,7 +82,7 @@ const styles = makeStyles(() => ({
 		flex: "none",
 		width: "70%",
 		height: "2px",
-		backgroundColor: "#64FFDA",
+		backgroundColor: theme.palette.colors.primary,
 		display: "flex",
 		alignItems: "center",
 		justifyContent: "center",
@@ -95,7 +95,7 @@ const styles = makeStyles(() => ({
 			zIndex: 5,
 			width: "100%",
 			height: "2px",
-			backgroundColor: "#64FFDA",
+			backgroundColor: theme.palette.colors.primary,
 			top: 0,
 			transform: "rotate(90deg)",
 		},
@@ -106,7 +106,7 @@ const styles = makeStyles(() => ({
 			zIndex: 5,
 			width: "100%",
 			height: "2px",
-			backgroundColor: "#64FFDA",
+			backgroundColor: theme.palette.colors.primary,
 			top: 0,
 			transform: "rotate(90deg)",
 		},
@@ -114,77 +114,27 @@ const styles = makeStyles(() => ({
 
 	menu: {
 		position: "fixed",
-		top: "0",
+		top: 0,
 		zIndex: 3,
 
-		height: "100%",
+		height: "100vh",
 		width: "75vw",
 		transition: "all 0.4s ease-in",
 
-		backgroundColor: "#172A45",
+		background: theme.palette.colors.lightPink,
 
 		display: "flex",
 		flexDirection: "column",
-		flexWrap: "no-wrap",
+		flexWrap: "nowrap",
 		justifyContent: "center",
 		alignItems: "center",
 		alignContent: "center",
 	},
 
-	p1: {
-		color: "#64FFDA",
-		marginBottom: "2px",
-	},
-
-	p2H: {
-		color: "#8892b0",
-
-		"&:hover": {
-			color: "#64FFDA",
-		},
-	},
-
-	hamItem: {
-		cursor: "pointer",
+	link: {
+		color: theme.palette.colors.primary,
 		marginBottom: "20px",
-	},
-
-	LINK: {
-		display: "flex",
-		flexDirection: "column",
-		flexWrap: "no-wrap",
-		justifyContent: "center",
-		alignItems: "center",
-		alignContent: "center",
-	},
-
-	linkNav: {
 		textDecoration: "none",
-		color: "#a8b2d1",
-
-		fontSize: "14px",
-	},
-
-	resume: {
-		height: "40px",
-		width: "100px",
-
-		marginTop: "10px",
-		borderRadius: "5px",
-		border: "0.5px solid #64FFDA",
-		color: "#64FFDA",
-
-		//backgroundColor: 'white',
-		display: "flex",
-		flexDirection: "row",
-		flexWrap: "no-wrap",
-		justifyContent: "center",
-		alignItems: "center",
-		alignContent: "center",
-
-		"&:hover": {
-			backgroundColor: "#293d5a",
-		},
 	},
 }));
 
