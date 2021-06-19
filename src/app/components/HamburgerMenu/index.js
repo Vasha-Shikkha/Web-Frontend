@@ -36,8 +36,8 @@ const HamburgerMenu = () => {
 				<div className={classes.link} onClick={() => history.push("/flash-card")}>
 					Flashcard
 				</div>
-				<div className={classes.link} onClick={() => history.push("/acknowledgement")}>
-					Acknowledgement
+				<div className={classes.link} onClick={() => history.push("/about")}>
+					About
 				</div>
 				<div className={classes.link}>Logout</div>
 			</div>
