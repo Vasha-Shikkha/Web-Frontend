@@ -4,7 +4,6 @@ import {useHistory} from "react-router-dom";
 import {getAllExercises} from "../../axios/services/exercises";
 
 import Loading from "../../components/Loading";
-import BackArrowButton from "../../components/BackArrowButton";
 import Navbar from "../../components/Navbar";
 import JumbledSentenceIcon from "../../assets/exercise/jumbledSentence.svg";
 import SentenceMatchingIcon from "../../assets/exercise/sentenceMatching.svg";
@@ -86,7 +85,6 @@ const ExerciseHome = (props) => {
 			</div>
 
 			<div className={classes.contentContainer}>
-				<BackArrowButton />
 				<div
 					className={`${classes.box} ${classes.tutorial}`}
 					style={{paddingTop: 20, paddingBottom: 20}}

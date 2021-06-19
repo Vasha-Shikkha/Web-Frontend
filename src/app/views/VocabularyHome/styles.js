@@ -3,7 +3,17 @@ import {makeStyles} from "@material-ui/core";
 const styles = makeStyles((theme) => ({
 	root: {
 		width: "100%",
-		paddingBottom: 100,
+	},
+
+	navContainer: {
+		height: 70,
+		width: "100%",
+		position: "fixed",
+		zIndex: 2,
+	},
+
+	contentContainer: {
+		paddingTop: 70,
 	},
 
 	centered: {
