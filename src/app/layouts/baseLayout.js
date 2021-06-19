@@ -27,6 +27,7 @@ const JumbledSentence = lazy(() => import("../views/JumbledSentence"));
 const FillInTheBlanks = lazy(() => import("../views/FillInTheBlanks"));
 const RearrangeSentence = lazy(() => import("../views/RearrangeSentence"));
 const DragCaptionToPicture = lazy(() => import("../views/DragCaptionToPicture"));
+const About = lazy(() => import("../views/About"));
 
 const theme = createMuiTheme({
 	palette: {
@@ -60,6 +61,8 @@ const BaseLayout = () => (
 									path="/home"
 									render={(props) => <PrivateWrapper component={<Home {...props} />} />}
 								/>
+
+								<Route exact path="/about" component={About} />
 
 								<Route
 									exact
@@ -147,12 +150,6 @@ const BaseLayout = () => (
 									exact
 									path="/exercise"
 									render={(props) => <PrivateWrapper component={<Exercise {...props} />} />}
-								/>
-
-								<Route
-									exact
-									path="/home"
-									render={(props) => <PrivateWrapper component={<Home {...props} />} />}
 								/>
 
 								<Route
