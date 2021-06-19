@@ -15,22 +15,16 @@ const Navbar = () => {
 			</div>
 			<div className={classes.contentContainer}>
 				<div className={classes.webNav}>
-					<div to="/" className={classes.link} onClick={() => history.push("/")}>
+					<div className={classes.link} onClick={() => history.push("/home")}>
 						Home
 					</div>
-					<div
-						to="/dictionary"
-						className={classes.link}
-						onClick={() => history.push("/dictionary")}>
+					<div className={classes.link} onClick={() => history.push("/dictionary")}>
 						Dictionary
 					</div>
-					<div
-						to="/flash-card"
-						className={classes.link}
-						onClick={() => history.push("/flash-card")}>
+					<div className={classes.link} onClick={() => history.push("/flash-card")}>
 						Flashcard
 					</div>
-					<div to="/" className={classes.link} onClick={() => history.push("/acknowledgement")}>
+					<div className={classes.link} onClick={() => history.push("/acknowledgement")}>
 						Acknowledgement
 					</div>
 					<div className={classes.link}>Logout</div>
