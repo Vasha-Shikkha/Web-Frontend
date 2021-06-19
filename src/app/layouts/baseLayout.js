@@ -44,6 +44,7 @@ const theme = createMuiTheme({
 			violetText: "#6C63FF",
 			mediumPink: "#FFB8B8",
 			lightPink: "#fff0ff",
+			bluishViolet: "#8880ff",
 		},
 	},
 });
