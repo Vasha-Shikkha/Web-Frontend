@@ -84,7 +84,7 @@ const About = () => {
 									name={mentor.name}
 									image={mentor.image}
 									description={mentor.description}
-									type="Team Member"
+									type="Mentor"
 								/>
 							</div>
 						</Grid>
