@@ -3,22 +3,25 @@ import {makeStyles} from "@material-ui/core";
 const styles = makeStyles((theme) => ({
 	root: {
 		width: "100%",
-		padding: "0% 5% 5% 5%",
-		paddingBottom: 100,
 	},
 
 	navContainer: {
-		height: "15vh",
-		display: "flex",
-		flexDirection: "column",
-		justifyContent: "center",
+		height: 70,
+		width: "100%",
+		position: "fixed",
+		zIndex: 2,
+	},
+
+	contentContainer: {
+		padding: "100px 5% 5% 5%",
 	},
 
 	tutorial: {
 		color: theme.palette.colors.violetMedium,
 		fontWeight: 600,
-		textDecoration: "underline",
 		cursor: "pointer",
+
+		marginTop: 30,
 	},
 
 	exerciseContainer: {
@@ -74,6 +77,7 @@ const styles = makeStyles((theme) => ({
 	paginationContainer: {
 		display: "flex",
 		justifyContent: "center",
+		zIndex: 1,
 	},
 }));
 

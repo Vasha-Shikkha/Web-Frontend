@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Link} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import Button from "../../components/Button";
 import {getFlashCards} from "../../axios/services/flashCard";
 import CancelIcon from "@material-ui/icons/Cancel";
@@ -8,6 +8,7 @@ import styles from "./styles";
 const FlashCard = () => {
 	const classes = styles();
 	const [cards, setCards] = useState([]);
+	const history = useHistory();
 
 	useEffect(() => {
 		let date = new Date();
@@ -32,9 +33,9 @@ const FlashCard = () => {
 		<div className={classes.root}>
 			<div className={classes.navContainer}>
 				<div className={`${classes.nav_inner} ${classes.crossContainer}`}>
-					<Link to="/home">
+					<div onClick={() => history.goBack()}>
 						<CancelIcon className={classes.cross} />
-					</Link>
+					</div>
 				</div>
 				<div className={`${classes.nav_inner} ${classes.centered}`}>FLASH CARDS</div>
 			</div>
