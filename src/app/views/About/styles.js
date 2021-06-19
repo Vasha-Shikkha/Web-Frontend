@@ -17,8 +17,8 @@ const styles = makeStyles((theme) => ({
 	},
 
 	spondonImage: {
-		width: 200,
-		height: 200,
+		width: 150,
+		height: 150,
 		float: "left",
 		marginRight: 10,
 	},
@@ -46,7 +46,17 @@ const styles = makeStyles((theme) => ({
 	gridroot: {
 		flexGrow: 1,
 		width: "100%",
-		marginTop: 50,
+	},
+
+	teamHeading: {
+		color: theme.palette.colors.bluishViolet,
+		fontWeight: 700,
+		fontSize: 20,
+		marginTop: 100,
+	},
+
+	devContainer: {
+		marginTop: 100,
 	},
 }));
 
