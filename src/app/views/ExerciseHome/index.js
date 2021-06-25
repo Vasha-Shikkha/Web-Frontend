@@ -27,6 +27,7 @@ const ExerciseHome = (props) => {
 		let temp = new Map();
 		temp.set("Sentence Matching", "/sentence-matching");
 		temp.set("MCQ", "/mcq");
+		temp.set("Error in Sentence", "/error-in-sentence");
 		temp.set("True False", "/true-false");
 		temp.set("Word to Picture", "/word-to-picture");
 		temp.set("Picture to Word", "/picture-to-word");
