@@ -10,15 +10,17 @@ const Dictionary = () => {
 	const [dictionarySearch, setDictionarySearch] = useState("");
 	const [searchRes, setSearchRes] = useState({});
 	const [loading, setLoading] = useState(false);
+	const [open, setOpen] = useState(false);
 
 	const searchWord = () => {
 		if (!dictionarySearch || dictionarySearch.length === 0) return;
 
 		setLoading(true);
+		if (open) setOpen(false);
 		getWordMeaning(dictionarySearch, (err, axios_data) => {
-			console.log(err, axios_data);
 			if (!err) {
 				setSearchRes(axios_data);
+				if (!open) setOpen(true);
 			} else {
 				setSearchRes({word: "word not found"});
 			}
@@ -57,6 +59,27 @@ const Dictionary = () => {
 						onChange={(e) => setDictionarySearch(e.target.value)}
 					/>
 				</div>
+
+				{loading ? (
+					<Loading container={classes.loadingContainer} />
+				) : !open ? null : (
+					<div className={`${classes.dictionaryContainer} ${classes.centererd}`}>
+						<div className={classes.card}>
+							<div className={classes.word}>
+								{dictionarySearch ? dictionarySearch.toUpperCase() : ""}
+							</div>
+							<div className={classes.meaning}>
+								{searchRes.meaning ? searchRes.meaning.join(", ") : null}
+							</div>
+							{searchRes && searchRes.example ? (
+								<div className={classes.exampleHead}>Example</div>
+							) : null}
+							<div className={classes.example}>
+								{searchRes.example ? searchRes.example.join(", ") : null}
+							</div>
+						</div>
+					</div>
+				)}
 			</div>
 		</div>
 	);
