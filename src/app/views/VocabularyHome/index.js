@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {useHistory} from "react-router-dom";
 import {getCommunicativeTopics} from "../../axios/services/topics";
+import config from "../../util/config";
 
 import Loading from "../../components/Loading";
 // import colors from "../../styles/colors";
@@ -112,7 +113,7 @@ const VocabularyHome = (props) => {
 											<div className={`${classes.taskBoxInner} ${classes.centered}`}>
 												<div className={`${classes.taskImgContainer} ${classes.centered}`}>
 													<img
-														src={obj.image ? obj.image : DummyTopic}
+														src={obj.image ? config.IMAGE_BASE + obj.image : DummyTopic}
 														alt=""
 														className={classes.topicImage}
 													/>
