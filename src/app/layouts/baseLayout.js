@@ -28,6 +28,7 @@ const FillInTheBlanks = lazy(() => import("../views/FillInTheBlanks"));
 const RearrangeSentence = lazy(() => import("../views/RearrangeSentence"));
 const DragCaptionToPicture = lazy(() => import("../views/DragCaptionToPicture"));
 const About = lazy(() => import("../views/About"));
+const Dictionary = lazy(() => import("../views/Dictionary"));
 
 const theme = createMuiTheme({
 	palette: {
@@ -139,6 +140,12 @@ const BaseLayout = () => (
 									exact
 									path="/flash-card"
 									render={(props) => <PrivateWrapper component={<FlashCard {...props} />} />}
+								/>
+
+								<Route
+									exact
+									path="/dictionary"
+									render={(props) => <PrivateWrapper component={<Dictionary {...props} />} />}
 								/>
 
 								<Route
