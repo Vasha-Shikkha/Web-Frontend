@@ -30,13 +30,14 @@ export const AuthProvider = (props) => {
 		cb();
 	};
 
-	const logout = () => {
+	const logout = (cb) => {
 		localStorage.removeItem("vasha_shikkha_user");
 		localStorage.removeItem("vasha_shikkha_jwtToken");
 		localStorage.removeItem("vasha_shikkha_jwtToken_expiresAt");
 
 		setUser({});
 		setIsAuthenticated(false);
+		cb();
 	};
 
 	return (
