@@ -1,12 +1,19 @@
 import React from "react";
 import {useHistory} from "react-router-dom";
+import {AuthConsumer} from "../../stateHandlers/authContext";
 import HamburgerMenu from "../HamburgerMenu";
 
 import styles from "./styles";
 
-const Navbar = () => {
+const Navbar = (props) => {
 	const classes = styles();
 	const history = useHistory();
+
+	const handleLogout = () => {
+		props.logout(() => {
+			history.push("/auth");
+		});
+	};
 
 	return (
 		<div className={classes.root}>
@@ -27,7 +34,9 @@ const Navbar = () => {
 					<div className={classes.link} onClick={() => history.push("/about")}>
 						About
 					</div>
-					<div className={classes.link}>Logout</div>
+					<div onClick={handleLogout} className={classes.link}>
+						Logout
+					</div>
 				</div>
 				<div className={classes.mobileNav}>
 					<HamburgerMenu />
@@ -37,4 +46,8 @@ const Navbar = () => {
 	);
 };
 
-export default Navbar;
+const ConsumerComponent = (props) => (
+	<AuthConsumer>{({logout}) => <Navbar {...props} logout={logout} />}</AuthConsumer>
+);
+
+export default ConsumerComponent;
