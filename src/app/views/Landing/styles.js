@@ -14,13 +14,13 @@ const styles = makeStyles((theme) => ({
 
 	contentContainer: {
 		paddingTop: 70,
-		paddingLeft: "5%",
-		paddingRight: "5%",
 	},
 
 	container: {
 		flexGrow: 1,
 		marginTop: 25,
+		paddingLeft: "5%",
+		paddingRight: "5%",
 	},
 
 	gridItem: {
