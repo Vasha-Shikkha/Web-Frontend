@@ -3,7 +3,17 @@ import {makeStyles} from "@material-ui/core";
 const styles = makeStyles((theme) => ({
 	root: {
 		width: "100%",
-		height: "100vh",
+	},
+
+	navContainer: {
+		height: 70,
+		width: "100%",
+		position: "fixed",
+		zIndex: 2,
+	},
+
+	contentContainer: {
+		paddingTop: 70,
 	},
 
 	centered: {
@@ -12,18 +22,6 @@ const styles = makeStyles((theme) => ({
 		justifyContent: "center",
 		alignContent: "center",
 		alignItems: "center",
-	},
-
-	landingImg: {
-		[theme.breakpoints.down("md")]: {
-			width: "100%",
-			height: "auto",
-		},
-
-		[theme.breakpoints.up("lg")]: {
-			width: "auto",
-			height: "70vh",
-		},
 	},
 
 	btn: {
