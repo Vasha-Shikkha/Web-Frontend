@@ -22,21 +22,31 @@ const Navbar = (props) => {
 			</div>
 			<div className={classes.contentContainer}>
 				<div className={classes.webNav}>
-					<div className={classes.link} onClick={() => history.push("/home")}>
+					<div
+						className={classes.link}
+						onClick={() => (props.isAuthenticated ? history.push("/home") : history.push("/"))}>
 						Home
 					</div>
+
 					<div className={classes.link} onClick={() => history.push("/dictionary")}>
 						Dictionary
 					</div>
-					<div className={classes.link} onClick={() => history.push("/flash-card")}>
-						Flashcard
-					</div>
+
+					{props.isAuthenticated && (
+						<div className={classes.link} onClick={() => history.push("/flash-card")}>
+							Flashcard
+						</div>
+					)}
+
 					<div className={classes.link} onClick={() => history.push("/about")}>
 						About
 					</div>
-					<div onClick={handleLogout} className={classes.link}>
-						Logout
-					</div>
+
+					{props.isAuthenticated && (
+						<div onClick={handleLogout} className={classes.link}>
+							Logout
+						</div>
+					)}
 				</div>
 				<div className={classes.mobileNav}>
 					<HamburgerMenu />
@@ -47,7 +57,11 @@ const Navbar = (props) => {
 };
 
 const ConsumerComponent = (props) => (
-	<AuthConsumer>{({logout}) => <Navbar {...props} logout={logout} />}</AuthConsumer>
+	<AuthConsumer>
+		{({logout, isAuthenticated}) => (
+			<Navbar {...props} logout={logout} isAuthenticated={isAuthenticated} />
+		)}
+	</AuthConsumer>
 );
 
 export default ConsumerComponent;
