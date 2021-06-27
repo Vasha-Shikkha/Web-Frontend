@@ -1,6 +1,7 @@
 import React from "react";
 import {useHistory} from "react-router-dom";
 import {AuthConsumer} from "../../stateHandlers/authContext";
+import RegisterButton from "../RegisterButton";
 import HamburgerMenu from "../HamburgerMenu";
 
 import styles from "./styles";
@@ -20,8 +21,15 @@ const Navbar = (props) => {
 			<div className={classes.logoContainer}>
 				vasha<span style={{fontWeight: "bold"}}>Shikkha</span>
 			</div>
-			<div className={classes.contentContainer}>
-				<div className={classes.webNav}>
+			<div
+				className={
+					props.isAuthenticated
+						? classes.contentContainerAuthenticated
+						: classes.contentContainerUnAuthenticated
+				}>
+				<div
+					className={classes.webNav}
+					style={{justifyContent: props.isAuthenticated ? "flex-end" : "center"}}>
 					<div
 						className={classes.link}
 						onClick={() => (props.isAuthenticated ? history.push("/home") : history.push("/"))}>
@@ -53,6 +61,15 @@ const Navbar = (props) => {
 					<HamburgerMenu />
 				</div>
 			</div>
+
+			{!props.isAuthenticated && (
+				<div className={classes.authContainer}>
+					<div className={classes.link} onClick={() => history.push("/auth")}>
+						Login
+					</div>
+					<RegisterButton />
+				</div>
+			)}
 		</div>
 	);
 };
