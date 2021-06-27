@@ -14,6 +14,62 @@ const styles = makeStyles((theme) => ({
 
 	contentContainer: {
 		paddingTop: 70,
+		paddingLeft: "5%",
+		paddingRight: "5%",
+	},
+
+	container: {
+		flexGrow: 1,
+		marginTop: 25,
+	},
+
+	gridItem: {
+		//background: "yellow",
+	},
+
+	homeImgContainer: {
+		display: "flex",
+		justifyContent: "center",
+	},
+
+	homeImg: {
+		height: "auto",
+
+		[theme.breakpoints.down("cs")]: {
+			width: "80%",
+		},
+
+		[theme.breakpoints.up("sm")]: {
+			width: "100%",
+		},
+	},
+
+	intro1Head: {
+		fontSize: 25,
+		fontWeight: "bold",
+		marginBottom: 10,
+		color: theme.palette.colors.primary,
+	},
+
+	intro1Description: {
+		width: "100%",
+		wordSpacing: "1.5px",
+		marginBottom: 25,
+	},
+
+	getStarted: {
+		// [theme.breakpoints.down()]:{},
+		// [theme.breakpoints]
+		height: 40,
+		width: 200,
+		borderRadius: 10,
+		cursor: "pointer",
+
+		display: "grid",
+		placeContent: "center",
+
+		background: theme.palette.colors.violetMedium,
+		color: "white",
 	},
 
 	centered: {
