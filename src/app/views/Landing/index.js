@@ -1,19 +1,22 @@
-import React from "react";
-import {Link} from "react-router-dom";
-
-import LandingImg from "../../assets/landing_img.svg";
+import React, {useEffect} from "react";
+import {Link, useHistory} from "react-router-dom";
+import {AuthConsumer} from "../../stateHandlers/authContext";
 import styles from "./styles";
 
-const Landing = () => {
+const Landing = (props) => {
 	const classes = styles();
-	return (
-		<div className={`${classes.root} ${classes.centered}`}>
-			<img src={LandingImg} alt="" className={classes.landingImg} />
-			<Link to="/auth" className={`${classes.btn} ${classes.centered}`}>
-				Get Started
-			</Link>
-		</div>
-	);
+	const history = useHistory();
+
+	useEffect(() => {
+		if (props.isAuthenticated) history.push("/home");
+	}, []);
+	return <div className={classes.root}>landing</div>;
 };
 
-export default Landing;
+const ConsumerComponent = (props) => (
+	<AuthConsumer>
+		{({isAuthenticated}) => <Landing {...props} isAuthenticated={isAuthenticated} />}
+	</AuthConsumer>
+);
+
+export default ConsumerComponent;
