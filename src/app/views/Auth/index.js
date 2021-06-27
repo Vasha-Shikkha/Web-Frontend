@@ -191,7 +191,7 @@ const SignIn = (props) => {
 					onClick={() => {
 						showSignUp ? handleSignUp() : handleSignin();
 					}}>
-					{showSignUp ? "Sign Up" : "Sign In"}
+					{showSignUp ? "Register" : "Login"}
 				</div>
 			</div>
 		</div>
