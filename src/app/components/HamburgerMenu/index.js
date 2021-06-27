@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {useHistory} from "react-router-dom";
 import {AuthConsumer} from "../../stateHandlers/authContext";
-
+import RegisterButton from "../RegisterButton";
 import styles from "./styles";
 
 const HamburgerMenu = (props) => {
@@ -53,6 +53,14 @@ const HamburgerMenu = (props) => {
 				<div className={classes.link} onClick={() => history.push("/about")}>
 					About
 				</div>
+
+				{!props.isAuthenticated && (
+					<div className={classes.link} onClick={() => history.push("/auth")}>
+						Login
+					</div>
+				)}
+
+				{!props.isAuthenticated && <RegisterButton />}
 
 				{props.isAuthenticated && (
 					<div onClick={handleLogout} className={classes.link}>

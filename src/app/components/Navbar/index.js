@@ -48,6 +48,7 @@ const Navbar = (props) => {
 						</div>
 					)}
 				</div>
+
 				<div className={classes.mobileNav}>
 					<HamburgerMenu />
 				</div>
