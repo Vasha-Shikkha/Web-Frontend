@@ -52,7 +52,7 @@ const Landing = (props) => {
 					</Grid>
 				</div>
 				<div className={`${classes.container} ${classes.section1}`}>
-					<Grid container spacing={3} wrap="wrap">
+					<Grid container spacing={3} wrap="wrap" alignContent="center" alignItems="center">
 						<Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
 							<div className={classes.section1Text}>
 								We’ve divided all the topics into two sections which are equally important for

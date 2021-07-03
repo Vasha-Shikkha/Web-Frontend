@@ -45,7 +45,7 @@ const styles = makeStyles((theme) => ({
 	},
 
 	intro1Head: {
-		fontSize: 25,
+		fontSize: 40,
 		fontWeight: "bold",
 		marginBottom: 10,
 		color: theme.palette.colors.primary,
@@ -55,6 +55,8 @@ const styles = makeStyles((theme) => ({
 		width: "100%",
 		wordSpacing: "1.5px",
 		marginBottom: 25,
+		fontWeight: 500,
+		fontSize: 20,
 	},
 
 	getStarted: {
