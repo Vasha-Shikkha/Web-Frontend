@@ -27,6 +27,7 @@ const JumbledSentence = lazy(() => import("../views/JumbledSentence"));
 const FillInTheBlanks = lazy(() => import("../views/FillInTheBlanks"));
 const RearrangeSentence = lazy(() => import("../views/RearrangeSentence"));
 const DragCaptionToPicture = lazy(() => import("../views/DragCaptionToPicture"));
+const ErrorInSentence = lazy(() => import("../views/ErrorInSentence"));
 const About = lazy(() => import("../views/About"));
 const Dictionary = lazy(() => import("../views/Dictionary"));
 
@@ -76,6 +77,12 @@ const BaseLayout = () => (
 									exact
 									path="/mcq"
 									render={(props) => <PrivateWrapper component={<MCQ {...props} />} />}
+								/>
+
+								<Route
+									exact
+									path="/error-in-sentence"
+									render={(props) => <PrivateWrapper component={<ErrorInSentence {...props} />} />}
 								/>
 
 								<Route
