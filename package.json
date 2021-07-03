@@ -1,5 +1,6 @@
 {
 	"name": "vasha-shikkha-web-frontend",
+	"author": "Waqar Hassan Khan",
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {

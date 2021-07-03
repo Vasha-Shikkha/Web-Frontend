@@ -13,33 +13,25 @@ const About = () => {
 			name: "Nafis Tahmid",
 			image: DummyImage,
 			description:
-				"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rhoncus ultricies mi, a\
-			suscipit massa dignissim ut. Fusce laoreet, leo at fermentum pharetra, massa nibh\
-			lobortis lacus, et blandit mauris elit in mauris. Cras eu sagittis velit. Class aptent",
+				"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rhoncus ultricies mi, a suscipit massa dignissim ut. Fusce laoreet, leo at fermentum pharetra, massa nibh lobortis lacus, et blandit mauris elit in mauris. Cras eu sagittis velit. Class aptent",
 		},
 		{
 			name: "Waqar Hassan Khan",
 			image: WaqarImage,
 			description:
-				"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rhoncus ultricies mi, a\
-			suscipit massa dignissim ut. Fusce laoreet, leo at fermentum pharetra, massa nibh\
-			lobortis lacus, et blandit mauris elit in mauris. Cras eu sagittis velit. Class aptent",
+				"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rhoncus ultricies mi, a suscipit massa dignissim ut. Fusce laoreet, leo at fermentum pharetra, massa nibh lobortis lacus, et blandit mauris elit in mauris. Cras eu sagittis velit. Class aptent",
 		},
 		{
 			name: "Priyeta Saha",
 			image: DummyImage,
 			description:
-				"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rhoncus ultricies mi, a\
-			suscipit massa dignissim ut. Fusce laoreet, leo at fermentum pharetra, massa nibh\
-			lobortis lacus, et blandit mauris elit in mauris. Cras eu sagittis velit. Class aptent",
+				"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rhoncus ultricies mi, a suscipit massa dignissim ut. Fusce laoreet, leo at fermentum pharetra, massa nibh lobortis lacus, et blandit mauris elit in mauris. Cras eu sagittis velit. Class aptent",
 		},
 		{
 			name: "Gourab Saha",
 			image: DummyImage,
 			description:
-				"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rhoncus ultricies mi, a\
-			suscipit massa dignissim ut. Fusce laoreet, leo at fermentum pharetra, massa nibh\
-			lobortis lacus, et blandit mauris elit in mauris. Cras eu sagittis velit. Class aptent",
+				"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rhoncus ultricies mi, a suscipit massa dignissim ut. Fusce laoreet, leo at fermentum pharetra, massa nibh lobortis lacus, et blandit mauris elit in mauris. Cras eu sagittis velit. Class aptent",
 		},
 	];
 
@@ -47,9 +39,7 @@ const About = () => {
 		name: "Dr. Anindya Iqbal",
 		image: DummyImage,
 		description:
-			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rhoncus ultricies mi, a\
-	suscipit massa dignissim ut. Fusce laoreet, leo at fermentum pharetra, massa nibh\
-	lobortis lacus, et blandit mauris elit in mauris. Cras eu sagittis velit. Class aptent",
+			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rhoncus ultricies mi, a suscipit massa dignissim ut. Fusce laoreet, leo at fermentum pharetra, massa nibh lobortis lacus, et blandit mauris elit in mauris. Cras eu sagittis velit. Class aptent",
 	};
 
 	return (
