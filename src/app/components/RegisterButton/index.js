@@ -4,8 +4,8 @@ import {makeStyles} from "@material-ui/core";
 
 const styles = makeStyles((theme) => ({
 	root: {
-		width: 120,
-		height: 50,
+		width: 100,
+		height: 40,
 		borderRadius: 10,
 		cursor: "pointer",
 
