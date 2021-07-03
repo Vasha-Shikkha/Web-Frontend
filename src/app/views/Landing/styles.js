@@ -58,8 +58,6 @@ const styles = makeStyles((theme) => ({
 	},
 
 	getStarted: {
-		// [theme.breakpoints.down()]:{},
-		// [theme.breakpoints]
 		height: 40,
 		width: 200,
 		borderRadius: 10,
@@ -70,6 +68,20 @@ const styles = makeStyles((theme) => ({
 
 		background: theme.palette.colors.violetMedium,
 		color: "white",
+	},
+
+	section1: {
+		width: "100%",
+		background: theme.palette.colors.violetLight,
+		paddingTop: "5%",
+		paddingBottom: "5%",
+		marginTop: 50,
+	},
+
+	section1Text: {
+		fontWeight: 500,
+		fontSize: 32,
+		//lineHeight: 39,
 	},
 
 	centered: {
