@@ -4,6 +4,8 @@ import {AuthConsumer} from "../../stateHandlers/authContext";
 import Navbar from "../../components/Navbar";
 
 import HomeImg from "../../assets/home_img.svg";
+import Vocabulary from "../../assets/vocabulary.svg";
+import Grammar from "../../assets/grammar.svg";
 import {Grid} from "@material-ui/core";
 import styles from "./styles";
 
@@ -57,11 +59,17 @@ const Landing = (props) => {
 								learning English
 							</div>
 						</Grid>
-						<Grid item xs={12} sm={6} md={5} lg={5} xl={5}>
-							<div>img1 </div>
+						<Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
+							<div className={`${classes.section1Box}`}>
+								<img className={classes.section1Img} src={Vocabulary} alt="" />
+								<div className={classes.section1BoxText}>COMMUNICATIVE</div>
+							</div>
 						</Grid>
-						<Grid item xs={12} sm={6} md={3} lg={3} xl={3}>
-							<div>img2 </div>
+						<Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
+							<div className={classes.section1Box}>
+								<img className={classes.section1Img} src={Grammar} alt="" />
+								<div className={classes.section1BoxText}>GRAMMAR</div>
+							</div>
 						</Grid>
 					</Grid>
 				</div>

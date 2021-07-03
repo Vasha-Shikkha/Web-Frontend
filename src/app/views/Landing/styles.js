@@ -81,7 +81,43 @@ const styles = makeStyles((theme) => ({
 	section1Text: {
 		fontWeight: 500,
 		fontSize: 32,
-		//lineHeight: 39,
+	},
+
+	section1Img: {
+		height: 100,
+		width: 100,
+		objectFit: "cover",
+		objectPosition: "center",
+
+		marginRight: 15,
+	},
+
+	section1Box: {
+		height: "auto",
+		background: theme.palette.colors.violetMedium,
+
+		display: "flex",
+		alignContent: "center",
+		alignItems: "center",
+
+		width: "100%",
+		flexDirection: "row",
+		justifyContent: "flex-start",
+		padding: "3%",
+		borderRadius: 20,
+	},
+
+	section1BoxText: {
+		fontFamily: "Montserrat",
+		fontWeight: 600,
+		color: "white",
+
+		[theme.breakpoints.down("md")]: {
+			fontSize: 16,
+		},
+		[theme.breakpoints.up("lg")]: {
+			fontSize: 20,
+		},
 	},
 
 	centered: {
