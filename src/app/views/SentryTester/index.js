@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {makeStyles} from "@material-ui/core";
 
 const styles = makeStyles(() => ({
@@ -12,15 +12,14 @@ const styles = makeStyles(() => ({
 
 const SentryTester = () => {
 	const classes = styles();
-
-	const handleClick = () => {
-		let arr = null;
-		arr.map((x) => x);
-	};
+	const [tempArr, setter] = useState(null);
 
 	return (
 		<div className={classes.root}>
-			<button onClick={handleClick}>crash the app</button>
+			this will crash
+			{tempArr.map(() => (
+				<p>err</p>
+			))}
 		</div>
 	);
 };
