@@ -6,7 +6,9 @@ import {AuthProvider} from "../stateHandlers/authContext";
 import PrivateWrapper from "./privateWrapper";
 
 import Loading from "../components/Loading";
-import ErrorBoundary from "../util/errorBoundary";
+//import ErrorBoundary from "../util/errorBoundary";
+import ErrorBoundary from "../views/ErrorBoundary";
+import * as Sentry from "@sentry/react";
 
 // use code splitting for better ux
 const Landing = lazy(() => import("../views/Landing"));
@@ -57,7 +59,7 @@ const BaseLayout = () => (
 		<Suspense fallback={<Loading />}>
 			<AuthProvider>
 				<MuiThemeProvider theme={theme}>
-					<ErrorBoundary>
+					<Sentry.ErrorBoundary fallback={ErrorBoundary} showDialog>
 						<div>
 							<Switch>
 								<Route exact path="/" component={Landing} />
@@ -173,7 +175,7 @@ const BaseLayout = () => (
 								/>
 							</Switch>
 						</div>
-					</ErrorBoundary>
+					</Sentry.ErrorBoundary>
 				</MuiThemeProvider>
 			</AuthProvider>
 		</Suspense>
