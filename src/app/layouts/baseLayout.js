@@ -6,9 +6,10 @@ import {AuthProvider} from "../stateHandlers/authContext";
 import PrivateWrapper from "./privateWrapper";
 
 import Loading from "../components/Loading";
-//import ErrorBoundary from "../util/errorBoundary";
-import ErrorBoundary from "../views/ErrorBoundary";
-import * as Sentry from "@sentry/react";
+import ErrorBoundary from "../util/errorBoundary";
+//import ErrorBoundary from "../views/ErrorBoundary";
+// import * as Sentry from "@sentry/react";
+// import {Integrations} from "@sentry/tracing";
 
 // use code splitting for better ux
 const Landing = lazy(() => import("../views/Landing"));
@@ -33,6 +34,16 @@ const ErrorInSentence = lazy(() => import("../views/ErrorInSentence"));
 const About = lazy(() => import("../views/About"));
 const Dictionary = lazy(() => import("../views/Dictionary"));
 const SentryTester = lazy(() => import("../views/SentryTester"));
+
+// Sentry.init({
+// 	dsn: "https://dceb2c042e654a05b5abd3e400ad79ca@o512318.ingest.sentry.io/5859763",
+// 	integrations: [new Integrations.BrowserTracing()],
+
+// 	// Set tracesSampleRate to 1.0 to capture 100%
+// 	// of transactions for performance monitoring.
+// 	// We recommend adjusting this value in production
+// 	tracesSampleRate: 1.0,
+// });
 
 const theme = createMuiTheme({
 	palette: {
@@ -59,7 +70,8 @@ const BaseLayout = () => (
 		<Suspense fallback={<Loading />}>
 			<AuthProvider>
 				<MuiThemeProvider theme={theme}>
-					<Sentry.ErrorBoundary fallback={ErrorBoundary} showDialog>
+					{/* <Sentry.ErrorBoundary fallback={ErrorBoundary}> */}
+					<ErrorBoundary>
 						<div>
 							<Switch>
 								<Route exact path="/" component={Landing} />
@@ -175,7 +187,8 @@ const BaseLayout = () => (
 								/>
 							</Switch>
 						</div>
-					</Sentry.ErrorBoundary>
+						{/* </Sentry.ErrorBoundary> */}
+					</ErrorBoundary>
 				</MuiThemeProvider>
 			</AuthProvider>
 		</Suspense>
