@@ -30,6 +30,7 @@ const DragCaptionToPicture = lazy(() => import("../views/DragCaptionToPicture"))
 const ErrorInSentence = lazy(() => import("../views/ErrorInSentence"));
 const About = lazy(() => import("../views/About"));
 const Dictionary = lazy(() => import("../views/Dictionary"));
+const SentryTester = lazy(() => import("../views/SentryTester"));
 
 const theme = createMuiTheme({
 	palette: {
@@ -63,6 +64,7 @@ const BaseLayout = () => (
 								<Route exact path="/auth" component={Auth} />
 								<Route exact path="/about" component={About} />
 								<Route exact path="/dictionary" component={Dictionary} />
+								<Route exact path="/test-sentry" component={SentryTester} />
 
 								<Route
 									exact
