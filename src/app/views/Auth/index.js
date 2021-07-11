@@ -119,14 +119,14 @@ const SignIn = (props) => {
 						<div
 							className={showSignUp ? classes.activeAuth : classes.inactiveAuth}
 							onClick={() => toggleAuth()}>
-							Sign Up
+							Register
 						</div>
 
 						<div
 							style={{marginLeft: 25}}
 							className={!showSignUp ? classes.activeAuth : classes.inactiveAuth}
 							onClick={() => toggleAuth()}>
-							Sign In
+							Login
 						</div>
 					</div>
 				</div>
@@ -191,7 +191,7 @@ const SignIn = (props) => {
 					onClick={() => {
 						showSignUp ? handleSignUp() : handleSignin();
 					}}>
-					{showSignUp ? "Sign Up" : "Sign In"}
+					{showSignUp ? "Register" : "Login"}
 				</div>
 			</div>
 		</div>

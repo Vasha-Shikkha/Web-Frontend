@@ -30,6 +30,7 @@ const DragCaptionToPicture = lazy(() => import("../views/DragCaptionToPicture"))
 const ErrorInSentence = lazy(() => import("../views/ErrorInSentence"));
 const About = lazy(() => import("../views/About"));
 const Dictionary = lazy(() => import("../views/Dictionary"));
+const SentryTester = lazy(() => import("../views/SentryTester"));
 
 const theme = createMuiTheme({
 	palette: {
@@ -59,13 +60,17 @@ const BaseLayout = () => (
 					<ErrorBoundary>
 						<div>
 							<Switch>
+								<Route exact path="/" component={Landing} />
+								<Route exact path="/auth" component={Auth} />
+								<Route exact path="/about" component={About} />
+								<Route exact path="/dictionary" component={Dictionary} />
+								<Route exact path="/test-sentry" component={SentryTester} />
+
 								<Route
 									exact
 									path="/home"
 									render={(props) => <PrivateWrapper component={<Home {...props} />} />}
 								/>
-
-								<Route exact path="/about" component={About} />
 
 								<Route
 									exact
@@ -151,12 +156,6 @@ const BaseLayout = () => (
 
 								<Route
 									exact
-									path="/dictionary"
-									render={(props) => <PrivateWrapper component={<Dictionary {...props} />} />}
-								/>
-
-								<Route
-									exact
 									path="/tutorial"
 									render={(props) => <PrivateWrapper component={<Tutorial {...props} />} />}
 								/>
@@ -172,9 +171,6 @@ const BaseLayout = () => (
 									path="/finish"
 									render={(props) => <PrivateWrapper component={<FinishLine {...props} />} />}
 								/>
-
-								<Route exact path="/" component={Landing} />
-								<Route exact path="/auth" component={Auth} />
 							</Switch>
 						</div>
 					</ErrorBoundary>

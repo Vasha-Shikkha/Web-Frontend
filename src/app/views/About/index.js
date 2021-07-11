@@ -2,7 +2,7 @@ import React from "react";
 import Navbar from "../../components/Navbar";
 import AboutCard from "../../components/AboutCard";
 import DummyImage from "../../assets/topics/birds.svg";
-import WaqarImage from "../../assets/team/waqar.jpg";
+import WaqarImage from "../../assets/team/waqar.jpeg";
 import {Grid} from "@material-ui/core";
 import styles from "./styles";
 

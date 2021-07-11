@@ -29,7 +29,7 @@ const styles = makeStyles((theme) => ({
 		},
 	},
 
-	contentContainer: {
+	contentContainerAuthenticated: {
 		height: "100%",
 
 		[theme.breakpoints.down("md")]: {
@@ -38,6 +38,36 @@ const styles = makeStyles((theme) => ({
 
 		[theme.breakpoints.up("md")]: {
 			width: "80%",
+		},
+	},
+
+	contentContainerUnAuthenticated: {
+		height: "100%",
+
+		[theme.breakpoints.down("md")]: {
+			width: "50%",
+		},
+
+		[theme.breakpoints.up("md")]: {
+			width: "50%",
+		},
+	},
+
+	authContainer: {
+		width: "30%",
+
+		display: "flex",
+		flexDirection: "row",
+		justifyContent: "flex-end",
+		alignContent: "center",
+		alignItems: "center",
+
+		[theme.breakpoints.down("md")]: {
+			display: "none",
+		},
+
+		[theme.breakpoints.up("md")]: {
+			display: "flex",
 		},
 	},
 
@@ -60,7 +90,6 @@ const styles = makeStyles((theme) => ({
 		height: "100%",
 
 		display: "flex",
-		justifyContent: "flex-end",
 		alignContent: "center",
 		alignItems: "center",
 
