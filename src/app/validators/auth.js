@@ -26,6 +26,8 @@ module.exports.signup = (data) => {
 
 	if (checker.isEmpty(data.phone)) {
 		errors.phone = "phone field is empty";
+	} else if (!checker.bangladeshiPhone(data.phone)) {
+		errors.phone = "phone is not a valid Bangladeshi number";
 	}
 
 	if (checker.isEmpty(data.password)) {

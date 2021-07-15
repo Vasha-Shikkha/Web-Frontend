@@ -51,7 +51,7 @@ const SignIn = (props) => {
 			if (err) {
 				console.error("error in login", err);
 				setSnackType(0);
-				setMsg(err.msg);
+				setMsg(err.error);
 			} else {
 				props.login(axios_data.user, () => {
 					setAuthenticated(true);
@@ -78,7 +78,7 @@ const SignIn = (props) => {
 		signup(data, (err, axios_data) => {
 			if (err) {
 				console.error("error in signup", err);
-				setMsg(err.msg);
+				setMsg(err.error);
 				setSnackType(0);
 				setErrors({});
 			} else {
