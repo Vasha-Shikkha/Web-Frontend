@@ -13,7 +13,7 @@ const FillInTheBlanksCard = forwardRef((props, ref) => {
 			let jdx = 0;
 			for (let i = 0; i < tokenizedQuestion.length; i++) {
 				if (isBlank[i]) {
-					if (tokenizedQuestion[i] !== props.question.answers[jdx]) {
+					if (tokenizedQuestion[i].toLowerCase() !== props.question.answers[jdx].toLowerCase()) {
 						answer.isCorrect = false;
 						temp_color[i] = colors.incorrect;
 					} else temp_color[i] = colors.correct;
