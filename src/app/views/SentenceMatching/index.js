@@ -29,7 +29,7 @@ const SentenceMatching = (props) => {
 
 		if (task) {
 			setQuestion(task.question);
-			setChecked(task.taskDetail.solved_status === constants.EXERCISE_SOLVED ? true : false);
+			setChecked(task.taskDetail.solved_status === constants.EXERCISE_SOLVED);
 			setTaskDetail(task.taskDetail);
 			setLoading(false);
 		}
@@ -114,7 +114,7 @@ const SentenceMatching = (props) => {
 						<SentenceMatchingCard
 							ref={childRef}
 							question={question}
-							isReview={taskDetail.solved_status === constants.EXERCISE_SOLVED ? true : false}
+							isReview={taskDetail.solved_status === constants.EXERCISE_SOLVED}
 							isChecked={checked}
 							taskDetail={taskDetail}
 							tried={tried}

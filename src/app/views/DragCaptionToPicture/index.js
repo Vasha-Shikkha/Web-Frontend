@@ -29,7 +29,7 @@ const DragCaptionToPicture = (props) => {
 		if (task) {
 			setQuestion(task.question);
 			setTaskDetail(task.taskDetail);
-			setChecked(task.taskDetail.solved_status === constants.EXERCISE_SOLVED ? true : false);
+			setChecked(task.taskDetail.solved_status === constants.EXERCISE_SOLVED);
 			setLoading(false);
 		}
 	}, [props.location.state]);
@@ -112,7 +112,7 @@ const DragCaptionToPicture = (props) => {
 						<DragCaptionToPictureCard
 							ref={childRef}
 							question={question}
-							isReview={taskDetail.solved_status === constants.EXERCISE_SOLVED ? true : false}
+							isReview={taskDetail.solved_status === constants.EXERCISE_SOLVED}
 							isChecked={checked}
 							taskDetail={taskDetail}
 							tried={tried}

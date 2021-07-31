@@ -33,9 +33,7 @@ const MCQ = (props) => {
 		if (task) {
 			setQuestion(task.question);
 			setChecked(
-				task.question.map(() =>
-					task.taskDetail.solved_status === constants.EXERCISE_SOLVED ? true : false
-				)
+				task.question.map(() => task.taskDetail.solved_status === constants.EXERCISE_SOLVED)
 			);
 			setTaskDetail(task.taskDetail);
 			setCurrentQuestion(0);
@@ -136,7 +134,7 @@ const MCQ = (props) => {
 							ref={childRef}
 							currentQuestionNumber={currentQuestion}
 							question={question[currentQuestion]}
-							isReview={taskDetail.solved_status === constants.EXERCISE_SOLVED ? true : false}
+							isReview={taskDetail.solved_status === constants.EXERCISE_SOLVED}
 							isChecked={checked[currentQuestion]}
 							taskDetail={taskDetail}
 							tried={tried}
