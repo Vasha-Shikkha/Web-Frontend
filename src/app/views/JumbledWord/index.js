@@ -55,7 +55,7 @@ const JumbledWord = (props) => {
 		arr[currentQuestion] = true;
 		setChecked(arr);
 
-		if (answer.isCorrect) setTaskIsCorrect(false);
+		if (!answer.isCorrect) setTaskIsCorrect(false);
 
 		// show verdict
 		setShowVerdict(true);
