@@ -3,7 +3,8 @@ import {useHistory} from "react-router-dom";
 import ExerciseLayout from "../../layouts/exerciseLayout";
 import Loading from "../../components/Loading";
 import DragCaptionToPictureCard from "../../components/ExerciseCard/DragCaptionToPictureCard";
-
+import {updateExerciseStatus} from "../../axios/services/exercises";
+import constants from "../../util/constants";
 import styles from "../../styles/exerciseViewStyles";
 import {Dialog} from "@material-ui/core";
 import "../../styles/answerContainer.css";
@@ -27,8 +28,8 @@ const DragCaptionToPicture = (props) => {
 
 		if (task) {
 			setQuestion(task.question);
-			setChecked(task.taskDetail.solved_status ? true : false);
 			setTaskDetail(task.taskDetail);
+			setChecked(task.taskDetail.solved_status === constants.EXERCISE_SOLVED ? true : false);
 			setLoading(false);
 		}
 	}, [props.location.state]);
@@ -42,9 +43,11 @@ const DragCaptionToPicture = (props) => {
 
 		setChecked(true);
 
-		// show verdict
-		setShowVerdict(true);
-		setCorrect(answer.isCorrect);
+		updateExerciseStatus(taskDetail.task_id, answer.isCorrect, () => {
+			// show verdict
+			setShowVerdict(true);
+			setCorrect(answer.isCorrect);
+		});
 	};
 
 	const tryAgain = () => {
@@ -109,7 +112,7 @@ const DragCaptionToPicture = (props) => {
 						<DragCaptionToPictureCard
 							ref={childRef}
 							question={question}
-							isReview={taskDetail.solved_status ? taskDetail.solved_status : false}
+							isReview={taskDetail.solved_status === constants.EXERCISE_SOLVED ? true : false}
 							isChecked={checked}
 							taskDetail={taskDetail}
 							tried={tried}
