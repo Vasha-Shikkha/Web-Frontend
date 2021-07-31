@@ -14,7 +14,7 @@ const ErrorInSentenceCard = forwardRef((props, ref) => {
 
 			let answerIdx = -1;
 			for (let i = 0; i < props.question.options.length; i++) {
-				if (props.question.answer === props.question.options[i]) {
+				if (props.question.answer.toLowerCase() === props.question.options[i].toLowerCase()) {
 					answerIdx = i;
 					break;
 				}
@@ -46,7 +46,7 @@ const ErrorInSentenceCard = forwardRef((props, ref) => {
 		} else {
 			let answerIdx = -1;
 			for (let i = 0; i < props.question.options.length; i++) {
-				if (props.question.answer === props.question.options[i]) {
+				if (props.question.answer.toLowerCase() === props.question.options[i].toLowerCase()) {
 					answerIdx = i;
 					break;
 				}

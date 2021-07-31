@@ -3,6 +3,8 @@ import {useHistory} from "react-router-dom";
 import ExerciseLayout from "../../layouts/exerciseLayout";
 import Loading from "../../components/Loading";
 import FillInTheBlanksCard from "../../components/ExerciseCard/FillInTheBlanksCard";
+import {updateExerciseStatus} from "../../axios/services/exercises";
+import constants from "../../util/constants";
 
 import styles from "../../styles/exerciseViewStyles";
 import {Dialog} from "@material-ui/core";
@@ -20,6 +22,7 @@ const FillInTheBlanks = (props) => {
 	const [correct, setCorrect] = useState(true);
 	const [tried, setTried] = useState(0);
 	const [open, setOpen] = useState(false);
+	const [taskIsCorrect, setTaskIsCorrect] = useState(true);
 
 	const childRef = useRef();
 
@@ -28,7 +31,9 @@ const FillInTheBlanks = (props) => {
 
 		if (task) {
 			setQuestion(task.question);
-			setChecked(task.question.map(() => (task.taskDetail.solved_status ? true : false)));
+			setChecked(
+				task.question.map(() => task.taskDetail.solved_status === constants.EXERCISE_SOLVED)
+			);
 			setTaskDetail(task.taskDetail);
 			setCurrentQuestion(0);
 			setLoading(false);
@@ -46,6 +51,8 @@ const FillInTheBlanks = (props) => {
 		let arr = [...checked];
 		arr[currentQuestion] = true;
 		setChecked(arr);
+
+		if (!answer.isCorrect) setTaskIsCorrect(false);
 
 		// show verdict
 		setShowVerdict(true);
@@ -78,7 +85,9 @@ const FillInTheBlanks = (props) => {
 
 		// gameover
 		if (currentQuestion + 1 === question.length) {
-			history.goBack();
+			updateExerciseStatus(taskDetail.task_id, taskIsCorrect, () => {
+				history.goBack();
+			});
 		} else {
 			setCurrentQuestion(currentQuestion + 1);
 		}
@@ -125,7 +134,7 @@ const FillInTheBlanks = (props) => {
 							ref={childRef}
 							currentQuestionNumber={currentQuestion}
 							question={question[currentQuestion]}
-							isReview={taskDetail.solved_status ? taskDetail.solved_status : false}
+							isReview={taskDetail.solved_status === constants.EXERCISE_SOLVED}
 							isChecked={checked[currentQuestion]}
 							taskDetail={taskDetail}
 							tried={tried}

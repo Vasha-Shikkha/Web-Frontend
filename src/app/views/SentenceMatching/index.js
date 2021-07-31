@@ -3,6 +3,8 @@ import {useHistory} from "react-router-dom";
 import ExerciseLayout from "../../layouts/exerciseLayout";
 import Loading from "../../components/Loading";
 import SentenceMatchingCard from "../../components/ExerciseCard/SentenceMatchingCard";
+import {updateExerciseStatus} from "../../axios/services/exercises";
+import constants from "../../util/constants";
 
 import styles from "../../styles/exerciseViewStyles";
 import {Dialog} from "@material-ui/core";
@@ -27,7 +29,7 @@ const SentenceMatching = (props) => {
 
 		if (task) {
 			setQuestion(task.question);
-			setChecked(task.taskDetail.solved_status ? true : false);
+			setChecked(task.taskDetail.solved_status === constants.EXERCISE_SOLVED);
 			setTaskDetail(task.taskDetail);
 			setLoading(false);
 		}
@@ -43,9 +45,11 @@ const SentenceMatching = (props) => {
 		// mark this question as checked
 		setChecked(true);
 
-		// show verdict
-		setShowVerdict(true);
-		setCorrect(answer.isCorrect);
+		updateExerciseStatus(taskDetail.task_id, answer.isCorrect, () => {
+			// show verdict
+			setShowVerdict(true);
+			setCorrect(answer.isCorrect);
+		});
 	};
 
 	const tryAgain = () => {
@@ -110,7 +114,7 @@ const SentenceMatching = (props) => {
 						<SentenceMatchingCard
 							ref={childRef}
 							question={question}
-							isReview={taskDetail.solved_status ? taskDetail.solved_status : false}
+							isReview={taskDetail.solved_status === constants.EXERCISE_SOLVED}
 							isChecked={checked}
 							taskDetail={taskDetail}
 							tried={tried}
