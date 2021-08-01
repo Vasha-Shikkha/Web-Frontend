@@ -35,12 +35,11 @@ const styles = makeStyles((theme) => ({
 
 	gridroot: {
 		flexGrow: 1,
-		//marginBottom: 100,
 	},
 
 	imageBox: {
 		width: "100%",
-		height: 350,
+		height: 250,
 		background: theme.palette.colors.violetLight,
 	},
 
