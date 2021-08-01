@@ -39,7 +39,7 @@ const styles = makeStyles((theme) => ({
 
 	imageBox: {
 		width: "100%",
-		height: 250,
+		height: 150,
 		background: theme.palette.colors.violetLight,
 	},
 
@@ -62,6 +62,12 @@ const styles = makeStyles((theme) => ({
 		justifyContent: "center",
 		alignContent: "center",
 		alignItems: "center",
+	},
+
+	explanation: {
+		marginTop: 30,
+		fontSize: 16,
+		fontWeight: "bold",
 	},
 }));
 
