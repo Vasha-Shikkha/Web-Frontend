@@ -56,6 +56,12 @@ const styles = makeStyles((theme) => ({
 	questionContainer: {
 		marginBottom: 100,
 	},
+
+	explanation: {
+		marginTop: 30,
+		fontSize: 16,
+		fontWeight: "bold",
+	},
 }));
 
 export default styles;
