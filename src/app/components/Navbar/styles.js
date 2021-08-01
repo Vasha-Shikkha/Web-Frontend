@@ -19,6 +19,7 @@ const styles = makeStyles((theme) => ({
 		display: "flex",
 		alignContent: "center",
 		alignItems: "center",
+		cursor: "pointer",
 
 		[theme.breakpoints.down("md")]: {
 			width: "50%",
