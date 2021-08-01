@@ -101,6 +101,9 @@ const PictureToWordCard = forwardRef((props, ref) => {
 						))}
 				</Grid>
 			</div>
+			{props.isChecked || props.isReview ? (
+				<div className={classes.explanation}>{`Explanation: ${props.question.explanation}`}</div>
+			) : null}
 		</div>
 	);
 });
