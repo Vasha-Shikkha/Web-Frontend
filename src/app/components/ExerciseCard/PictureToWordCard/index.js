@@ -69,7 +69,7 @@ const PictureToWordCard = forwardRef((props, ref) => {
 	};
 
 	return (
-		<div className={classes.root}>
+		<div className={classes.root} style={{height: props.isChecked && props.isReview ? "100%" : ""}}>
 			<div className={`${classes.question} ${classes.centered}`}>
 				{props.question.question}
 				<img
