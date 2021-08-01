@@ -18,7 +18,7 @@ const Navbar = (props) => {
 
 	return (
 		<div className={classes.root}>
-			<div className={classes.logoContainer}>
+			<div className={classes.logoContainer} onClick={() => history.push("/home")}>
 				vasha<span style={{fontWeight: "bold"}}>Shikkha</span>
 			</div>
 			<div

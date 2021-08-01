@@ -17,7 +17,7 @@ const styles = makeStyles((theme) => ({
 	},
 
 	optionContainer: {
-		height: "70%",
+		//height: "70%",
 		width: "100%",
 		flexGrow: 1,
 	},
@@ -55,6 +55,12 @@ const styles = makeStyles((theme) => ({
 
 	questionContainer: {
 		marginBottom: 100,
+	},
+
+	explanation: {
+		marginTop: 30,
+		fontSize: 16,
+		fontWeight: "bold",
 	},
 }));
 

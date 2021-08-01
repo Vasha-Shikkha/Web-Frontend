@@ -28,12 +28,20 @@ const DragCaptionToPictureCard = forwardRef((props, ref) => {
 	const classes = styles();
 	const [boxColors, setBoxColors] = useState([]);
 	const [currentAnswers, setCurrentAnswers] = useState([]);
+	const [explanation, setExplanation] = useState([]);
 
 	useEffect(() => {
 		setBoxColors(props.question.map(() => colors.white));
 
 		if (props.isReview) setCurrentAnswers(props.question.map((obj) => obj.caption));
 		else setCurrentAnswers(props.question.map(() => ""));
+
+		let tempExplanation = [];
+		props.question.map((obj) => {
+			if (obj.explanation) tempExplanation.push(obj.explanation);
+		});
+
+		setExplanation(tempExplanation);
 	}, [props.question, props.tried, props.isReview]);
 
 	const handleOnDragEnd = (result) => {
@@ -85,7 +93,7 @@ const DragCaptionToPictureCard = forwardRef((props, ref) => {
 					<Grid container spacing={3}>
 						{props.question &&
 							props.question.map((obj, idx) => (
-								<Grid item xs={12} sm={6} md={6} lg={4} xl={4} key={idx}>
+								<Grid item xs={12} sm={6} md={6} lg={3} xl={3} key={idx}>
 									<div className={classes.imageBox}>
 										<img src={config.IMAGE_BASE + obj.image} alt="" className={classes.image} />
 										<Droppable droppableId={`drop_blank~${idx.toString()}`} isDropDisabled={false}>
@@ -105,6 +113,15 @@ const DragCaptionToPictureCard = forwardRef((props, ref) => {
 							))}
 					</Grid>
 				</div>
+				{(props.isChecked || props.isReview) && explanation.length > 0 ? (
+					<div className={classes.explanation}>
+						Explanation:
+						<br />
+						{explanation.map((obj, idx) => (
+							<div key={idx}>{obj}</div>
+						))}
+					</div>
+				) : null}
 			</div>
 		</DragDropContext>
 	);

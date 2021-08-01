@@ -12,7 +12,7 @@ const PictureToWordCard = forwardRef((props, ref) => {
 
 			let answerIdx = -1;
 			for (let i = 0; i < props.question.options.length; i++) {
-				if (props.question.answer === props.question.options[i]) {
+				if (props.question.answer.toLowerCase() === props.question.options[i].toLowerCase()) {
 					answerIdx = i;
 					break;
 				}
@@ -69,7 +69,7 @@ const PictureToWordCard = forwardRef((props, ref) => {
 	};
 
 	return (
-		<div className={classes.root}>
+		<div className={classes.root} style={{height: props.isChecked && props.isReview ? "100%" : ""}}>
 			<div className={`${classes.question} ${classes.centered}`}>
 				{props.question.question}
 				<img
@@ -101,6 +101,9 @@ const PictureToWordCard = forwardRef((props, ref) => {
 						))}
 				</Grid>
 			</div>
+			{(props.isChecked || props.isReview) && props.question.explanation ? (
+				<div className={classes.explanation}>{`Explanation: ${props.question.explanation}`}</div>
+			) : null}
 		</div>
 	);
 });

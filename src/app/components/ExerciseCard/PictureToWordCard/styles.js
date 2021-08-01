@@ -27,7 +27,7 @@ const styles = makeStyles((theme) => ({
 	},
 
 	optionContainer: {
-		height: "40%",
+		//height: "40%",
 		width: "100%",
 		padding: "0% 5% 0% 5%",
 		borderRadius: "0px 0px 30px 30px",
@@ -55,6 +55,12 @@ const styles = makeStyles((theme) => ({
 		justifyContent: "center",
 		alignContent: "center",
 		alignItems: "center",
+	},
+
+	explanation: {
+		marginTop: 30,
+		fontSize: 16,
+		fontWeight: "bold",
 	},
 }));
 

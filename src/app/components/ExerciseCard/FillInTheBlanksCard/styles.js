@@ -58,6 +58,12 @@ const styles = makeStyles((theme) => ({
 	lo: {
 		boxShadow: `2px 3px 4px ${theme.palette.colors.secondary}`,
 	},
+
+	explanation: {
+		marginBottom: "5%",
+		fontSize: 16,
+		fontWeight: "bold",
+	},
 }));
 
 export default styles;

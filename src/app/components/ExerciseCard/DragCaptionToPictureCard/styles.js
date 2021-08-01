@@ -35,12 +35,11 @@ const styles = makeStyles((theme) => ({
 
 	gridroot: {
 		flexGrow: 1,
-		//marginBottom: 100,
 	},
 
 	imageBox: {
 		width: "100%",
-		height: 350,
+		height: 150,
 		background: theme.palette.colors.violetLight,
 	},
 
@@ -63,6 +62,12 @@ const styles = makeStyles((theme) => ({
 		justifyContent: "center",
 		alignContent: "center",
 		alignItems: "center",
+	},
+
+	explanation: {
+		marginTop: 30,
+		fontSize: 16,
+		fontWeight: "bold",
 	},
 }));
 
