@@ -157,6 +157,9 @@ const JumbledSentenceCard = forwardRef((props, ref) => {
 						</Droppable>
 					</div>
 				</div>
+				{(props.isChecked || props.isReview) && props.question.explanation ? (
+					<div className={classes.explanation}>{`Explanation: ${props.question.explanation}`}</div>
+				) : null}
 			</div>
 		</DragDropContext>
 	);
