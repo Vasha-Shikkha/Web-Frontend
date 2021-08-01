@@ -37,6 +37,7 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 	const [rightUsed, setRightUsed] = useState([]);
 	const [stack, setStack] = useState([]);
 	const [disableUndo, setDisableUndo] = useState(false);
+	const [explanation, setExplanation] = useState([]);
 
 	useEffect(() => {
 		// keep the left part as it is. make them draggable. make the whole container non-droppable
@@ -51,6 +52,14 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 		setRightUsed(shuffled_array.map(() => false));
 		setCurrentRight(shuffled_array.map((obj) => props.question[obj].part_two));
 		setBoxColors(shuffled_array.map(() => colors.white));
+
+		let tempExplanation = [];
+		props.question.map((obj) => {
+			if (obj.explanation)
+				tempExplanation.push(obj.part_one + " " + obj.part_two + " - " + obj.explanation);
+		});
+
+		setExplanation(tempExplanation);
 	}, [props.question, props.tried, props.isReview]);
 
 	const handleOnDragEnd = (result) => {
@@ -184,6 +193,18 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 							))}
 					</div>
 				</div>
+				{(props.isChecked || props.isReview) && explanation.length > 0 ? (
+					<div className={classes.explanation}>
+						Explanation:
+						<br />
+						{explanation.map((obj, idx) => (
+							<>
+								<div key={idx}>{obj}</div>
+								<br />
+							</>
+						))}
+					</div>
+				) : null}
 			</div>
 		</DragDropContext>
 	);

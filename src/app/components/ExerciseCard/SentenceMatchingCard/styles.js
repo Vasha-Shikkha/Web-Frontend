@@ -24,22 +24,23 @@ const styles = makeStyles((theme) => ({
 
 		display: "flex",
 		flexDirection: "column",
+		alignItems: "stretch",
 	},
 
 	options: {
 		width: "95%",
 
-		[theme.breakpoints.down("360")]: {
-			height: 160,
-		},
-		[theme.breakpoints.up("360")]: {
-			height: 140,
-		},
-		[theme.breakpoints.up("600")]: {
-			height: 100,
-		},
+		// [theme.breakpoints.down("360")]: {
+		// 	height: 160,
+		// },
+		// [theme.breakpoints.up("360")]: {
+		// 	height: 140,
+		// },
+		// [theme.breakpoints.up("600")]: {
+		// 	height: 100,
+		// },
 
-		padding: 10,
+		padding: 15,
 		fontSize: 16,
 		marginBottom: 15,
 		borderRadius: 10,
@@ -62,6 +63,12 @@ const styles = makeStyles((theme) => ({
 		paddingBottom: 25,
 		paddingTop: 25,
 		lineHeight: 1.5,
+	},
+
+	explanation: {
+		marginBottom: 30,
+		fontSize: 16,
+		fontWeight: "bold",
 	},
 }));
 
