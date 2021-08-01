@@ -64,6 +64,12 @@ const styles = makeStyles((theme) => ({
 		alignContent: "center",
 		alignItems: "center",
 	},
+
+	explanation: {
+		marginTop: 30,
+		fontSize: 16,
+		fontWeight: "bold",
+	},
 }));
 
 export default styles;
