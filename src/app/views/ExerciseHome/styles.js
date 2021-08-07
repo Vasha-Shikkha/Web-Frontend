@@ -22,7 +22,7 @@ const styles = makeStyles((theme) => ({
 
 	box: {
 		width: "100%",
-		padding: 10,
+		padding: 20,
 		borderRadius: 10,
 		background: theme.palette.colors.lightPink,
 
