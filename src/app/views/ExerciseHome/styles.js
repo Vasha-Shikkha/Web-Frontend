@@ -16,29 +16,44 @@ const styles = makeStyles((theme) => ({
 		padding: "100px 5% 5% 5%",
 	},
 
-	tutorial: {
-		color: theme.palette.colors.violetMedium,
-		fontWeight: 600,
-		cursor: "pointer",
-
-		marginTop: 30,
-	},
-
 	exerciseContainer: {
 		marginTop: 25,
 	},
 
 	box: {
 		width: "100%",
-		padding: 10,
+		padding: 20,
 		borderRadius: 10,
 		background: theme.palette.colors.lightPink,
 
 		display: "flex",
 		flexDirection: "row",
+		justifyContent: "space-between",
 		cursor: "pointer",
 
 		marginBottom: 25,
+	},
+
+	boxTitleContainer: {
+		height: "100%",
+		display: "flex",
+		flexDirection: "row",
+	},
+
+	boxLinkContainer: {
+		height: "100%",
+		display: "flex",
+		flexDirection: "row",
+	},
+
+	boxLinks: {
+		color: theme.palette.colors.violetMedium,
+		fontWeight: 500,
+		cursor: "pointer",
+
+		"&:nth-last-child(1)": {
+			marginLeft: 10,
+		},
 	},
 
 	imageContainer: {
