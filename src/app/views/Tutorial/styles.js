@@ -24,6 +24,12 @@ const styles = makeStyles((theme) => ({
 	tutorialContainer: {
 		marginTop: 25,
 	},
+
+	noNotesFoundText: {
+		fontSize: 20,
+		fontWeight: 500,
+		color: theme.palette.colors.violetMedium,
+	},
 }));
 
 export default styles;
