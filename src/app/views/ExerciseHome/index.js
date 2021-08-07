@@ -86,33 +86,40 @@ const ExerciseHome = (props) => {
 			</div>
 
 			<div className={classes.contentContainer}>
-				<div
-					className={`${classes.box} ${classes.tutorial}`}
-					style={{paddingTop: 20, paddingBottom: 20}}
-					onClick={() => history.push("/tutorial", {topicId: props.location.state.topicId})}>
-					Check Tutorials
-				</div>
 				<div className={classes.exerciseContainer}>
 					{questionSet &&
 						questionSet.map((obj, idx) => (
-							<div
-								onClick={() => history.push(linkMapping.get(obj.taskDetail.name), {task: obj})}
-								style={{textDecoration: "none"}}
-								key={idx}>
+							<div style={{textDecoration: "none"}} key={idx}>
 								<div className={classes.box}>
-									<div className={classes.imageContainer}>
-										<img
-											src={imagePicker(obj.taskDetail.name)}
-											alt=""
-											className={classes.boxImage}
-										/>
+									<div className={classes.boxTitleContainer}>
+										<div className={classes.imageContainer}>
+											<img
+												src={imagePicker(obj.taskDetail.name)}
+												alt=""
+												className={classes.boxImage}
+											/>
+										</div>
+										<div className={classes.titleContainer}>
+											<div className={classes.title}>{obj.taskDetail.name}</div>
+											<div
+												className={
+													classes.questionQuantity
+												}>{`${obj.question.length} questions`}</div>
+										</div>
 									</div>
-									<div className={classes.titleContainer}>
-										<div className={classes.title}>{obj.taskDetail.name}</div>
+									<div className={classes.boxLinkContainer}>
 										<div
-											className={
-												classes.questionQuantity
-											}>{`${obj.question.length} questions`}</div>
+											onClick={() =>
+												history.push(linkMapping.get(obj.taskDetail.name), {task: obj})
+											}
+											className={classes.boxLinks}>
+											Solve
+										</div>
+										<div
+											onClick={() => history.push("/tutorial", {taskDetail: obj.taskDetail})}
+											className={classes.boxLinks}>
+											Notes
+										</div>
 									</div>
 								</div>
 							</div>

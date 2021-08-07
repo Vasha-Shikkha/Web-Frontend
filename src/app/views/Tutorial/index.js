@@ -5,18 +5,19 @@ import styles from "./styles";
 
 const Tutorial = (props) => {
 	const classes = styles();
+	const {taskDetail} = props.location.state;
 
 	useEffect(() => {
 		// call api to fetch tutorial here
-		console.log(props.location.state.topicId);
-	}, [props.location.state.topicId]);
+		console.log(taskDetail);
+	}, []);
 
 	return (
 		<div className={classes.root}>
 			<div className={classes.navContainer}>
 				<BackArrowButton />
 			</div>
-			<div className={classes.tutorialContainer}>No Tutorial Available for This Topic</div>
+			<div className={classes.tutorialContainer}></div>
 		</div>
 	);
 };
