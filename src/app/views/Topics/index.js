@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {useHistory} from "react-router-dom";
 import {getCommunicativeTopics} from "../../axios/services/topics";
 import config from "../../util/config";
-
+import {AuthConsumer} from "../../stateHandlers/authContext";
 import Loading from "../../components/Loading";
 // import colors from "../../styles/colors";
 // import Triangle from "../../components/Triangle";
@@ -15,7 +15,7 @@ import DummyTopic from "../../assets/dummyTopic.svg";
 
 import styles from "./styles";
 
-const VocabularyHome = (props) => {
+const Topics = (props) => {
 	const classes = styles();
 	const history = useHistory();
 	const [type, setType] = useState("");
@@ -25,6 +25,7 @@ const VocabularyHome = (props) => {
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
+		setLevel(props.level ? props.level : 1);
 		setType(props.match.params.type);
 		let params = {
 			level: level,
@@ -66,6 +67,11 @@ const VocabularyHome = (props) => {
 		history.push("/exercise", {level, topicId: topics[idx].id});
 	};
 
+	const changeLevel = (level) => {
+		setLevel(level);
+		props.changeLevel(level);
+	};
+
 	return (
 		<div className={classes.root}>
 			<div className={classes.navContainer}>
@@ -88,7 +94,7 @@ const VocabularyHome = (props) => {
 						{[1, 2, 3, 4, 5, 6].map((obj, idx) => (
 							<div
 								key={idx}
-								onClick={() => setLevel(obj)}
+								onClick={() => changeLevel(obj)}
 								className={`${classes.levelBox} ${
 									level === obj ? classes.levelBoxActive : classes.levelBoxInactive
 								}`}>
@@ -149,4 +155,10 @@ const VocabularyHome = (props) => {
 	);
 };
 
-export default VocabularyHome;
+const ConsumerComponent = (props) => (
+	<AuthConsumer>
+		{({level, changeLevel}) => <Topics {...props} level={level} changeLevel={changeLevel} />}
+	</AuthConsumer>
+);
+
+export default ConsumerComponent;

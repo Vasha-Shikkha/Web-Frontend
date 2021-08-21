@@ -7,6 +7,7 @@ export const AuthContext = React.createContext();
 export const AuthProvider = (props) => {
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
 	const [user, setUser] = useState({});
+	const [level, setLevel] = useState(1);
 
 	useEffect(() => {
 		checkAuth();
@@ -40,11 +41,17 @@ export const AuthProvider = (props) => {
 		cb();
 	};
 
+	const changeLevel = (level) => {
+		setLevel(level);
+	};
+
 	return (
 		<AuthContext.Provider
 			value={{
 				user: user,
 				isAuthenticated: isAuthenticated,
+				level: level,
+				changeLevel: changeLevel,
 				checkAuth: checkAuth,
 				logout: logout,
 				login: login,
