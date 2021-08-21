@@ -22,7 +22,7 @@ const styles = makeStyles((theme) => ({
 
 	nav: {
 		background: "white",
-		height: "30vh",
+		height: "20vh",
 	},
 
 	outerNav: {
