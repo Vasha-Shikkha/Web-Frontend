@@ -10,7 +10,6 @@ import CancelIcon from "@material-ui/icons/Cancel";
 import SearchIcon from "@material-ui/icons/Search";
 import Loading from "../components/Loading";
 import VerdictBanner from "../components/VerdictBanner";
-import ClipboardIcon from "../assets/clipboard.svg";
 
 import "../styles/scrollbar.css";
 
@@ -357,7 +356,7 @@ const ExerciseLayout = (props) => {
 							<div className={classes.meaning}>
 								{searchRes.meaning ? searchRes.meaning.join(", ") : null}
 							</div>
-							{searchRes && searchRes.example ? (
+							{searchRes && searchRes.example && searchRes.example.length ? (
 								<div className={classes.exampleHead}>Example</div>
 							) : null}
 							<div className={classes.example}>
@@ -394,7 +393,6 @@ const ExerciseLayout = (props) => {
 										onChange={(e) => setDictionarySearch(e.target.value)}
 									/>
 								</div>
-								<img src={ClipboardIcon} alt="" style={{width: 30, height: 30, marginLeft: 10}} />
 							</div>
 						</div>
 					</div>
