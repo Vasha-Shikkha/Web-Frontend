@@ -21,7 +21,6 @@ const Navbar = (props) => {
 			<div
 				className={classes.logoContainer}
 				onClick={() => {
-					props.changeLevel(1);
 					history.push("/home");
 				}}>
 				vasha<span style={{fontWeight: "bold"}}>Shikkha</span>
@@ -81,13 +80,8 @@ const Navbar = (props) => {
 
 const ConsumerComponent = (props) => (
 	<AuthConsumer>
-		{({logout, isAuthenticated, changeLevel}) => (
-			<Navbar
-				{...props}
-				logout={logout}
-				isAuthenticated={isAuthenticated}
-				changeLevel={changeLevel}
-			/>
+		{({logout, isAuthenticated}) => (
+			<Navbar {...props} logout={logout} isAuthenticated={isAuthenticated} />
 		)}
 	</AuthConsumer>
 );

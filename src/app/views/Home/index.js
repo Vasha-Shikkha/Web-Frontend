@@ -1,14 +1,19 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {useHistory} from "react-router-dom";
 import Navbar from "../../components/Navbar";
+import {AuthConsumer} from "../../stateHandlers/authContext";
 import HomeImg from "../../assets/home_img.svg";
 import Vocabulary from "../../assets/vocabulary.svg";
 import Grammar from "../../assets/grammar.svg";
 import styles from "./styles";
 
-const Home = () => {
+const Home = (props) => {
 	const classes = styles();
 	const history = useHistory();
+
+	useEffect(() => {
+		props.changeLevel(1);
+	}, []);
 
 	return (
 		<div className={classes.root}>
@@ -46,4 +51,8 @@ const Home = () => {
 	);
 };
 
-export default Home;
+const ConsumerComponent = (props) => (
+	<AuthConsumer>{({changeLevel}) => <Home {...props} changeLevel={changeLevel} />}</AuthConsumer>
+);
+
+export default ConsumerComponent;
