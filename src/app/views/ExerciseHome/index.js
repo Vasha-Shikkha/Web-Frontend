@@ -101,24 +101,20 @@ const ExerciseHome = (props) => {
 										</div>
 										<div className={classes.titleContainer}>
 											<div className={classes.title}>{obj.taskDetail.name}</div>
-											<div
-												className={
-													classes.questionQuantity
-												}>{`${obj.question.length} questions`}</div>
-										</div>
-									</div>
-									<div className={classes.boxLinkContainer}>
-										<div
-											onClick={() =>
-												history.push(linkMapping.get(obj.taskDetail.name), {task: obj})
-											}
-											className={classes.boxLinks}>
-											Solve
-										</div>
-										<div
-											onClick={() => history.push("/tutorial", {taskDetail: obj.taskDetail})}
-											className={classes.boxLinks}>
-											Notes
+											<div className={classes.boxLinkContainer}>
+												<div
+													onClick={() =>
+														history.push(linkMapping.get(obj.taskDetail.name), {task: obj})
+													}
+													className={classes.boxLinks}>
+													Solve
+												</div>
+												<div
+													onClick={() => history.push("/tutorial", {taskDetail: obj.taskDetail})}
+													className={classes.boxLinks}>
+													Notes
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>
