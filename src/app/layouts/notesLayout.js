@@ -4,12 +4,9 @@ import PropTypes from "prop-types";
 import {makeStyles} from "@material-ui/core";
 import {getWordMeaning} from "../axios/services/dictionary";
 
-import QuestionNumber from "../components/QuestionNumber";
-import Button from "../components/Button";
 import CancelIcon from "@material-ui/icons/Cancel";
 import SearchIcon from "@material-ui/icons/Search";
 import Loading from "../components/Loading";
-import VerdictBanner from "../components/VerdictBanner";
 
 import "../styles/scrollbar.css";
 
@@ -291,7 +288,7 @@ const styles = makeStyles((theme) => ({
 	},
 }));
 
-const ExerciseLayout = (props) => {
+const NotesLayout = (props) => {
 	const classes = styles();
 	const history = useHistory();
 	const [showSidebar, setShowSidebar] = useState(false);
@@ -323,14 +320,6 @@ const ExerciseLayout = (props) => {
 
 	return (
 		<div className={classes.outerContainer}>
-			<VerdictBanner
-				correct={props.correct}
-				anime={props.anime}
-				getNext={props.getNext}
-				tryAgain={props.tryAgain}
-				showAnswer={props.showAnswer}
-			/>
-
 			<div
 				id="dictionaryScroll"
 				className={classes.sidebar}
@@ -366,9 +355,7 @@ const ExerciseLayout = (props) => {
 					</div>
 				)}
 			</div>
-			<div
-				className={classes.root}
-				style={showSidebar && !props.anime ? {filter: "blur(4px)"} : {}}>
+			<div className={classes.root} style={showSidebar ? {filter: "blur(4px)"} : {}}>
 				<div className={`${classes.nav}`}>
 					<div className={classes.outerNav}>
 						<div className={classes.nameContainer}>{props.exerciseName}</div>
@@ -396,44 +383,15 @@ const ExerciseLayout = (props) => {
 							</div>
 						</div>
 					</div>
-
-					<div className={classes.barContainer}>
-						<QuestionNumber
-							totalQuestions={props.totalQuestions}
-							currentQuestionNumber={props.currentQuestionNumber}
-						/>
-					</div>
 				</div>
-				<div className={props.scrollable ? classes.childScrollable : classes.child}>
-					{props.children}
-				</div>
-				<div className={`${classes.btnContainer} ${classes.container}`}>
-					<div className={`${classes.btn}`}>
-						<Button styles={classes.btn1} text="Skip" onClick={props.skip} />
-					</div>
-
-					<div className={classes.btn}>
-						<Button styles={classes.btn2} text="Check" onClick={props.check} />
-					</div>
-				</div>
+				<div className={classes.childScrollable}>{props.children}</div>
 			</div>
 		</div>
 	);
 };
 
-ExerciseLayout.propTypes = {
+NotesLayout.propTypes = {
 	children: PropTypes.object.isRequired,
-	exerciseName: PropTypes.string.isRequired,
-	skip: PropTypes.func.isRequired,
-	check: PropTypes.func.isRequired,
-	totalQuestions: PropTypes.number.isRequired,
-	currentQuestionNumber: PropTypes.number.isRequired,
-	scrollable: PropTypes.bool,
-	correct: PropTypes.bool.isRequired,
-	getNext: PropTypes.func.isRequired,
-	tryAgain: PropTypes.func.isRequired,
-	showAnswer: PropTypes.func.isRequired,
-	anime: PropTypes.bool.isRequired,
 };
 
-export default ExerciseLayout;
+export default NotesLayout;

@@ -17,7 +17,7 @@ const Home = lazy(() => import("../views/Home"));
 const FinishLine = lazy(() => import("../views/FinishLine"));
 const Tutorial = lazy(() => import("../views/Tutorial"));
 const Exercise = lazy(() => import("../views/ExerciseHome"));
-const VocabularyHome = lazy(() => import("../views/VocabularyHome"));
+const Topics = lazy(() => import("../views/Topics"));
 const FlashCard = lazy(() => import("../views/FlashCard"));
 const MCQ = lazy(() => import("../views/MCQ"));
 const TrueFalse = lazy(() => import("../views/TrueFalse"));
@@ -87,7 +87,7 @@ const BaseLayout = () => (
 								<Route
 									exact
 									path="/practice/:type"
-									render={(props) => <PrivateWrapper component={<VocabularyHome {...props} />} />}
+									render={(props) => <PrivateWrapper component={<Topics {...props} />} />}
 								/>
 
 								<Route

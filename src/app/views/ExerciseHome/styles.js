@@ -41,14 +41,14 @@ const styles = makeStyles((theme) => ({
 	},
 
 	boxLinkContainer: {
-		height: "100%",
+		marginTop: 7,
 		display: "flex",
 		flexDirection: "row",
 	},
 
 	boxLinks: {
-		color: theme.palette.colors.violetMedium,
-		fontWeight: 500,
+		color: theme.palette.colors.primary,
+		fontWeight: 600,
 		cursor: "pointer",
 
 		"&:nth-last-child(1)": {
