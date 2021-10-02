@@ -9,6 +9,7 @@ import constants from "../../util/constants";
 import styles from "../../styles/exerciseViewStyles";
 import {Dialog} from "@material-ui/core";
 import "../../styles/answerContainer.css";
+import "../../styles/scrollbar.css";
 
 const WordToPicture = (props) => {
 	const classes = styles();
@@ -128,7 +129,7 @@ const WordToPicture = (props) => {
 					tryAgain={tryAgain}
 					showAnswer={showAnswer}
 					getNext={getNext}>
-					<div className={`${classes.root} ${classes.centered}`}>
+					<div id="childScroll" className={classes.root}>
 						<WordToPictureCard
 							ref={childRef}
 							currentQuestionNumber={currentQuestion}

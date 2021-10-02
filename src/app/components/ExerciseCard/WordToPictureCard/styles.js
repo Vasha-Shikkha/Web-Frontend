@@ -2,20 +2,18 @@ import {makeStyles} from "@material-ui/core";
 
 const styles = makeStyles((theme) => ({
 	root: {
-		width: "90%",
-		minHeight: "50vh",
+		width: "100%",
 		background: "white",
+		paddingTop: 25,
 	},
 
 	question: {
-		height: "30%",
 		width: "100%",
-
+		marginBottom: 25,
 		fontSize: 18,
 	},
 
 	optionContainer: {
-		height: "70%",
 		width: "100%",
 		flexGrow: 1,
 
