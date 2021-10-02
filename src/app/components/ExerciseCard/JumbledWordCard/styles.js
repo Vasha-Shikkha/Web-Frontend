@@ -2,9 +2,10 @@ import {makeStyles} from "@material-ui/core";
 
 const styles = makeStyles((theme) => ({
 	root: {
-		width: "90%",
-		minHeight: "50vh",
+		width: "100%",
 		background: "white",
+		paddingTop: 25,
+		paddingRight: 5,
 	},
 
 	context: {
@@ -25,7 +26,7 @@ const styles = makeStyles((theme) => ({
 	},
 
 	answerContainer: {
-		marginTop: 50,
+		//marginTop: 50,
 		position: "relative",
 		height: 200,
 		width: "100%",
