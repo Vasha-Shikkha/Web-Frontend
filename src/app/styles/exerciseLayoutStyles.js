@@ -46,7 +46,6 @@ const styles = makeStyles((theme) => ({
 	child: {
 		height: "calc(100% - 150px)",
 		width: "100%",
-		background: "cyan",
 		[theme.breakpoints.down("md")]: {
 			height: "calc(100% - 150px)",
 		},
@@ -54,11 +53,6 @@ const styles = makeStyles((theme) => ({
 		[theme.breakpoints.up("md")]: {
 			height: "calc(100% - 125px)",
 		},
-	},
-
-	childScrollable: {
-		width: "100%",
-		background: "white",
 	},
 
 	btn: {

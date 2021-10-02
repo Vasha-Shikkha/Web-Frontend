@@ -69,12 +69,15 @@ const MCQCard = forwardRef((props, ref) => {
 
 	return (
 		<div className={classes.root}>
-			<div
-				contentEditable="false"
-				dangerouslySetInnerHTML={{
-					__html: props.taskDetail ? props.taskDetail.instruction : null,
-				}}
-				className={classes.instruction}></div>
+			{props.taskDetail.instruction && (
+				<div
+					contentEditable="false"
+					dangerouslySetInnerHTML={{
+						__html: props.taskDetail ? props.taskDetail.instruction : null,
+					}}
+					className={classes.instruction}></div>
+			)}
+
 			<div className={classes.questionContainer}>
 				<div
 					className={`${classes.question}`}

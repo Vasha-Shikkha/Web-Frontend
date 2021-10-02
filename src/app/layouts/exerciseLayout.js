@@ -121,7 +121,7 @@ const ExerciseLayout = (props) => {
 						/>
 					</div>
 				</div>
-				<div className={classes.child}>{/* {props.children} */}</div>
+				<div className={classes.child}>{props.children}</div>
 				<div className={`${classes.btnContainer} ${classes.container}`}>
 					<div className={`${classes.btn}`}>
 						<Button styles={classes.btn1} text="Skip" onClick={props.skip} />
@@ -143,7 +143,6 @@ ExerciseLayout.propTypes = {
 	check: PropTypes.func.isRequired,
 	totalQuestions: PropTypes.number.isRequired,
 	currentQuestionNumber: PropTypes.number.isRequired,
-	scrollable: PropTypes.bool,
 	correct: PropTypes.bool.isRequired,
 	getNext: PropTypes.func.isRequired,
 	tryAgain: PropTypes.func.isRequired,
