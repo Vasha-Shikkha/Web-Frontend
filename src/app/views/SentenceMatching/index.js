@@ -9,6 +9,7 @@ import constants from "../../util/constants";
 import styles from "../../styles/exerciseViewStyles";
 import {Dialog} from "@material-ui/core";
 import "../../styles/answerContainer.css";
+import "../../styles/scrollbar.css";
 
 const SentenceMatching = (props) => {
 	const classes = styles();
@@ -100,7 +101,6 @@ const SentenceMatching = (props) => {
 			) : (
 				<ExerciseLayout
 					exerciseName="Sentence Matching"
-					scrollable={true}
 					totalQuestions={question.length}
 					currentQuestionNumber={1}
 					skip={skip}
@@ -110,7 +110,7 @@ const SentenceMatching = (props) => {
 					tryAgain={tryAgain}
 					showAnswer={showAnswer}
 					getNext={getNext}>
-					<div className={`${classes.scrollableRoot} ${classes.centered}`}>
+					<div id="childScroll" className={classes.root}>
 						<SentenceMatchingCard
 							ref={childRef}
 							question={question}

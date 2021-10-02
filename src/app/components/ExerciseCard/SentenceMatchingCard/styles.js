@@ -2,15 +2,16 @@ import {makeStyles} from "@material-ui/core";
 
 const styles = makeStyles((theme) => ({
 	root: {
-		width: "90%",
+		width: "100%",
 		background: "white",
+		paddingTop: 25,
+		paddingRight: 5,
 	},
 
 	undo: {
 		background: theme.palette.colors.primary,
-		marginBottom: 25,
-		padding: 10,
 		width: 100,
+		padding: 5,
 		color: "white",
 	},
 
@@ -60,9 +61,7 @@ const styles = makeStyles((theme) => ({
 	},
 
 	instruction: {
-		paddingBottom: 25,
-		paddingTop: 25,
-		lineHeight: 1.5,
+		//lineHeight: 1.5,
 	},
 
 	explanation: {
