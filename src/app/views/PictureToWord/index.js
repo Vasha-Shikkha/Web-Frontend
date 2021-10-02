@@ -128,7 +128,7 @@ const PictureToWord = (props) => {
 					showAnswer={showAnswer}
 					getNext={getNext}>
 					<div className={`${classes.root} ${classes.centered}`}>
-						<PictureToWordCard
+						{/* <PictureToWordCard
 							ref={childRef}
 							currentQuestionNumber={currentQuestion}
 							question={question[currentQuestion]}
@@ -136,7 +136,7 @@ const PictureToWord = (props) => {
 							isChecked={checked[currentQuestion]}
 							taskDetail={taskDetail}
 							tried={tried}
-						/>
+						/> */}
 					</div>
 				</ExerciseLayout>
 			)}
