@@ -120,7 +120,6 @@ const MCQ = (props) => {
 			) : (
 				<ExerciseLayout
 					exerciseName="Multiple Choice Questions"
-					scrollable={true}
 					totalQuestions={question.length}
 					currentQuestionNumber={currentQuestion + 1}
 					skip={skip}
