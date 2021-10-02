@@ -2,20 +2,20 @@ import {makeStyles} from "@material-ui/core";
 
 const styles = makeStyles((theme) => ({
 	root: {
-		width: "90%",
-		//minHeight: "60vh",
+		width: "100%",
+		background: "white",
+		paddingTop: 25,
+		paddingRight: 10,
 	},
 
 	context: {
-		paddingTop: "5%",
 		fontSize: 18,
 		fontWeight: 600,
 	},
 
 	optionContainer: {
 		width: "100%",
-		marginTop: 20,
-		marginBottom: 20,
+		marginBottom: 10,
 
 		display: "flex",
 		flexDirection: "row",

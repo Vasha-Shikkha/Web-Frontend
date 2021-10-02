@@ -8,6 +8,7 @@ import constants from "../../util/constants";
 import styles from "../../styles/exerciseViewStyles";
 import {Dialog} from "@material-ui/core";
 import "../../styles/answerContainer.css";
+import "../../styles/scrollbar.css";
 
 const DragCaptionToPicture = (props) => {
 	const classes = styles();
@@ -98,7 +99,6 @@ const DragCaptionToPicture = (props) => {
 			) : (
 				<ExerciseLayout
 					exerciseName="Drag Caption to Pictures"
-					scrollable={true}
 					totalQuestions={question.length}
 					currentQuestionNumber={1}
 					skip={skip}
@@ -108,7 +108,7 @@ const DragCaptionToPicture = (props) => {
 					tryAgain={tryAgain}
 					showAnswer={showAnswer}
 					getNext={getNext}>
-					<div className={`${classes.scrollableRoot} ${classes.centered}`}>
+					<div id="childScroll" className={classes.root}>
 						<DragCaptionToPictureCard
 							ref={childRef}
 							question={question}

@@ -93,7 +93,7 @@ const DragCaptionToPictureCard = forwardRef((props, ref) => {
 					<Grid container spacing={3}>
 						{props.question &&
 							props.question.map((obj, idx) => (
-								<Grid item xs={12} sm={6} md={6} lg={3} xl={3} key={idx}>
+								<Grid item xs={6} sm={3} md={3} lg={2} xl={2} key={idx}>
 									<div className={classes.imageBox}>
 										<img src={config.IMAGE_BASE + obj.image} alt="" className={classes.image} />
 										<Droppable droppableId={`drop_blank~${idx.toString()}`} isDropDisabled={false}>
