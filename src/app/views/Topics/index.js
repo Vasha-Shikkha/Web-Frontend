@@ -46,7 +46,7 @@ const Topics = (props) => {
 				//setShowTooltip(topics.map(() => false));
 			}
 		});
-	}, [level, props.match.params.type, type]);
+	}, [level, props.level, props.match.params.type, type]);
 
 	// const tooltipToggler = (idx) => {
 	// 	let arr = [...showTooltip];

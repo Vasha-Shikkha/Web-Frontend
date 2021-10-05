@@ -37,9 +37,11 @@ const DragCaptionToPictureCard = forwardRef((props, ref) => {
 		else setCurrentAnswers(props.question.map(() => ""));
 
 		let tempExplanation = [];
-		props.question.map((obj) => {
-			if (obj.explanation) tempExplanation.push(obj.explanation);
-		});
+		for (var obj of props.question) {
+			if (obj.explanation) {
+				tempExplanation.push(obj.explanation);
+			}
+		}
 
 		setExplanation(tempExplanation);
 	}, [props.question, props.tried, props.isReview]);
