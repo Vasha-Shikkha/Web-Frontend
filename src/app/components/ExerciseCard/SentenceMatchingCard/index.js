@@ -54,10 +54,11 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 		setBoxColors(shuffled_array.map(() => colors.white));
 
 		let tempExplanation = [];
-		props.question.map((obj) => {
-			if (obj.explanation)
+		for (var obj of props.question) {
+			if (obj.explanation) {
 				tempExplanation.push(obj.part_one + " " + obj.part_two + " - " + obj.explanation);
-		});
+			}
+		}
 
 		setExplanation(tempExplanation);
 	}, [props.question, props.tried, props.isReview]);
@@ -193,7 +194,9 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 							))}
 					</div>
 				</div>
-				{(props.isChecked || props.isReview) && explanation.length > 0 ? (
+				{(props.isChecked || props.isReview) &&
+				explanation.length &&
+				props.showAnswerDialogue > 0 ? (
 					<div className={classes.explanation}>
 						Explanation:
 						<br />
@@ -216,6 +219,7 @@ SentenceMatchingCard.propTypes = {
 	isChecked: PropTypes.bool.isRequired,
 	taskDetail: PropTypes.object.isRequired,
 	tried: PropTypes.number.isRequired,
+	showAnswerDialogue: PropTypes.bool,
 };
 
 export default SentenceMatchingCard;

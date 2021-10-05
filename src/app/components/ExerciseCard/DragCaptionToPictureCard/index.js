@@ -113,7 +113,9 @@ const DragCaptionToPictureCard = forwardRef((props, ref) => {
 							))}
 					</Grid>
 				</div>
-				{(props.isChecked || props.isReview) && explanation.length > 0 ? (
+				{(props.isChecked || props.isReview) &&
+				explanation.length > 0 &&
+				props.showAnswerDialogue ? (
 					<div className={classes.explanation}>
 						Explanation:
 						<br />
@@ -133,6 +135,7 @@ DragCaptionToPictureCard.propTypes = {
 	isChecked: PropTypes.bool.isRequired,
 	taskDetail: PropTypes.object.isRequired,
 	tried: PropTypes.number.isRequired,
+	showAnswerDialogue: PropTypes.bool,
 };
 
 export default DragCaptionToPictureCard;

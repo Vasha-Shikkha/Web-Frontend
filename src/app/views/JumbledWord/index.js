@@ -111,6 +111,7 @@ const JumbledWord = (props) => {
 							isChecked={true}
 							taskDetail={taskDetail}
 							tried={tried}
+							showAnswerDialogue={true}
 						/>
 					</div>
 				)}

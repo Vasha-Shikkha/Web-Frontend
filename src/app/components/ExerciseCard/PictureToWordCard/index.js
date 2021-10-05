@@ -101,7 +101,9 @@ const PictureToWordCard = forwardRef((props, ref) => {
 						))}
 				</Grid>
 			</div>
-			{(props.isChecked || props.isReview) && props.question.explanation ? (
+			{(props.isChecked || props.isReview) &&
+			props.question.explanation &&
+			props.showAnswerDialogue ? (
 				<div className={classes.explanation}>{`Explanation: ${props.question.explanation}`}</div>
 			) : null}
 		</div>
@@ -115,6 +117,7 @@ PictureToWordCard.propTypes = {
 	isChecked: PropTypes.bool.isRequired,
 	taskDetail: PropTypes.object.isRequired,
 	tried: PropTypes.number.isRequired,
+	showAnswerDialogue: PropTypes.bool,
 };
 
 export default PictureToWordCard;
