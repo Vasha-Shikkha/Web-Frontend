@@ -69,12 +69,15 @@ const ErrorInSentenceCard = forwardRef((props, ref) => {
 
 	return (
 		<div className={classes.root}>
-			<div
-				contentEditable="false"
-				dangerouslySetInnerHTML={{
-					__html: props.taskDetail ? props.taskDetail.instruction : null,
-				}}
-				className={classes.instruction}></div>
+			{props.taskDetail.instruction && (
+				<div
+					contentEditable="false"
+					dangerouslySetInnerHTML={{
+						__html: props.taskDetail ? props.taskDetail.instruction : null,
+					}}
+					className={classes.instruction}></div>
+			)}
+
 			<div className={classes.questionContainer}>
 				<div
 					className={`${classes.question}`}
@@ -98,7 +101,9 @@ const ErrorInSentenceCard = forwardRef((props, ref) => {
 							))}
 					</Grid>
 				</div>
-				{(props.isChecked || props.isReview) && props.question.explanation ? (
+				{(props.isChecked || props.isReview) &&
+				props.question.explanation &&
+				props.showAnswerDialogue ? (
 					<div className={classes.explanation}>{`Explanation: ${props.question.explanation}`}</div>
 				) : null}
 			</div>
@@ -113,6 +118,7 @@ ErrorInSentenceCard.propTypes = {
 	isChecked: PropTypes.bool.isRequired,
 	taskDetail: PropTypes.object.isRequired,
 	tried: PropTypes.number.isRequired,
+	showAnswerDialogue: PropTypes.bool,
 };
 
 export default ErrorInSentenceCard;

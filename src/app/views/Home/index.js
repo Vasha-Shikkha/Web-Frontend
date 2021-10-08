@@ -13,7 +13,7 @@ const Home = (props) => {
 
 	useEffect(() => {
 		props.changeLevel(1);
-	}, []);
+	}, [props]);
 
 	return (
 		<div className={classes.root}>

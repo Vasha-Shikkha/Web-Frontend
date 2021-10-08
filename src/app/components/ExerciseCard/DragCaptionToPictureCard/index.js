@@ -37,9 +37,11 @@ const DragCaptionToPictureCard = forwardRef((props, ref) => {
 		else setCurrentAnswers(props.question.map(() => ""));
 
 		let tempExplanation = [];
-		props.question.map((obj) => {
-			if (obj.explanation) tempExplanation.push(obj.explanation);
-		});
+		for (var obj of props.question) {
+			if (obj.explanation) {
+				tempExplanation.push(obj.explanation);
+			}
+		}
 
 		setExplanation(tempExplanation);
 	}, [props.question, props.tried, props.isReview]);
@@ -93,7 +95,7 @@ const DragCaptionToPictureCard = forwardRef((props, ref) => {
 					<Grid container spacing={3}>
 						{props.question &&
 							props.question.map((obj, idx) => (
-								<Grid item xs={12} sm={6} md={6} lg={3} xl={3} key={idx}>
+								<Grid item xs={6} sm={3} md={3} lg={2} xl={2} key={idx}>
 									<div className={classes.imageBox}>
 										<img src={config.IMAGE_BASE + obj.image} alt="" className={classes.image} />
 										<Droppable droppableId={`drop_blank~${idx.toString()}`} isDropDisabled={false}>
@@ -113,7 +115,9 @@ const DragCaptionToPictureCard = forwardRef((props, ref) => {
 							))}
 					</Grid>
 				</div>
-				{(props.isChecked || props.isReview) && explanation.length > 0 ? (
+				{(props.isChecked || props.isReview) &&
+				explanation.length > 0 &&
+				props.showAnswerDialogue ? (
 					<div className={classes.explanation}>
 						Explanation:
 						<br />
@@ -133,6 +137,7 @@ DragCaptionToPictureCard.propTypes = {
 	isChecked: PropTypes.bool.isRequired,
 	taskDetail: PropTypes.object.isRequired,
 	tried: PropTypes.number.isRequired,
+	showAnswerDialogue: PropTypes.bool,
 };
 
 export default DragCaptionToPictureCard;

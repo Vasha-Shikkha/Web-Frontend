@@ -142,7 +142,9 @@ const JumbledWordCard = forwardRef((props, ref) => {
 						</Droppable>
 					</div>
 				</div>
-				{(props.isChecked || props.isReview) && props.question.explanation ? (
+				{(props.isChecked || props.isReview) &&
+				props.question.explanation &&
+				props.showAnswerDialogue ? (
 					<div className={classes.explanation}>{`Explanation: ${props.question.explanation}`}</div>
 				) : null}
 			</div>
@@ -156,6 +158,7 @@ JumbledWordCard.propTypes = {
 	isReview: PropTypes.bool.isRequired,
 	isChecked: PropTypes.bool.isRequired,
 	tried: PropTypes.number.isRequired,
+	showAnswerDialogue: PropTypes.bool,
 };
 
 export default JumbledWordCard;

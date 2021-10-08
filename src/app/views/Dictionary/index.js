@@ -8,21 +8,27 @@ import styles from "./styles";
 const Dictionary = () => {
 	const classes = styles();
 	const [dictionarySearch, setDictionarySearch] = useState("");
+	const [searchedWord, setSearchedWord] = useState("");
 	const [searchRes, setSearchRes] = useState({});
 	const [loading, setLoading] = useState(false);
 	const [open, setOpen] = useState(false);
+	const [wordNotFoundError, setWordNotFoundError] = useState(false);
 
 	const searchWord = () => {
+		console.log("searching for", dictionarySearch);
 		if (!dictionarySearch || dictionarySearch.length === 0) return;
 
 		setLoading(true);
-		if (open) setOpen(false);
+		setWordNotFoundError(false);
+		setSearchedWord(dictionarySearch);
+		setSearchRes({});
+
 		getWordMeaning(dictionarySearch, (err, axios_data) => {
 			if (!err) {
 				setSearchRes(axios_data);
 				if (!open) setOpen(true);
 			} else {
-				setSearchRes({word: "word not found"});
+				setWordNotFoundError(true);
 			}
 
 			setLoading(false);
@@ -65,17 +71,22 @@ const Dictionary = () => {
 				) : !open ? null : (
 					<div className={`${classes.dictionaryContainer} ${classes.centererd}`}>
 						<div className={classes.card}>
-							<div className={classes.word}>
-								{dictionarySearch ? dictionarySearch.toUpperCase() : ""}
-							</div>
+							<div className={classes.word}>{searchedWord ? searchedWord.toUpperCase() : ""}</div>
+							{wordNotFoundError && (
+								<div className={classes.meaning}>Word not found in the Dictionary :(</div>
+							)}
 							<div className={classes.meaning}>
-								{searchRes.meaning ? searchRes.meaning.join(", ") : null}
+								{searchRes.meaning && searchRes.meaning.length
+									? searchRes.meaning.join(", ")
+									: null}
 							</div>
 							{searchRes && searchRes.example ? (
 								<div className={classes.exampleHead}>Example</div>
 							) : null}
 							<div className={classes.example}>
-								{searchRes.example ? searchRes.example.join(", ") : null}
+								{searchRes.example && searchRes.example.length
+									? searchRes.example.join(", ")
+									: null}
 							</div>
 						</div>
 					</div>

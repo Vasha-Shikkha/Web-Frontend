@@ -10,6 +10,7 @@ import constants from "../../util/constants";
 import styles from "../../styles/exerciseViewStyles";
 import {Dialog} from "@material-ui/core";
 import "../../styles/answerContainer.css";
+import "../../styles/scrollbar.css";
 
 const JumbledSentence = (props) => {
 	const classes = styles();
@@ -110,6 +111,7 @@ const JumbledSentence = (props) => {
 							isChecked={true}
 							taskDetail={taskDetail}
 							tried={tried}
+							showAnswerDialogue={true}
 						/>
 					</div>
 				)}
@@ -120,7 +122,6 @@ const JumbledSentence = (props) => {
 			) : (
 				<ExerciseLayout
 					exerciseName="Jumbled Sentence"
-					scrollable={true}
 					totalQuestions={question.length}
 					currentQuestionNumber={currentQuestion + 1}
 					skip={skip}
@@ -130,7 +131,7 @@ const JumbledSentence = (props) => {
 					tryAgain={tryAgain}
 					showAnswer={showAnswer}
 					getNext={getNext}>
-					<div className={`${classes.scrollableRoot} ${classes.centered}`}>
+					<div id="childScroll" className={classes.root}>
 						<JumbledSentenceCard
 							ref={childRef}
 							currentQuestionNumber={currentQuestion}
