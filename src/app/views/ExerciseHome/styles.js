@@ -51,8 +51,8 @@ const styles = makeStyles((theme) => ({
 		fontWeight: 600,
 		cursor: "pointer",
 
-		"&:nth-last-child(1)": {
-			marginLeft: 10,
+		"&:nth-child(1)": {
+			marginRight: 10,
 		},
 	},
 

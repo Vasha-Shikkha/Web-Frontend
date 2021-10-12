@@ -15,7 +15,6 @@ const Dictionary = () => {
 	const [wordNotFoundError, setWordNotFoundError] = useState(false);
 
 	const searchWord = () => {
-		console.log("searching for", dictionarySearch);
 		if (!dictionarySearch || dictionarySearch.length === 0) return;
 
 		setLoading(true);
