@@ -1,5 +1,7 @@
 import React from "react";
+import ReactMarkdown from "react-markdown";
 import NotesLayout from "../../layouts/notesLayout";
+import remarkGfm from "remark-gfm";
 import styles from "./styles";
 
 const Tutorial = (props) => {
@@ -9,13 +11,7 @@ const Tutorial = (props) => {
 	return (
 		<NotesLayout>
 			<div className={classes.root}>
-				<div
-					dangerouslySetInnerHTML={{
-						__html: taskDetail && taskDetail.instruction ? taskDetail.instruction : null,
-					}}></div>
-				{!taskDetail || !taskDetail.instruction ? (
-					<div className={classes.noNotesFoundText}>No notes available for this task</div>
-				) : null}
+				<ReactMarkdown children={taskDetail.instruction} remarkPlugins={[remarkGfm]} />
 			</div>
 		</NotesLayout>
 	);
