@@ -3,11 +3,12 @@
 	padding: 0% 5% 5% 5%;
 }
 
-.root img {
+.root table img {
 	width: min(100px, 100%);
 	height: auto;
 }
 
-.root table {
-	min-width: 100%;
+.root img {
+	width: 50%;
+	height: auto;
 }
