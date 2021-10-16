@@ -18,11 +18,18 @@ const styles = makeStyles((theme) => ({
 	root: {
 		width: "100%",
 		position: "absolute",
+		padding: 25,
 	},
 
 	nav: {
 		background: "white",
-		height: "20vh",
+		[theme.breakpoints.down("md")]: {
+			height: 100,
+		},
+
+		[theme.breakpoints.up("md")]: {
+			height: 75,
+		},
 	},
 
 	outerNav: {
@@ -51,8 +58,6 @@ const styles = makeStyles((theme) => ({
 		justifyContent: "space-between",
 		alignContent: "center",
 		alignItems: "center",
-
-		padding: "0px 5% 0px 5%",
 	},
 
 	btnContainer: {
