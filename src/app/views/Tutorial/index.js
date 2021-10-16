@@ -4,10 +4,6 @@ import NotesLayout from "../../layouts/notesLayout";
 import remarkGfm from "remark-gfm";
 import "./tutorialStyles.css";
 
-const Image = (props) => {
-	return <img {...props} style={{width: "100px"}} />;
-};
-
 const Tutorial = (props) => {
 	const {taskDetail} = props.location.state;
 
@@ -18,7 +14,6 @@ const Tutorial = (props) => {
 					skipHtml={true}
 					children={taskDetail.instruction}
 					remarkPlugins={[remarkGfm]}
-					renderers={{image: Image}}
 				/>
 			</div>
 		</NotesLayout>

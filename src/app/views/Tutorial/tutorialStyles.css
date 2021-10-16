@@ -4,6 +4,10 @@
 }
 
 .root img {
-	width: 100%;
+	width: min(100px, 100%);
 	height: auto;
+}
+
+.root table {
+	min-width: 100%;
 }
