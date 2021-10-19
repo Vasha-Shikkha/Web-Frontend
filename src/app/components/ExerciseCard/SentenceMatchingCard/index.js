@@ -11,14 +11,16 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 		check() {
 			setDisableUndo(true);
 
-			let answer = {users_answer: [], isCorrect: true};
+			let answer = {users_answer: [], isCorrect: true, totalCorrect: 0};
 
 			let temp_color = [...boxColors];
 			for (let i = 0; i < temp_color.length; i++) {
 				let sen = props.question[rightSentenceMapping[i]];
 
-				if (currentRight[i] === sen.part_one + " " + sen.part_two) temp_color[i] = colors.correct;
-				else {
+				if (currentRight[i] === sen.part_one + " " + sen.part_two) {
+					temp_color[i] = colors.correct;
+					answer.totalCorrect++;
+				} else {
 					temp_color[i] = colors.incorrect;
 					answer.isCorrect = false;
 				}

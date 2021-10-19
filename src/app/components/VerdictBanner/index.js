@@ -15,7 +15,7 @@ const VerdictBanner = (props) => {
 	const classes = styles();
 
 	const determineImage = (isCorrect) => {
-		let randomNumber = Math.floor(Math.random());
+		let randomNumber = Math.floor(Math.random() * 100);
 		if (isCorrect) {
 			return randomNumber % 2 ? correctAnswerGirl : correctAnswerBoy;
 		} else {

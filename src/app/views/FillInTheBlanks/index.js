@@ -3,6 +3,7 @@ import {useHistory} from "react-router-dom";
 import ExerciseLayout from "../../layouts/exerciseLayout";
 import Loading from "../../components/Loading";
 import FillInTheBlanksCard from "../../components/ExerciseCard/FillInTheBlanksCard";
+import ScoreCard from "../../components/ScoreCard";
 import {updateExerciseStatus} from "../../axios/services/exercises";
 import constants from "../../util/constants";
 
@@ -24,6 +25,8 @@ const FillInTheBlanks = (props) => {
 	const [tried, setTried] = useState(0);
 	const [open, setOpen] = useState(false);
 	const [taskIsCorrect, setTaskIsCorrect] = useState(true);
+	const [score, setScore] = useState(0);
+	const [openScore, setOpenScore] = useState(false);
 
 	const childRef = useRef();
 
@@ -54,6 +57,7 @@ const FillInTheBlanks = (props) => {
 		setChecked(arr);
 
 		if (!answer.isCorrect) setTaskIsCorrect(false);
+		else setScore(score + 1);
 
 		// show verdict
 		setShowVerdict(true);
@@ -87,7 +91,7 @@ const FillInTheBlanks = (props) => {
 		// gameover
 		if (currentQuestion + 1 === question.length) {
 			updateExerciseStatus(taskDetail.task_id, taskIsCorrect, () => {
-				history.goBack();
+				setOpenScore(true);
 			});
 		} else {
 			setCurrentQuestion(currentQuestion + 1);
@@ -114,6 +118,14 @@ const FillInTheBlanks = (props) => {
 						/>
 					</div>
 				)}
+			</Dialog>
+
+			<Dialog open={openScore} onClose={() => history.goBack()} maxWidth={false}>
+				<ScoreCard
+					score={score}
+					total={question.length}
+					closeScoreDialog={() => history.goBack()}
+				/>
 			</Dialog>
 
 			{loading ? (
