@@ -113,12 +113,7 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 		<DragDropContext onDragEnd={handleOnDragEnd}>
 			<div className={classes.root}>
 				{!props.isReview && <Button text="Undo" styles={classes.undo} onClick={() => undo()} />}
-				<div
-					contentEditable="false"
-					dangerouslySetInnerHTML={{
-						__html: props.taskDetail ? props.taskDetail.instruction : null,
-					}}
-					className={classes.instruction}></div>
+
 				<div className={classes.optionsOuter}>
 					<div
 						className={classes.optionContainer}
