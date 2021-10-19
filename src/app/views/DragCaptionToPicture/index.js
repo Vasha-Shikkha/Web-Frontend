@@ -3,6 +3,7 @@ import {useHistory} from "react-router-dom";
 import ExerciseLayout from "../../layouts/exerciseLayout";
 import Loading from "../../components/Loading";
 import DragCaptionToPictureCard from "../../components/ExerciseCard/DragCaptionToPictureCard";
+import ScoreCard from "../../components/ScoreCard";
 import {updateExerciseStatus} from "../../axios/services/exercises";
 import constants from "../../util/constants";
 import styles from "../../styles/exerciseViewStyles";
@@ -21,6 +22,8 @@ const DragCaptionToPicture = (props) => {
 	const [correct, setCorrect] = useState(true);
 	const [tried, setTried] = useState(0);
 	const [open, setOpen] = useState(false);
+	const [score, setScore] = useState(0);
+	const [openScore, setOpenScore] = useState(false);
 
 	const childRef = useRef();
 
@@ -48,6 +51,7 @@ const DragCaptionToPicture = (props) => {
 			// show verdict
 			setShowVerdict(true);
 			setCorrect(answer.isCorrect);
+			setScore(answer.totalCorrect);
 		});
 	};
 
@@ -71,7 +75,7 @@ const DragCaptionToPicture = (props) => {
 		setShowVerdict(false);
 
 		// gameover
-		history.goBack();
+		setOpenScore(true);
 	};
 
 	const handleClose = () => {
@@ -93,6 +97,14 @@ const DragCaptionToPicture = (props) => {
 						/>
 					</div>
 				)}
+			</Dialog>
+
+			<Dialog open={openScore} onClose={() => history.goBack()} maxWidth={false}>
+				<ScoreCard
+					score={score}
+					total={question.length}
+					closeScoreDialog={() => history.goBack()}
+				/>
 			</Dialog>
 
 			{loading ? (

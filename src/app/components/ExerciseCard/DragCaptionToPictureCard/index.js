@@ -9,12 +9,14 @@ import styles from "./styles";
 const DragCaptionToPictureCard = forwardRef((props, ref) => {
 	useImperativeHandle(ref, () => ({
 		check() {
-			let answer = {isCorrect: true};
+			let answer = {isCorrect: true, totalCorrect: 0};
 
 			let temp_color = [...boxColors];
 			for (let i = 0; i < temp_color.length; i++) {
-				if (props.question[i].caption === currentAnswers[i]) temp_color[i] = colors.correct;
-				else {
+				if (props.question[i].caption === currentAnswers[i]) {
+					temp_color[i] = colors.correct;
+					answer.totalCorrect++;
+				} else {
 					temp_color[i] = colors.incorrect;
 					answer.isCorrect = false;
 				}

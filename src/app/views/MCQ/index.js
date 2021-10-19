@@ -4,6 +4,7 @@ import {useHistory} from "react-router-dom";
 import ExerciseLayout from "../../layouts/exerciseLayout";
 import Loading from "../../components/Loading";
 import MCQCard from "../../components/ExerciseCard/MCQCard";
+import ScoreCard from "../../components/ScoreCard";
 import {updateExerciseStatus} from "../../axios/services/exercises";
 import constants from "../../util/constants";
 
@@ -11,7 +12,6 @@ import styles from "../../styles/exerciseViewStyles";
 import {Dialog} from "@material-ui/core";
 import "../../styles/answerContainer.css";
 import "../../styles/scrollbar.css";
-import ScoreCard from "../../components/ScoreCard";
 
 const MCQ = (props) => {
 	const classes = styles();
@@ -92,7 +92,6 @@ const MCQ = (props) => {
 		// gameover
 		if (currentQuestion + 1 === question.length) {
 			updateExerciseStatus(taskDetail.task_id, taskIsCorrect, () => {
-				//history.goBack();
 				setOpenScore(true);
 			});
 		} else {
