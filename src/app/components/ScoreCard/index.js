@@ -18,7 +18,11 @@ const ScoreCard = ({score, total, closeScoreDialog}) => {
 			<div className={classes.header}>Task Completed</div>
 			<img className={classes.image} src={determineImage()} alt="" />
 			<div className={classes.scoreText}>{`You Got ${score} out of ${total} correct!`}</div>
-			<Button text="Ok" onClick={closeScoreDialog} styles={classes.okButton} />
+			<Button
+				text="Ok"
+				onClick={closeScoreDialog}
+				styles={`${classes.okButton} ${score === total ? classes.correct : classes.incorrect}`}
+			/>
 		</div>
 	);
 };

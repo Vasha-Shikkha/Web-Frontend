@@ -33,9 +33,18 @@ const styles = makeStyles((theme) => ({
 	},
 
 	okButton: {
+		borderRadius: 10,
+		padding: 10,
+	},
+
+	correct: {
+		color: "white",
+		background: "#73af55",
+	},
+
+	incorrect: {
 		color: theme.palette.colors.incorrect,
 		background: " #d06079",
-		borderRadius: 10,
 	},
 }));
 
