@@ -144,6 +144,7 @@ const JumbledWordCard = forwardRef((props, ref) => {
 				</div>
 				{(props.isChecked || props.isReview) &&
 				props.question.explanation &&
+				props.question.explanation.length &&
 				props.showAnswerDialogue ? (
 					<div className={classes.explanation}>{`Explanation: ${props.question.explanation}`}</div>
 				) : null}
