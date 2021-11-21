@@ -70,6 +70,9 @@ const MCQCard = forwardRef((props, ref) => {
 
 	return (
 		<div className={classes.root}>
+			{props.taskDetail.exerciseInstructions && (
+				<InstructionContainer instruction={props.taskDetail.exerciseInstructions} />
+			)}
 			<div className={classes.questionContainer}>
 				<div
 					className={`${classes.question}`}

@@ -99,30 +99,33 @@ const FillInTheBlanksCard = forwardRef((props, ref) => {
 				<div className={classes.optionContainer}>
 					<Droppable droppableId="option_container" direction="horizontal" isDropDisabled={true}>
 						{(provided) => (
-							<div
-								{...provided.droppableProps}
-								ref={provided.innerRef}
-								className={`${classes.optionContainer}`}>
-								{props.question.options.map((obj, idx) => (
-									<Draggable
-										key={idx}
-										draggableId={`option~${obj}`}
-										index={idx}
-										isDragDisabled={props.isReview || props.isChecked}>
-										{(provided2) => {
-											return (
-												<div
-													ref={provided2.innerRef}
-													{...provided2.draggableProps}
-													{...provided2.dragHandleProps}
-													className={classes.box}>
-													{obj}
-												</div>
-											);
-										}}
-									</Draggable>
-								))}
-							</div>
+							<>
+								<div
+									{...provided.droppableProps}
+									ref={provided.innerRef}
+									className={`${classes.optionContainer}`}>
+									{props.question.options.map((obj, idx) => (
+										<Draggable
+											key={idx}
+											draggableId={`option~${obj}`}
+											index={idx}
+											isDragDisabled={props.isReview || props.isChecked}>
+											{(provided2) => {
+												return (
+													<div
+														ref={provided2.innerRef}
+														{...provided2.draggableProps}
+														{...provided2.dragHandleProps}
+														className={classes.box}>
+														{obj}
+													</div>
+												);
+											}}
+										</Draggable>
+									))}
+								</div>
+								{provided.placeholder}
+							</>
 						)}
 					</Droppable>
 				</div>
