@@ -1,5 +1,6 @@
 import React, {useState, useEffect, forwardRef, useImperativeHandle} from "react";
 import PropTypes from "prop-types";
+import InstructionContainer from "../../InstructionContainer";
 import config from "../../../util/config";
 import {Grid} from "@material-ui/core";
 import colors from "../../../styles/colors";
@@ -70,6 +71,9 @@ const PictureToWordCard = forwardRef((props, ref) => {
 
 	return (
 		<div className={classes.root} style={{height: props.isChecked && props.isReview ? "100%" : ""}}>
+			{props.taskDetail.exerciseInstructions && (
+				<InstructionContainer instruction={props.taskDetail.exerciseInstructions} />
+			)}
 			<div className={`${classes.question} ${classes.centered}`}>
 				{props.question.question}
 				<img

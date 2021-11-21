@@ -1,6 +1,7 @@
 import React, {useState, forwardRef, useImperativeHandle, useEffect} from "react";
 import PropTypes from "prop-types";
 import {Grid} from "@material-ui/core";
+import InstructionContainer from "../../InstructionContainer";
 import colors from "../../../styles/colors";
 import styles from "./styles";
 
@@ -69,6 +70,9 @@ const MCQCard = forwardRef((props, ref) => {
 
 	return (
 		<div className={classes.root}>
+			{props.taskDetail.exerciseInstructions && (
+				<InstructionContainer instruction={props.taskDetail.exerciseInstructions} />
+			)}
 			<div className={classes.questionContainer}>
 				<div
 					className={`${classes.question}`}

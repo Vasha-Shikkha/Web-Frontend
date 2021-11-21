@@ -1,6 +1,7 @@
 import React, {useState, forwardRef, useImperativeHandle, useEffect} from "react";
 import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
 import PropTypes from "prop-types";
+import InstructionContainer from "../../InstructionContainer";
 import config from "../../../util/config";
 import {Grid} from "@material-ui/core";
 import colors from "../../../styles/colors";
@@ -60,6 +61,9 @@ const DragCaptionToPictureCard = forwardRef((props, ref) => {
 	return (
 		<DragDropContext onDragEnd={handleOnDragEnd}>
 			<div className={classes.root}>
+				{props.taskDetail.exerciseInstructions && (
+					<InstructionContainer instruction={props.taskDetail.exerciseInstructions} />
+				)}
 				<div className={classes.optionContainer}>
 					<Droppable droppableId="option_container" direction="horizontal" isDropDisabled={true}>
 						{(provided) => (
