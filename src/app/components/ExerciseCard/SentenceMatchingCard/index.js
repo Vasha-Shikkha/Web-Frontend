@@ -2,6 +2,7 @@ import React, {useState, useEffect, forwardRef, useImperativeHandle} from "react
 import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
 import PropTypes from "prop-types";
 import Button from "../../Button";
+import InstructionContainer from "../../InstructionContainer";
 import {shuffle} from "../../../util/helpers";
 import colors from "../../../styles/colors";
 import styles from "./styles";
@@ -115,7 +116,9 @@ const SentenceMatchingCard = forwardRef((props, ref) => {
 		<DragDropContext onDragEnd={handleOnDragEnd}>
 			<div className={classes.root}>
 				{!props.isReview && <Button text="Undo" styles={classes.undo} onClick={() => undo()} />}
-
+				{props.taskDetail.exerciseInstructions && (
+					<InstructionContainer instruction={props.taskDetail.exerciseInstructions} />
+				)}
 				<div className={classes.optionsOuter}>
 					<div
 						className={classes.optionContainer}

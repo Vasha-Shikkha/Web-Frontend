@@ -1,6 +1,7 @@
 import React, {useState, forwardRef, useImperativeHandle, useEffect} from "react";
 import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
 import PropTypes from "prop-types";
+import InstructionContainer from "../../InstructionContainer";
 import {shuffle} from "../../../util/helpers";
 import styles from "./styles";
 
@@ -83,6 +84,9 @@ const JumbledSentenceCard = forwardRef((props, ref) => {
 	return (
 		<DragDropContext onDragEnd={handleOnDragEnd}>
 			<div className={classes.root}>
+				{props.taskDetail.exerciseInstructions && (
+					<InstructionContainer instruction={props.taskDetail.exerciseInstructions} />
+				)}
 				<div className={classes.context}>{props.question.paragraph}</div>
 				<Droppable
 					droppableId="question_container"

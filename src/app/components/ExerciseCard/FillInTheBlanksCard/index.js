@@ -1,5 +1,6 @@
 import React, {useState, forwardRef, useImperativeHandle, useEffect} from "react";
 import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
+import InstructionContainer from "../../InstructionContainer";
 import PropTypes from "prop-types";
 import colors from "../../../styles/colors";
 import styles from "./styles";
@@ -90,7 +91,11 @@ const FillInTheBlanksCard = forwardRef((props, ref) => {
 	return (
 		<DragDropContext onDragEnd={handleOnDragEnd}>
 			<div className={classes.root}>
-				<div className={classes.context}>{props.question.context}</div>
+				<div className={classes.context}>
+					{props.taskDetail.exerciseInstructions && (
+						<InstructionContainer instruction={props.taskDetail.exerciseInstructions} />
+					)}
+				</div>
 				<div className={classes.optionContainer}>
 					<Droppable droppableId="option_container" direction="horizontal" isDropDisabled={true}>
 						{(provided) => (

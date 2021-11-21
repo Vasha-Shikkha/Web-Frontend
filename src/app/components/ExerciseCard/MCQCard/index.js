@@ -1,6 +1,7 @@
 import React, {useState, forwardRef, useImperativeHandle, useEffect} from "react";
 import PropTypes from "prop-types";
 import {Grid} from "@material-ui/core";
+import InstructionContainer from "../../InstructionContainer";
 import colors from "../../../styles/colors";
 import styles from "./styles";
 

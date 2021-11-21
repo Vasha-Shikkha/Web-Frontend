@@ -1,5 +1,6 @@
 import React, {useState, useEffect, forwardRef, useImperativeHandle} from "react";
 import PropTypes from "prop-types";
+import InstructionContainer from "../../InstructionContainer";
 import config from "../../../util/config";
 import {Grid} from "@material-ui/core";
 import colors from "../../../styles/colors";
@@ -70,9 +71,17 @@ const WordToPictureCard = forwardRef((props, ref) => {
 
 	return (
 		<div className={classes.root}>
+			{props.taskDetail.exerciseInstructions && (
+				<InstructionContainer instruction={props.taskDetail.exerciseInstructions} />
+			)}
 			<div className={`${classes.question}`}>{props.question.question}</div>
 			<div className={classes.optionContainer}>
-				<Grid container spacing={3}>
+				<Grid
+					container
+					spacing={3}
+					justify={
+						props.question.images && props.question.images.length === 3 ? "center" : "flex-start"
+					}>
 					{props.question &&
 						props.question.images &&
 						props.question.images.map((obj, idx) => (
