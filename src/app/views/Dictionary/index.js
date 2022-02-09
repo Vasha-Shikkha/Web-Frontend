@@ -79,7 +79,7 @@ const Dictionary = () => {
 									? searchRes.meaning.join(", ")
 									: null}
 							</div>
-							{searchRes && searchRes.example ? (
+							{searchRes && searchRes.example && searchRes.example.length ? (
 								<div className={classes.exampleHead}>Example</div>
 							) : null}
 							<div className={classes.example}>
