@@ -52,11 +52,11 @@ const styles = makeStyles((theme) => ({
 		color: theme.palette.colors.bluishViolet,
 		fontWeight: 700,
 		fontSize: 20,
-		marginTop: 100,
+		marginTop: 50,
 	},
 
 	devContainer: {
-		marginTop: 100,
+		marginTop: 50,
 	},
 }));
 
