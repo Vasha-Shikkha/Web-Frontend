@@ -23,7 +23,7 @@ const Navbar = (props) => {
 				onClick={() => {
 					history.push("/home");
 				}}>
-				vasha<span style={{fontWeight: "bold"}}>Shikkha</span>
+				<b>Esho English Shikhi</b>
 			</div>
 			<div
 				className={
