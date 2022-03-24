@@ -11,7 +11,6 @@ const AboutCard = (props) => {
 				<img src={props.image} alt="" className={classes.image} />
 			</div>
 			<div className={classes.name}>{props.name}</div>
-			<div className={classes.type}>{props.type}</div>
 			<div className={classes.description}>{props.description}</div>
 		</div>
 	);
@@ -20,7 +19,6 @@ const AboutCard = (props) => {
 AboutCard.propTypes = {
 	name: PropTypes.string.isRequired,
 	description: PropTypes.string.isRequired,
-	type: PropTypes.string.isRequired,
 	image: PropTypes.string.isRequired,
 };
 
