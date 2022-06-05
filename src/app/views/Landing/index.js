@@ -28,14 +28,15 @@ const Landing = (props) => {
 							<div className={classes.gridItem}>
 								<div className={classes.intro1Head}>Welcome Learner!</div>
 								<div className={classes.intro1Description}>
-									<b>Esho English Shikhi</b> is a web and mobile application devised to facilitate
-									learning English as a second language for children in Bangladesh. The app focuses
-									specifically on the needs of children who do not enjoy as much privilege and
-									exposure to the English-speaking world as children from the big cities and
-									affluent households. Since the contents of the app have been adapted to the
-									cultural context of Bangladesh and hence, children will find it easier to relate
-									and connect to them. Moreover, the use of contextual images will ensure that
-									children can learn English through fun and games.
+									<b>Esho English Shikhi</b> from <b>Ankur International </b>
+									is a web and mobile application devised to facilitate learning English as a second
+									language for children in Bangladesh. The app focuses specifically on the needs of
+									children who do not enjoy as much privilege and exposure to the English-speaking
+									world as children from the big cities and affluent households. Since the contents
+									of the app have been adapted to the cultural context of Bangladesh and hence,
+									children will find it easier to relate and connect to them. Moreover, the use of
+									contextual images will ensure that children can learn English through fun and
+									games.
 								</div>
 								<div onClick={() => history.push("/auth")} className={classes.getStarted}>
 									Get Started

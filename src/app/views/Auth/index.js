@@ -113,7 +113,7 @@ const SignIn = (props) => {
 			<div className={classes.upper}>
 				<div className={classes.nav}>
 					<div className={classes.logo}>
-						Vasha<span className={classes.logoBold}>Shikkha</span>
+						<span className={classes.logoBold}>Esho English Shikhi</span>
 					</div>
 					<div className={classes.authBtnContainer}>
 						<div
